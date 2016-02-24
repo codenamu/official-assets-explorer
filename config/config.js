@@ -6,7 +6,7 @@ var config = {
   development: {
     root: rootPath,
     app: {
-      name: 'publicwealth'
+      name: 'publicassets'
     },
     port: 3000,
     db: 'mysql://root:@localhost:3306/publicwealth',
@@ -16,7 +16,7 @@ var config = {
   test: {
     root: rootPath,
     app: {
-      name: 'publicwealth'
+      name: 'publicassets'
     },
     port: 3000,
     db: 'mysql://localhost/publicwealth-test',
@@ -26,7 +26,7 @@ var config = {
   production: {
     root: rootPath,
     app: {
-      name: 'publicwealth'
+      name: 'publicassets'
     },
     port: 3000,
     db: 'mysql://localhost/publicwealth-production',
