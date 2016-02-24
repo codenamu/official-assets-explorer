@@ -1,0 +1,18 @@
+    <h1>Welcome to {{ title }}</h1>
+    <ul>
+        {{#each assets}}
+            <li>
+                <ul>
+                    <li>이름: {{ Official.name }}</li>
+                    <li>소속(대분류): {{ Org_3.Org_2.Org_1.title }}</li>
+                    <li>소속(소분류): {{ Org_3.Org_2.title }}</li>
+                    <li>직위: {{ Org_3.title }}</li>
+                    <li>종류(대분류): {{ Cat_2.Cat_1.title }}</li>
+                    <li>종류(소분류): {{ Cat_2.title }}</li>
+                    <li>증감액: {{ change }}</li>
+                    <li>총액: {{ total }}</li>
+                </ul>
+            </li>
+        {{/each}}
+    </ul>
+
