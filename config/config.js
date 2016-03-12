@@ -9,7 +9,7 @@ var config = {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://root:@localhost:3306/publicwealth',
+    db: 'mysql://root:@localhost:3306/publicassets',
     sync: true
   },
 
@@ -19,7 +19,7 @@ var config = {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://localhost/publicwealth-test',
+    db: 'mysql://localhost/publicassets-test',
     sync: false
   },
 
@@ -29,7 +29,7 @@ var config = {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://localhost/publicwealth-production',
+    db: 'mysql://localhost/publicassets-production',
     sync: false
   }
 };

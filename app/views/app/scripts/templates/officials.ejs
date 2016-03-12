@@ -1,0 +1,13 @@
+<div class="row">
+
+<% for(var o in officials) {%>
+  <ul class="col s12 m4 l3">
+     <li>id: <%= officials[o].id %></li>
+     <li>이름:  <a href="<%= officials[o].attributes.Person.name %>" title=""><%= officials[o].attributes.Person.name %></a></li>
+     <li>년도: <%= officials[o].attributes.year %>년</li>
+     <li>소속: <%= officials[o].attributes.Position.Org.title %></li>
+     <li>직위: <%= officials[o].attributes.Position.title %></li>
+  </ul>
+<% } %>
+
+</div>

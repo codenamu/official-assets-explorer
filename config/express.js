@@ -8,19 +8,16 @@ var bodyParser = require('body-parser');
 var compress = require('compression');
 var methodOverride = require('method-override');
 var exphbs  = require('express-handlebars');
+var ejs = require('ejs').renderFile;
 
 module.exports = function(app, config) {
   var env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
   
-  app.engine('handlebars', exphbs({
-    layoutsDir: config.root + '/app/views/layouts/',
-    defaultLayout: 'main',
-    partialsDir: [config.root + '/app/views/partials/']
-  }));
-  app.set('views', config.root + '/app/views');
-  app.set('view engine', 'handlebars');
+  
+  app.set('views', config.root + '/app/views/app');
+  app.set('view engine', 'ejs');
 
   // app.use(favicon(config.root + '/public/img/favicon.ico'));
   app.use(logger('dev'));
@@ -31,6 +28,7 @@ module.exports = function(app, config) {
   app.use(cookieParser());
   app.use(compress());
   app.use(express.static(config.root + '/public'));
+  app.use(express.static(config.root + '/app/views/app'));
   app.use(methodOverride());
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');

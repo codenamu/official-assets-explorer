@@ -7,11 +7,11 @@ module.exports = function (sequelize, DataTypes) {
     classMethods: {
       associate: function (models) {
         // example on how to add relations
-        // Cat_1.hasMany(models.Cat_2);
+        // Cat_1.hasMany(models.Cat_2)
       }
     }
-  });
+  })
 
-  return Cat_1;
-};
+  return Cat_1
+}
 

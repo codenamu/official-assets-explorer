@@ -1,17 +1,16 @@
 module.exports = function (sequelize, DataTypes) {
 
-  var Org_2 = sequelize.define('Org_2', {
+  var Position = sequelize.define('Position', {
     title: DataTypes.STRING
   }, {
     timestamps: false,
     classMethods: {
       associate: function (models) {
         // example on how to add relations
-        Org_2.belongsTo(models.Org_1, {foreignKey: 'org1Id'});
-        Org_2.belongsToMany(models.Org_3, {through: 'Position', foreignKey: 'org2Id'});
+        Position.belongsTo(models.Org, {foreignKey: 'orgId'})
       }
     }
-  });
+  })
 
-  return Org_2;
-};
+  return Position
+}
