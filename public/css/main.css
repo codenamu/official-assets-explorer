@@ -1,8 +1,37 @@
-body {
-    background: #fafafa;
+nav {
+  background-color: #343B46;
 }
 
-.hero-unit {
-    margin: 50px auto 0 auto;
-    width: 300px;
+.tabs .tab a {
+  color: #5C6D85;
+}
+
+.tabs .tab a:hover {
+  color: #5C6D85;
+}
+
+.tabs .indicator {
+  background-color: #5C6D85;
+}
+
+.card {
+  cursor: pointer;
+}
+
+.card .card-action {
+  position: relative;
+}
+
+.card .card-action .card-link-to-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.color-news {
+  background-color: #5C6D85;
+}
+
+.color-news:hover {
+  background-color: #343B46;
 }

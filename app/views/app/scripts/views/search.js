@@ -11,15 +11,19 @@ define([
   var SearchView = Backbone.View.extend({
     template: JST['app/scripts/templates/search.ejs'],
 
-    tagName: 'div',
+    // tagName: 'div',
 
-    id: '',
+    // id: '',
 
-    className: '',
+    // className: '',
 
     el: '#main',
 
-    events: {},
+    events: {
+      'change #selected-orgs'   : 'selectOrgs',
+      'change #selected-years'  : 'selectYears',
+      'submit form#search'      : 'search'
+    },
 
     initialize: function () {
       // this.listenTo(this.model, 'change', this.render)
@@ -32,7 +36,14 @@ define([
     },
 
     afterRender: function() {
-      $('select').material_select();
+      $('#selected-orgs').material_select();
+      $('#selected-years').material_select();
+      $('ul.tabs').tabs();
+    },
+
+    search: function(event) {
+      // event.preventDefault()
+
     }
   })
 

@@ -110,7 +110,14 @@ db.sequelize
                 change: 2,
                 total: 26,
                 description: '국민은행 예금',
-                cat2Id: cat2s[1].id,
+                cat2Id: cat2s[2].id,
+                officialId: officials[0].id
+              }, {
+                relation: '본인',
+                change: 2,
+                total: 26,
+                description: '국민은행 예금',
+                cat2Id: cat2s[2].id,
                 officialId: officials[1].id
               }, {
                 relation: '본인',
@@ -119,6 +126,13 @@ db.sequelize
                 description: '서울특별시 강남구 삼성동 대지 484.00㎡ 건물 317.35㎡',
                 cat2Id: cat2s[0].id,
                 officialId: officials[2].id
+              }, {
+                relation: '본인',
+                change: 2,
+                total: 26,
+                description: '국민은행 예금',
+                cat2Id: cat2s[2].id,
+                officialId: officials[3].id
               }
             ])
           })

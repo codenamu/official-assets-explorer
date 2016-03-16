@@ -16,17 +16,7 @@ define([
   var NavView = Backbone.View.extend({
     template: JST['app/scripts/templates/nav.ejs'],
 
-    tagName: 'nav',
-
-    id: '',
-
-    className: '',
-
     el: '#nav',
-
-    events: {
-      'click .button-collapse': 'test'
-    },
 
     initialize: function () {
       this.render()
@@ -34,9 +24,10 @@ define([
 
     render: function () {
       this.$el.html(this.template())
+      this.afterRender()
     },
 
-    test: function(event) {
+    afterRender: function(event) {
       $('.button-collapse').sideNav()
     }
   })

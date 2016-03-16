@@ -1,13 +1,26 @@
 <div class="row">
+  <h5>총 <%= officials.length %>개의 결과를 찾았습니다.</h5>
+</div>
+<div class="row">
 
-<% for(var o in officials) {%>
-  <ul class="col s12 m4 l3">
-     <li>id: <%= officials[o].id %></li>
-     <li>이름:  <a href="<%= officials[o].attributes.Person.name %>" title=""><%= officials[o].attributes.Person.name %></a></li>
-     <li>년도: <%= officials[o].attributes.year %>년</li>
-     <li>소속: <%= officials[o].attributes.Position.Org.title %></li>
-     <li>직위: <%= officials[o].attributes.Position.title %></li>
-  </ul>
-<% } %>
-
+<% officials.forEach(function(o) {%>
+  <div class="col s12 m6">
+    <div id="official-<%- o.Person.uniqueId %>" class="card">
+      <div class="card-content">
+        <span class="card-title"><%- o.Person.name %></span>
+      </div>
+      <div class="card-action">
+        <li>id: <%- o.Person.uniqueId %></li>
+        <% o.Position.forEach(function(p) {%>
+          <li>년도: <%- p.year %>년</li>
+          <li>소속: <%- p.Org.title %></li>
+          <li>직위: <%- p.title %></li>
+        <% }) %>
+        <span class="card-link-to-btn">
+        <a class="btn-floating btn-large waves-effect waves-light color-news"><i class="material-icons">trending_flat</i></a>
+        </span>
+      </div>
+    </div>
+  </div>
+<% }) %>
 </div>

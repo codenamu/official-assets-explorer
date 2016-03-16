@@ -2,17 +2,19 @@
 
 define([
   'jquery',
+  'backbone-query-parameters',
   '../views/nav',
   '../views/officials',
   '../views/official',
   '../views/search'
-], function ($, NavView, OfficialsView, OfficialView, SearchView) {
+], function ($, _query_params, NavView, OfficialsView, OfficialView, SearchView) {
   'use strict'
 
   var MainRouter = Backbone.Router.extend({
     routes: {
-      ''        : 'search',
-      ':name'   : 'official'
+      ''          : 'search',
+      'officials' : 'officials',
+      ':id'       : 'official'
     },
 
     initialize: function() {
@@ -23,12 +25,12 @@ define([
       var view = new SearchView()
     },
 
-    officials: function() {
-      var view = new OfficialsView()
+    officials: function(params) {
+      var view = new OfficialsView(params)
     },
 
-    official: function(name) {
-      var view = new OfficialView({ name: name })
+    official: function(id) {
+      var view = new OfficialView({ uniqueId: id })
     }
 
   })
