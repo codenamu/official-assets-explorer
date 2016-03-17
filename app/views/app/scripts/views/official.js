@@ -27,15 +27,10 @@ define([
       // this.listenTo(this.model, 'change', this.render)
       var self = this;
       this.model = new Official({ id: params.uniqueId})
-      this.model.fetch({ success: function () { self.render() }})
+      this.model.fetch({ success: function () { self.calAssets() }})
     },
 
-    render: function () {
-      var model = this.model.toJSON()
-
-      delete model['id']
-      delete model['name']
-
+    render: function (model) {
       this.$el.html(this.template({ official: model }))
       this.afterRender()
     },
@@ -44,49 +39,56 @@ define([
       this.drawChart()
     },
 
+    calAssets: function() {
+      var model = this.model.toJSON()
+      delete model['id']
+      delete model['name']
+
+      var result = {}
+      result.person = model[0].Person
+      result.position = []
+      result.assets = {}
+      result.assets.total = 0
+      result.assets.history = {}
+
+      Object.keys(model).forEach(function(m) {
+        model[m].Position.year = model[m].year
+        result.position.push(model[m].Position)
+
+        model[m].Assets.forEach(function(a) {
+          result.assets.total += a.total
+        })
+
+        result.assets.history[model[m].year] = model[m].Assets
+      })
+
+      console.log(result)
+      this.render(result)
+    },
+
     drawChart: function() {
       var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
       var barChartData = {
-        labels : ["January","February","March","April","May","June","July"],
+        labels : ["2011","2012","2013","2014","2015"],
         datasets : [
           {
-            fillColor : "rgba(220,220,220,0.5)",
-            strokeColor : "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
-            data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-          },
-          {
-            fillColor : "rgba(151,187,205,0.5)",
-            strokeColor : "rgba(151,187,205,0.8)",
-            highlightFill : "rgba(151,187,205,0.75)",
-            highlightStroke : "rgba(151,187,205,1)",
-            data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+            fillColor : '#ffffff',
+            strokeColor : '#ffffff',
+            highlightFill: '#fffca9',
+            highlightStroke: '#fffca9',
+            data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
           }
         ]
       }
 
-      var ctx = $('#canvas')[0].getContext("2d");
-      var myBar = new Chart(ctx).Bar(barChartData, {
-        responsive : true
+      var ctx = $('#canvas')[0].getContext('2d');
+      this.myBar = new Chart(ctx).Bar(barChartData, {
+        responsive : true,
+        scaleGridLineColor : '#5F718A',
+        scaleFontColor: "#fff"
       });
 
     }
-
-    // calAssets: function() {
-    //   var model = this.model.toJSON()
-
-    //   var official = {}
-
-    //   official.Assets = {}
-    //   official.Person = model[0].Person
-
-    //   for (var i in model) {
-    //     official.Assets[model[i].year] = model[i].Assets
-    //   }
-
-    //   this.render()
-    // }
   })
 
   return OfficialView

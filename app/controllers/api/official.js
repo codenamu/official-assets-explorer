@@ -18,7 +18,7 @@ module.exports = function() {
     var org = queries.org ? { title: { $in: queries.org }} : {}
     var year = queries.year ? { year: { $in: queries.year }} : {}
     var name = queries.name ? { name: { $like: queries.name }} : {}
-
+    console.log(org)
     db.Official.findAll({
       // order: [
       //   ['year', 'ASC']
@@ -28,12 +28,22 @@ module.exports = function() {
         model: db.Person,
         attributes: ['uniqueId'],
         where: name
+      }, {
+        model: db.Position,
+        attributes: ['id'],
+        include: [{
+          model: db.Org,
+          attribute: [],
+          where: org
+        }]
       }]
     })
     .then(function (officials) {
       var targets = officials.map(function(o) {
         return o.Person.dataValues.uniqueId
       })
+
+      console.log(targets)
 
       db.Official.findAll({
         order: [

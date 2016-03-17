@@ -1,26 +1,26 @@
-<div class="row">
-  <h5>총 <%= officials.length %>개의 결과를 찾았습니다.</h5>
-</div>
-<div class="row">
+<section id="page-result" class="container">
+  <div class="row">
+    <h5>총 <%= officials.length %>개의 결과를 찾았습니다.</h5>
+  </div>
+  <div class="row">
 
-<% officials.forEach(function(o) {%>
-  <div class="col s12 m6">
-    <div id="official-<%- o.Person.uniqueId %>" class="card">
-      <div class="card-content">
-        <span class="card-title"><%- o.Person.name %></span>
-      </div>
-      <div class="card-action">
-        <li>id: <%- o.Person.uniqueId %></li>
-        <% o.Position.forEach(function(p) {%>
-          <li>년도: <%- p.year %>년</li>
-          <li>소속: <%- p.Org.title %></li>
-          <li>직위: <%- p.title %></li>
-        <% }) %>
-        <span class="card-link-to-btn">
-        <a class="btn-floating btn-large waves-effect waves-light color-news"><i class="material-icons">trending_flat</i></a>
-        </span>
+  <% officials.forEach(function(o) {%>
+    <div class="col s12 m6">
+      <div id="official-<%- o.Person.uniqueId %>" class="card">
+        <div class="card-content">
+          <span class="card-title"><%- o.Person.name %></span>
+          <span class="card-subtitle"><%= o.Position[o.Position.length - 1].title %></span>
+        </div>
+        <div class="card-action">
+          <% o.Position.forEach(function(p) {%>
+            <li><%- p.year %>년 <%- p.title %></li>
+          <% }) %>
+          <span class="card-link-to-btn">
+          <a class="btn-floating btn-large waves-effect waves-light color-news"><i class="material-icons">trending_flat</i></a>
+          </span>
+        </div>
       </div>
     </div>
+  <% }) %>
   </div>
-<% }) %>
-</div>
+</section>

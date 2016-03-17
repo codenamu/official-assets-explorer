@@ -1,21 +1,47 @@
-<div class="row">
-    <h3><%= official[0].Person.name %></h3>
-</div>
-<div class="row">
-    <div style="width: 50%">
-        <canvas id="canvas" height="450" width="600"></canvas>
+<section id="page-official">
+    <div class="row">
+        <div class="col s12 m7">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title"><%- official.person.name %></span>
+                    <span class="card-subtitle"><%- official.position[official.position.length - 1].title %></span>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <h5><li>재산 총액</li></h5>
+                        <span class="value"><%- official.assets.total %></span>
+                    </div>
+                    <div class="row">
+                        <h5><li>재산 변동 이력</li></h5>
+                        <div style="width: 100%">
+                            <canvas id="canvas" height="450" width="600"></canvas>
+                        </div>
+                        <div style="width: 100%">
+                            <h6>포트폴리오</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h5><li>경력</li></h5>
+                        <ul>
+                        <% for (var p in official.position) { %>
+                            <li>- <%- official.position[p].year %>년 <%- official.position[p].Org.title %> <%- official.position[p].title %></li>
+                        <% } %>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col s12">
+                                <button class="btn waves-effect color-news" type="button">원본 PDF 보기</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <button class="btn waves-effect color-news" type="button">제보하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="row">
-<% Object.keys(official).forEach(function(o) { %>
-    <p><%- o %></p>
-    <h4><%- official[o].year %>년</h4>
-
-    <% for (var a in official[o].Assets) { %>
-        <p><%- official[o].Assets[a]['Cat_2']['Cat_1'].title %></p>
-        <p><%- official[o].Assets[a]['Cat_2'].title %></p>
-        <p><%- official[o].Assets[a].total %></p>
-    <% } %>
-<% }) %>
-</div>
+</section>
