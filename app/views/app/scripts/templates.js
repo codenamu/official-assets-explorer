@@ -6,7 +6,7 @@ this["JST"]["app/scripts/templates/nav.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<a href="/" class="brand-logo"><img src="/img/logo/newstapa.png" alt="뉴스타파"></a>\n<ul id="slide-out" class="side-nav">\n  <li><a href="/">홈</a></li>\n  <li><a href="/">소개</a></li>\n  <li><a href="/">보도사례</a></li>\n  <li><a href="/">데이터</a></li>\n  <li><a href="/">제작진에게 연락하기</a></li>\n  <li class="nav-footer">\n    <img src="/img/logo/nav-footer.png" alt="뉴스타파 & CCKOREA">\n    <p>Copyright © 2016<br>\n      The Korea center For Investigation Journalism<br>\n      Some right reserved.\n    </p>\n  </li>\n</ul>\n<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>\n';
+__p += '<a href="/" class="brand-logo"><img src="/public/img/logo/newstapa.png" alt="뉴스타파"></a>\n<ul id="slide-out" class="side-nav">\n  <li><a href="/">홈</a></li>\n  <li><a href="/">소개</a></li>\n  <li><a href="/">보도사례</a></li>\n  <li><a href="/">데이터</a></li>\n  <li><a href="/">제작진에게 연락하기</a></li>\n  <li class="nav-footer">\n    <img src="/img/logo/nav-footer.png" alt="뉴스타파 & CCKOREA">\n    <p>Copyright © 2016<br>\n      The Korea center For Investigation Journalism<br>\n      Some right reserved.\n    </p>\n  </li>\n</ul>\n<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>\n';
 
 }
 return __p
