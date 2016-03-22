@@ -19,15 +19,15 @@ require.config({
     }
   },
   paths: {
-    materialize   : '/public/vendor/materialize/dist/js/materialize.min',
-    jquery        : '/public/vendor/jquery/dist/jquery',
-    backbone      : '/public/vendor/backbone/backbone',
-    underscore    : '/public/vendor/lodash/dist/lodash',
-    hammerjs      : '/public/vendor/materialize/js/hammer.min',
-    sideNav       : '/public/vendor/materialize/js/sideNav',
-    hammer        : '/public/vendor/materialize/js/jquery.hammer',
-    velocity      : '/public/vendor/materialize/js/velocity.min',
-    'backbone-query-parameters': '/public/vendor/backbone-query-parameters/backbone.queryparams.min',
+    materialize   : '/vendor/materialize/dist/js/materialize.min',
+    jquery        : '/vendor/jquery/dist/jquery',
+    backbone      : '/vendor/backbone/backbone',
+    underscore    : '/vendor/lodash/dist/lodash',
+    hammerjs      : '/vendor/materialize/js/hammer.min',
+    sideNav       : '/vendor/materialize/js/sideNav',
+    hammer        : '/vendor/materialize/js/jquery.hammer',
+    velocity      : '/vendor/materialize/js/velocity.min',
+    'backbone-query-parameters': '/vendor/backbone-query-parameters/backbone.queryparams.min',
     chartjs       : 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min'
   }
 })
@@ -37,8 +37,5 @@ require([
   'routes/main'
 ], function (Backbone, Router) {
   var App = new Router
-  Backbone.history.start({
-    pushState: true,
-    root: '/'
-  })
+  Backbone.history.start({pushState: true})
 })
