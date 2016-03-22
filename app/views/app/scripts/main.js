@@ -37,5 +37,8 @@ require([
   'routes/main'
 ], function (Backbone, Router) {
   var App = new Router
-  Backbone.history.start({pushState: true})
+  Backbone.history.start({
+    pushState: true,
+    root: '/'
+  })
 })
