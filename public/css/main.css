@@ -1,5 +1,31 @@
 nav {
   background-color: #343B46;
+  z-index: 11;
+  position: relative;
+}
+
+nav a.brand-logo {
+  left: 150px;
+  padding: 5px 10px;
+}
+
+nav a.brand-logo > img {
+  width: 200px;
+}
+
+nav.nav-desktop {
+  display: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 40px 0px !important;
+}
+
+nav.nav-desktop ul a {
+  padding: 0 45px;
+}
+
+#sidenav-overlay {
+  z-index: 10;
 }
 
 button {
@@ -21,10 +47,25 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 
 #main > section {
   padding: 20px 0px;
+  z-index: 10;
+}
+
+#page-search .tabs, #page-search .tabs .tab {
+  height: 58px;
+}
+
+#page-search .tabs .tab {
+  padding: 10px 0;
+  border-top: 2px solid #ababab;
 }
 
 #page-search .tabs .tab a {
   color: #5C6D85;
+  font-size: 1.5rem;
+}
+
+#page-search .tabs .tab a:not(.active) {
+  color: #ababab;
 }
 
 #page-search .tabs .tab a:hover {
@@ -32,6 +73,8 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 }
 
 #page-search .tabs .indicator {
+  top: 0px;
+  height: 6px;
   background-color: #5C6D85;
 }
 
@@ -40,57 +83,78 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   color: #ffffff;
   background-color: #5C6D85;
   padding: 30px 10px;
+  margin-top: -20px;
 }
 
-#page-search > header > h4 {
+#page-search > header h1 {
+  font-size: 2.5rem;
   text-align: center;
 }
 
-#page-search > header > p {
+#page-search > header p {
   text-align: right;
 }
 
+#page-search {
+  position: relative;
+  top: 0px;
+  z-index: 10;
+  -webkit-transition-duration: 0.1s;
+  -moz-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+
+#page-search.closed {
+  top: -650px;
+}
+
 #page-search > section {
-  padding: 15px 0px;
+  padding: 35px 0px;
 }
 
 #page-search form {
-  padding: 50px 0px;
+  padding: 25px 0px;
 }
 
-#page-result .card {
+#page-search form input, #page-search form .caret {
+  color: #5c6d85;
+  border-bottom-color: #5c6d85;
+}
+
+.cards .card {
   cursor: pointer;
 }
 
-#page-result .card .card-content, #page-official .card .card-content {
+.cards .card .card-content, #page-official .card .card-content {
   text-align: center;
 }
 
-#page-result .card .card-content img.card-profile {
+.cards .card .card-content img.card-profile {
   width: 75px;
 }
 
-#page-result .card .card-content span.card-title, #page-official .card .card-content span.card-title {
+.cards .card .card-content span.card-title, #page-official .card .card-content span.card-title {
   font-weight: bold;
 }
 
-#page-result .card .card-content span.card-subtitle, #page-official .card .card-content span.card-subtitle {
+.cards .card .card-content span.card-subtitle, #page-official .card .card-content span.card-subtitle {
   font-weight: bold;
   color: #5C6D85;
 }
 
-#page-result .card .card-content span.card-title, #page-result .card .card-content .card-subtitle, #page-official .card .card-content span.card-title, #page-official .card .card-content .card-subtitle {
+.cards .card .card-content span.card-title, .cards .card .card-content .card-subtitle, #page-official .card .card-content span.card-title, #page-official .card .card-content .card-subtitle {
   display: block;
 }
 
-#page-result .card .card-action {
+.cards .card .card-action {
   font-size: 1.2rem;
   position: relative;
   background-color: #f8f8f8;
   min-height: 100px;
 }
 
-#page-result .card .card-action .card-link-to-btn {
+.cards .card .card-action .card-link-to-btn {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -114,6 +178,18 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   border-bottom: none;
 }
 
+#page-official .card .card-action .official-total > span.value {
+  font-size: 2.2rem;
+}
+
+#page-official .card .card-action .official-pie-chart {
+  text-align: center;
+}
+
+#page-official .card .card-action .official-pie-chart h6 {
+  text-align: left;
+}
+
 .color-news {
   background-color: #5C6D85;
 }
@@ -133,4 +209,27 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 
 #nav ul.side-nav li.nav-footer img {
   width: 150px;
+}
+
+@media only screen and (min-width: 768px) {
+  nav a.brand-logo {
+    left: 0;
+  }
+
+  nav.nav-desktop {
+    display: block;
+  }
+
+  #page-search.closed {
+    top: 0px;
+  }
+
+  #page-search > header h1 {
+    text-align: left;
+    font-size: 3rem;
+  }
+
+  #page-search > header p {
+    text-align: left;
+  }
 }

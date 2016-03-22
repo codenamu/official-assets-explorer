@@ -21,8 +21,8 @@ define([
       var nav = new NavView()
     },
 
-    search: function() {
-      var view = new SearchView()
+    search: function(params) {
+      var view = new SearchView(params)
     },
 
     officials: function(params) {

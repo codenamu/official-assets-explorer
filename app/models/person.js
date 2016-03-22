@@ -1,8 +1,9 @@
 module.exports = function (sequelize, DataTypes) {
 
   var Person = sequelize.define('Person', {
-    name: DataTypes.STRING,
-    uniqueId: DataTypes.INTEGER
+    name            : DataTypes.STRING,
+    profileImage    : DataTypes.STRING,
+    uniqueId        : DataTypes.STRING
   }, {
     timestamps: false,
     classMethods: {

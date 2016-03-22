@@ -17,12 +17,9 @@ module.exports = function() {
 
     var org = queries.org ? { title: { $in: queries.org }} : {}
     var year = queries.year ? { year: { $in: queries.year }} : {}
-    var name = queries.name ? { name: { $like: queries.name }} : {}
-    console.log(org)
+    var name = queries.name ? { name: { $like: queries.name }} : ''
+
     db.Official.findAll({
-      // order: [
-      //   ['year', 'ASC']
-      // ],
       where: year,
       include: [{
         model: db.Person,
@@ -32,9 +29,17 @@ module.exports = function() {
         model: db.Position,
         attributes: ['id'],
         include: [{
-          model: db.Org,
-          attribute: [],
-          where: org
+          model: db.Org3,
+          attribute: ['id'],
+          incude: [{
+            model: db.Org2,
+            attribute: ['id'],
+            include: [{
+              model: db.Org1,
+              attribute: ['id'],
+              where: org
+            }]
+          }]
         }]
       }]
     })
@@ -42,8 +47,6 @@ module.exports = function() {
       var targets = officials.map(function(o) {
         return o.Person.dataValues.uniqueId
       })
-
-      console.log(targets)
 
       db.Official.findAll({
         order: [
@@ -57,8 +60,16 @@ module.exports = function() {
           model: db.Position,
           attributes: ['title'],
           include: [{
-            model: db.Org,
-            attribute: ['title']
+            model: db.Org3,
+            attribute: ['title'],
+            incude: [{
+              model: db.Org2,
+              attribute: ['title'],
+              include: [{
+                model: db.Org1,
+                attribute: ['title']
+              }]
+            }]
           }]
         }]
       })
@@ -83,15 +94,23 @@ module.exports = function() {
         model: db.Position,
         attributes: ['title'],
         include: [{
-          model: db.Org,
-          attributes: ['title']
+          model: db.Org3,
+          attribute: ['title'],
+          incude: [{
+            model: db.Org2,
+            attribute: ['title'],
+            include: [{
+              model: db.Org1,
+              attribute: ['title']
+            }]
+          }]
         }]
       }, {
         model: db.Asset,
         include: [{
-          model: db.Cat_2,
+          model: db.Cat2,
           include: [{
-            model: db.Cat_1
+            model: db.Cat1
           }]
         }]
       }]

@@ -1,15 +1,15 @@
 module.exports = function (sequelize, DataTypes) {
 
-  var Cat1 = sequelize.define('Cat1', {
+  var Org1 = sequelize.define('Org1', {
     title: DataTypes.STRING
   }, {
     timestamps: false,
     classMethods: {
       associate: function (models) {
+        Org1.belongsTo(models.Publisher, {foreignKey: 'publisherId'})
       }
     }
   })
 
-  return Cat1
+  return Org1
 }
-

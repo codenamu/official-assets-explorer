@@ -15,14 +15,7 @@ define([
     defaults: {
       id: 0,
       name: ''
-    },
-
-    // validate: function(attrs, options) {
-    // },
-
-    // parse: function(response, options)  {
-    //   return response;
-    // }
+    }
   });
 
   return OfficialModel;

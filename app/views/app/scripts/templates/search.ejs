@@ -1,27 +1,34 @@
 <section id="page-search">
-  <header>
-    <div class="container">
-      <h3>고위공직자 재산정보 공개</h3>
-      <p>크리에이티브 커먼즈 코리아 공동 작업</p>
-    </div>
+  <header class="row">
+    <section class="col s12 m6">
+      <h1>고위공직자 재산 정보 공개</h1>
+      <p>크리에이티브 커먼즈 코리아 공동작업</p>
+    </section>
+    <nav class="nav-desktop col m6">
+      <div class="nav-wrapper">
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">소개</a></li>
+          <li><a href="#">보도사례</a></li>
+          <li><a href="#">데이터</a></li>
+          <li><a href="#">연락하기</a></li>
+        </ul>
+      </div>
+    </nav>
   </header>
-  <section class="container">
-    <div class="col s12">
+  <section id="search-form" class="row container">
+    <div id="search-tabs" class="col s12 m6 offset-m3">
       <ul class="tabs">
         <li class="tab col s3"><a class="active" href="#search-default">기본 검색</a></li>
-        <li class="tab col s3"><a href="#search-election">총선 후보자 검색</a></li>
+        <li class="tab col s3"><a href="#search-election">총선 인물 검색</a></li>
       </ul>
     </div>
-    <div id="search-default" class="col s12">
-      <form id="search" action="/officials" method="GET">
+    <section id="search-default" class="col s12">
+      <form id="form-search-default" action="/officials" method="GET">
         <div class="row">
           <div class="input-field col s12 m4">
             <select id="selected-orgs" name="org" multiple>
               <option value="" disabled selected>소속을 선택하세요</option>
-              <option value="국회">국회</option>
-              <option value="대통령 비서실">대통령 비서실</option>
             </select>
-            <label>소속 선택</label>
           </div>
           <div class="input-field col s12 m4">
             <select id="selected-years" name="year" multiple>
@@ -38,20 +45,47 @@
               <option value="2014">2014</option>
               <option value="2015">2015</option>
             </select>
-            <label>연도 선택</label>
           </div>
           <div class="input-field col s12 m4">
-            <input type="text" class="text" name="name">
+            <input type="text" id="selected-name" class="text" name="name">
           </div>
         </div>
         <div class="row">
-          <div class="input-field col s12">
-            <button class="btn waves-effect color-news" type="submit" name="action">검색하기</button>
+          <div class="input-field col s12 m2 offset-m5">
+            <button class="btn btn-large waves-effect color-news" type="submit" name="action">검색하기</button>
           </div>
         </div>
       </form>
-    </div>
-    <div id="search-election" class="col s12">Test 2</div>
+      <section id="search-default-result" class="cards">
+
+      </section>
+    </section>
+    <section id="search-election" class="col s12">
+      <form id="form-search-election" action="/officials" method="GET">
+        <div class="row">
+          <div class="input-field col s12 m4">
+            <select id="selected-provinces" name="province">
+              <option value="" disabled selected>자치단체</option>
+            </select>
+          </div>
+          <div class="input-field col s12 m4">
+            <select id="selected-municipals" name="municipal" disabled>
+              <option value="" disabled selected>시/군/구</option>
+            </select>
+          </div>
+          <div class="input-field col s12 m4">
+            <select id="selected-dongs" name="dong" disabled>
+              <option value="" disabled selected>읍/면/동</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m3 offset-m6">
+            <button class="btn btn-large waves-effect color-news" type="submit" name="action">검색하기</button>
+          </div>
+        </div>
+      </form>
+    </section>
   </section>
 </section>
 

@@ -1,15 +1,15 @@
 module.exports = function (sequelize, DataTypes) {
 
-  var Cat1 = sequelize.define('Cat1', {
-    title: DataTypes.STRING
+  var Province = sequelize.define('Province', {
+    name: DataTypes.STRING
   }, {
     timestamps: false,
     classMethods: {
       associate: function (models) {
+        // example on how to add relations
       }
     }
   })
 
-  return Cat1
+  return Province
 }
-

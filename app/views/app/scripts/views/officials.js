@@ -12,15 +12,16 @@ define([
   var OfficialsView = Backbone.View.extend({
     template: JST['app/scripts/templates/officials.ejs'],
 
-    el: '#main',
+    el: '#search-default-result',
 
     events: {
-      'click .card': 'clickCard'
+      'click .card'         : 'clickCard',
+      'click #btn-research' : 'showForm'
     },
 
     initialize: function (params) {
-      // this.listenTo(this.model, 'change', this.render)
       var self = this
+      this.params = params
       this.collection = new Officials()
       this.collection.fetch({data: $.param(params), success: function () {
         self.rearrangeOfficials()
@@ -60,17 +61,12 @@ define([
 
     clickCard: function(event) {
       Backbone.history.navigate($(event.target).closest('.card').attr('id').slice(9))
-      window.location.reload();
+      window.location.reload()
+    },
+
+    showForm: function() {
+      $('#page-search').removeClass('closed')
     }
-
-    // close: function () {
-
-    //   console.log('Kill: ', this)
-
-    //   this.unbind() // Unbind all local event bindings
-    //   this.remove() // Remove view from DOM
-
-    // }
   })
 
   return OfficialsView

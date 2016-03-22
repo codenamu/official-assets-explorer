@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
     classMethods: {
       associate: function (models) {
         // example on how to add relations
-        Position.belongsTo(models.Org, {foreignKey: 'orgId'})
+        Position.belongsTo(models.Org3, {foreignKey: 'org3Id'})
       }
     }
   })

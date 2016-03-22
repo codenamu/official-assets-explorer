@@ -1,16 +1,16 @@
 module.exports = function (sequelize, DataTypes) {
 
-  var Cat2 = sequelize.define('Cat2', {
-    title: DataTypes.STRING
+  var Municipal = sequelize.define('Municipal', {
+    name: DataTypes.STRING
   }, {
     timestamps: false,
     classMethods: {
       associate: function (models) {
         // example on how to add relations
-        Cat2.belongsTo(models.Cat1, {foreignKey: 'cat1Id'})
+        Municipal.belongsTo(models.Province, {foreignKey: 'provinceId'})
       }
     }
   })
 
-  return Cat2
+  return Municipal
 }

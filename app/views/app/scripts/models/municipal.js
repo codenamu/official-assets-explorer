@@ -6,15 +6,17 @@ define([
 ], function (_, Backbone) {
   'use strict';
 
-  var AssetModel = Backbone.Model.extend({
-    url: '',
+  var MunicipalModel = Backbone.Model.extend({
+    urlRoot: '/api/municipal',
 
     initialize: function() {
     },
 
     defaults: {
+      id    : 0,
+      name  : ''
     }
   });
 
-  return AssetModel;
+  return MunicipalModel;
 });

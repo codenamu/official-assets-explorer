@@ -6,15 +6,17 @@ define([
 ], function (_, Backbone) {
   'use strict';
 
-  var AssetModel = Backbone.Model.extend({
-    url: '',
+  var OrgModel = Backbone.Model.extend({
+    urlRoot: '/api/org',
 
     initialize: function() {
     },
 
     defaults: {
+      id    : 0,
+      title : ''
     }
   });
 
-  return AssetModel;
+  return OrgModel;
 });
