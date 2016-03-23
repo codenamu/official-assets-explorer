@@ -33,7 +33,6 @@ node_modules
 .node_repl_history
 
 # bower dependencies
-public/vendor
 
 # caches
 .sass-cache

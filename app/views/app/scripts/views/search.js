@@ -21,7 +21,7 @@ define([
 
     events: {
       'change #selected-provinces'      : 'selectProvince',
-      'change #selected-municipals'      : 'selectMunicipal',
+      'change #selected-municipals'     : 'selectMunicipal',
       'submit form#form-search-default' : 'submitDefaultSearch'
     },
 
