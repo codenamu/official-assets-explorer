@@ -3,7 +3,7 @@
 define([
   'underscore',
   'backbone',
-  'models/Municipal'
+  'models/municipal'
 ], function (_, Backbone, MunicipalModel) {
   'use strict';
 
