@@ -54,7 +54,7 @@ define([
         this.setParams()
         this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
         this.resetTags('default', 'years', $('#selected-years > option:selected'))
-        this.getResult()
+        this.getResult(this.params)
       }
 
       this.drawForms()
@@ -172,7 +172,7 @@ define([
 
       // destory the previous result view if there is
       Backbone.history.navigate('?' + $.param(params))
-      window.location.reload()
+      this.getResult(params)
     },
 
     getResult: function(params) {
