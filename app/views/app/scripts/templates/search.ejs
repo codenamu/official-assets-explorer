@@ -25,33 +25,34 @@
     <section id="search-default" class="col s12">
       <form id="form-search-default" action="/officials" method="GET">
         <div class="row">
-          <div class="input-field col s12 m4">
+          <div class="input-field col s12 m6">
             <select id="selected-orgs" name="org" multiple>
               <option value="" disabled selected>소속을 선택하세요</option>
             </select>
           </div>
-          <div class="input-field col s12 m4">
+          <div class="input-field col s12 m6">
             <select id="selected-years" name="year" multiple>
               <option value="" disabled selected>연도를 선택하세요</option>
-              <option value="2005">2005</option>
-              <option value="2006">2006</option>
-              <option value="2007">2007</option>
-              <option value="2008">2008</option>
-              <option value="2009">2009</option>
-              <option value="2010">2010</option>
-              <option value="2011">2011</option>
-              <option value="2012">2012</option>
-              <option value="2013">2013</option>
-              <option value="2014">2014</option>
-              <option value="2015">2015</option>
+              <option id="option-years-id-2005" value="2005">2005</option>
+              <option id="option-years-id-2006" value="2006">2006</option>
+              <option id="option-years-id-2007" value="2007">2007</option>
+              <option id="option-years-id-2008" value="2008">2008</option>
+              <option id="option-years-id-2009" value="2009">2009</option>
+              <option id="option-years-id-2010" value="2010">2010</option>
+              <option id="option-years-id-2011" value="2011">2011</option>
+              <option id="option-years-id-2012" value="2012">2012</option>
+              <option id="option-years-id-2013" value="2013">2013</option>
+              <option id="option-years-id-2014" value="2014">2014</option>
+              <option id="option-years-id-2015" value="2015">2015</option>
             </select>
           </div>
-          <div class="input-field col s12 m4">
-            <input type="text" id="selected-name" class="text" name="name">
-          </div>
         </div>
+        <div id="tags-default" class="row"></div>
         <div class="row">
-          <div class="input-field col s12 m2 offset-m5">
+          <div class="input-field col s12 m5 offset-m2">
+            <input type="text" id="selected-name" class="text" name="name" placeholder="검색어(이름, 직위, 소속)를 입력하세요.">
+          </div>
+          <div class="input-field col s3 m2">
             <button class="btn btn-large waves-effect color-news" type="submit" name="action">검색하기</button>
           </div>
         </div>
@@ -77,6 +78,9 @@
             </select>
           </div>
         </div>
+        <div id="tags" class="row">
+
+        </div>
         <div class="row">
           <div class="input-field col s12 m3 offset-m6">
             <button class="btn btn-large waves-effect color-news" type="submit" name="action">검색하기</button>
@@ -84,9 +88,6 @@
         </div>
       </form>
     </section>
-  </section>
-  <section id="search-result">
-
   </section>
 </section>
 

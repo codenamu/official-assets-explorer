@@ -28,6 +28,11 @@ nav.nav-desktop ul a {
   z-index: 10;
 }
 
+.chip {
+  color: #5c6d85;
+  margin: 1px 5px;
+}
+
 button {
   width: 100%;
 }
@@ -45,7 +50,7 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   border-bottom-color: #5C6D85;
 }
 
-#main > section {
+#search > section {
   padding: 20px 0px;
   z-index: 10;
 }
@@ -110,7 +115,7 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 }
 
 #page-search > section {
-  padding: 35px 0px;
+  padding: 35px 0 0;
 }
 
 #page-search form {
@@ -122,39 +127,51 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   border-bottom-color: #5c6d85;
 }
 
-.cards .card {
+#main {
+  padding: 10px 0px;
+}
+
+#main .search-message h5 {
+  margin: 0.6rem 0 0.656rem 0;
+}
+
+#btn-research {
+  padding: 0px 1px;
+}
+
+#main .search-cards .card {
   cursor: pointer;
 }
 
-.cards .card .card-content, #page-official .card .card-content {
+#main .search-cards .card .card-content, #page-official .card .card-content {
   text-align: center;
 }
 
-.cards .card .card-content img.card-profile {
+#main .search-cards .card .card-content img.card-profile {
   width: 75px;
 }
 
-.cards .card .card-content span.card-title, #page-official .card .card-content span.card-title {
+#main .search-cards .card .card-content span.card-title, #page-official .card .card-content span.card-title {
   font-weight: bold;
 }
 
-.cards .card .card-content span.card-subtitle, #page-official .card .card-content span.card-subtitle {
+#main .search-cards .card .card-content span.card-subtitle, #page-official .card .card-content span.card-subtitle {
   font-weight: bold;
   color: #5C6D85;
 }
 
-.cards .card .card-content span.card-title, .cards .card .card-content .card-subtitle, #page-official .card .card-content span.card-title, #page-official .card .card-content .card-subtitle {
+#main .search-cards .card .card-content span.card-title, #main .search-cards .card .card-content .card-subtitle, #page-official .card .card-content span.card-title, #page-official .card .card-content .card-subtitle {
   display: block;
 }
 
-.cards .card .card-action {
+#main .search-cards .card .card-action {
   font-size: 1.2rem;
   position: relative;
   background-color: #f8f8f8;
   min-height: 100px;
 }
 
-.cards .card .card-action .card-link-to-btn {
+#main .search-cards .card .card-action .card-link-to-btn {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -218,6 +235,10 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 
   nav.nav-desktop {
     display: block;
+  }
+
+  #tags-default, #tags-election {
+    padding: 0px 50px;
   }
 
   #page-search.closed {

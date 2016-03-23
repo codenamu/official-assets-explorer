@@ -181,6 +181,13 @@ define([
       }
 
       return result
+    },
+
+    close: function() {
+      this.undelegateEvents();
+      this.$el.empty();
+      this.stopListening();
+      return this;
     }
   })
 

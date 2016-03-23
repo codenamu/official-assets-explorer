@@ -17,12 +17,15 @@ define([
   var SearchView = Backbone.View.extend({
     template: JST['app/scripts/templates/search.ejs'],
 
-    el: '#main',
+    el: '#search',
 
     events: {
+      'change #selected-orgs'           : 'selectOrgs',
+      'change #selected-years'          : 'selectYears',
       'change #selected-provinces'      : 'selectProvince',
       'change #selected-municipals'     : 'selectMunicipal',
-      'submit form#form-search-default' : 'submitDefaultSearch'
+      'submit form#form-search-default' : 'submitDefaultSearch',
+      'click .chip > i'                 : 'closeAChip'
     },
 
     initialize: function (params) {
@@ -49,6 +52,9 @@ define([
 
       if (!_.isEmpty(this.params)) {
         this.setParams()
+        this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
+        this.resetTags('default', 'years', $('#selected-years > option:selected'))
+        this.getResult()
       }
 
       this.drawForms()
@@ -59,6 +65,7 @@ define([
 
       this.orgs.models.forEach(function(m) {
         $('#selected-orgs').append($('<option>', {
+          id: 'option-orgs-id-' + m.attributes.id,
           value: m.attributes.title,
           text: m.attributes.title
         }))
@@ -67,6 +74,7 @@ define([
 
       this.provinces.forEach(function(p) {
         $('#selected-provinces').append($('<option>', {
+          id: 'option-provinces-id' + p.attributes.id,
           value: p.attributes.name,
           text: p.attributes.name
         }))
@@ -108,46 +116,12 @@ define([
       $('ul.tabs').tabs();
     },
 
-    submitDefaultSearch: function(e) {
-      e.preventDefault()
-
-      var self = this
-
-      var params = {}
-      params.org = $('#selected-orgs').val()
-      params.year = $('#selected-years').val()
-      params.name = $('#selected-name').val()
-
-      this.hideForm()
-      var view = new OfficialsView(params)
-
+    selectOrgs: function(e) {
+      this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
     },
 
-    rearrangeOfficials: function() {
-      var officials = {}
-      var result = []
-
-      this.collection.models.forEach(function(o) {
-        var model = o.attributes
-        var id = o.attributes.Person.uniqueId
-
-        if(officials[id]) {
-          model.Position.year = model.year
-          officials[id].Position.push(model.Position)
-        } else {
-          officials[id] = {}
-          officials[id].Person = model.Person
-          officials[id].Position = []
-          model.Position.year = model.year
-          officials[id].Position.push(model.Position)
-        }
-      })
-
-      for (var o in officials) {
-        result.push(officials[o])
-      }
-
-      this.render(result)
+    selectYears: function() {
+      this.resetTags('default', 'years', $('#selected-years > option:selected'))
     },
 
     selectProvince: function() {
@@ -185,8 +159,68 @@ define([
       }})
     },
 
-    hideForm: function() {
-      $('#page-search').addClass('closed')
+    submitDefaultSearch: function(e) {
+      var self = this
+
+      // if user click the submit button
+      if (e) e.preventDefault()
+
+      var params = {}
+      params.org = $('#selected-orgs').val()
+      params.year = $('#selected-years').val()
+      params.name = $('#selected-name').val()
+
+      // destory the previous result view if there is
+      Backbone.history.navigate('?' + $.param(params))
+      window.location.reload()
+    },
+
+    getResult: function(params) {
+      if (this.resultView) {
+        this.resultView.destroy()
+      }
+      this.resultView = new OfficialsView(params)
+
+      // hide search form view
+      $('#search').velocity('slideUp', { duration: 500 });
+    },
+
+    resetTags: function(category, subcategory, values) {
+      var chips = $('#tags-' + category + ' > .chip.chip-' + subcategory)
+
+      if (values.length - 1 > chips.length) {
+        // if user added a tag
+        for (var i = 1; i < values.length; i++) {
+          var id = $(values[i]).attr('id').split('-')[3]
+
+          if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
+            $('#tags-' + category).append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[i]).val() + '<i class="material-icons">close</i></span>')
+          }
+        }
+      } else {
+        // if user removed a tag
+        for (var i = 0; i < chips.length; i++) {
+          var id = $(chips[i]).attr('id').split('-')[3]
+
+          if ($('#option-' + subcategory + '-id-' + id).prop('selected') === false) {
+             $('#chip-' + subcategory + '-id-' + id).remove()
+          }
+        }
+      }
+    },
+
+    closeAChip: function(e) {
+      var id = 'option-' + $(e.target).closest('.chip').attr('id').split('-').slice(1).join('-')
+
+      $('option#' + id).prop('selected', false)
+      $('#selected-' + $(e.target).closest('.chip').attr('id').split('-')[1]).material_select()
+    },
+
+    destroy: function() {
+      this.undelegateEvents();
+      this.$el.empty();
+      this.stopListening();
+      return this;
     }
   })
 

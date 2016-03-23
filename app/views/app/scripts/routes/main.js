@@ -12,21 +12,21 @@ define([
 
   var MainRouter = Backbone.Router.extend({
     routes: {
-      ''          : 'search',
+      ''          : 'main',
       'officials' : 'officials',
       ':id'       : 'official'
     },
 
     initialize: function() {
-      var nav = new NavView()
+      this.navView = new NavView()
+      this.searchView = new SearchView()
     },
 
-    search: function(params) {
-      var view = new SearchView(params)
-    },
-
-    officials: function(params) {
-      var view = new OfficialsView(params)
+    main: function(params) {
+      if (params) {
+        this.searchView.destroy()
+        this.searchView = new SearchView(params)
+      }
     },
 
     official: function(id) {

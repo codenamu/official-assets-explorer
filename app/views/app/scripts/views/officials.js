@@ -12,7 +12,7 @@ define([
   var OfficialsView = Backbone.View.extend({
     template: JST['app/scripts/templates/officials.ejs'],
 
-    el: '#search-default-result',
+    el: '#main',
 
     events: {
       'click .card'         : 'clickCard',
@@ -30,6 +30,14 @@ define([
 
     render: function (model) {
       this.$el.html(this.template({officials: model}))
+    },
+
+    showForm: function() {
+      if ($('#search').css('display') === 'none') {
+        $('#search').velocity('slideDown', { duration: 500 });
+      }
+
+      $('#btn-research').hide()
     },
 
     rearrangeOfficials: function() {
@@ -64,8 +72,11 @@ define([
       window.location.reload()
     },
 
-    showForm: function() {
-      $('#page-search').removeClass('closed')
+    destroy: function() {
+      this.undelegateEvents();
+      this.$el.empty();
+      this.stopListening();
+      return this;
     }
   })
 
