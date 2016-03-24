@@ -16,7 +16,6 @@ module.exports = function() {
     }
 
     // TODO: integration query paramters
-
     var org = queries.org ? { title: { $in: queries.org }} : {}
     var year = queries.year ? { year: { $in: queries.year }} : {}
     var keywordQuery = queries.keyword ? {
