@@ -17,14 +17,27 @@ module.exports = function() {
 
     var org = queries.org ? { title: { $in: queries.org }} : {}
     var year = queries.year ? { year: { $in: queries.year }} : {}
-    var name = queries.name ? { name: { $like: queries.name }} : ''
+    var keywordQuery = queries.keyword ? {
+        $or: [{
+            '$Person.name$': {
+              $like: '%' + queries.keyword.replace(/ /g, '%')
+            }
+          }, {
+            '$Position.title$': {
+              $like: '%' + queries.keyword.replace(/ /g, '%')
+            }
+          }, {
+            '$Position.Org3.title$': {
+              $like: '%' + queries.keyword.replace(/ /g, '%')
+            }
+          }]
+      } : {}
 
     db.Official.findAll({
-      where: year,
+      where: keywordQuery,
       include: [{
         model: db.Person,
-        attributes: ['uniqueId'],
-        where: name
+        attributes: ['uniqueId', 'name']
       }, {
         model: db.Position,
         attributes: ['id'],

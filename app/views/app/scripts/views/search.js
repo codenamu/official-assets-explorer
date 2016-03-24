@@ -168,10 +168,11 @@ define([
       var params = {}
       params.org = $('#selected-orgs').val()
       params.year = $('#selected-years').val()
-      params.name = $('#selected-name').val()
+      params.keyword = $('#selected-keyword').val()
 
-      // destory the previous result view if there is
+      // set current url with query parameters
       Backbone.history.navigate('?' + $.param(params))
+      // find results
       this.getResult(params)
     },
 
@@ -181,7 +182,7 @@ define([
       }
       this.resultView = new OfficialsView(params)
 
-      // hide search form view
+      // hide animation search form view
       $('#search').velocity('slideUp', { duration: 500 });
     },
 
