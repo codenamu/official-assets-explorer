@@ -12,11 +12,8 @@ define([
   var OfficialsView = Backbone.View.extend({
     template: JST['app/scripts/templates/officials.ejs'],
 
-    el: '#main',
-
     events: {
-      'click .card'         : 'clickCard',
-      'click #btn-research' : 'showForm'
+      'click .card'         : 'clickCard'
     },
 
     initialize: function (params) {
@@ -34,23 +31,10 @@ define([
     },
 
     afterRender: function() {
-      this.hideForm()
-    },
-
-    hideForm: function() {
-      if ($('#search').css('display') === 'block') {
-        $('#search').velocity('slideUp', { duration: 300 });
-      }
-
-      $('#btn-research').show()
-    },
-
-    showForm: function() {
-      if ($('#search').css('display') === 'none') {
-        $('#search').velocity('slideDown', { duration: 300 });
-      }
-
-      $('#btn-research').hide()
+      $('#' + this.$el.attr('id')).velocity('scroll', {
+        duration: 500,
+        easing: 'ease-in-out'
+      })
     },
 
     rearrangeOfficials: function() {

@@ -63,7 +63,7 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 }
 
 #search {
-  display: none;
+  // display: none;
 }
 
 #search > section {
@@ -144,11 +144,11 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   border-bottom-color: #5c6d85;
 }
 
-#main .search-message {
+.cards .search-message {
   padding-top: 10px;
 }
 
-#main .search-message h5 {
+.cards .search-message h5 {
   margin: 0.6rem 0 0.656rem 0;
   font-size: 1.2rem;
   color: #5c6d85;
@@ -158,39 +158,39 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   padding: 0px 1px;
 }
 
-#main .search-cards .card {
+.cards .search-cards .card {
   cursor: pointer;
 }
 
-#main .search-cards .card .card-content, #page-official .card .card-content {
+.cards .search-cards .card .card-content, #page-official .card .card-content {
   text-align: center;
 }
 
-#main .search-cards .card .card-content img.card-profile {
+.cards .search-cards .card .card-content img.card-profile {
   width: 75px;
 }
 
-#main .search-cards .card .card-content span.card-title, #page-official .card .card-content span.card-title {
+.cards .search-cards .card .card-content span.card-title, #page-official .card .card-content span.card-title {
   font-weight: bold;
 }
 
-#main .search-cards .card .card-content span.card-subtitle, #page-official .card .card-content span.card-subtitle {
+.cards .search-cards .card .card-content span.card-subtitle, #page-official .card .card-content span.card-subtitle {
   font-weight: bold;
   color: #5C6D85;
 }
 
-#main .search-cards .card .card-content span.card-title, #main .search-cards .card .card-content .card-subtitle, #page-official .card .card-content span.card-title, #page-official .card .card-content .card-subtitle {
+.cards .search-cards .card .card-content span.card-title, .cards .search-cards .card .card-content .card-subtitle, #page-official .card .card-content span.card-title, #page-official .card .card-content .card-subtitle {
   display: block;
 }
 
-#main .search-cards .card .card-action {
+.cards .search-cards .card .card-action {
   font-size: 1.2rem;
   position: relative;
   background-color: #f8f8f8;
   min-height: 100px;
 }
 
-#main .search-cards .card .card-action .card-link-to-btn {
+.cards .search-cards .card .card-action .card-link-to-btn {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -261,7 +261,7 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
     top: 0px;
     right: -88px;
     width: 100px;
-    height: 49px;
+    height: 47px;
     line-height: 47px;
   }
 

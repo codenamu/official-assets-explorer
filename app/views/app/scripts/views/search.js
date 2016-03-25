@@ -55,8 +55,6 @@ define([
         this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
         this.resetTags('default', 'years', $('#selected-years > option:selected'))
         this.getResult(this.params)
-      } else {
-        $('#search').velocity('slideDown', { duration: 100 });
       }
 
       this.drawForms()
@@ -182,6 +180,10 @@ define([
       if (this.resultView) {
         this.resultView.destroy()
       }
+
+      // show results in the active tab
+      // between #search-default and #search-election
+      params.el = $('.tabs > .tab > a.active').attr('href') + '-result'
       this.resultView = new OfficialsView(params)
     },
 
