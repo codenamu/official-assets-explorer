@@ -26,7 +26,7 @@ define([
     },
 
     render: function (model) {
-      this.$el.html(this.template({officials: model}))
+      this.$el.html(this.template({count: this.collection.models[0].attributes.count, officials: model}))
       this.afterRender()
     },
 
@@ -41,19 +41,18 @@ define([
       var officials = {}
       var result = []
 
-      this.collection.models.forEach(function(o) {
-        var model = o.attributes
-        var id = o.attributes.Person.uniqueId
+      this.collection.models[0].attributes.officials.forEach(function(o) {
+        var id = o.Person.uniqueId
 
         if(officials[id]) {
-          model.Position.year = model.year
-          officials[id].Position.push(model.Position)
+          o.Position.year = o.year
+          officials[id].Position.push(o.Position)
         } else {
           officials[id] = {}
-          officials[id].Person = model.Person
+          officials[id].Person = o.Person
           officials[id].Position = []
-          model.Position.year = model.year
-          officials[id].Position.push(model.Position)
+          o.Position.year = o.year
+          officials[id].Position.push(o.Position)
         }
       })
 

@@ -5,20 +5,12 @@ module.exports = function() {
   var router = express.Router()
 
   router.get('/', function(req, res, next) {
+    var result = {}
     var queries = req.query
+    var searchOption = {}
 
-    if (queries.org && (typeof queries.org === 'string')) {
-      queries.org = queries.org.split(',')
-    }
-
-    if (queries.year && (typeof queries.year === 'string')) {
-      queries.year = queries.year.split(',')
-    }
-
-    // TODO: integration query paramters
-    var org = queries.org ? { title: { $in: queries.org }} : {}
-    var year = queries.year ? { year: { $in: queries.year }} : {}
-    var keywordQuery = queries.keyword ? {
+    searchOption.order = [['year', 'DESC']]
+    searchOption.where = queries.keyword ? {
         $or: [{
             '$Person.name$': {
               $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
@@ -34,11 +26,18 @@ module.exports = function() {
           }]
       } : {}
 
-    db.Official.findAll({
-      where: keywordQuery,
-      include: [{
+    if (queries.org && (typeof queries.org === 'string')) {
+      queries.org = queries.org.split(',')
+      searchOption.where['$Position.Org3.Org2.Org1.title$'] = { $in: queries.org }
+    }
+    if (queries.year && (typeof queries.year === 'string')) {
+      queries.year = queries.year.split(',')
+      searchOption.where['year'] = { $in: queries.year }
+    }
+    
+    searchOption.include = [{
         model: db.Person,
-        attributes: ['uniqueId', 'name']
+        attributes: ['uniqueId'],
       }, {
         model: db.Position,
         attributes: ['id'],
@@ -51,45 +50,57 @@ module.exports = function() {
             include: [{
               model: db.Org1,
               attribute: ['id'],
-              where: org
             }]
           }]
         }]
       }]
-    })
-    .then(function (officials) {
-      var targets = officials.map(function(o) {
-        return o.Person.dataValues.uniqueId
-      })
 
-      db.Official.findAll({
-        order: [
-          ['year', 'ASC']
-        ],
-        include: [{
-          model: db.Person,
-          attributes: ['name', 'uniqueId'],
-          where: { uniqueId: { $in: targets }}
-        }, {
-          model: db.Position,
-          attributes: ['title'],
-          include: [{
-            model: db.Org3,
-            attribute: ['title'],
-            incude: [{
-              model: db.Org2,
-              attribute: ['title'],
+    // searchOption.attributes = ['id', [db.sequelize.col('Person.uniqueId'), 'personUniqueId']]
+    searchOption.group = ['Person.uniqueId']
+    
+
+    db.Official.count(searchOption)
+    .then(function (count) {
+      result.count = count.length
+
+      searchOption.limit = 1
+      searchOption.offset = queries.offset ? queries.offset : 0
+      delete searchOption['group']
+
+      db.Official.findAll(searchOption)
+        .then(function(officials) {
+          var targets = officials.map(function(o) {
+            return o.Person.dataValues.uniqueId
+          })
+
+          db.Official.findAll({
+            order: [['year', 'ASC']],
+            include: [{
+              model: db.Person,
+              attributes: ['name', 'uniqueId'],
+              where: { uniqueId: { $in: targets }}
+            }, {
+              model: db.Position,
+              attributes: ['title'],
               include: [{
-                model: db.Org1,
-                attribute: ['title']
+                model: db.Org3,
+                attribute: ['title'],
+                incude: [{
+                  model: db.Org2,
+                  attribute: ['title'],
+                  include: [{
+                    model: db.Org1,
+                    attribute: ['title']
+                  }]
+                }]
               }]
             }]
-          }]
-        }]
-      })
-      .then(function(officials) {
-        res.json(officials)
-      })
+          })
+          .then(function(officials) {
+            result.officials = officials
+            res.json(result)
+          })
+        })
     })
   })
 

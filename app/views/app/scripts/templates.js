@@ -49,7 +49,7 @@ var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<section class="container">\n  <div class="row search-message">\n    <div class="col s12">\n      <h5>총 ' +
-((__t = ( officials.length )) == null ? '' : __t) +
+__e( count ) +
 '개의 결과를 찾았습니다.</h5>\n    </div>\n    <!-- <div class="col s3">\n      <button id="btn-research" class="btn waves-effect color-news hide-desktop" type="button">다시 검색하기</button>\n    </div> -->\n  </div>\n  <div class="row search-cards">\n  ';
  officials.forEach(function(o) {;
 __p += '\n    <div class="col s12 m6 l4">\n      <div id="official-' +
