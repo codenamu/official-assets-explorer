@@ -20,6 +20,7 @@ define([
     initialize: function (params) {
       // this.listenTo(this.model, 'change', this.render)
       var self = this;
+
       this.model = new Official({ id: params.uniqueId})
       this.model.fetch({ success: function () { self.calAssets() }})
     },

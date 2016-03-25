@@ -55,6 +55,8 @@ define([
         this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
         this.resetTags('default', 'years', $('#selected-years > option:selected'))
         this.getResult(this.params)
+      } else {
+        $('#search').velocity('slideDown', { duration: 100 });
       }
 
       this.drawForms()
@@ -181,9 +183,6 @@ define([
         this.resultView.destroy()
       }
       this.resultView = new OfficialsView(params)
-
-      // hide animation search form view
-      $('#search').velocity('slideUp', { duration: 500 });
     },
 
     resetTags: function(category, subcategory, values) {

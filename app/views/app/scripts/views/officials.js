@@ -30,11 +30,24 @@ define([
 
     render: function (model) {
       this.$el.html(this.template({officials: model}))
+      this.afterRender()
+    },
+
+    afterRender: function() {
+      this.hideForm()
+    },
+
+    hideForm: function() {
+      if ($('#search').css('display') === 'block') {
+        $('#search').velocity('slideUp', { duration: 300 });
+      }
+
+      $('#btn-research').show()
     },
 
     showForm: function() {
       if ($('#search').css('display') === 'none') {
-        $('#search').velocity('slideDown', { duration: 500 });
+        $('#search').velocity('slideDown', { duration: 300 });
       }
 
       $('#btn-research').hide()

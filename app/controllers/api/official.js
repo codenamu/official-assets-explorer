@@ -21,15 +21,15 @@ module.exports = function() {
     var keywordQuery = queries.keyword ? {
         $or: [{
             '$Person.name$': {
-              $like: '%' + queries.keyword.replace(/ /g, '%')
+              $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
             }
           }, {
             '$Position.title$': {
-              $like: '%' + queries.keyword.replace(/ /g, '%')
+              $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
             }
           }, {
             '$Position.Org3.title$': {
-              $like: '%' + queries.keyword.replace(/ /g, '%')
+              $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
             }
           }]
       } : {}
