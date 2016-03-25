@@ -2,6 +2,31 @@ define(function(){
 
 this["JST"] = this["JST"] || {};
 
+this["JST"]["app/scripts/templates/card.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<div class="col s12 m6 l4">\n  <div id="official-' +
+__e( model.Person.uniqueId ) +
+'" class="card">\n    <div class="card-content">\n      <span class="card-title">' +
+__e( model.Person.name ) +
+'</span>\n      <span class="card-subtitle">' +
+((__t = ( model.Position[model.Position.length - 1].title )) == null ? '' : __t) +
+'</span>\n    </div>\n    <div class="card-action">\n      ';
+ model.Position.forEach(function(p) {;
+__p += '\n        <li>' +
+__e( p.year ) +
+'년 ' +
+__e( p.title ) +
+'</li>\n      ';
+ }) ;
+__p += '\n      <span class="card-link-to-btn">\n      <a class="btn-floating btn-large waves-effect waves-light color-news"><i class="material-icons">trending_flat</i></a>\n      </span>\n    </div>\n  </div>\n</div>\n';
+
+}
+return __p
+};
+
 this["JST"]["app/scripts/templates/nav.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -45,30 +70,11 @@ return __p
 
 this["JST"]["app/scripts/templates/officials.ejs"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<section class="container">\n  <div class="row search-message">\n    <div class="col s12">\n      <h5>총 ' +
 __e( count ) +
-'개의 결과를 찾았습니다.</h5>\n    </div>\n    <!-- <div class="col s3">\n      <button id="btn-research" class="btn waves-effect color-news hide-desktop" type="button">다시 검색하기</button>\n    </div> -->\n  </div>\n  <div class="row search-cards">\n  ';
- officials.forEach(function(o) {;
-__p += '\n    <div class="col s12 m6 l4">\n      <div id="official-' +
-__e( o.Person.uniqueId ) +
-'" class="card">\n        <div class="card-content">\n          <span class="card-title">' +
-__e( o.Person.name ) +
-'</span>\n          <span class="card-subtitle">' +
-((__t = ( o.Position[o.Position.length - 1].title )) == null ? '' : __t) +
-'</span>\n        </div>\n        <div class="card-action">\n          ';
- o.Position.forEach(function(p) {;
-__p += '\n            <li>' +
-__e( p.year ) +
-'년 ' +
-__e( p.title ) +
-'</li>\n          ';
- }) ;
-__p += '\n          <span class="card-link-to-btn">\n          <a class="btn-floating btn-large waves-effect waves-light color-news"><i class="material-icons">trending_flat</i></a>\n          </span>\n        </div>\n      </div>\n    </div>\n  ';
- }) ;
-__p += '\n  </div>\n</section>\n';
+'개의 결과를 찾았습니다.</h5>\n    </div>\n    <!-- <div class="col s3">\n      <button id="btn-research" class="btn waves-effect color-news hide-desktop" type="button">다시 검색하기</button>\n    </div> -->\n  </div>\n  <div class="row search-cards">\n\n  </div>\n</section>\n';
 
 }
 return __p

@@ -1,0 +1,16 @@
+<div class="col s12 m6 l4">
+  <div id="official-<%- model.Person.uniqueId %>" class="card">
+    <div class="card-content">
+      <span class="card-title"><%- model.Person.name %></span>
+      <span class="card-subtitle"><%= model.Position[model.Position.length - 1].title %></span>
+    </div>
+    <div class="card-action">
+      <% model.Position.forEach(function(p) {%>
+        <li><%- p.year %>년 <%- p.title %></li>
+      <% }) %>
+      <span class="card-link-to-btn">
+      <a class="btn-floating btn-large waves-effect waves-light color-news"><i class="material-icons">trending_flat</i></a>
+      </span>
+    </div>
+  </div>
+</div>

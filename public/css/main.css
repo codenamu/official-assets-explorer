@@ -174,6 +174,10 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   padding: 0px 1px;
 }
 
+.search-cards {
+  
+}
+
 .cards .search-cards .card {
   cursor: pointer;
 }
