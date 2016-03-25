@@ -67,8 +67,20 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 }
 
 #search > section {
-  padding: 20px 0px;
   z-index: 10;
+}
+
+#page-search > section.content {
+  margin: 0px;
+}
+
+#page-search > section.content .tab-content {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#page-search > section.content .tab-content .cards {
+  height: 100%;
 }
 
 #page-search .tabs, #page-search .tabs .tab {
@@ -142,6 +154,10 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 #page-search form input, #page-search form .caret {
   color: #5c6d85;
   border-bottom-color: #5c6d85;
+}
+
+.cards {
+  background-color: #f8f8f8;
 }
 
 .cards .search-message {
@@ -261,7 +277,7 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
     top: 0px;
     right: -88px;
     width: 100px;
-    height: 47px;
+    height: 49px;
     line-height: 47px;
   }
 
@@ -298,7 +314,11 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
     text-align: left;
   }
 
-  #page-search .card .card-action > li {
+  .cards .card .card-action > li {
     font-size: 0.85rem;
+  }
+
+  .cards .search-message {
+    text-align: center;
   }
 }

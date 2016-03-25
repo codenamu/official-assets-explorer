@@ -31,13 +31,14 @@ define([
     },
 
     afterRender: function() {
-      $('#main').velocity('scroll', {
-        duration: 500,
-        easing: 'ease-in-out'
-      })
-
       this.drawBarChart()
       this.drawPieChart(2014)
+
+      $('#main').velocity('scroll', {
+        duration: 500,
+        offset: -40,
+        easing: 'ease-in-out'
+      })
     },
 
     calAssets: function() {

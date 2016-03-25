@@ -1,5 +1,5 @@
 <section id="page-search">
-  <header class="row">
+  <header class="row header">
     <section class="col s12 m6">
       <h1>고위공직자 재산 정보 공개</h1>
       <p>크리에이티브 커먼즈 코리아 공동작업</p>
@@ -15,22 +15,22 @@
       </div>
     </nav>
   </header>
-  <section id="search-form" class="row container">
-    <div id="search-tabs" class="col s12 m6 offset-m3">
+  <section class="row content">
+    <div id="search-tabs" class="col s12 m4 offset-m4">
       <ul class="tabs">
         <li class="tab col s3"><a class="active" href="#search-default">기본 검색</a></li>
         <li class="tab col s3"><a href="#search-election">총선 인물 검색</a></li>
       </ul>
     </div>
-    <section id="search-default" class="col s12">
+    <section id="search-default" class="col s12 tab-content">
       <form id="form-search-default" action="/officials" method="GET">
         <div class="row">
-          <div class="input-field col s12 m6">
+          <div class="input-field col s12 m4 offset-m2">
             <select id="selected-orgs" name="org" multiple>
               <option value="" disabled selected>소속을 선택하세요</option>
             </select>
           </div>
-          <div class="input-field col s12 m6">
+          <div class="input-field col s12 m4">
             <select id="selected-years" name="year" multiple>
               <option value="" disabled selected>연도를 선택하세요</option>
               <option id="option-years-id-2005" value="2005">2005</option>
@@ -51,7 +51,7 @@
         <div class="row">
           <div class="input-field input-field-integrated col s12 m5 offset-m3">
             <input type="text" id="selected-keyword" class="text" name="keyword" placeholder="검색어(이름, 직위, 소속)를 입력하세요.">
-            <button class="btn btn-large waves-effect color-news" type="submit" name="action">검색</button>
+            <button class="btn btn-large color-news" type="submit" name="action">검색</button>
           </div>
         </div>
       </form>
@@ -59,7 +59,7 @@
 
       </section>
     </section>
-    <section id="search-election" class="col s12">
+    <section id="search-election" class="col s12 tab-content">
       <form id="form-search-election" action="/officials" method="GET">
         <div class="row">
           <div class="input-field col s12 m4">
@@ -82,7 +82,7 @@
         <div class="row">
           <div class="input-field input-field-integrated col s12 m5 offset-m3">
             <input type="text" id="selected-keyword" class="text" name="keyword" placeholder="검색어(이름, 직위, 소속)를 입력하세요.">
-            <button class="btn btn-large waves-effect color-news" type="submit" name="action">검색</button>
+            <button class="btn btn-large color-news" type="submit" name="action">검색</button>
           </div>
         </div>
       </form>
