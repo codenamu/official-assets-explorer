@@ -188,7 +188,7 @@ define([
     },
 
     resetTags: function(category, subcategory, values) {
-      var chips = $('#tags-' + category + ' > .chip.chip-' + subcategory)
+      var chips = $('#tags-' + category + ' > .col > .chip.chip-' + subcategory)
 
       if (values.length - 1 > chips.length) {
         // if user added a tag
@@ -196,7 +196,7 @@ define([
           var id = $(values[i]).attr('id').split('-')[3]
 
           if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
-            $('#tags-' + category).append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[i]).val() + '<i class="material-icons">close</i></span>')
+            $('#tags-' + category + ' > .col').append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[i]).val() + '<i class="material-icons">close</i></span>')
           }
         }
       } else {

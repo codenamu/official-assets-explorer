@@ -221,6 +221,14 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   background-color: #5A6C84;
 }
 
+#page-official .card .card-action a {
+  color: #ffffff;
+}
+
+#page-official .card .card-action a:hover {
+  color: #ffffff;
+}
+
 #page-official .card .card-action > .row {
   padding: 30px 0px;
   border-bottom: 1px solid #ffffff;
