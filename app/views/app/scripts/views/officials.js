@@ -19,20 +19,38 @@ define([
 
     subViews: [],
 
+    searchStatus: {
+      isLoaded: true,
+      isEnded: false,
+      count: 0
+    },
+
     initialize: function (params) {
       var self = this
+      this.params = params
+
+      // bind detectScroll event to this
       _.bindAll(this, 'detectScroll')
       $(window).scroll(this.detectScroll)
 
-      this.params = params
-      this.collection = new Officials()
-      this.collection.fetch({data: $.param(params), success: function () {
-        self.rearrangeOfficials()
+      var officials = new Officials()
+      officials.fetch({data: $.param(params), success: function () {
+        var officialsRearranged = self.rearrangeOfficials(officials.models[0].attributes.officials)
+        self.searchStatus.count += officialsRearranged.length
+        self.checkSearchEnded(officials.models[0].attributes.count)
+
+        self.$el.html(self.template({count: officials.models[0].attributes.count}))
+        self.afterRender(officialsRearranged)
+
+        $('#' + self.$el.attr('id')).velocity('scroll', {
+          duration: 500,
+          easing: 'ease-in-out'
+        })
       }})
+
     },
 
     render: function (model) {
-      this.$el.html(this.template({count: this.collection.models[0].attributes.count}))
       this.afterRender(model)
     },
 
@@ -42,17 +60,25 @@ define([
         self.subViews.push(new CardView({el: '#' + self.$el.attr('id') + ' .search-cards', model: m}))
       })
 
-      $('#' + this.$el.attr('id')).velocity('scroll', {
-        duration: 500,
-        easing: 'ease-in-out'
-      })
+      this.saveCurrentsearchStatus()
     },
 
-    rearrangeOfficials: function() {
+    saveCurrentsearchStatus: function() {
+      // save current cards status to searchStatus after loading new cards
+      this.searchStatus.isLoaded = true
+    },
+
+    checkSearchEnded: function(count) {
+      if (this.searchStatus.count === count) {
+        this.searchStatus.isEnded = true
+      }
+    },
+
+    rearrangeOfficials: function(collection) {
       var officials = {}
       var result = []
 
-      this.collection.models[0].attributes.officials.forEach(function(o) {
+      collection.forEach(function(o) {
         var id = o.Person.uniqueId
 
         if(officials[id]) {
@@ -71,17 +97,32 @@ define([
         result.push(officials[o])
       }
 
-      this.render(result)
+      return result
     },
 
     detectScroll: function() {
+      var self = this
       var triggerPoint = 100; // 100px from the bottom
       var scrollTop = $(window).scrollTop()
       var scrollHeight = this.el.scrollHeight
 
       // trigger!!
-      if(scrollTop + triggerPoint > scrollHeight) {
+      if(scrollTop + 35 > scrollHeight && this.searchStatus.isLoaded && !this.searchStatus.isEnded) {
+        console.log(this.searchStatus)
+        this.searchStatus.isLoaded = false
+        console.log(this.searchStatus)
 
+        var officials = new Officials()
+        var params = this.params
+        params.offset = this.searchStatus.count
+        params.limit = 20
+
+        officials.fetch({data: $.param(params), success: function () {
+          var officialsRearranged = self.rearrangeOfficials(officials.models[0].attributes.officials)
+          self.searchStatus.count += officialsRearranged.length
+          self.checkSearchEnded(officials.models[0].attributes.count)
+          self.afterRender(officialsRearranged)
+        }})
       }
     },
 
