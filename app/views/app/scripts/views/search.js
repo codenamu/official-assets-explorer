@@ -20,12 +20,13 @@ define([
     el: '#search',
 
     events: {
-      'change #selected-orgs'           : 'selectOrgs',
-      'change #selected-years'          : 'selectYears',
-      'change #selected-provinces'      : 'selectProvince',
-      'change #selected-municipals'     : 'selectMunicipal',
-      'submit form#form-search-default' : 'submitDefaultSearch',
-      'click .chip > i'                 : 'closeAChip'
+      'change #selected-orgs'            : 'selectOrgs',
+      'change #selected-years'           : 'selectYears',
+      'change #selected-provinces'       : 'selectProvince',
+      'change #selected-municipals'      : 'selectMunicipal',
+      'submit form#form-search-default'  : 'submitDefaultSearch',
+      'submit form#form-search-election' : 'submitElectionSearch',
+      'click .chip > i'                  : 'closeAChip'
     },
 
     initialize: function (params) {
@@ -48,13 +49,16 @@ define([
     },
 
     afterRender: function() {
+      $('#search-tabs > ul.tabs').tabs();
       this.setSelectOptions()
 
-      if (!_.isEmpty(this.params)) {
+      if (!_.isEmpty(this.params) && this.params['keyword'] !== undefined) {
         this.setParams()
         this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
         this.resetTags('default', 'years', $('#selected-years > option:selected'))
         this.getResult(this.params)
+      } else if (!_.isEmpty(this.params) && this.params['dong'] !== undefined) {
+        $('#search-tabs > ul.tabs').tabs('select_tab', 'search-election');
       }
 
       this.drawForms()
@@ -74,7 +78,7 @@ define([
 
       this.provinces.forEach(function(p) {
         $('#selected-provinces').append($('<option>', {
-          id: 'option-provinces-id' + p.attributes.id,
+          id: 'option-provinces-id-' + p.attributes.id,
           value: p.attributes.name,
           text: p.attributes.name
         }))
@@ -126,13 +130,16 @@ define([
 
     selectProvince: function() {
       var self = this
-      $('#selected-municipals').prop('disabled', false)
-      $('#selected-dongs').prop('disabled', true)
+      this.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
+
+      self.initRegionOptions($('#selected-municipals'))
+      self.initRegionOptions($('#selected-dongs'))
 
       this.municipals = new Municipals()
       this.municipals.fetch({data: 'province=' + $('#selected-provinces').val(), success: function() {
         self.municipals.models.forEach(function(m) {
           $('#selected-municipals').append($('<option>', {
+            id: 'option-municipals-id' + m.attributes.id,
             value: m.attributes.name,
             text: m.attributes.name
           }))
@@ -144,12 +151,14 @@ define([
 
     selectMunicipal: function() {
       var self = this
-      $('#selected-dongs').prop('disabled', false)
+      this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
+      self.initRegionOptions($('#selected-dongs'))
 
       this.dongs = new Dongs()
       this.dongs.fetch({data: 'municipal=' + $('#selected-municipals').val(), success: function() {
         self.dongs.models.forEach(function(m) {
           $('#selected-dongs').append($('<option>', {
+            id: 'option-dongs-id' + m.attributes.id,
             value: m.attributes.name,
             text: m.attributes.name
           }))
@@ -157,6 +166,20 @@ define([
 
         $('#selected-dongs').material_select()
       }})
+    },
+
+    initRegionOptions: function(target) {
+      var text = target.attr('id') === 'selected-municipals' ? '시/군/구를 선택하세요' : '읍/면/동을 선택하세요'
+      target.html('')
+
+      target.append($('<option>', {
+        selected: true,
+        disabled: true,
+        value: text,
+        text: text
+      }))
+
+      target.material_select()
     },
 
     submitDefaultSearch: function(e) {
@@ -176,6 +199,24 @@ define([
       this.getResult(params)
     },
 
+    submitElectionSearch: function(e) {
+      var self = this
+
+      // if user click the submit button
+      if (e) e.preventDefault()
+
+      var params = {}
+      params.province = $('#selected-provinces').val()
+      params.municipal = $('#selected-municipal').val()
+      params.dong = $('#selected-dongs').val()
+      params.election = true
+
+      // set current url with query parameters
+      Backbone.history.navigate('?' + $.param(params))
+      // find results
+      this.getResult(params)
+    },
+
     getResult: function(params) {
       if (this.resultView) {
         this.resultView.destroy()
@@ -188,15 +229,22 @@ define([
     },
 
     resetTags: function(category, subcategory, values) {
+      if (category === 'default') {
+        var valLength = values.length - 1
+        var initNum = 1
+      } else {
+        var valLength = values.length
+        var initNum = 0
+      }
       var chips = $('#tags-' + category + ' > .col > .chip.chip-' + subcategory)
 
-      if (values.length - 1 > chips.length) {
+      if (valLength > chips.length) {
         // if user added a tag
-        for (var i = 1; i < values.length; i++) {
-          var id = $(values[i]).attr('id').split('-')[3]
+        for (; initNum < values.length; initNum++) {
+          var id = $(values[initNum]).attr('id').split('-')[3]
 
           if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
-            $('#tags-' + category + ' > .col').append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[i]).val() + '<i class="material-icons">close</i></span>')
+            $('#tags-' + category + ' > .col').append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[initNum]).val() + '<i class="material-icons">close</i></span>')
           }
         }
       } else {

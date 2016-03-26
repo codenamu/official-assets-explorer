@@ -9,8 +9,6 @@ module.exports = function() {
     var queries = req.query
     var searchOption = {}
 
-    console.log()
-
     searchOption.order = [['year', 'DESC']]
     searchOption.where = queries.keyword ? {
         $or: [{
