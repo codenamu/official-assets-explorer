@@ -8,6 +8,7 @@ module.exports = function (sequelize, DataTypes) {
       associate: function (models) {
         // example on how to add relations
         Dong.belongsTo(models.Municipal, {foreignKey: 'municipalId'})
+        Dong.belongsToMany(models.Constituency, {through: 'ConstituencyDong'})
       }
     }
   })

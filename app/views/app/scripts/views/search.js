@@ -49,19 +49,20 @@ define([
     },
 
     afterRender: function() {
-      $('#search-tabs > ul.tabs').tabs();
       this.setSelectOptions()
+      this.drawForms()
 
       if (!_.isEmpty(this.params) && this.params['keyword'] !== undefined) {
         this.setParams()
+        this.getResult(this.params)
         this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
         this.resetTags('default', 'years', $('#selected-years > option:selected'))
-        this.getResult(this.params)
       } else if (!_.isEmpty(this.params) && this.params['dong'] !== undefined) {
         $('#search-tabs > ul.tabs').tabs('select_tab', 'search-election');
-      }
+        this.setParams()
+        this.getResult(this.params)
 
-      this.drawForms()
+      }
     },
 
     setSelectOptions: function() {
@@ -85,12 +86,18 @@ define([
       })
     },
 
+
+    /**
+     * [setParams description]
+     * set options in form if url has parameters like keyword, provinces, and so on
+     */
     setParams: function() {
+      var self = this
       var params = this.params
-      var orgOps = $('#selected-orgs > option')
-      var yearOps = $('#selected-years > option')
 
       if (params.org) {
+        var orgOps = $('#selected-orgs > option')
+
         if (typeof params.org === 'string') {
           params.org = params.org.split(',')
         }
@@ -101,6 +108,8 @@ define([
       }
 
       if (params.year) {
+        var yearOps = $('#selected-years > option')
+
         if (typeof params.year === 'string') {
           params.year = params.year.split(',')
         }
@@ -109,7 +118,47 @@ define([
           if (params.year.indexOf($(yearOps[i]).val()) > -1) $(yearOps[i]).attr('selected', 'selected')
         }
       }
+
+      if (params.dong) {
+        var provinceOps = $('#selected-provinces > option:not(:disabled)')
+
+        for (var i = 0; i < provinceOps.length; i++) {
+          if (params.province === $(provinceOps[i]).val()) {
+            $(provinceOps[i]).prop('selected', true)
+            $('#selected-provinces').material_select()
+            break;
+          }
+        }
+
+        this.selectProvince(function() {
+          var municipalOps = $('#selected-municipals > option:not(:disabled)')
+
+          for (var i = 0; i < municipalOps.length; i++) {
+            if (params.municipal === $(municipalOps[i]).val()) {
+              $(municipalOps[i]).prop('selected', true)
+              $('#selected-municipals').material_select()
+              break;
+            }
+          }
+
+          self.selectMunicipal(function() {
+            var dongOps = $('#selected-dongs > option:not(:disabled)')
+
+            for (var i = 0; i < dongOps.length; i++) {
+              if (params.dong === $(dongOps[i]).val()) {
+                $(dongOps[i]).prop('selected', true)
+                $('#selected-dongs').material_select()
+                break;
+              }
+            }
+
+          })
+        })
+      }
     },
+    /**
+     * end of setParams
+     */
 
     drawForms: function() {
       $('#selected-orgs').material_select();
@@ -117,7 +166,7 @@ define([
       $('#selected-provinces').material_select();
       $('#selected-municipals').material_select();
       $('#selected-dongs').material_select();
-      $('ul.tabs').tabs();
+      $('#search-tabs > ul.tabs').tabs();
     },
 
     selectOrgs: function(e) {
@@ -128,9 +177,10 @@ define([
       this.resetTags('default', 'years', $('#selected-years > option:selected'))
     },
 
-    selectProvince: function() {
+    selectProvince: function(callback) {
       var self = this
-      this.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
+      var cb = callback ? callback : function(){}
+      // this.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
 
       self.initRegionOptions($('#selected-municipals'))
       self.initRegionOptions($('#selected-dongs'))
@@ -139,32 +189,36 @@ define([
       this.municipals.fetch({data: 'province=' + $('#selected-provinces').val(), success: function() {
         self.municipals.models.forEach(function(m) {
           $('#selected-municipals').append($('<option>', {
-            id: 'option-municipals-id' + m.attributes.id,
+            id: 'option-municipals-id-' + m.attributes.id,
             value: m.attributes.name,
             text: m.attributes.name
           }))
         })
 
         $('#selected-municipals').material_select()
+
+        cb()
       }})
     },
 
-    selectMunicipal: function() {
+    selectMunicipal: function(callback) {
       var self = this
-      this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
+      var cb = callback ? callback : function(){}
+      // this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
       self.initRegionOptions($('#selected-dongs'))
 
       this.dongs = new Dongs()
       this.dongs.fetch({data: 'municipal=' + $('#selected-municipals').val(), success: function() {
         self.dongs.models.forEach(function(m) {
           $('#selected-dongs').append($('<option>', {
-            id: 'option-dongs-id' + m.attributes.id,
+            id: 'option-dongs-id-' + m.attributes.id,
             value: m.attributes.name,
             text: m.attributes.name
           }))
         })
 
         $('#selected-dongs').material_select()
+        cb()
       }})
     },
 
@@ -207,7 +261,7 @@ define([
 
       var params = {}
       params.province = $('#selected-provinces').val()
-      params.municipal = $('#selected-municipal').val()
+      params.municipal = $('#selected-municipals').val()
       params.dong = $('#selected-dongs').val()
       params.election = true
 
@@ -224,7 +278,8 @@ define([
 
       // show results in the active tab
       // between #search-default and #search-election
-      params.el = $('.tabs > .tab > a.active').attr('href') + '-result'
+      params.el = $('#search-tabs li.tab > a.active').attr('href') + '-result'
+      console.log(params.el)
       this.resultView = new OfficialsView(params)
     },
 

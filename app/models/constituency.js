@@ -8,8 +8,8 @@ module.exports = function (sequelize, DataTypes) {
     classMethods: {
       associate: function (models) {
         // example on how to add relations
-        Constituency.hasMany(models.Dong, {foreignKey: 'constituencyId'})
-        Constituency.hasMany(models.Person, {foreignKey: 'constituencyId'})
+        Constituency.hasMany(models.Person, {foreignKey: 'ConstituencyId'})
+        Constituency.belongsToMany(models.Dong, {through: 'ConstituencyDong'})
       }
     }
   })

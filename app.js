@@ -16,7 +16,7 @@ db.sequelize
         var province = {}
         var municipals = []
         var dongs = []
-        var consituencies = []
+        var constituencies = []
         var persons = []
         var officials = []
         var publishers = []
@@ -40,24 +40,35 @@ db.sequelize
             municipals = result
             return db.Constituency.bulkCreate([
               { name: '서울 종로구', uniqueId: 1 },
-              { name: '서울 중구 성동구 갑', uniqueId: 2 }
+              { name: '서울 마포구을', uniqueId: 2 }
             ])
           })
           .then(function() {
             return db.Constituency.findAll()
           })
           .then(function(result) {
-            consituencies = result
+            constituencies = result
             return db.Dong.bulkCreate([
-              { name: '마장동', municipalId: municipals[1].id, constituencyId: consituencies[1].id },
-              { name: '사근동', municipalId: municipals[1].id, constituencyId: consituencies[1].id }
+              { name: '마장동', municipalId: municipals[1].id },
+              { name: '사근동', municipalId: municipals[1].id },
+              { name: '종로구 전체', municipalId: municipals[0].id }
             ])
           })
           .then(function() {
+            return db.Dong.findAll()
+          })
+          .then(function(result) {
+            dongs = result
+            return constituencies[1].addDong(dongs.slice(0, 2))
+          })
+          .then(function() {
+            return constituencies[0].addDong(dongs.slice(2, 3))
+          })
+          .then(function() {
             return db['Person'].bulkCreate([
-              { name: '박근혜', uniqueId: 'open42976', profileImage: 'https://avatars1.githubusercontent.com/u/1366161?v=3&s=460', constituencyId: consituencies[1].id},
-              { name: '김기춘', uniqueId: 'open42977', profileImage: 'https://avatars1.githubusercontent.com/u/1366161?v=3&s=460', constituencyId: consituencies[1].id },
-              { name: '유민봉', uniqueId: 'open42978', profileImage: 'https://avatars1.githubusercontent.com/u/1366161?v=3&s=460', constituencyId: consituencies[1].id }
+              { name: '박근혜', uniqueId: 'open42976', profileImage: 'https://avatars1.githubusercontent.com/u/1366161?v=3&s=460', ConstituencyId: constituencies[0].dataValues.id, election: true},
+              { name: '김기춘', uniqueId: 'open42977', profileImage: 'https://avatars1.githubusercontent.com/u/1366161?v=3&s=460', ConstituencyId: constituencies[1].dataValues.id, election: true },
+              { name: '유민봉', uniqueId: 'open42978', profileImage: 'https://avatars1.githubusercontent.com/u/1366161?v=3&s=460', ConstituencyId: constituencies[0].dataValues.id, election: true }
             ])
           })
           .then(function() {
