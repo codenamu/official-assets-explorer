@@ -1,20 +1,4 @@
 <section id="page-search">
-  <header class="row header">
-    <section class="col s12 m6">
-      <h1>고위공직자 재산 정보 공개</h1>
-      <p>크리에이티브 커먼즈 코리아 공동작업</p>
-    </section>
-    <nav class="nav-desktop col m6">
-      <div class="nav-wrapper">
-        <ul class="right hide-on-med-and-down">
-          <li><a href="#">소개</a></li>
-          <li><a href="#">보도사례</a></li>
-          <li><a href="#">데이터</a></li>
-          <li><a href="#">연락하기</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
   <section class="row content">
     <div id="search-tabs" class="col s12 m4 offset-m4">
       <ul class="tabs">
@@ -23,14 +7,14 @@
       </ul>
     </div>
     <section id="search-default" class="col s12 tab-content">
-      <form id="form-search-default" action="/officials" method="GET">
+      <form id="form-search-default" class="container" action="/officials" method="GET">
         <div class="row">
-          <div class="input-field col s12 m4 offset-m2">
+          <div class="input-field col s12 m6">
             <select id="selected-orgs" name="org" multiple>
               <option value="" disabled selected>소속을 선택하세요</option>
             </select>
           </div>
-          <div class="input-field col s12 m4">
+          <div class="input-field col s12 m6">
             <select id="selected-years" name="year" multiple>
               <option value="" disabled selected>연도를 선택하세요</option>
               <option id="option-years-id-2005" value="2005">2005</option>
@@ -62,7 +46,7 @@
       </section>
     </section>
     <div id="search-election" class="col s12 tab-content">
-      <form id="form-search-election" action="/officials" method="GET">
+      <form id="form-search-election" class="container" action="/officials" method="GET">
         <div class="row">
           <div class="input-field col s12 m4">
             <select id="selected-provinces" name="province">

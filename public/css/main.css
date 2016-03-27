@@ -2,6 +2,10 @@ html, body {
   font-family: notosanscjkkr;
 }
 
+p {
+  color: #5c6d85;
+}
+
 .hide-mobile {
   display: none;
 }
@@ -10,19 +14,27 @@ html, body {
   border: 2px solid #5C6D85;
 }
 
-nav {
+nav#nav {
   background-color: #343B46;
   z-index: 11;
   position: relative;
 }
 
-nav a.brand-logo {
-  left: 150px;
-  padding: 5px 10px;
+nav#nav a.brand-logo {
+  left: 130px;
+  padding: 2px 0px;
 }
 
-nav a.brand-logo > img {
-  width: 200px;
+nav#nav a.brand-logo > img {
+  width: 170px;
+}
+
+nav#nav ul.right {
+  width: 40%;
+}
+
+nav#nav ul.right li a {
+  padding: 0 8px;
 }
 
 nav.nav-desktop {
@@ -34,6 +46,40 @@ nav.nav-desktop {
 
 nav.nav-desktop ul a {
   padding: 0 45px;
+}
+
+nav#nav li.donate {
+  display: none;
+}
+
+nav li.donate a.donate {
+  display: block;
+  width: 180px;
+  height: 70px;
+  padding: 0;
+  margin: 0;
+  background-image: url(http://download.newstapa.org/common/choice2016/donate.png?v=2);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: contain;
+}
+
+header {
+  width: 100%;
+  color: #ffffff;
+  background-color: #5C6D85;
+  padding: 0px 10px;
+  margin-top: -20px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  text-align: center;
+}
+
+header p {
+  color: #a7b9d1;
+  text-align: right;
 }
 
 #sidenav-overlay {
@@ -60,10 +106,6 @@ button {
 
 input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([readonly]), input[type=text].valid, input[type=text]:focus.valid {
   border-bottom-color: #5C6D85;
-}
-
-#search {
-  // display: none;
 }
 
 #search > section {
@@ -109,24 +151,6 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   top: 0px;
   height: 6px;
   background-color: #5C6D85;
-}
-
-#page-search > header {
-  width: 100%;
-  color: #ffffff;
-  background-color: #5C6D85;
-  padding: 0px 10px;
-  margin-top: -20px;
-}
-
-#page-search > header h1 {
-  font-size: 2.2rem;
-  text-align: center;
-}
-
-#page-search > header p {
-  color: #a7b9d1;
-  text-align: right;
 }
 
 #page-search {
@@ -216,6 +240,10 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   right: 15px;
 }
 
+#main > section {
+  margin: 0 auto;
+}
+
 #page-official {
   background-color: #E7E8EC;
 }
@@ -252,6 +280,16 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 
 #page-official .card .card-action .official-pie-chart h6 {
   text-align: left;
+}
+
+#main .page.page-about {
+  padding: 20px 0;
+}
+
+#main .page.page-about h5 {
+  font-size: 1.3rem;
+  line-height: 2.6rem;
+  letter-spacing: -1.5px
 }
 
 .color-news {
@@ -293,9 +331,30 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
     line-height: 47px;
   }
 
-  nav a.brand-logo {
-    left: 0;
+  nav#nav a.brand-logo {
+    left: 10px;
   }
+
+  nav#nav ul.right {
+    width: initial;
+  }
+
+  nav#nav ul.right li a {
+    padding: 0 15px;
+  }
+
+  nav#nav ul a {
+    font-size: 2rem;
+  }
+
+  nav#nav li > a > i {
+    height: 39px;
+  }
+
+  nav#nav li.donate {
+    display: block;
+  }
+
 
   nav.nav-desktop {
     display: block;
@@ -313,16 +372,16 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
     top: 0px;
   }
 
-  #page-search > header {
+  header {
     padding: 30px 10px;
   }
 
-  #page-search > header h1 {
+  header h1 {
     text-align: left;
     font-size: 3rem;
   }
 
-  #page-search > header p {
+  header p {
     text-align: left;
   }
 
@@ -332,5 +391,11 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 
   .cards .search-message {
     text-align: center;
+  }
+
+  #main .page.page-about h5 {
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+    letter-spacing: 0px;
   }
 }

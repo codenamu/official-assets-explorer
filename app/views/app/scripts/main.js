@@ -19,14 +19,14 @@ require.config({
     }
   },
   paths: {
-    materialize   : '/vendor/materialize/js/materialize.min',
+    materialize   : '/vendor/material/js/materialize.min',
     jquery        : '/vendor/jquery/jquery.min',
     backbone      : '/vendor/backbone',
     underscore    : '/vendor/lodash.min',
-    hammerjs      : '/vendor/materialize/js/hammer.min',
-    sideNav       : '/vendor/materialize/js/sideNav',
-    hammer        : '/vendor/materialize/js/jquery.hammer',
-    velocity      : '/vendor/materialize/js/velocity.min',
+    hammerjs      : '/vendor/material/js/hammer.min',
+    sideNav       : '/vendor/material/js/sideNav',
+    hammer        : '/vendor/material/js/jquery.hammer',
+    velocity      : '/vendor/material/js/velocity.min',
     'backbone-query-parameters': '/vendor/backbone.queryparams.min',
     chartjs       : 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min'
   }
