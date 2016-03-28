@@ -3,7 +3,8 @@ module.exports = function (sequelize, DataTypes) {
   var Official = sequelize.define('Official', {
     openId    : DataTypes.STRING,     // 공개id
     page      : DataTypes.INTEGER,     // 원본 자료 페이지
-    year      : DataTypes.INTEGER
+    year      : DataTypes.INTEGER,
+    pdfUrl    : DataTypes.STRING
   }, {
     timestamps: false,
     classMethods: {

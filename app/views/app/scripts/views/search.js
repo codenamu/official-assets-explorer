@@ -247,8 +247,9 @@ define([
       params.year = $('#selected-years').val()
       params.keyword = $('#selected-keyword').val()
 
+
       // set current url with query parameters
-      Backbone.history.navigate('?' + $.param(params))
+      Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
       // find results
       this.getResult(params)
     },
@@ -266,9 +267,13 @@ define([
       params.election = true
 
       // set current url with query parameters
-      Backbone.history.navigate('?' + $.param(params))
+      Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
       // find results
       this.getResult(params)
+    },
+
+    fixEncodeURI: function(param) {
+      return param.replace(/%5B/g, '').replace(/%5D/g, '');
     },
 
     getResult: function(params) {
@@ -279,7 +284,6 @@ define([
       // show results in the active tab
       // between #search-default and #search-election
       params.el = $('#search-tabs li.tab > a.active').attr('href') + '-result'
-      console.log(params.el)
       this.resultView = new OfficialsView(params)
     },
 

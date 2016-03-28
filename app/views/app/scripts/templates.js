@@ -28,6 +28,8 @@ __e( model.Person.name ) +
 __p += '\n        <li>' +
 __e( p.year ) +
 '년 ' +
+__e( p.Org3.title ) +
+' ' +
 __e( p.title ) +
 '</li>\n      ';
  }) ;
@@ -104,7 +106,7 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<section class="container">\n  <div class="row search-message">\n    <div class="col s12">\n      <h5>총 ' +
 __e( count ) +
-'개의 결과를 찾았습니다.</h5>\n    </div>\n    <!-- <div class="col s3">\n      <button id="btn-research" class="btn waves-effect color-news hide-desktop" type="button">다시 검색하기</button>\n    </div> -->\n  </div>\n  <div class="row search-cards">\n\n  </div>\n</section>\n';
+'개의 결과를 찾았습니다.</h5>\n    </div>\n    <!-- <div class="col s3">\n      <button id="btn-research" class="btn waves-effect color-news hide-desktop" type="button">다시 검색하기</button>\n    </div> -->\n  </div>\n  <div class="row search-cards" style="position: relative;">\n\n  </div>\n</section>\n';
 
 }
 return __p

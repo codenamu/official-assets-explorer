@@ -23,14 +23,21 @@ define([
     },
 
     initialize: function() {
-      this.navView = new NavView()
+      if (!this.navView) {
+        this.navView = new NavView()
+      }
     },
 
     main: function(params) {
-      this.headerView = new HeaderView()
+      if (!this.headerView) {
+        this.headerView = new HeaderView()
+      }
+
+      if (this.officialView) {
+        this.officialView.destroy()
+      }
 
       if (params) {
-        this.searchView.destroy()
         this.searchView = new SearchView(params)
       } else {
         this.searchView = new SearchView()
@@ -38,7 +45,7 @@ define([
     },
 
     official: function(id) {
-      var view = new OfficialView({ uniqueId: id })
+      this.officialView = new OfficialView({ uniqueId: id })
     },
 
     about: function() {

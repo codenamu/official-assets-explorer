@@ -19,26 +19,23 @@ define([
 
     subViews: [],
 
-    searchStatus: {
-      isLoaded: true,
-      isEnded: false,
-      count: 0
-    },
+    searchStatus: {},
 
     initialize: function (params) {
       var self = this
       this.params = params
-
-      // bind detectScroll event to this
-      _.bindAll(this, 'detectScroll')
-      $(window).scroll(this.detectScroll)
+      this.searchStatus = {
+        isLoaded: true,
+        isEnded: false,
+        count: 0
+      }
 
       var officials = new Officials()
       officials.fetch({data: $.param(params), success: function () {
-        var officialsRearranged = self.rearrangeOfficials(officials.models[0].attributes.officials)
-        self.searchStatus.count += officialsRearranged.length
+        self.searchStatus.count += officials.models[0].attributes.officials.length
         self.checkSearchEnded(officials.models[0].attributes.count)
 
+        var officialsRearranged = self.rearrangeOfficials(officials.models[0].attributes.officials)
         self.$el.html(self.template({count: officials.models[0].attributes.count}))
         self.afterRender(officialsRearranged)
 
@@ -46,6 +43,10 @@ define([
           duration: 500,
           easing: 'ease-in-out'
         })
+
+        // bind detectScroll event to this
+        _.bindAll(self, 'detectScroll')
+        $(window).scroll(self.detectScroll)
       }})
 
     },
@@ -61,6 +62,14 @@ define([
       })
 
       this.saveCurrentsearchStatus()
+
+      var wookmark = new Wookmark('.search-cards', {
+        autoResize: true,
+        offset: 0,
+        outerOffset: -5,
+        flexibleWidth: false,
+        direction: 'left',
+      });
     },
 
     saveCurrentsearchStatus: function() {
@@ -69,7 +78,7 @@ define([
     },
 
     checkSearchEnded: function(count) {
-      if (this.searchStatus.count === count) {
+      if (this.searchStatus.count === parseInt(count, 10)) {
         this.searchStatus.isEnded = true
       }
     },
@@ -104,13 +113,14 @@ define([
       var self = this
       var triggerPoint = 100; // 100px from the bottom
       var scrollTop = $(window).scrollTop()
-      var scrollHeight = this.el.scrollHeight
-
+      var docHeight = this.$el.height()
+      // console.log('window height', $(window).height())
+      // console.log('scrollTop', scrollTop)
+      // console.log('doc height', this.$el.height())
       // trigger!!
-      if(scrollTop + 35 > scrollHeight && this.searchStatus.isLoaded && !this.searchStatus.isEnded) {
-        console.log(this.searchStatus)
+      if(scrollTop + 350 > docHeight && this.searchStatus.isLoaded && !this.searchStatus.isEnded) {
+        console.log('=====')
         this.searchStatus.isLoaded = false
-        console.log(this.searchStatus)
 
         var officials = new Officials()
         var params = this.params
@@ -118,6 +128,7 @@ define([
         params.limit = 20
 
         officials.fetch({data: $.param(params), success: function () {
+          console.log(officials)
           var officialsRearranged = self.rearrangeOfficials(officials.models[0].attributes.officials)
           self.searchStatus.count += officialsRearranged.length
           self.checkSearchEnded(officials.models[0].attributes.count)
@@ -136,6 +147,7 @@ define([
       this.undelegateEvents();
       this.$el.empty();
       this.stopListening();
+      this.searchStatus = {}
       return this;
     },
 

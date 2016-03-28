@@ -6,90 +6,236 @@ module.exports = function() {
 
   router.get('/', function(req, res, next) {
     var queries = req.query
+    var result = {}
     var searchOption = {}
+    var params = {}
 
-    searchOption.order = [['year', 'DESC']]
-    searchOption.where = queries.keyword ? {
-        $or: [{
-            '$Person.name$': {
-              $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
-            }
-          }, {
-            '$Position.title$': {
-              $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
-            }
-          }, {
-            '$Position.Org3.title$': {
-              $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
-            }
-          }]
-      } : {}
-
+    // ready for clean query parameters
     if (queries.org && (typeof queries.org === 'string')) {
       queries.org = queries.org.split(',')
-      searchOption.where['$Position.Org3.Org2.Org1.title$'] = { $in: queries.org }
     }
+
     if (queries.year && (typeof queries.year === 'string')) {
-      queries.year = queries.year.split(',')
-      searchOption.where['year'] = { $in: queries.year }
+      queries.year = queries.year.split(',').map(function(y) {
+        return parseInt(y, 10)
+      })
+    } else if (queries.year) {
+      queries.year = queries.year.map(function(y) {
+        return parseInt(y, 10)
+      })
     }
-    
-    searchOption.include = [{
-        model: db.Person,
-        attributes: ['id', 'uniqueId'],
-        required: true,
-        include: [{
-          model: db.Constituency,
-          attribute: [['id', 'ConstituencyId'], 'name'],
-          required: true
+
+    if (queries.keyword) {
+      queries.keyword = '%' + queries.keyword.replace(/ /g, '%') + '%'
+    }
+
+
+    if (queries.election) {
+    } else {
+      var where = {}
+
+      if (queries.keyword) {
+        where['$or'] = [{
+          '$Person.name$': {
+            $like: queries.keyword
+          }
+        }, {
+          '$Position.title$': {
+            $like: queries.keyword
+          }
+        }, {
+          '$Position.Org3.title$': {
+            $like: queries.keyword
+          }
         }]
-      }, {
-        model: db.Position,
-        attributes: ['id'],
-        required: true,
+      }
+
+      if (queries.year) {
+        where.year = { $in: queries.year }
+      }
+
+      if (queries.org) {
+        where['$Position.Org3.Org2.Org1.title$'] = { $in: queries.org }
+      }
+
+      getCount(db.Official, {
+        where: where,
+        group: 'Person.uniqueId',
         include: [{
-          model: db.Org3,
-          attribute: ['id'],
-          required: true,
-          incude: [{
-            model: db.Org2,
-            attribute: ['id'],
-            required: true,
+          model: db.Person
+        }, {
+          model: db.Position,
+          include: [{
+            model: db.Org3,
             include: [{
-              model: db.Org1,
-              attribute: ['id'],
-              required: true
+              model: db.Org2,
+              include: [{
+                model: db.Org1
+              }]
             }]
           }]
         }]
-      }]
+      })
+      .then(function(count) {
+        result.count = count.length
 
+        getOfficials({
+          order: [['year', 'DESC']],
+          where: where,
+          group: 'Person.uniqueId',
+          limit: queries.limit ? parseInt(queries.limit, 10) : 40,
+          offset: queries.offset ? parseInt(queries.offset, 10) : 0,
+          include: [{
+            model: db.Person
+          }, {
+            model: db.Position,
+            include: [{
+              model: db.Org3,
+              include: [{
+                model: db.Org2,
+                include: [{
+                  model: db.Org1
+                }]
+              }]
+            }]
+          }]
+        })
+        .then(function(officials) {
+          var targets = officials.map(function(o) {
+            return o.Person.dataValues.uniqueId
+          })
 
-    searchOption.group = ['Person.uniqueId']
-    searchOption.limit = queries.limit ? queries.limit : 40
-    searchOption.offset = queries.offset ? parseInt(queries.offset, 10) : 0
+          getOfficials({
+            order: [['year', 'DESC']],
+            include: [{
+              model: db.Person,
+              attributes: ['name', 'uniqueId'],
+              where: { uniqueId: { $in: targets }}
+            }, {
+              model: db.Position,
+              attributes: ['title'],
+              include: [{
+                model: db.Org3,
+                attribute: ['title'],
+                incude: [{
+                  model: db.Org2,
+                  attribute: ['title'],
+                  include: [{
+                    model: db.Org1,
+                    attribute: ['title']
+                  }]
+                }]
+              }]
+            }]
+          })
+          .then(function(officials) {
+            result.officials = officials
+            res.json(result)
+          })
+          
+        })
+      })
+    }
     
 
-    if (queries.election) {
-      searchOption.where['$Person.election$'] = queries.election ? 1 : 0
+    // 
+    // searchOption.where = queries.keyword ? {
+    //     $or: [{
+    //         '$Person.name$': {
+    //           $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
+    //         }
+    //       }, {
+    //         '$Position.title$': {
+    //           $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
+    //         }
+    //       }, {
+    //         '$Position.Org3.title$': {
+    //           $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
+    //         }
+    //       }]
+    //   } : {}
 
-      db.Constituency.findAll({
-        include: [{
-          model: db.Dong,
-          where: {
-            name: queries.dong ? queries.dong : ''
-          }
-        }]
-      })
-      .then(function(result) {
-        searchOption.where['$Person.Constituency.id$'] = result[0].id
+    
+    // }
+
+    // searchOption.where['$Position.Org3.Org2.Org1.title$'] = { $in: queries.org }
+    // searchOption.where['year'] = { $in: queries.year }
+    
+    // searchOption.include = [{
+    //     model: db.Person,
+    //     attributes: ['id', 'uniqueId'],
+    //     required: true
+    //   }, {
+    //     model: db.Position,
+    //     attributes: ['id'],
+    //     required: true,
+    //     include: [{
+    //       model: db.Org3,
+    //       attribute: ['id'],
+    //       required: true,
+    //       incude: [{
+    //         model: db.Org2,
+    //         attribute: ['id'],
+    //         required: true,
+    //         include: [{
+    //           model: db.Org1,
+    //           attribute: ['id', 'title'],
+    //           required: true
+    //         }]
+    //       }]
+    //     }]
+    //   }]
+
+
+    // searchOption.group = ['Person.uniqueId']
+
+    // if (queries.election) {
+    //   searchOption.where['$Person.election$'] = queries.election ? 1 : 0
+    //   searchOption.include[0].include = [{
+    //     model: db.Constituency,
+    //     attribute: [['id', 'ConstituencyId'], 'name'],
+    //     required: true
+    //   }]
+
+    //   db.Constituency.findAll({
+    //     include: [{
+    //       model: db.Dong,
+    //       where: {
+    //         name: queries.dong ? queries.dong : ''
+    //       }
+    //     }]
+    //   })
+    //   .then(function(result) {
+    //     searchOption.where['$Person.Constituency.id$'] = result[0].id
         
-        getOfficials(searchOption, res)
-      })
-      // searchOption.where['$Person.Constituency.Dongs.name$'] = queries.dong
-    } else {
-      getOfficials(searchOption, res)
-    }
+    //     getOfficials(searchOption, res)
+    //   })
+    //   // searchOption.where['$Person.Constituency.Dongs.name$'] = queries.dong
+    // } else {
+      
+    //   // getOfficials(searchOption, res)
+    //   db.Official.count({
+    //     where: {
+    //       year: {
+    //         $in: ['2014', '2015']
+    //       },
+    //       '$Position.title$': {
+    //         $like: '%대통령%'
+    //       }
+    //     },
+    //     group: 'Person.uniqueId',
+    //     attributes: ['Official.*', 'Person.*'],
+    //     include: [{
+    //       model: db.Person,
+    //       attribute: ['uniqueId']
+    //     }, {
+    //       model: db.Position
+    //     }]
+    //   })
+    //   .then(function(result) {
+    //     res.json(result)
+    //   })
+    // }
 
 
   })
@@ -138,46 +284,79 @@ module.exports = function() {
   return router
 }
 
-function getOfficials(searchOption, res) {
-  var result = {}
+function getCount(target, option) {
+  return target.count(option)
+}
 
-  db.Official.findAndCount(searchOption)
-    .then(function (officials) {
-      result.count = officials.count.length
+function getOfficials(searchOption) {
+  return db.Official.findAll(searchOption)
+  // var result = {}
+  // searchOption.limit = queries.limit ? parseInt(queries.limit, 10) : 40
+  // // searchOption['OFFSET'] = queries.offset ? parseInt(queries.offset, 10) : 0
+  // searchOption.offset = queries.offset ? parseInt(queries.offset, 10) : 0
+  // searchOption.distinct = '$Person.uniqueId$'
+  // db.Official.count(searchOption)
+  //   .then(function() {
 
-      var targets = officials.rows.map(function(o) {
-        return o.Person.dataValues.uniqueId
-      })
+  //   })
+  // console.log(searchOption)
+  // console.log('=====================')
+  // console.log('before findAndCount')
+  // console.log('=====================')
+  // db.Official.findAndCountAll(searchOption)
+  //     .then(function(officials) {
+
+  // console.log('=====================')
+  // console.log('after findAndCount')
+  // console.log('=====================')
+  //       result.count = officials.count.length
+  //       var targets = officials.rows.map(function(o) {
+  //         return o.Person.dataValues.uniqueId
+  //       })
+  //       // var targets = officials[0].map(function(o) {
+  //       //   return o['personUniqueId']
+  //       // })
+        
+  //       console.log('=====================')
+  //       console.log('before findAll')
+  //       console.log('=====================')
+  //       db.Official.findAll({
+  //         order: [['year', 'ASC']],
+  //         include: [{
+  //           model: db.Person,
+  //           attributes: ['name', 'uniqueId'],
+  //           where: { uniqueId: { $in: targets }}
+  //         }, {
+  //           model: db.Position,
+  //           attributes: ['title'],
+  //           include: [{
+  //             model: db.Org3,
+  //             attribute: ['title'],
+  //             incude: [{
+  //               model: db.Org2,
+  //               attribute: ['title'],
+  //               include: [{
+  //                 model: db.Org1,
+  //                 attribute: ['title']
+  //               }]
+  //             }]
+  //           }]
+  //         }]
+  //       })
+  //       .then(function(officials) {
+  //         console.log('=====================')
+  //         console.log('after findAll')
+  //         console.log('=====================')
+  //         result.officials = officials
+  //         res.json(result)
+  //       })
+  //     })
+  // })
+  
+  // db.Official.findAndCount(searchOption)
+
+  //   .then(function (officials) {
+  //     result.count = officials.count.length
+
       
-      db.Official.findAll({
-        order: [['year', 'ASC']],
-        include: [{
-          model: db.Person,
-          attributes: ['name', 'uniqueId'],
-          where: { uniqueId: { $in: targets }},
-          include: [{
-            model: db.Constituency
-          }]
-        }, {
-          model: db.Position,
-          attributes: ['title'],
-          include: [{
-            model: db.Org3,
-            attribute: ['title'],
-            incude: [{
-              model: db.Org2,
-              attribute: ['title'],
-              include: [{
-                model: db.Org1,
-                attribute: ['title']
-              }]
-            }]
-          }]
-        }]
-      })
-      .then(function(officials) {
-        result.officials = officials
-        res.json(result)
-      })
-    })
 }

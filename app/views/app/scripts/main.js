@@ -6,6 +6,7 @@ require.config({
     materialize: {
       deps: ['jquery', 'hammerjs', 'hammer']
     },
+
     hammer: {
       deps: ['jquery']
     },

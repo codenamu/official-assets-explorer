@@ -190,7 +190,7 @@ define([
       return result
     },
 
-    close: function() {
+    destroy: function() {
       this.undelegateEvents();
       this.$el.empty();
       this.stopListening();
