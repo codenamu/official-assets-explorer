@@ -61,6 +61,7 @@ define([
 
       Object.keys(model).forEach(function(m) {
         model[m].Position.year = model[m].year
+        model[m].Position.pdfUrl = model[m].pdfUrl
 
         if (model[m].year > self.result.latestYear) {
           self.result.latestYear = model[m].year
@@ -69,6 +70,7 @@ define([
         self.result.position.push(model[m].Position)
 
         self.result.assets.history[model[m].year] = {}
+        self.result.assets.history[model[m].year].pdfUrl = model[m].pdfUrl
         self.result.assets.history[model[m].year].assets = model[m].Assets
         self.result.assets.history[model[m].year].total = 0
 
@@ -78,6 +80,7 @@ define([
       })
 
       this.result.assets.history[this.result.latestYear].totalText = this.calMeasureMoney(this.result.assets.history[this.result.latestYear].total)
+      console.log(this.result)
       this.render(this.result)
     },
 

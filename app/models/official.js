@@ -4,7 +4,7 @@ module.exports = function (sequelize, DataTypes) {
     openId    : DataTypes.STRING,     // 공개id
     page      : DataTypes.INTEGER,     // 원본 자료 페이지
     year      : DataTypes.INTEGER,
-    pdfUrl    : DataTypes.STRING
+    pdfUrl    : DataTypes.TEXT
   }, {
     timestamps: false,
     classMethods: {

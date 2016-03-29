@@ -33,7 +33,7 @@
                     <h5><li>원본 보기</li></h5>
                     <ul>
                     <% for (var p in official.position) { %>
-                      <li><a href="#">- <%- official.position[p].year %>년</a></li>
+                      <li><a href="<%- official.position[p].pdfUrl %>" target="_blank">- <%- official.position[p].year %>년</a></li>
                     <% } %>
                     </ul>
                   </div>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="row">
                               <div class="input-field col s12">
-                                <input id="contact-official-email" class="validate" type="email" name="contact=official-email" required/>
+                                <input id="contact-official-email" class="validate" type="email" name="contact=official-email" placeholder="필수" required/>
                                 <label for="contact-official-email">이메일</label>
                               </div>
                             </div>

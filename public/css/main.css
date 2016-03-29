@@ -341,13 +341,12 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
   background-color: #E7E7E7;
 }
 
-#main .page.page-contact form > div.row:first-child .input-field {
-  margin-top: 0px;
-}
+// #main .page.page-contact form > div.row:first-child .input-field {
+//   margin-top: 0px;
+// }
 
-#main .page.page-contact form .col.m1 h6 {
-  text-align: right;
-  margin: 1rem 0 1rem; 0;
+#main .page.page-contact .card {
+  padding: 10px 0;
 }
 
 .color-news {

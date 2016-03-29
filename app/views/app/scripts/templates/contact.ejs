@@ -4,58 +4,41 @@
       <div class="card-content row">
           <form id="form-contact" action="#">
             <div class="row">
-              <div class="col s12 m1">
-                <h6>구분</h6>
-              </div>
-              <div class="col s12 m11">
-                <div class="row">
-                  <div class="input-field col s12 m3">
-                    <input name="contact-for" type="radio" id="contact-for-update" value="개선사항 제안하기" required/>
-                    <label for="contact-for-update">개선사항 제안하기</label>
-                  </div>
-                  <div class="input-field col s12 m3">
-                    <input name="contact-for" type="radio" id="contact-for-data" value="데이터 수정 요구" required />
-                    <label for="contact-for-data">데이터 수정요구</label>
-                  </div>
-                  <div class="input-field col s12 m3">
-                    <input name="contact-for" type="radio" id="contact-for-article" value="기사 제보하기" required />
-                    <label for="contact-for-article">기사 제보하기</label>
-                  </div>
-                  <div class="input-field col s12 m3">
-                    <input name="contact-for" type="radio" id="contact-for-etc" value="기타 문의" required />
-                    <label for="contact-for-etc">기타 문의</label>
-                  </div>
+              <div class="col s12 m10 offset-m1">
+                <div class="input-field col s6 m3">
+                  <input name="contact-for" type="radio" id="contact-for-update" value="개선사항 제안하기" required/>
+                  <label for="contact-for-update">개선사항 제안하기</label>
+                </div>
+                <div class="input-field col s6 m3">
+                  <input name="contact-for" type="radio" id="contact-for-data" value="데이터 수정 요구" required />
+                  <label for="contact-for-data">데이터 수정요구</label>
+                </div>
+                <div class="input-field col s6 m3">
+                  <input name="contact-for" type="radio" id="contact-for-article" value="기사 제보하기" required />
+                  <label for="contact-for-article">기사 제보하기</label>
+                </div>
+                <div class="input-field col s6 m3">
+                  <input name="contact-for" type="radio" id="contact-for-etc" value="기타 문의" required />
+                  <label for="contact-for-etc">기타 문의</label>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col s12 m1">
-                <h6>이메일</h6>
-              </div>
-              <div class="col s12 m11">
-                <div class="input-field col s12">
-                  <input id="contact-email" class="validate" type="email" required></input>
-                  <label for="contact-email">필수</label>
-                </div>
+              <div class="input-field col s12 m10 offset-m1">
+                <input id="contact-email" class="validate" name="contact-email" placeholder="필수" type="email" required></input>
+                <label for="contact-email">이메일</label>
               </div>
             </div>
             <div class="row">
-              <div class="col s12 m1">
-                <h6>연락처</h6>
-              </div>
-              <div class="col s12 m11">
-                <div class="input-field col s12">
-                  <input id="contact-contact" class="validate" type="tel"></input>
-                </div>
+              <div class="input-field col s12 m10 offset-m1">
+                <input id="contact-contact" class="validate" placeholder="선택" type="tel"></input>
+                <label for="contact-email">연락처</label>
               </div>
             </div>
             <div class="row">
-              <div class="col s12 m1">
-                <h6>내용</h6>
-              </div>
-              <div class="col s12 m11">
-                <div class="input-field col s12">
-                  <textarea id="contact-content" class="materialize-textarea" required></textarea>
+                <div class="input-field col s12 m10 offset-m1">
+                  <textarea id="contact-content" class="materialize-textarea" name="contact-content" required></textarea>
+                  <label for="contact-content">내용</label>
                 </div>
               </div>
             </div>
