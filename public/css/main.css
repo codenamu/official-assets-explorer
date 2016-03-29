@@ -251,7 +251,7 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
 
 .cards .search-cards .card .card-action .card-link-to-btn {
   position: absolute;
-  top: 15px;
+  bottom: 15px;
   right: 15px;
 }
 

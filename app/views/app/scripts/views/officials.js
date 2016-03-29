@@ -65,7 +65,7 @@ define([
       this.saveCurrentsearchStatus()
 
       // remove loading signal
-      $('#page-search .search-loading').removeClass('active')
+      $('#page-search .search-loading > .preloader-wrapper').removeClass('active')
 
       var wookmark = new Wookmark('.search-cards', {
         autoResize: true,
@@ -84,6 +84,7 @@ define([
     checkSearchEnded: function(count) {
       if (this.searchStatus.count === parseInt(count, 10)) {
         this.searchStatus.isEnded = true
+        $('#page-search .search-loading > .preloader-wrapper').removeClass('active')
       }
     },
 
@@ -124,7 +125,7 @@ define([
       // trigger!!
       if(scrollTop + 400 > docHeight && this.searchStatus.isLoaded && !this.searchStatus.isEnded) {
         // activate loading signal
-        $('#page-search .search-loading').addClass('active')
+        $('#page-search .search-loading > .preloader-wrapper').addClass('active')
 
         this.searchStatus.isLoaded = false
 

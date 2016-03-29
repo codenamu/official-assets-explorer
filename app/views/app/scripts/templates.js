@@ -33,7 +33,7 @@ __e( p.Org3.title ) +
 __e( p.title ) +
 '</li>\n      ';
  }) ;
-__p += '\n      <span class="card-link-to-btn">\n      <a class="btn-floating btn-large waves-effect waves-light color-news"><i class="material-icons">trending_flat</i></a>\n      </span>\n    </div>\n  </div>\n</div>\n';
+__p += '\n      <span class="card-link-to-btn">\n      <a class="btn btn-floating waves-effect waves-light color-news"><i class="material-icons">trending_flat</i></a>\n      </span>\n    </div>\n  </div>\n</div>\n';
 
 }
 return __p

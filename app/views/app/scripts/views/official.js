@@ -34,9 +34,8 @@ define([
       this.drawBarChart()
       this.drawPieChart(2014)
 
-      $('#main').velocity('scroll', {
+      $('#page-official').velocity('scroll', {
         duration: 500,
-        offset: -40,
         easing: 'ease-in-out'
       })
 
