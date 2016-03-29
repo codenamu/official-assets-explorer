@@ -15,7 +15,9 @@ define([
 
     el: '#main',
 
-    events: {},
+    events: {
+      'submit #form-contact-official'  : 'sendEmail'
+    },
 
     initialize: function (params) {
       // this.listenTo(this.model, 'change', this.render)
@@ -189,6 +191,26 @@ define([
       }
 
       return result
+    },
+
+    sendEmail: function(e) {
+      var self = this
+      e.preventDefault()
+
+      $.post('/api/send', {
+        type: $('#contact-official-type').val(),
+        fromEmail: $('#contact-official-email').val(),
+        content: $('#contact-official-content').val()
+      })
+      .then(function(result) {
+        if (result[0].status === 'sent') {
+          alert('이메일을 성공적으로 보냈습니다.')
+          $('#contact-official-' + self.result.person.uniqueId).closeModal();
+        } else {
+          alert('이메일을 보내는데 실패하였습니다.')
+        }
+      })
+
     },
 
     destroy: function() {

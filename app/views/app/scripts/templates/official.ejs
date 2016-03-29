@@ -42,28 +42,32 @@
                       <button id="btn-contact-official-<%- official.person.uniqueId %>" class="btn waves-effect color-news modal-trigger" type="button" data-target="contact-official-<%- official.person.uniqueId %>">제보하기</button>
 
                       <div id="contact-official-<%- official.person.uniqueId %>" class="modal">
-                        <div class="modal-content">
-                          <div class="row">
-                            <h5>제보하기</h5>
-                            <p><%- official.person.name %> 관련 정보 제보하기</p>
-                          </div>
-                          <div class="row">
-                            <form class="col s12">
-                              <div class="row">
-                                <div class="input-field col s12">
-                                  <input type="hidden" name="official-id-name" value="<%- official.person.uniqueId %>-<%- official.person.name %>">
-                                  <textarea id="contact-official-content" class="materialize-textarea"></textarea>
-                                  <label for="contact-official-content">내용</label>
-                                </div>
+                        <form id="form-contact-official" class="col s12">
+                          <div class="modal-content">
+                            <div class="row">
+                              <h5>제보하기</h5>
+                              <p><%- official.person.name %> 관련 정보 제보하기</p>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <input id="contact-official-email" class="validate" type="email" name="contact=official-email" required/>
+                                <label for="contact-official-email">이메일</label>
                               </div>
-                            </form>
-                          </div>
-                          <div class="row">
-                            <div class="col s12 m4 offset-m4">
-                              <button type="submit" class="btn btn-larget color-news">보내기</button>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <input type="hidden" name="official-id-name" id="contact-official-type" value="<%- official.person.uniqueId %>-<%- official.person.name %>">
+                                <textarea id="contact-official-content" name="contact-official-content" class="materialize-textarea"></textarea>
+                                <label for="contact-official-content">내용</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col s12 m4 offset-m4">
+                                <button type="submit" class="btn btn-larget color-news">보내기</button>
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </form>
                       </div>
                     </div>
                   </div>

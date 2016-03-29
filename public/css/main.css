@@ -10,8 +10,6 @@ p {
   max-width: 960px;
 }
 
-
-
 .hide-mobile {
   display: none;
 }
@@ -40,7 +38,8 @@ nav#nav ul.right {
 }
 
 nav#nav ul.right li a {
-  padding: 0 8px;
+  padding: 8px 8px;
+  height: 56px;
 }
 
 nav.nav-desktop {
@@ -76,6 +75,10 @@ header {
   background-color: #5C6D85;
   padding: 0px 10px;
   margin-top: -20px;
+}
+
+header > .row {
+  margin-bottom: 0px;
 }
 
 header h1 {
@@ -407,6 +410,7 @@ footer.page-footer p {
 
   nav#nav ul.right li a {
     padding: 0 15px;
+    height: 64px;
   }
 
   nav#nav ul a {
