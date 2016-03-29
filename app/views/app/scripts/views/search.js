@@ -51,22 +51,44 @@ define([
     afterRender: function() {
       // initialize tabs
       $('#search-tabs > ul.tabs').tabs();
-      this.setSelectOptions()
+      this.setInitSelectOptions()
       this.drawForms()
 
-      if (!_.isEmpty(this.params) && this.params['keyword'] !== undefined) {
+
+      if (!_.isEmpty(this.params)) {
         this.setParams()
         this.getResult(this.params)
-        this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
-        this.resetTags('default', 'years', $('#selected-years > option:selected'))
-      } else if (!_.isEmpty(this.params) && this.params['election'] !== undefined) {
-        $('#search-tabs > ul.tabs').tabs('select_tab', 'search-election');
-        this.setParams()
-        this.getResult(this.params)
+
+        /**
+         * if use request with default search option
+         */
+        if (this.params['keyword'] !== undefined) {
+          this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
+          this.resetTags('default', 'years', $('#selected-years > option:selected'))
+        } else if (this.params['election'] !== undefined) {
+          /**
+         * if use request with election cadidates search option
+         */
+          $('#search-tabs > ul.tabs').tabs('select_tab', 'search-election');
+          this.setParams()
+          this.getResult(this.params)
+        }
+      } else {
+        this.hideLoadingDiv()
       }
+
+
     },
 
-    setSelectOptions: function() {
+    showLoadingDiv: function() {
+      $('#page-search .search-loading').show()
+    },
+
+    hideLoadingDiv: function() {
+      $('#page-search .search-loading').hide()
+    },
+
+    setInitSelectOptions: function() {
       var self = this
 
       this.orgs.models.forEach(function(m) {
@@ -76,7 +98,6 @@ define([
           text: m.attributes.title
         }))
       })
-
 
       this.provinces.forEach(function(p) {
         $('#selected-provinces').append($('<option>', {

@@ -22,7 +22,9 @@ __e( model.Person.uniqueId ) +
 '" class="card">\n    <div class="card-content">\n      <span class="card-title">' +
 __e( model.Person.name ) +
 '</span>\n      <span class="card-subtitle">' +
-((__t = ( model.Position[model.Position.length - 1].title )) == null ? '' : __t) +
+__e( model.Position[model.Position.length - 1].Org3.title ) +
+' ' +
+__e( model.Position[model.Position.length - 1].title ) +
 '</span>\n    </div>\n    <div class="card-action">\n      ';
  model.Position.forEach(function(p) {;
 __p += '\n        <li>' +

@@ -25,8 +25,11 @@ define([
       var self = this
       this.params = params
       this.searchStatus = {
+        // is data user requested at this time loaded
         isLoaded: true,
+        // is entired data for the parameters loaded?
         isEnded: false,
+        // the current number of data loaded(not the entire data)
         count: 0
       }
 
@@ -36,23 +39,24 @@ define([
         self.searchStatus.count += officialsRearranged.length
         self.checkSearchEnded(officials.models[0].attributes.count)
 
+        self.beforeRender()
         self.$el.html(self.template({count: officials.models[0].attributes.count}))
         self.afterRender(officialsRearranged)
 
-        $('#' + self.$el.attr('id')).velocity('scroll', {
-          duration: 500,
-          easing: 'ease-in-out'
-        })
 
-        // bind detectScroll event to this
-        _.bindAll(self, 'detectScroll')
-        $(window).scroll(self.detectScroll)
       }})
 
     },
 
     render: function (model) {
       this.afterRender(model)
+    },
+
+    beforeRender: function() {
+      $('#' + this.$el.attr('id')).velocity('scroll', {
+        duration: 500,
+        easing: 'ease-in-out'
+      })
     },
 
     afterRender: function(model) {
@@ -63,9 +67,7 @@ define([
       })
 
       this.saveCurrentsearchStatus()
-
-      // remove loading signal
-      $('#page-search .search-loading > .preloader-wrapper').removeClass('active')
+      this.deactivateLoadingSignal()
 
       var wookmark = new Wookmark('.search-cards', {
         autoResize: true,
@@ -74,6 +76,10 @@ define([
         flexibleWidth: false,
         direction: 'left',
       });
+
+      // bind detectScroll event to this
+      _.bindAll(self, 'detectScroll')
+      $(window).scroll(self.detectScroll)
     },
 
     saveCurrentsearchStatus: function() {
@@ -119,13 +125,11 @@ define([
       var triggerPoint = 100; // 100px from the bottom
       var scrollTop = $(window).scrollTop()
       var docHeight = this.$el.height()
-      // console.log('window height', $(window).height())
-      // console.log('scrollTop', scrollTop)
-      // console.log('doc height', this.$el.height())
-      // trigger!!
+
       if(scrollTop + 400 > docHeight && this.searchStatus.isLoaded && !this.searchStatus.isEnded) {
-        // activate loading signal
-        $('#page-search .search-loading > .preloader-wrapper').addClass('active')
+        this.showLoadingDiv()
+        this.activateLoadingSignal()
+
 
         this.searchStatus.isLoaded = false
 
@@ -142,6 +146,18 @@ define([
           self.afterRender(officialsRearranged)
         }})
       }
+    },
+
+    showLoadingDiv: function() {
+      $('#page-search .search-loading').show()
+    },
+
+    activateLoadingSignal: function() {
+      $('#page-search .search-loading > .preloader-wrapper').addClass('active')
+    },
+
+    deactivateLoadingSignal: function() {
+      $('#page-search .search-loading > .preloader-wrapper').removeClass('active')
     },
 
     clickCard: function(event) {
