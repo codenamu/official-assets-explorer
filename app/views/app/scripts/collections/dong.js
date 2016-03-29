@@ -3,7 +3,7 @@
 define([
   'underscore',
   'backbone',
-  'models/dong'
+  '../models/dong'
 ], function (_, Backbone, DongModel) {
   'use strict';
 
