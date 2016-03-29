@@ -77,6 +77,25 @@ module.exports = function() {
           }]
         }
 
+        if (queries.keyword) {
+          var keyword = queries.keyword.replace('/ /g', '%')
+          where['$and'].push({
+            $or: [{
+              '$Person.name$': {
+                $like: keyword
+              }
+            }, {
+              '$Position.title$': {
+                $like: keyword
+              }
+            }, {
+              '$Position.Org3.title$': {
+                $like: keyword
+              }
+            }]
+          })
+        }
+
         getCount(db.Official, {
           where: where,
           group: 'Person.uniqueId',

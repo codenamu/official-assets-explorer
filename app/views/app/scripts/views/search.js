@@ -273,6 +273,10 @@ define([
         params.dong = $('#selected-dongs').val()
       }
 
+      if ($('#selected-keyword-election').val()) {
+        params.keyword = $('#selected-keyword-election').val()
+      }
+
       params.election = 1
 
       // set current url with query parameters

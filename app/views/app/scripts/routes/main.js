@@ -49,11 +49,13 @@ define([
     },
 
     about: function() {
+      $('#search').hide()
       this.headerView = new HeaderView()
       this.aboutView = new AboutView()
     },
 
     contact: function() {
+      $('#search').hide()
       this.headerView = new HeaderView()
       this.contactView = new ContactView()
     }

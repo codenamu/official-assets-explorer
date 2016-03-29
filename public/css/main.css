@@ -6,6 +6,10 @@ p {
   color: #5c6d85;
 }
 
+.container {
+  max-width: 960px;
+}
+
 .hide-mobile {
   display: none;
 }
@@ -393,6 +397,7 @@ footer.page-footer p {
 
   #search {
     display: block;
+    min-height: 500px;
   }
 
   #tags-default, #tags-election {
@@ -414,7 +419,7 @@ footer.page-footer p {
 
   header p {
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .cards .card .card-action > li {
