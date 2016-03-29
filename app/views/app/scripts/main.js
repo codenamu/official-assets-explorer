@@ -17,6 +17,10 @@ require.config({
 
     velocity: {
       deps: ['jquery']
+    },
+
+    backbone: {
+      deps: ['jquery', 'underscore']
     }
   },
   paths: {
