@@ -1,3 +1,72 @@
-<section class="container">
-  <p>contact view</p>
+<section class="page page-contact">
+  <section class="container">
+    <section class="card">
+      <div class="card-content row">
+          <form action="#">
+            <div class="row">
+              <div class="col s12 m1">
+                <h6>구분</h6>
+              </div>
+              <div class="col s12 m11">
+                <div class="row">
+                  <div class="input-field col s12 m3">
+                    <input name="contact-for" type="radio" id="contact-for-update" />
+                    <label for="contact-for-update">개선사항 제안하기</label>
+                  </div>
+                  <div class="input-field col s12 m3">
+                    <input name="contact-for" type="radio" id="contact-for-data" />
+                    <label for="contact-for-data">데이터 수정요구</label>
+                  </div>
+                  <div class="input-field col s12 m3">
+                    <input name="contact-for" type="radio" id="contact-for-article"  />
+                    <label for="contact-for-article">기사 제보하기</label>
+                  </div>
+                  <div class="input-field col s12 m3">
+                    <input name="contact-for" type="radio" id="contact-for-etc"/>
+                    <label for="contact-for-etc">기타 문의</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 m1">
+                <h6>이메일</h6>
+              </div>
+              <div class="col s12 m11">
+                <div class="input-field col s12">
+                  <input id="contact-email" class="materialize-textarea" type="email"></input>
+                  <label for="contact-email">필수</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 m1">
+                <h6>연락처</h6>
+              </div>
+              <div class="col s12 m11">
+                <div class="input-field col s12">
+                  <input id="contact-contact" class="validate" type="tel"></input>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 m1">
+                <h6>내용</h6>
+              </div>
+              <div class="col s12 m11">
+                <div class="input-field col s12">
+                  <textarea id="contact-content" class="materialize-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s10 offset-s1 m4 offset-m4">
+                <button class="btn btn-large color-news" type="submit" name="action">보내기</button>
+              </div>
+            </div>
+          </form>
+
+      </div>
+    </section>
+  </section>
 </section>
