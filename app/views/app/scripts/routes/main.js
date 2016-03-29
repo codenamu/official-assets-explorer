@@ -37,6 +37,14 @@ define([
         this.officialView.destroy()
       }
 
+      if (!$('header').is(':visible')) {
+        $('header').show()
+      }
+
+      if (!$('#search').is(':visible')) {
+        $('#search').show()
+      }
+
       if (params) {
         this.searchView = new SearchView(params)
       } else {
@@ -45,6 +53,17 @@ define([
     },
 
     official: function(id) {
+      $('header').hide()
+      $('#search').hide()
+
+      if (!this.headerView) {
+        this.headerView = new HeaderView()
+      }
+
+      if (this.officialView) {
+        this.officialView.destroy()
+      }
+
       this.officialView = new OfficialView({ uniqueId: id })
     },
 

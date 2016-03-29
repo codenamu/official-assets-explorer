@@ -57,11 +57,15 @@ define([
 
     afterRender: function(model) {
       var self = this
+
       model.forEach(function(m) {
         self.subViews.push(new CardView({el: '#' + self.$el.attr('id') + ' .search-cards', model: m}))
       })
 
       this.saveCurrentsearchStatus()
+
+      // remove loading signal
+      $('#page-search .search-loading').removeClass('active')
 
       var wookmark = new Wookmark('.search-cards', {
         autoResize: true,
@@ -118,8 +122,10 @@ define([
       // console.log('scrollTop', scrollTop)
       // console.log('doc height', this.$el.height())
       // trigger!!
-      if(scrollTop + 350 > docHeight && this.searchStatus.isLoaded && !this.searchStatus.isEnded) {
-        console.log('=====')
+      if(scrollTop + 400 > docHeight && this.searchStatus.isLoaded && !this.searchStatus.isEnded) {
+        // activate loading signal
+        $('#page-search .search-loading').addClass('active')
+
         this.searchStatus.isLoaded = false
 
         var officials = new Officials()

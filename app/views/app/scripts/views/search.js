@@ -49,6 +49,8 @@ define([
     },
 
     afterRender: function() {
+      // initialize tabs
+      $('#search-tabs > ul.tabs').tabs();
       this.setSelectOptions()
       this.drawForms()
 
@@ -57,11 +59,10 @@ define([
         this.getResult(this.params)
         this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
         this.resetTags('default', 'years', $('#selected-years > option:selected'))
-      } else if (!_.isEmpty(this.params) && this.params['dong'] !== undefined) {
+      } else if (!_.isEmpty(this.params) && this.params['election'] !== undefined) {
         $('#search-tabs > ul.tabs').tabs('select_tab', 'search-election');
         this.setParams()
         this.getResult(this.params)
-
       }
     },
 
@@ -119,7 +120,11 @@ define([
         }
       }
 
-      if (params.dong) {
+      if (params.election) {
+        if (params.keyword) {
+          $('#selected-keyword-election').val(params.keyword)
+        }
+
         var provinceOps = $('#selected-provinces > option:not(:disabled)')
 
         for (var i = 0; i < provinceOps.length; i++) {
@@ -166,7 +171,6 @@ define([
       $('#selected-provinces').material_select();
       $('#selected-municipals').material_select();
       $('#selected-dongs').material_select();
-      $('#search-tabs > ul.tabs').tabs();
     },
 
     selectOrgs: function(e) {

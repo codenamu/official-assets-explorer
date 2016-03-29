@@ -10,6 +10,8 @@ p {
   max-width: 960px;
 }
 
+
+
 .hide-mobile {
   display: none;
 }
@@ -110,6 +112,15 @@ button {
 
 input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([readonly]), input[type=text].valid, input[type=text]:focus.valid {
   border-bottom-color: #5C6D85;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom-color: #5C6D85;
+  box-shadow: 0 1px 0 0 #5C6D85;
+}
+
+input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([readonly]) + label, input[type=password]:focus:not([readonly]) + label, input[type=email]:focus:not([readonly]) + label, input[type=url]:focus:not([readonly]) + label, input[type=time]:focus:not([readonly]) + label, input[type=date]:focus:not([readonly]) + label, input[type=datetime-local]:focus:not([readonly]) + label, input[type=tel]:focus:not([readonly]) + label, input[type=number]:focus:not([readonly]) + label, input[type=search]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #5C6D85;
 }
 
 #search > section {
@@ -244,12 +255,28 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   right: 15px;
 }
 
+#page-search .search-loading {
+  position: relative;
+  height: 50px;
+  background-color: #f8f8f8;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.spinner-green, .spinner-green-only {
+  border-color: #5c6d84;
+}
+
 #main > section {
   margin: 0 auto;
 }
 
 #page-official {
   background-color: #E7E8EC;
+}
+
+#page-official > .row {
+  margin-bottom: 0px;
 }
 
 #page-official .card .card-action {
@@ -286,6 +313,10 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
   text-align: left;
 }
 
+#page-official .modal {
+  color: #5c6d85;
+}
+
 #main {
   // min-height: 300px;
   margin-top: -10px;
@@ -317,11 +348,11 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 }
 
 .color-news {
-  background-color: #5C6D85;
+  background-color: #5C6D85 !important;
 }
 
 .color-news:hover {
-  background-color: #343B46;
+  background-color: #343B46 !important;
 }
 
 #nav ul.side-nav li.nav-footer {

@@ -27,10 +27,10 @@ define([
 
     render: function (model) {
       this.$el.html(this.template({ official: model }))
-      this.afterRender()
+      this.afterRender(model)
     },
 
-    afterRender: function() {
+    afterRender: function(model) {
       this.drawBarChart()
       this.drawPieChart(2014)
 
@@ -39,6 +39,8 @@ define([
         offset: -40,
         easing: 'ease-in-out'
       })
+
+      $('#btn-contact-official-' + model.person.uniqueId).leanModal();
     },
 
     calAssets: function() {
