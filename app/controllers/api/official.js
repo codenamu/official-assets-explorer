@@ -9,6 +9,7 @@ module.exports = function() {
     var result = {}
     var searchOption = {}
     var params = {}
+    var where = {}
 
     // ready for clean query parameters
     if (queries.org && (typeof queries.org === 'string')) {
@@ -30,9 +31,135 @@ module.exports = function() {
     }
 
 
+      console.log('here')
     if (queries.election) {
+      // where['$Person.election$'] = queries.election ? 1 : 0
+
+      // searchOption.include[0].include = [{
+      //   model: db.Constituency,
+      //   attribute: [['id', 'ConstituencyId'], 'name'],
+      //   required: true
+      // }]
+      // 
+      // 
+      if (queries.dong) {
+        where['$Dongs.name$'] = queries.dong
+      } else if (queries.municipal) {
+        where['$Dongs.Municipal.name$'] = queries.municipal
+      } else if (queries.province) {
+        where['$Dongs.Municipal.Province.name$'] = queries.province
+      }
+
+      db.Constituency.findAll({
+        where: where,
+        include: [{
+          model: db.Dong,
+          include: [{
+            model: db.Municipal,
+            include: [{
+              model: db.Province
+            }]
+          }]
+        }]
+      })
+      .then(function(cons) {
+        var targetConsIds = cons.map(function(r) {
+          return r.id
+        })
+
+        where = {
+          $and: [{
+            '$Person.election$': 1
+          }, {
+            '$Person.ConstituencyId$': {
+              $in: targetConsIds
+            }
+          }]
+        }
+
+        getCount(db.Official, {
+          where: where,
+          group: 'Person.uniqueId',
+          include: [{
+            model: db.Person
+          }, {
+            model: db.Position,
+            include: [{
+              model: db.Org3,
+              include: [{
+                model: db.Org2,
+                include: [{
+                  model: db.Org1
+                }]
+              }]
+            }]
+          }]
+        })
+        .then(function(count) {
+          result.count = count.length
+
+          getOfficials({
+            order: [['year', 'DESC']],
+            where: where,
+            group: 'Person.uniqueId',
+            include: [{
+              model: db.Person
+            }, {
+              model: db.Position,
+              include: [{
+                model: db.Org3,
+                include: [{
+                  model: db.Org2,
+                  include: [{
+                    model: db.Org1
+                  }]
+                }]
+              }]
+            }]
+          })
+          .then(function(officials) {
+            var targetOfficialIds = officials.map(function(o) {
+              return o.Person.dataValues.uniqueId
+            })
+            
+            where['$and'].push({
+              '$Person.uniqueId$': {
+                $in: targetOfficialIds
+              }
+            })
+
+            getOfficials({
+              order: [['year', 'DESC']],
+              where: where,
+              include: [{
+                model: db.Person,
+                attributes: ['name', 'uniqueId']
+              }, {
+                model: db.Position,
+                attributes: ['title'],
+                include: [{
+                  model: db.Org3,
+                  attribute: ['title'],
+                  incude: [{
+                    model: db.Org2,
+                    attribute: ['title'],
+                    include: [{
+                      model: db.Org1,
+                      attribute: ['title']
+                    }]
+                  }]
+                }]
+              }]
+            })
+            .then(function(officials) {
+              result.officials = officials
+              res.json(result)
+            })
+          })
+        })
+      })
     } else {
-      var where = {}
+      
 
       if (queries.keyword) {
         where['$or'] = [{

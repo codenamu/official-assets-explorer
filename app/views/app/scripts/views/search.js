@@ -261,10 +261,19 @@ define([
       if (e) e.preventDefault()
 
       var params = {}
-      params.province = $('#selected-provinces').val()
-      params.municipal = $('#selected-municipals').val()
-      params.dong = $('#selected-dongs').val()
-      params.election = true
+      if ($('#selected-provinces').val()) {
+        params.province = $('#selected-provinces').val()
+      }
+
+      if ($('#selected-municipals').val()) {
+        params.municipal = $('#selected-municipals').val()
+      }
+
+      if ($('#selected-dongs').val()) {
+        params.dong = $('#selected-dongs').val()
+      }
+
+      params.election = 1
 
       // set current url with query parameters
       Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
