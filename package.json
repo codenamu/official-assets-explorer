@@ -14,6 +14,7 @@
     "express-handlebars": "^3.0.0",
     "glob": "^6.0.4",
     "knex": "^0.10.0",
+    "mandrill-api": "^1.0.45",
     "method-override": "^2.3.0",
     "morgan": "^1.6.1",
     "mysql": "^2.8.0",
