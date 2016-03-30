@@ -9,11 +9,13 @@ define([
   var OrgModel = Backbone.Model.extend({
     urlRoot: '/api/org',
 
+    idAttribute: '_id',
+
     initialize: function() {
     },
 
     defaults: {
-      id    : 0,
+      _id    : 0,
       title : ''
     }
   });

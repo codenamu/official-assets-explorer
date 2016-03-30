@@ -9,11 +9,13 @@ define([
   var MunicipalModel = Backbone.Model.extend({
     urlRoot: '/api/municipal',
 
+    idAttribute: '_id',
+
     initialize: function() {
     },
 
     defaults: {
-      id    : 0,
+      _id    : 0,
       name  : ''
     }
   });

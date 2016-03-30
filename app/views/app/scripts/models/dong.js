@@ -9,11 +9,13 @@ define([
   var DongModel = Backbone.Model.extend({
     urlRoot: '/api/dong',
 
+    idAttribute: '_id',
+
     initialize: function() {
     },
 
     defaults: {
-      id    : 0,
+      _id    : 0,
       name  : ''
     }
   });

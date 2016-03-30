@@ -23,7 +23,7 @@ define([
       // this.listenTo(this.model, 'change', this.render)
       var self = this;
 
-      this.model = new Official({ id: params.uniqueId})
+      this.model = new Official({ _id: params.uniqueId})
       this.model.fetch({ success: function () { self.calAssets() }})
     },
 
@@ -36,11 +36,6 @@ define([
       this.drawBarChart()
       this.drawPieChart(2014)
 
-      $('#page-official').velocity('scroll', {
-        duration: 500,
-        easing: 'ease-in-out'
-      })
-
       $('#btn-contact-official-' + model.person.uniqueId).leanModal();
     },
 
@@ -48,9 +43,10 @@ define([
       var self = this
       var model = this.model.toJSON()
 
-      delete model['id']
+      delete model['_id']
       delete model['name']
 
+      console.log(model)
       this.result = {}
       this.result.person = model[0].Person
       this.result.latestYear = 0
@@ -60,27 +56,31 @@ define([
       this.result.assets.history = {}
 
       Object.keys(model).forEach(function(m) {
-        model[m].Position.year = model[m].year
-        model[m].Position.pdfUrl = model[m].pdfUrl
+        var position = $.extend(true, {}, model[m].Position)
+        position.year = model[m].year
+        position.pdfUrl = model[m].pdfUrl
 
         if (model[m].year > self.result.latestYear) {
           self.result.latestYear = model[m].year
         }
 
-        self.result.position.push(model[m].Position)
+        self.result.position.push(position)
 
         self.result.assets.history[model[m].year] = {}
         self.result.assets.history[model[m].year].pdfUrl = model[m].pdfUrl
         self.result.assets.history[model[m].year].assets = model[m].Assets
         self.result.assets.history[model[m].year].total = 0
+        console.log(model[m])
+        console.log(model[m].Assets)
+        if (model[m].Assets.length) {
+          model[m].Assets.forEach(function(a) {
+            self.result.assets.history[model[m].year].total += a.total
+          })
+        }
 
-        model[m].Assets.forEach(function(a) {
-          self.result.assets.history[model[m].year].total += a.total
-        })
       })
 
       this.result.assets.history[this.result.latestYear].totalText = this.calMeasureMoney(this.result.assets.history[this.result.latestYear].total)
-      console.log(this.result)
       this.render(this.result)
     },
 

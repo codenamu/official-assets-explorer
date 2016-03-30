@@ -25,21 +25,29 @@ nav#nav {
 }
 
 nav#nav a.brand-logo {
-  left: 130px;
+  left: 115px;
   padding: 2px 0px;
 }
 
 nav#nav a.brand-logo > img {
-  width: 170px;
+  width: 155px;
 }
 
 nav#nav ul.right {
   width: 40%;
 }
 
+nav#nav ul.right li {
+  float: right;
+}
+
 nav#nav ul.right li a {
-  padding: 8px 8px;
+  padding: 8px 3px;
   height: 56px;
+}
+
+nav#nav ul.right li a img {
+  width: 80%;
 }
 
 nav.nav-desktop {
@@ -82,7 +90,7 @@ header > .row {
 }
 
 header h1 {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   text-align: center;
 }
 
@@ -410,6 +418,10 @@ footer.page-footer p {
   nav#nav ul.right li a {
     padding: 0 15px;
     height: 64px;
+  }
+
+  nav#nav ul.right li a img {
+    width: auto;
   }
 
   nav#nav ul a {

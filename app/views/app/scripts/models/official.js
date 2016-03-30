@@ -9,11 +9,13 @@ define([
   var OfficialModel = Backbone.Model.extend({
     urlRoot: '/api/official',
 
+    idAttribute: '_id',
+
     initialize: function() {
     },
 
     defaults: {
-      id: 0,
+      _id: 0,
       name: ''
     }
   });

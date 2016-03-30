@@ -9,11 +9,13 @@ define([
   var ProvinceModel = Backbone.Model.extend({
     urlRoot: '/api/province',
 
+    idAttribute: '_id',
+
     initialize: function() {
     },
 
     defaults: {
-      id    : 0,
+      _id    : 0,
       name  : ''
     }
   });
