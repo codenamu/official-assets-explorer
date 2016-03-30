@@ -44,9 +44,9 @@ define([
       var model = this.model.toJSON()
 
       delete model['_id']
+      delete model['id']
       delete model['name']
 
-      console.log(model)
       this.result = {}
       this.result.person = model[0].Person
       this.result.latestYear = 0
@@ -70,8 +70,7 @@ define([
         self.result.assets.history[model[m].year].pdfUrl = model[m].pdfUrl
         self.result.assets.history[model[m].year].assets = model[m].Assets
         self.result.assets.history[model[m].year].total = 0
-        console.log(model[m])
-        console.log(model[m].Assets)
+
         if (model[m].Assets.length) {
           model[m].Assets.forEach(function(a) {
             self.result.assets.history[model[m].year].total += a.total
@@ -137,6 +136,7 @@ define([
       var model = this.model.attributes
 
       delete model['id']
+      delete model['_id']
       delete model['name']
 
       for (var y in model) {

@@ -15,7 +15,7 @@ define([
     },
 
     defaults: {
-      _id    : 0,
+      id    : 0,
       title : ''
     }
   });

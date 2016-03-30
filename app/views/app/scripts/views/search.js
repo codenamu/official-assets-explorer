@@ -37,6 +37,7 @@ define([
       this.provinces = new Provinces()
 
       this.orgs.fetch({success: function() {
+        console.log(self.orgs)
         self.provinces.fetch({success: function() {
           self.render()
         }})
@@ -93,7 +94,7 @@ define([
 
       this.orgs.models.forEach(function(m) {
         $('#selected-orgs').append($('<option>', {
-          id: 'option-orgs-id-' + m.attributes.id,
+          id: 'option-orgs-id-' + m.attributes._id,
           value: m.attributes.title,
           text: m.attributes.title
         }))
@@ -101,7 +102,7 @@ define([
 
       this.provinces.forEach(function(p) {
         $('#selected-provinces').append($('<option>', {
-          id: 'option-provinces-id-' + p.attributes.id,
+          id: 'option-provinces-id-' + p.attributes._id,
           value: p.attributes.name,
           text: p.attributes.name
         }))
@@ -214,7 +215,7 @@ define([
       this.municipals.fetch({data: 'province=' + $('#selected-provinces').val(), success: function() {
         self.municipals.models.forEach(function(m) {
           $('#selected-municipals').append($('<option>', {
-            id: 'option-municipals-id-' + m.attributes.id,
+            id: 'option-municipals-id-' + m.attributes._id,
             value: m.attributes.name,
             text: m.attributes.name
           }))
@@ -236,7 +237,7 @@ define([
       this.dongs.fetch({data: 'municipal=' + $('#selected-municipals').val(), success: function() {
         self.dongs.models.forEach(function(m) {
           $('#selected-dongs').append($('<option>', {
-            id: 'option-dongs-id-' + m.attributes.id,
+            id: 'option-dongs-id-' + m.attributes._id,
             value: m.attributes.name,
             text: m.attributes.name
           }))
