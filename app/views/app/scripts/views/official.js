@@ -65,7 +65,6 @@ define([
         }
 
         self.result.position.push(position)
-
         self.result.assets.history[model[m].year] = {}
         self.result.assets.history[model[m].year].pdfUrl = model[m].pdfUrl
         self.result.assets.history[model[m].year].assets = model[m].Assets

@@ -37,7 +37,6 @@ define([
       this.provinces = new Provinces()
 
       this.orgs.fetch({success: function() {
-        console.log(self.orgs)
         self.provinces.fetch({success: function() {
           self.render()
         }})
