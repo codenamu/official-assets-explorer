@@ -6,6 +6,16 @@ p {
     color: #5c6d85;
 }
 
+button.btn, button.btn-large {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+button.btn:hover, button.btn-large:hover {
+    box-shadow: none;
+}
+
 .container {
     max-width: 960px;
 }
@@ -16,6 +26,8 @@ p {
 
 .input-field.input-field-integrated > input[type=text] {
     border: 2px solid #5C6D85;
+    padding: 0 16px;
+    box-sizing: inherit;
 }
 
 nav#nav {
@@ -55,10 +67,6 @@ nav.nav-desktop {
     background: transparent;
     box-shadow: none;
     padding: 40px 0px !important;
-}
-
-nav.nav-desktop ul li:after {
-    
 }
 
 nav.nav-desktop ul li a {
@@ -106,6 +114,14 @@ header h1 {
     text-align: center;
 }
 
+header h1 > a {
+    color: #a7b9d1;
+}
+
+header h1 > a:hover {
+    color: #a7b9d1;
+}
+
 header .subtitle {
     position: relative;
 }
@@ -128,10 +144,6 @@ header p {
     margin: 1px 5px;
 }
 
-button {
-    width: 100%;
-}
-
 .dropdown-content li > a, .dropdown-content li > span {
     color: #5C6D85;
 }
@@ -142,7 +154,7 @@ button {
 }
 
 input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([readonly]), input[type=text].valid, input[type=text]:focus.valid {
-    border-bottom-color: #5C6D85;
+    border-bottom-color: 2px solid #5C6D85;
 }
 
 input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
@@ -240,17 +252,18 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 }
 
 .cards {
-    background-color: #f8f8f8;
-}
-
-.cards .search-message {
-    padding-top: 10px;
+    background-color: #e7e9ed;
 }
 
 .cards .search-message h5 {
-    margin: 0.6rem 0 0.656rem 0;
-    font-size: 1.2rem;
+    padding: 1.5rem 0 1.5rem 0;
+    font-size: 1.4rem;
+    letter-spacing: -0.05em;
     color: #5c6d85;
+}
+
+.cards .search-message h5 .value {
+    font-weight: 700;
 }
 
 #btn-research {
@@ -302,7 +315,7 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 #page-search .search-loading {
     position: relative;
     height: 50px;
-    background-color: #f8f8f8;
+    background-color: #e7e9ed;
     text-align: center;
     padding: 50px 0;
 }
@@ -403,8 +416,12 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
     width: 240px;
     bottom: 0px;
     padding: 35px 15px;
-    background-color: black;
+    background-color: #5C6D85;
     line-height: 20px;
+}
+
+#nav ul.side-nav li.nav-footer p {
+    color: #97a8c0;
 }
 
 #nav ul.side-nav li.nav-footer img {
@@ -431,12 +448,16 @@ footer.page-footer p {
         display: none; 
     }
 
+    .input-field.input-field-integrated > input:focus, .input-field.input-field-integrated > input:active {
+        height: 2.95rem;
+    }
+
     .input-field.input-field-integrated > button {
         position: absolute;
         top: 0px;
         right: -88px;
         width: 100px;
-        height: 49px;
+        height: 45px;
         line-height: 47px;
     }
 
