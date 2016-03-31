@@ -110,10 +110,14 @@ define([
 
 
       var ctx = $('#canvas-bar')[0].getContext('2d');
+      var measureYAxis = 10000 // Y Axis 레이블 표현 단위
       this.myBar = new Chart(ctx).Bar(barChartData, {
         responsive : true,
         scaleGridLineColor : '#5F718A',
         scaleFontColor: "#fff",
+        scaleLabel: function(label) {
+          return self.calMeasureMoney(parseInt(label.value, 10)).slice(0, -4)
+        },
         customTooltips: function(tooltip) {
           if (!tooltip) {
             return;
@@ -126,6 +130,8 @@ define([
           $('#official-asset-total').text(self.calMeasureMoney(self.result.assets.history[year].total) + '원')
         }
       });
+      
+      console.log(this.myBar)
 
     },
 
