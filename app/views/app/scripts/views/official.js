@@ -181,15 +181,30 @@ define([
 
     calMeasureMoney: function(str) {
       var result = str.toString()
-      var num = Math.floor(result.length / 3)
+      var num = Math.floor(result.length / 4)
 
-      if (result.length % 3 === 0) {
+      if (result.length % 4 === 0) {
         num -= 1
       }
 
       for (var i = 0; i < num; i++) {
-        var index = (i + 1) * (-1) * 3 + i * (-1)
-        result = result.substr(0, result.length + index) + ',' + result.substr(index);
+        var index = (i + 1) * (-1) * 4 + 2 * (i * (-1))
+        var measure = ''
+        
+        switch (index) {
+          case -4:
+            measure = '만 '
+            break;
+          case -10:
+            measure = '억 '
+            break;
+          case -16:
+            measure = '조 '
+            break;
+          default:
+            break;
+        }
+        result = result.substr(0, result.length + index) + measure + result.substr(index);
       }
 
       return result
