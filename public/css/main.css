@@ -542,4 +542,8 @@ footer.page-footer p {
         line-height: 2.6rem;
         letter-spacing: 0px;
     }
+    
+    footer.page-footer .col:last-child{
+        text-align: center;
+    }
 }
