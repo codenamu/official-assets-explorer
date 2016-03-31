@@ -226,6 +226,10 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
     padding: 25px 0px;
 }
 
+#page-search form > .row.container {
+    margin: 0 auto;
+}
+
 #page-search form input, #page-search form .caret {
     color: #5c6d85;
     border-bottom-color: #5c6d85;
