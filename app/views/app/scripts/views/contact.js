@@ -14,7 +14,7 @@ define([
     el: '#main',
 
     events: {
-      'submit form#form-contact'  : 'sendEmail'
+      'submit #form-contact'  : 'sendEmail'
     },
 
     initialize: function () {
@@ -27,7 +27,7 @@ define([
 
     sendEmail: function(e) {
       e.preventDefault()
-      console.log($('#contact-email').val())
+      
       $.post('/api/send', {
         type: $('input[name=contact-for]:checked', '#form-contact').val(),
         fromEmail: $('#contact-email').val(),

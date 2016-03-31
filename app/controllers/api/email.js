@@ -18,7 +18,7 @@ module.exports = function() {
       'from_email': fromEmail,
       'from_name': fromEmail,
       'to': [{
-              'email': 'data.newstapa.org',
+              'email': 'data@newstapa.org',
               'name': '뉴스타파',
               'type': 'to'
           }],
