@@ -87,6 +87,8 @@ __e( official.assets.history[official.latestYear].totalText ) +
 __p += '\n                          <li>- ' +
 __e( official.position[p].year ) +
 '년 ' +
+__e( official.position[p].Org3.title ) +
+' ' +
 __e( official.position[p].title ) +
 '</li>\n                      ';
  } ;
