@@ -38,8 +38,8 @@ define([
       this.orgs = new Orgs()
       this.provinces = new Provinces()
 
-      this.orgs.reset()
-      this.provinces.reset()
+      this.orgs.model = OrgModel
+      this.provinces.model = provinceModel
 
       this.orgs.fetch({success: function() {
         self.provinces.fetch({success: function() {
