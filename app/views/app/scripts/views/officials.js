@@ -35,12 +35,13 @@ define([
 
       var officials = new Officials()
       officials.fetch({data: $.param(params), success: function () {
-        var officialsRearranged = self.rearrangeOfficials(officials.models[0].attributes.officials)
+        console.log(officials)
+        var officialsRearranged = self.rearrangeOfficials(officials.models[0].get('officials'))
         self.searchStatus.count += officialsRearranged.length
-        self.checkSearchEnded(officials.models[0].attributes.count)
+        self.checkSearchEnded(officials.models[0].get('count'))
 
         self.beforeRender()
-        self.$el.html(self.template({count: officials.models[0].attributes.count}))
+        self.$el.html(self.template({count: officials.models[0].get('count')}))
         self.afterRender(officialsRearranged)
 
 
@@ -139,10 +140,9 @@ define([
         params.limit = 20
 
         officials.fetch({data: $.param(params), success: function () {
-          console.log(officials)
-          var officialsRearranged = self.rearrangeOfficials(officials.models[0].attributes.officials)
+          var officialsRearranged = self.rearrangeOfficials(officials.models[0].get('officials'))
           self.searchStatus.count += officialsRearranged.length
-          self.checkSearchEnded(officials.models[0].attributes.count)
+          self.checkSearchEnded(officials.models[0].get('count'))
           self.afterRender(officialsRearranged)
         }})
       }

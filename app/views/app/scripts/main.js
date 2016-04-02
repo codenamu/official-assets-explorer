@@ -26,7 +26,7 @@ require.config({
   paths: {
     materialize   : '/vendor/material/js/materialize.min',
     jquery        : '/vendor/jquery/jquery.min',
-    backbone      : '/vendor/backbone',
+    backbone      : '/vendor/backbone.min',
     underscore    : '/vendor/lodash.min',
     hammerjs      : '/vendor/material/js/hammer.min',
     sideNav       : '/vendor/material/js/sideNav',

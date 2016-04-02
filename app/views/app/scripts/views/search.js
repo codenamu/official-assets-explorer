@@ -36,6 +36,9 @@ define([
       this.orgs = new Orgs()
       this.provinces = new Provinces()
 
+      this.orgs.reset()
+      this.provinces.reset()
+
       this.orgs.fetch({success: function() {
         self.provinces.fetch({success: function() {
           self.render()
@@ -93,17 +96,17 @@ define([
 
       this.orgs.models.forEach(function(m) {
         $('#selected-orgs').append($('<option>', {
-          id: 'option-orgs-id-' + m.attributes.id,
-          value: m.attributes.title,
-          text: m.attributes.title
+          id: 'option-orgs-id-' + m.get('id'),
+          value: m.get('title'),
+          text: m.get('title')
         }))
       })
 
       this.provinces.forEach(function(p) {
         $('#selected-provinces').append($('<option>', {
-          id: 'option-provinces-id-' + p.attributes.id,
-          value: p.attributes.name,
-          text: p.attributes.name
+          id: 'option-provinces-id-' + p.get('id'),
+          value: p.get('name'),
+          text: p.get('name')
         }))
       })
     },
@@ -214,9 +217,9 @@ define([
       this.municipals.fetch({data: 'province=' + $('#selected-provinces').val(), success: function() {
         self.municipals.models.forEach(function(m) {
           $('#selected-municipals').append($('<option>', {
-            id: 'option-municipals-id-' + m.attributes.id,
-            value: m.attributes.name,
-            text: m.attributes.name
+            id: 'option-municipals-id-' + m.get('id'),
+            value: m.get('name'),
+            text: m.get('name')
           }))
         })
 
@@ -236,9 +239,9 @@ define([
       this.dongs.fetch({data: 'municipal=' + $('#selected-municipals').val(), success: function() {
         self.dongs.models.forEach(function(m) {
           $('#selected-dongs').append($('<option>', {
-            id: 'option-dongs-id-' + m.attributes.id,
-            value: m.attributes.name,
-            text: m.attributes.name
+            id: 'option-dongs-id-' + m.get('id'),
+            value: m.get('name'),
+            text: m.get('name')
           }))
         })
 
