@@ -5,13 +5,15 @@ define([
   'underscore',
   'backbone',
   'templates',
+  'orgModel',
+  'provinceModel',
   '../collections/official',
   '../collections/org',
   '../collections/province',
   '../collections/municipal',
   '../collections/dong',
   './officials'
-], function ($, _, Backbone, JST, Officials, Orgs, Provinces, Municipals, Dongs, OfficialsView) {
+], function ($, _, Backbone, JST, OrgModel, ProvinceModel, Officials, Orgs, Provinces, Municipals, Dongs, OfficialsView) {
   'use strict'
 
   var SearchView = Backbone.View.extend({
