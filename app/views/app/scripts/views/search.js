@@ -39,7 +39,7 @@ define([
       this.provinces = new Provinces()
 
       this.orgs.model = OrgModel
-      this.provinces.model = provinceModel
+      this.provinces.model = ProvinceModel
 
       this.orgs.fetch({success: function() {
         self.provinces.fetch({success: function() {
