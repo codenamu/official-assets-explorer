@@ -31,19 +31,8 @@ define([
 
     initialize: function (params) {
       var self = this
-
       this.params = params
-      this.orgs = new Orgs()
-      this.provinces = new Provinces()
-
-      this.orgs.reset()
-      this.provinces.reset()
-
-      this.orgs.fetch({success: function() {
-        self.provinces.fetch({success: function() {
-          self.render()
-        }})
-      }})
+      this.render()
     },
 
     render: function () {
@@ -52,34 +41,46 @@ define([
     },
 
     afterRender: function() {
+      var self = this
+      this.orgs = new Orgs()
+      this.provinces = new Provinces()
+
+      this.orgs.reset()
+      this.provinces.reset()
+
+      this.orgs.fetch({success: function() {
+        self.provinces.fetch({success: function() {
+          $('#search-tabs > ul.tabs').tabs();
+          self.setInitSelectOptions()
+          self.drawForms()
+
+
+          if (!_.isEmpty(self.params)) {
+            self.setParams()
+            self.getResult(self.params)
+
+            /**
+             * if use request with default search option
+             */
+            if (self.params['keyword'] !== undefined) {
+              self.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
+              self.resetTags('default', 'years', $('#selected-years > option:selected'))
+            } else if (self.params['election'] !== undefined) {
+              /**
+             * if use request with election cadidates search option
+             */
+              $('#search-tabs > ul.tabs').tabs('select_tab', 'search-election');
+              self.setParams()
+              self.getResult(self.params)
+            }
+          } else {
+            self.hideLoadingDiv()
+          }
+
+
+        }})
+      }})
       // initialize tabs
-      $('#search-tabs > ul.tabs').tabs();
-      this.setInitSelectOptions()
-      this.drawForms()
-
-
-      if (!_.isEmpty(this.params)) {
-        this.setParams()
-        this.getResult(this.params)
-
-        /**
-         * if use request with default search option
-         */
-        if (this.params['keyword'] !== undefined) {
-          this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
-          this.resetTags('default', 'years', $('#selected-years > option:selected'))
-        } else if (this.params['election'] !== undefined) {
-          /**
-         * if use request with election cadidates search option
-         */
-          $('#search-tabs > ul.tabs').tabs('select_tab', 'search-election');
-          this.setParams()
-          this.getResult(this.params)
-        }
-      } else {
-        this.hideLoadingDiv()
-      }
-
 
     },
 
