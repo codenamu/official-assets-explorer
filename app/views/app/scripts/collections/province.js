@@ -3,7 +3,7 @@
 define([
   'underscore',
   'backbone',
-  '../models/province'
+  'provinceModel'
 ], function (_, Backbone, ProvinceModel) {
   'use strict';
 

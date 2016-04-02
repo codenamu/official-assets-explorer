@@ -3,7 +3,7 @@
 define([
   'underscore',
   'backbone',
-  '../models/official'
+  'officialModel'
 ], function (_, Backbone, OfficialModel) {
   'use strict';
 
