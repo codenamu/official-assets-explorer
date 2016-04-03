@@ -24,6 +24,9 @@ define([
     initialize: function (params) {
       var self = this
       this.params = params
+
+      delete params['el']
+
       this.searchStatus = {
         // is data user requested at this time loaded
         isLoaded: true,
@@ -35,7 +38,6 @@ define([
 
       var officials = new Officials()
       officials.fetch({data: $.param(params), success: function () {
-        console.log(officials)
         var officialsRearranged = self.rearrangeOfficials(officials.models[0].get('officials'))
         self.searchStatus.count += officialsRearranged.length
         self.checkSearchEnded(officials.models[0].get('count'))
@@ -43,8 +45,6 @@ define([
         self.beforeRender()
         self.$el.html(self.template({count: officials.models[0].get('count')}))
         self.afterRender(officialsRearranged)
-
-
       }})
 
     },
@@ -161,8 +161,12 @@ define([
     },
 
     clickCard: function(event) {
-      Backbone.history.navigate($(event.target).closest('.card').attr('id').slice(9))
+      Backbone.history.navigate($(event.target).closest('.card').attr('id').slice(9) + '?' + this.fixEncodeURI($.param(this.params)))
       window.location.reload()
+    },
+
+    fixEncodeURI: function(param) {
+      return param.replace(/%5B/g, '').replace(/%5D/g, '');
     },
 
     destroy: function() {

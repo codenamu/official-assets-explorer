@@ -37,6 +37,10 @@ define([
       this.drawPieChart(2014)
 
       $('#btn-contact-official-' + model.person.uniqueId).leanModal();
+      $('#page-official').velocity('scroll', {
+        duration: 500,
+        easing: 'ease-in-out'
+      })
     },
 
     calAssets: function() {
@@ -127,12 +131,9 @@ define([
           // change pie chart on the year
           self.drawPieChart(year)
           // change total asset value on the year
-          $('#official-asset-total').text(self.calMeasureMoney(self.result.assets.history[year].total) + '원')
+          $('#official-asset-total').text(self.calMeasureMoney(self.result.assets.history[year].total) + '원 | ' + year + '년')
         }
       });
-      
-      console.log(this.myBar)
-
     },
 
     drawPieChart: function(year) {
@@ -195,7 +196,7 @@ define([
       for (var i = 0; i < num; i++) {
         var index = (i + 1) * (-1) * 4 + 2 * (i * (-1))
         var measure = ''
-        
+
         switch (index) {
           case -4:
             measure = '만 '

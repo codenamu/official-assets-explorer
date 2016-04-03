@@ -16,6 +16,10 @@ button.btn:hover, button.btn-large:hover {
     box-shadow: none;
 }
 
+.btn, .btn:hover {
+    box-shadow: none;
+}
+
 .container {
     max-width: 960px;
 }
@@ -276,6 +280,7 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 
 .cards .search-cards .card {
     cursor: pointer;
+    box-shadow: 1px 2px 2px 0 rgba(0,0,0,0.1);
 }
 
 .cards .search-cards .card .card-content, #page-official .card .card-content {
@@ -290,8 +295,15 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
     font-weight: bold;
 }
 
+.cards .search-cards .card .card-content span.card-title {
+    font-weight: 500;
+    font-size: 26px;
+    letter-spacing: -0.06em;
+    color: rgb(52, 59, 70);
+}
+
 .cards .search-cards .card .card-content span.card-subtitle, #page-official .card .card-content span.card-subtitle {
-    font-weight: bold;
+    font-weight: 400;
     color: #5C6D85;
 }
 
@@ -300,11 +312,20 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 }
 
 .cards .search-cards .card .card-action {
-    font-size: 1.2rem;
     position: relative;
-    background-color: #f8f8f8;
     min-height: 100px;
+    background-color: #f8f8f8;
+    font-size: 1.2rem;
+    border-top: none;
 }
+
+.cards .search-cards .card .card-action > li {
+    color: #7b7b7b;
+    font-size: 14px;
+    letter-spacing: -0.03em;
+} 
+
+
 
 .cards .search-cards .card .card-action .card-link-to-btn {
     position: absolute;

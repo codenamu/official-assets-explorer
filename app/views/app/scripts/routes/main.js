@@ -52,9 +52,15 @@ define([
       }
     },
 
-    official: function(id) {
+    official: function(id, params) {
       $('header').hide()
       $('#search').hide()
+
+      // if (params) {
+      //   this.searchView = new SearchView(params)
+      // } else {
+      //   this.searchView = new SearchView()
+      // }
 
       if (!this.headerView) {
         this.headerView = new HeaderView()
