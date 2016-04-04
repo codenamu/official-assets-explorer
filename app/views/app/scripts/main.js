@@ -21,14 +21,6 @@ require.config({
 
     backbone: {
       deps: ['jquery', 'underscore']
-    },
-
-    orgCollection: {
-      deps: ['orgModel']
-    },
-
-    provinceCollection: {
-      deps: ['provinceModel']
     }
   },
   paths: {
