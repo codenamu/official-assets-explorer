@@ -15,13 +15,13 @@ require.config({
       deps: ['hammerjs', 'hammer']
     },
 
-    velocity: {
-      deps: ['jquery']
-    },
+    // velocity: {
+    //   deps: ['jquery']
+    // },
 
-    backbone: {
-      deps: ['jquery', 'underscore']
-    }
+    // backbone: {
+    //   deps: ['jquery', 'underscore']
+    // }
   },
   paths: {
     materialize     : '/vendor/material/js/materialize.min',
