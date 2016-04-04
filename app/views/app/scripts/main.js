@@ -38,7 +38,12 @@ require.config({
     municipalModel    : './models/municipal',
     provinceModel     : './models/province',
     orgModel          : './models/org',
-    officialModel     : './models/official'
+    officialModel     : './models/official',
+    orgCollection     : './collections/org',
+    officialCollection     : './collections/official',
+    provinceCollection     : './collections/province',
+    municipalCollection     : './collections/municipal',
+    dongCollection     : './collections/dong',
   }
 })
 

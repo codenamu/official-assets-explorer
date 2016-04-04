@@ -7,11 +7,11 @@ define([
   'templates',
   'orgModel',
   'provinceModel',
-  '../collections/official',
-  '../collections/org',
-  '../collections/province',
-  '../collections/municipal',
-  '../collections/dong',
+  'officialCollection',
+  'orgCollection',
+  'provinceCollection',
+  'municipalCollection',
+  'dongCollection',
   './officials'
 ], function ($, _, Backbone, JST, OrgModel, ProvinceModel, Officials, Orgs, Provinces, Municipals, Dongs, OfficialsView) {
   'use strict'
@@ -42,7 +42,9 @@ define([
       this.provinces.model = ProvinceModel
 
       this.orgs.fetch({success: function() {
+        console.log(self.orgs)
         self.provinces.fetch({success: function() {
+          console.log(self.provinces)
           self.render()
         }})
       }})

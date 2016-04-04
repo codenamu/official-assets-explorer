@@ -30,18 +30,7 @@ module.exports = function() {
       queries.keyword = '%' + queries.keyword.replace(/ /g, '%') + '%'
     }
 
-
-      console.log('here')
     if (queries.election) {
-      // where['$Person.election$'] = queries.election ? 1 : 0
-
-      // searchOption.include[0].include = [{
-      //   model: db.Constituency,
-      //   attribute: [['id', 'ConstituencyId'], 'name'],
-      //   required: true
-      // }]
-      // 
-      // 
       if (queries.dong) {
         where['$Dongs.name$'] = queries.dong
       } else if (queries.municipal) {

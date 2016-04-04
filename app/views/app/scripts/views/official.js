@@ -76,7 +76,9 @@ define([
 
         if (model[m].Assets.length) {
           model[m].Assets.forEach(function(a) {
-            self.result.assets.history[model[m].year].total += a.total
+            if (a.Cat2.title !== '채무') {
+              self.result.assets.history[model[m].year].total += a.total
+            }
           })
         }
 
