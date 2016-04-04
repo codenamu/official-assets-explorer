@@ -41,6 +41,8 @@ define([
       this.orgs.model = OrgModel
       this.provinces.model = ProvinceModel
 
+      this.checkBackboneError()
+
       this.orgs.fetch({success: function() {
         self.provinces.fetch({success: function() {
           self.render()
@@ -83,6 +85,12 @@ define([
       }
 
 
+    },
+
+    checkBackboneError: function() {
+      if (!OrgModel || !ProvinceModel || !Orgs || !Provinces) {
+        window.location.reload()
+      }
     },
 
     showLoadingDiv: function() {
