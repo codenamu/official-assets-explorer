@@ -416,7 +416,6 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 }
 
 #main {
-    // min-height: 300px;
     margin-top: -10px;
 }
 
