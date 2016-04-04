@@ -333,6 +333,13 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
     right: 15px;
 }
 
+.cards .search-cards .card .card-action .card-link-to-btn > a > img {
+    width: 10px;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+
 #page-search .search-loading {
     position: relative;
     height: 50px;
@@ -428,8 +435,17 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
     background-color: #5C6D85 !important;
 }
 
+.color-news-light {
+    background-color: #e9e9e9 !important;
+    color: #5c6d85;
+}
+
 .color-news:hover {
     background-color: #343B46 !important;
+}
+
+.color-news-light:hover {
+    background-color: #e9e9e9 !important;
 }
 
 #nav ul.side-nav li.nav-footer {

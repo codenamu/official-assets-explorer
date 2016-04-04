@@ -35,7 +35,7 @@ __e( p.Org3.title ) +
 __e( p.title ) +
 '</li>\n      ';
  }) ;
-__p += '\n      <span class="card-link-to-btn">\n      <a class="btn btn-floating waves-effect waves-light color-news">></a>\n      </span>\n    </div>\n  </div>\n</div>\n';
+__p += '\n      <span class="card-link-to-btn">\n      <a class="btn btn-floating waves-effect waves-light color-news">\n        <img src="/img/arrow.png" alt="arrow-right" />\n      </a>\n      </span>\n    </div>\n  </div>\n</div>\n';
 
 }
 return __p
@@ -104,7 +104,7 @@ __e( official.position[p].year ) +
  } ;
 __p += '\n                    </ul>\n                  </div>\n                  <div class="row">\n                    <div class="col s12 m6 offset-m3">\n                      <button id="btn-contact-official-' +
 __e( official.person.uniqueId ) +
-'" class="btn waves-effect color-news modal-trigger" type="button" data-target="contact-official-' +
+'" class="btn waves-effect color-news-light modal-trigger" type="button" data-target="contact-official-' +
 __e( official.person.uniqueId ) +
 '">제보하기</button>\n\n                      <div id="contact-official-' +
 __e( official.person.uniqueId ) +

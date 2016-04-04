@@ -34,7 +34,7 @@ define([
 
     afterRender: function(model) {
       this.drawBarChart()
-      this.drawPieChart(2014)
+      this.drawPieChart(model.latestYear)
 
       $('#btn-contact-official-' + model.person.uniqueId).leanModal();
       $('#page-official').velocity('scroll', {
@@ -115,10 +115,15 @@ define([
 
       var ctx = $('#canvas-bar')[0].getContext('2d');
       var measureYAxis = 10000 // Y Axis 레이블 표현 단위
+
       this.myBar = new Chart(ctx).Bar(barChartData, {
         responsive : true,
         scaleGridLineColor : '#5F718A',
         scaleFontColor: "#fff",
+        isFixedWidth:true,
+        barWidth:20,
+        // barDatasetSpacing:30,
+        // barValueSpacing:60,
         scaleLabel: function(label) {
           return self.calMeasureMoney(parseInt(label.value, 10)).slice(0, -4)
         },
@@ -159,7 +164,7 @@ define([
         })
       }
 
-      var canvas = document.getElementById('canvas-pie')
+      var canvas = $('#canvas-pie')[0]
       var ctx = canvas.getContext('2d')
       if (this.myPie) this.myPie.destroy()
 
