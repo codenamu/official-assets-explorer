@@ -320,10 +320,23 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 }
 
 .cards .search-cards .card .card-action > li {
+    position: relative;
     color: #7b7b7b;
     font-size: 14px;
     letter-spacing: -0.03em;
+    list-style: none;
 } 
+
+.cards .search-cards .card .card-action > li:before {
+    content: ' ';
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-image: url('/img/dot.png');
+    background-size: cover;
+    top: 9px;
+    left: -8px;
+}
 
 
 
