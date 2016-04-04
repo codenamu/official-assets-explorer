@@ -42,9 +42,7 @@ define([
       this.provinces.model = ProvinceModel
 
       this.orgs.fetch({success: function() {
-        console.log(self.orgs)
         self.provinces.fetch({success: function() {
-          console.log(self.provinces)
           self.render()
         }})
       }})
@@ -106,7 +104,7 @@ define([
         }))
       })
 
-      this.provinces.forEach(function(p) {
+      this.provinces.models.forEach(function(p) {
         $('#selected-provinces').append($('<option>', {
           id: 'option-provinces-id-' + p.get('id'),
           value: p.get('name'),
