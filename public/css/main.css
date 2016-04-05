@@ -16,6 +16,10 @@ button.btn:hover, button.btn-large:hover {
     box-shadow: none;
 }
 
+button.btn[type=submit] {
+    font-size: 1.6rem;
+}
+
 .btn, .btn:hover {
     box-shadow: none;
 }
@@ -29,7 +33,7 @@ button.btn:hover, button.btn-large:hover {
 }
 
 .input-field.input-field-integrated > input[type=text] {
-    border: 2px solid #5C6D85;
+    border: 1px solid #5C6D85;
     padding: 0 16px;
     box-sizing: inherit;
 }
@@ -176,6 +180,14 @@ header p.subtitle > img {
 [type="checkbox"]:checked+label:before {
     border-right-color: #5C6D85;
     border-bottom-color: #5C6D85;
+}
+
+input[type=text] {
+    transition: none;
+}
+
+input[type=text]:focus {
+    border-bottom: initial !important;
 }
 
 input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([readonly]), input[type=text].valid, input[type=text]:focus.valid {
