@@ -41,13 +41,14 @@ module.exports = function() {
        * START
        * query parameters to search candidations in this election
        */
-
+      if (queries.province) {
+          where['$Dongs.Municipal.Province.name$'] = queries.province
+      }
+      if (queries.municipal) {
+          where['$Dongs.Municipal.name$'] = queries.municipal
+      }
       if (queries.dong) {
-        where['$Dongs.name$'] = queries.dong
-      } else if (queries.municipal) {
-        where['$Dongs.Municipal.name$'] = queries.municipal
-      } else if (queries.province) {
-        where['$Dongs.Municipal.Province.name$'] = queries.province
+          where['$Dongs.name$'] = queries.dong
       }
 
       db.Constituency.findAll({

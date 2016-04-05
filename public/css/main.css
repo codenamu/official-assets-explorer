@@ -543,6 +543,10 @@ footer.page-footer p {
         line-height: 47px;
     }
 
+    button.btn[type=submit] {
+        font-size: 1rem;
+    }
+
     nav#nav {
         height: 90px;
     }
