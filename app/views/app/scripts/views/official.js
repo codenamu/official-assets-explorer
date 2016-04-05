@@ -141,9 +141,6 @@ Officials.Views = Officials.Views || {};
 
     drawPieChart: function(year) {
       var self = this
-
-
-
       var pieData = {}
       var model = this.model.attributes
 
@@ -158,7 +155,7 @@ Officials.Views = Officials.Views || {};
           if (d.total > 0) {
             var data = {}
             data.value = d.total
-            data.color = '#fffca9'
+            data.color = self.selectPieColor(d.Cat2.title)
             data.label = d.Cat2.title
             pieData[model[y].year].push(data)
           }
@@ -191,77 +188,50 @@ Officials.Views = Officials.Views || {};
           percentage: {
             color: '#5c6d85',
             decimalPlaces: 0
+          },
+          lines: {
+            enabled: true
           }
         }
       }
 
+      /**
+       * make pie bigger if user's browser is from desktop
+       */
       if (window.innerWidth > 768) {
         pieOption.size.canvasWidth = 450
         pieOption.size.pieOuterRadius = '70%'
       }
+
       this.myPie = new d3pie('canvas-pie', pieOption)
-
-      // var canvas = $('#canvas-pie')[0]
-      // var ctx = canvas.getContext('2d')
-      
-
-      // var tooltips = []
-
-      // this.myPie = new Chart(ctx).Pie(pieData[year], {
-      //   showTooltips: true,
-      //   tooltipEvents: [],
-      //   tooltipFillColor: 'rgba(0,0,0,0)',
-      //   tooltipFontColor: '#5c6d85',
-      //   tooltipFontSize: 10,
-      //   tooltipFontStyle: 'bold',
-      //   tooltipTemplate: "<%if (label){%><%=label%> <%}%><%= valueText %>%",
-      //   labelAlign: 'center',
-      //   animationSteps : 25,
-      //   animationEasing: 'linear',
-      //   segmentStrokeWidth : 3,
-      //   customTooltips: function(tooltip) {
-      //     if (tooltip) {
-      //       console.log(tooltip.chart.canvas.offsetLeft)
-      //     }
-      //     console.log(tooltip)
-      //     ctx.fillStyle = '#000';
-      //     ctx.textAlign = 'center';
-      //     ctx.fillText(tooltip.text, this.x, this.y);
-
-      //     // var tooltipEl = $('#chartjs-tooltip');
-      //     // if (!tooltip) {
-      //     //     tooltipEl.css({
-      //     //         opacity: 0
-      //     //     });
-      //     //     return;
-      //     // }
-      //     // tooltipEl.removeClass('above below');
-      //     // tooltipEl.addClass(tooltip.yAlign);
-
-      //     // // split out the label and value and make your own tooltip here
-      //     // var innerHtml = '<span>' + tooltip.text + '</span>';
-      //     // tooltipEl.html(innerHtml);
-
-      //     // tooltipEl.css({
-      //     //     opacity: 1,
-      //     //     left: tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
-      //     //     top: tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
-      //     //     fontFamily: tooltip.fontFamily,
-      //     //     fontSize: tooltip.fontSize,
-      //     //     fontStyle: tooltip.fontStyle,
-      //     // });
-
-      //   },
-      //   onAnimationComplete: function() {
-      //     this.segments.forEach(function(s) {
-      //       s.valueText = self.calMeasureMoney(Math.round(100 * s.value / self.result.assets.history[year].total))
-      //     })
-
-      //     this.showTooltip(this.segments, true);
-      //   }
-      // })
     },
 
+    selectPieColor: function(cat) {
+      switch(cat) {
+        case '자동차·선박 등':
+          return '#fffca9'
+          break
+        case '예금':
+          return '#b7d1ee'
+          break
+        case '토지':
+          return '#c0efa9'
+          break
+        case '채무':
+          return '#f4c79c'
+          break
+        case '건물':
+          return '#ffc1d7'
+          break
+      }
+    },
+
+
+    /**
+     * [calMeasureMoney description]
+     * @param  {[type]} str [asset value on str type]
+     * @return {[type]} str [asset value adapted korean WON measure]
+     */
     calMeasureMoney: function(str) {
       var result = str.toString()
       var num = Math.floor(result.length / 4)

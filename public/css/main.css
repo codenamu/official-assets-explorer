@@ -596,3 +596,11 @@ footer.page-footer p {
         text-align: center;
     }
 }
+
+/*
+    d3.pie Style
+ */
+
+#canvas-pie svg > g:not(.p0_lineGroups) path {
+    stroke: #5c6d85 !important;
+} 

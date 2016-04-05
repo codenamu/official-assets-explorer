@@ -9,7 +9,6 @@ window.Officials = {
   ActiveViews: {},
   init: function () {
     'use strict';
-    console.log('Hello from Backbone!');
     var App = new Officials.Routers.Main
     Backbone.history.start()
   }

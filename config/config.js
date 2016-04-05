@@ -9,8 +9,7 @@ var config = {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://root:@localhost:3306/publicassets',
-    sync: true
+    db: 'mysql://' + process.env.mysqlUsername + ':' + process.env.mysqlPassword + '@localhost:3306/publicassets'
   },
 
   test: {
@@ -19,8 +18,7 @@ var config = {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://localhost/publicassets-test',
-    sync: false
+    db: 'mysql://' + process.env.mysqlUsername + ':' + process.env.mysqlPassword + '@localhost:3306/publicassets-test'
   },
 
   production: {
@@ -29,8 +27,7 @@ var config = {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://localhost/publicassets-production',
-    sync: false
+    db: 'mysql://' + process.env.mysqlUsername + ':' + process.env.mysqlPassword + '@localhost:3306/publicassets-production'
   }
 };
 

@@ -11,7 +11,9 @@ module.exports = function() {
     var params = {}
     var where = {}
 
-    // ready for clean query parameters
+    /**
+     * make query parameters to array to use in `where` clause
+     */
     if (queries.org && (typeof queries.org === 'string')) {
       queries.org = queries.org.split(',')
     }
@@ -26,11 +28,20 @@ module.exports = function() {
       })
     }
 
+    /**
+     * replace whitespace to `%` to use in `in` query in `where` clause
+     */
+
     if (queries.keyword) {
       queries.keyword = '%' + queries.keyword.replace(/ /g, '%') + '%'
     }
 
     if (queries.election) {
+      /**
+       * START
+       * query parameters to search candidations in this election
+       */
+
       if (queries.dong) {
         where['$Dongs.name$'] = queries.dong
       } else if (queries.municipal) {
@@ -166,8 +177,17 @@ module.exports = function() {
           })
         })
       })
+
+      /**
+       * END
+       * query parameters to search candidations in this election
+       */
     } else {
-      
+      /**
+       * START
+       * query parameters to search officials with default options
+       * SUCH AS Org, Year, Position, Name 
+       */
 
       if (queries.keyword) {
         where['$or'] = [{
@@ -237,7 +257,6 @@ module.exports = function() {
         })
         .then(function(officials) {
           var targets = officials.map(function(o) {
-            console.log(o.Person)
             return o.Person.dataValues.uniqueId
           })
 
@@ -271,109 +290,12 @@ module.exports = function() {
           
         })
       })
+      /**
+       * END
+       * query parameters to search officials with default options
+       * SUCH AS Org, Year, Position, Name 
+       */
     }
-    
-
-    // 
-    // searchOption.where = queries.keyword ? {
-    //     $or: [{
-    //         '$Person.name$': {
-    //           $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
-    //         }
-    //       }, {
-    //         '$Position.title$': {
-    //           $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
-    //         }
-    //       }, {
-    //         '$Position.Org3.title$': {
-    //           $like: '%' + queries.keyword.replace(/ /g, '%') + '%'
-    //         }
-    //       }]
-    //   } : {}
-
-    
-    // }
-
-    // searchOption.where['$Position.Org3.Org2.Org1.title$'] = { $in: queries.org }
-    // searchOption.where['year'] = { $in: queries.year }
-    
-    // searchOption.include = [{
-    //     model: db.Person,
-    //     attributes: ['id', 'uniqueId'],
-    //     required: true
-    //   }, {
-    //     model: db.Position,
-    //     attributes: ['id'],
-    //     required: true,
-    //     include: [{
-    //       model: db.Org3,
-    //       attribute: ['id'],
-    //       required: true,
-    //       incude: [{
-    //         model: db.Org2,
-    //         attribute: ['id'],
-    //         required: true,
-    //         include: [{
-    //           model: db.Org1,
-    //           attribute: ['id', 'title'],
-    //           required: true
-    //         }]
-    //       }]
-    //     }]
-    //   }]
-
-
-    // searchOption.group = ['Person.uniqueId']
-
-    // if (queries.election) {
-    //   searchOption.where['$Person.election$'] = queries.election ? 1 : 0
-    //   searchOption.include[0].include = [{
-    //     model: db.Constituency,
-    //     attribute: [['id', 'ConstituencyId'], 'name'],
-    //     required: true
-    //   }]
-
-    //   db.Constituency.findAll({
-    //     include: [{
-    //       model: db.Dong,
-    //       where: {
-    //         name: queries.dong ? queries.dong : ''
-    //       }
-    //     }]
-    //   })
-    //   .then(function(result) {
-    //     searchOption.where['$Person.Constituency.id$'] = result[0].id
-        
-    //     getOfficials(searchOption, res)
-    //   })
-    //   // searchOption.where['$Person.Constituency.Dongs.name$'] = queries.dong
-    // } else {
-      
-    //   // getOfficials(searchOption, res)
-    //   db.Official.count({
-    //     where: {
-    //       year: {
-    //         $in: ['2014', '2015']
-    //       },
-    //       '$Position.title$': {
-    //         $like: '%대통령%'
-    //       }
-    //     },
-    //     group: 'Person.uniqueId',
-    //     attributes: ['Official.*', 'Person.*'],
-    //     include: [{
-    //       model: db.Person,
-    //       attribute: ['uniqueId']
-    //     }, {
-    //       model: db.Position
-    //     }]
-    //   })
-    //   .then(function(result) {
-    //     res.json(result)
-    //   })
-    // }
-
-
   })
 
   router.get('/:uniqueId', function (req, res, next) {
@@ -426,73 +348,4 @@ function getCount(target, option) {
 
 function getOfficials(searchOption) {
   return db.Official.findAll(searchOption)
-  // var result = {}
-  // searchOption.limit = queries.limit ? parseInt(queries.limit, 10) : 40
-  // // searchOption['OFFSET'] = queries.offset ? parseInt(queries.offset, 10) : 0
-  // searchOption.offset = queries.offset ? parseInt(queries.offset, 10) : 0
-  // searchOption.distinct = '$Person.uniqueId$'
-  // db.Official.count(searchOption)
-  //   .then(function() {
-
-  //   })
-  // console.log(searchOption)
-  // console.log('=====================')
-  // console.log('before findAndCount')
-  // console.log('=====================')
-  // db.Official.findAndCountAll(searchOption)
-  //     .then(function(officials) {
-
-  // console.log('=====================')
-  // console.log('after findAndCount')
-  // console.log('=====================')
-  //       result.count = officials.count.length
-  //       var targets = officials.rows.map(function(o) {
-  //         return o.Person.dataValues.uniqueId
-  //       })
-  //       // var targets = officials[0].map(function(o) {
-  //       //   return o['personUniqueId']
-  //       // })
-        
-  //       console.log('=====================')
-  //       console.log('before findAll')
-  //       console.log('=====================')
-  //       db.Official.findAll({
-  //         order: [['year', 'ASC']],
-  //         include: [{
-  //           model: db.Person,
-  //           attributes: ['name', 'uniqueId'],
-  //           where: { uniqueId: { $in: targets }}
-  //         }, {
-  //           model: db.Position,
-  //           attributes: ['title'],
-  //           include: [{
-  //             model: db.Org3,
-  //             attribute: ['title'],
-  //             incude: [{
-  //               model: db.Org2,
-  //               attribute: ['title'],
-  //               include: [{
-  //                 model: db.Org1,
-  //                 attribute: ['title']
-  //               }]
-  //             }]
-  //           }]
-  //         }]
-  //       })
-  //       .then(function(officials) {
-  //         console.log('=====================')
-  //         console.log('after findAll')
-  //         console.log('=====================')
-  //         result.officials = officials
-  //         res.json(result)
-  //       })
-  //     })
-  // })
-  
-  // db.Official.findAndCount(searchOption)
-
-  //   .then(function (officials) {
-  //     result.count = officials.count.length
-
-      
 }

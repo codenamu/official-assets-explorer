@@ -72,13 +72,6 @@ Officials.Views = Officials.Views || {};
 
     },
 
-    checkBackboneError: function() {
-      // console.log(OrgModel, ProvinceModel, Orgs, Provinces)
-      // if (!OrgModel || !ProvinceModel || !Orgs || !Provinces) {
-      //   window.location.reload()
-      // }
-    },
-
     showLoadingDiv: function() {
       $('#page-search .search-loading').show()
     },
