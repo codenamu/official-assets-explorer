@@ -82,7 +82,7 @@ __e( official.position[official.position.length - 1].title ) +
 __e( official.assets.history[official.latestYear].totalText ) +
 '원 | ' +
 __e( official.latestYear ) +
-'년</span>\n                  </div>\n                  <div class="row official-history">\n                      <h5><li>재산 변동 이력</li></h5>\n                      <div class="official-bar-chart" style="width: 100%">\n                          <canvas id="canvas-bar" height="250" width="350"></canvas>\n                      </div>\n                      <div class="official-pie-chart" style="width: 100%">\n                          <h6>자산 구성비</h6>\n                          <canvas id="canvas-pie" height="350" width="350"></canvas>\n                      </div>\n                  </div>\n                  <div class="row">\n                      <h5><li>재산 공개 이력</li></h5>\n                      <ul>\n                      ';
+'년</span>\n                  </div>\n                  <div class="row official-history">\n                      <h5><li>재산 변동 이력</li></h5>\n                      <div class="official-bar-chart" style="width: 100%">\n                          <canvas id="canvas-bar" height="250" width="350"></canvas>\n                      </div>\n                      <div class="official-pie-chart" style="width: 100%">\n                          <h6>자산 구성비</h6>\n                          <div id="canvas-pie" height="350" width="100%"></div>\n                      </div>\n                  </div>\n                  <div class="row">\n                      <h5><li>재산 공개 이력</li></h5>\n                      <ul>\n                      ';
  for (var p in official.position) { ;
 __p += '\n                          <li>- ' +
 __e( official.position[p].year ) +

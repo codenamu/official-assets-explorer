@@ -141,6 +141,9 @@ Officials.Views = Officials.Views || {};
 
     drawPieChart: function(year) {
       var self = this
+
+
+
       var pieData = {}
       var model = this.model.attributes
 
@@ -162,30 +165,101 @@ Officials.Views = Officials.Views || {};
         })
       }
 
-      var canvas = $('#canvas-pie')[0]
-      var ctx = canvas.getContext('2d')
       if (this.myPie) this.myPie.destroy()
 
-      this.myPie = new Chart(ctx).Pie(pieData[year], {
-        showTooltips: true,
-        tooltipEvents: [],
-        tooltipFillColor: 'rgba(0,0,0,0)',
-        tooltipFontColor: '#5c6d85',
-        tooltipFontSize: 10,
-        tooltipFontStyle: 'bold',
-        tooltipTemplate: "<%if (label){%><%=label%> <%}%><%= valueText %>%",
-        animationSteps : 25,
-        animationEasing: 'linear',
-        segmentStrokeWidth : 3,
-        customTooltips: false,
-        onAnimationComplete: function() {
-          this.segments.forEach(function(s) {
-            s.valueText = self.calMeasureMoney(Math.round(100 * s.value / self.result.assets.history[year].total))
-          })
-
-          this.showTooltip(this.segments, true);
+      var pieOption = {
+        header: {
+          title: '자산 구성비'
+        },
+        size: {
+          canvasWidth: 350,
+          pieOuterRadius: "70%"
+        },
+        data: {
+          content: pieData[year]
+        },
+        labels: {
+          outer: {
+            pieDistance: 15
+          },
+          inner: {
+            hideWhenLessThanPercentage: 2
+          },
+          mainLabel: {
+            color: '#ffffff'
+          },
+          percentage: {
+            color: '#5c6d85',
+            decimalPlaces: 0
+          }
         }
-      })
+      }
+
+      if (window.innerWidth > 768) {
+        pieOption.size.canvasWidth = 450
+        pieOption.size.pieOuterRadius = '70%'
+      }
+      this.myPie = new d3pie('canvas-pie', pieOption)
+
+      // var canvas = $('#canvas-pie')[0]
+      // var ctx = canvas.getContext('2d')
+      
+
+      // var tooltips = []
+
+      // this.myPie = new Chart(ctx).Pie(pieData[year], {
+      //   showTooltips: true,
+      //   tooltipEvents: [],
+      //   tooltipFillColor: 'rgba(0,0,0,0)',
+      //   tooltipFontColor: '#5c6d85',
+      //   tooltipFontSize: 10,
+      //   tooltipFontStyle: 'bold',
+      //   tooltipTemplate: "<%if (label){%><%=label%> <%}%><%= valueText %>%",
+      //   labelAlign: 'center',
+      //   animationSteps : 25,
+      //   animationEasing: 'linear',
+      //   segmentStrokeWidth : 3,
+      //   customTooltips: function(tooltip) {
+      //     if (tooltip) {
+      //       console.log(tooltip.chart.canvas.offsetLeft)
+      //     }
+      //     console.log(tooltip)
+      //     ctx.fillStyle = '#000';
+      //     ctx.textAlign = 'center';
+      //     ctx.fillText(tooltip.text, this.x, this.y);
+
+      //     // var tooltipEl = $('#chartjs-tooltip');
+      //     // if (!tooltip) {
+      //     //     tooltipEl.css({
+      //     //         opacity: 0
+      //     //     });
+      //     //     return;
+      //     // }
+      //     // tooltipEl.removeClass('above below');
+      //     // tooltipEl.addClass(tooltip.yAlign);
+
+      //     // // split out the label and value and make your own tooltip here
+      //     // var innerHtml = '<span>' + tooltip.text + '</span>';
+      //     // tooltipEl.html(innerHtml);
+
+      //     // tooltipEl.css({
+      //     //     opacity: 1,
+      //     //     left: tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
+      //     //     top: tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
+      //     //     fontFamily: tooltip.fontFamily,
+      //     //     fontSize: tooltip.fontSize,
+      //     //     fontStyle: tooltip.fontStyle,
+      //     // });
+
+      //   },
+      //   onAnimationComplete: function() {
+      //     this.segments.forEach(function(s) {
+      //       s.valueText = self.calMeasureMoney(Math.round(100 * s.value / self.result.assets.history[year].total))
+      //     })
+
+      //     this.showTooltip(this.segments, true);
+      //   }
+      // })
     },
 
     calMeasureMoney: function(str) {

@@ -232,7 +232,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('createDefaultTemplate', function () {
-    grunt.file.write('<%= yeoman.app %>/scripts/templates.js', 'this.JST = this.JST || {};');
+    grunt.file.write('app/scripts/templates.js', 'this.JST = this.JST || {};');
   });
 
   grunt.registerTask('server', function (target) {
