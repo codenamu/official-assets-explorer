@@ -655,4 +655,5 @@ footer.page-footer p {
 
 #canvas-pie svg > g:not(.p0_lineGroups) path {
     stroke: #5c6d85 !important;
+    stroke-width: 2 !important;
 } 

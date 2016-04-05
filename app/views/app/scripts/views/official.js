@@ -187,6 +187,7 @@ Officials.Views = Officials.Views || {};
           },
           percentage: {
             color: '#5c6d85',
+            fontSize: 14,
             decimalPlaces: 0
           },
           lines: {
