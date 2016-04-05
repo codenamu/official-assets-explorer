@@ -1,16 +1,14 @@
-/*global define*/
+/*global Officials, Backbone*/
 
-define([
-  'underscore',
-  'backbone',
-  'orgModel'
-], function (_, Backbone, OrgModel) {
+Officials.Collections = Officials.Collections || {};
+
+(function () {
   'use strict';
 
-  var OrgCollection = Backbone.Collection.extend({
+  Officials.Collections.Org = Backbone.Collection.extend({
     url: '/api/org',
-    model: OrgModel
+    model: Officials.Models.Org
+
   });
 
-  return OrgCollection;
-});
+})();

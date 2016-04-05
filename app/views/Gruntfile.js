@@ -1,5 +1,5 @@
 'use strict';
-var LIVERELOAD_PORT = 35730;
+var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 9000;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
@@ -132,40 +132,12 @@ module.exports = function (grunt) {
         }
       }
     },
-    requirejs: {
-      dist: {
-        // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
-        options: {
-          almond: true,
-
-          replaceRequireScript: [{
-            files: ['<%= yeoman.dist %>/index.html'],
-            module: 'main'
-          }],
-
-          modules: [{name: 'main'}],
-
-          baseUrl: '<%= yeoman.app %>/scripts',
-
-          mainConfigFile: '<%= yeoman.app %>/scripts/main.js', // contains path specifications and nothing else important with respect to config
-          dir: '.tmp/scripts',
-
-          optimize: 'none', // optimize by uglify task
-          useStrict: true,
-          wrap: true
-
-        }
-      }
-    },
-    uglify: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/main.js': [
-            '.tmp/scripts/main.js'
-          ]
-        }
-      }
-    },
+    // not enabled since usemin task does concat and uglify
+    // check index.html to edit your build targets
+    // enable this task if you prefer defining your build targets here
+    /*uglify: {
+      dist: {}
+    },*/
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
       options: {
@@ -238,18 +210,10 @@ module.exports = function (grunt) {
         }]
       }
     },
-    bower: {
-      all: {
-        rjsConfig: '<%= yeoman.app %>/scripts/main.js'
-      }
-    },
     jst: {
-      options: {
-        amd: true
-      },
       compile: {
         files: {
-          'app/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
+          '<%= yeoman.app %>/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
         }
       }
     },
@@ -268,7 +232,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('createDefaultTemplate', function () {
-    grunt.file.write('app/scripts/templates.js', 'this.JST = this.JST || {};');
+    grunt.file.write('<%= yeoman.app %>/scripts/templates.js', 'this.JST = this.JST || {};');
   });
 
   grunt.registerTask('server', function (target) {
@@ -330,7 +294,6 @@ module.exports = function (grunt) {
     'htmlmin',
     'concat',
     'cssmin',
-    'requirejs',
     'uglify',
     'copy',
     'rev',

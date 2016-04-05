@@ -1,19 +1,12 @@
-/*global define*/
+/*global Officials, Backbone, JST*/
 
-define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'templates',
-  'materialize'
-  // 'hammerjs',
-  // 'sideNav',
-  // 'hammer',
-  // 'velocity'
-], function ($, _, Backbone, JST) {
-  'use strict'
+Officials.Views = Officials.Views || {};
 
-  var NavView = Backbone.View.extend({
+(function () {
+  'use strict';
+
+  Officials.Views.Nav = Backbone.View.extend({
+
     template: JST['app/scripts/templates/nav.ejs'],
 
     el: '#nav',
@@ -30,7 +23,7 @@ define([
     afterRender: function(event) {
       $('.button-collapse').sideNav()
     }
-  })
 
-  return NavView
-})
+  });
+
+})();

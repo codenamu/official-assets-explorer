@@ -1,12 +1,12 @@
-/*global define*/
+/*global Officials, Backbone*/
 
-define([
-  'underscore',
-  'backbone'
-], function (_, Backbone) {
+Officials.Models = Officials.Models || {};
+
+(function () {
   'use strict';
 
-  var MunicipalModel = Backbone.Model.extend({
+  Officials.Models.Municipal = Backbone.Model.extend({
+
     urlRoot: '/api/municipal',
 
     idAttribute: '_id',
@@ -20,5 +20,4 @@ define([
     }
   });
 
-  return MunicipalModel;
-});
+})();

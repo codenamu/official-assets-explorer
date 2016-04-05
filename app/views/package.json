@@ -16,8 +16,6 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-mocha": "^0.4.11",
     "grunt-usemin": "^2.4.0",
-    "grunt-bower-requirejs": "^1.1.0",
-    "grunt-requirejs": "^0.4.2",
     "grunt-rev": "^0.1.0",
     "grunt-open": "^0.2.3",
     "connect-livereload": "^0.4.0",

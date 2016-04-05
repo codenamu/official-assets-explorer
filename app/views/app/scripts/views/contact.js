@@ -1,14 +1,12 @@
-/*global define*/
+/*global Officials, Backbone, JST*/
 
-define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'templates'
-], function ($, _, Backbone, JST) {
+Officials.Views = Officials.Views || {};
+
+(function () {
   'use strict';
 
-  var ContactView = Backbone.View.extend({
+  Officials.Views.Contact = Backbone.View.extend({
+
     template: JST['app/scripts/templates/contact.ejs'],
 
     el: '#main',
@@ -43,7 +41,7 @@ define([
       })
 
     }
+
   });
 
-  return ContactView;
-});
+})();

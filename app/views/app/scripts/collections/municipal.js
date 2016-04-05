@@ -1,16 +1,14 @@
-/*global define*/
+/*global Officials, Backbone*/
 
-define([
-  'underscore',
-  'backbone',
-  'municipalModel'
-], function (_, Backbone, MunicipalModel) {
+Officials.Collections = Officials.Collections || {};
+
+(function () {
   'use strict';
 
-  var MunicipalCollection = Backbone.Collection.extend({
+  Officials.Collections.Municipal = Backbone.Collection.extend({
     url: '/api/municipal',
-    model: MunicipalModel
+    model: Officials.Models.Municipal
+
   });
 
-  return MunicipalCollection;
-});
+})();

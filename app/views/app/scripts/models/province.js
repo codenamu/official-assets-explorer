@@ -1,12 +1,12 @@
-/*global define*/
+/*global Officials, Backbone*/
 
-define([
-  'underscore',
-  'backbone'
-], function (_, Backbone) {
+Officials.Models = Officials.Models || {};
+
+(function () {
   'use strict';
 
-  var ProvinceModel = Backbone.Model.extend({
+  Officials.Models.Province = Backbone.Model.extend({
+
     urlRoot: '/api/province',
 
     idAttribute: '_id',
@@ -20,5 +20,4 @@ define([
     }
   });
 
-  return ProvinceModel;
-});
+})();

@@ -1,12 +1,12 @@
-/*global define*/
+/*global Officials, Backbone*/
 
-define([
-  'underscore',
-  'backbone'
-], function (_, Backbone) {
+Officials.Models = Officials.Models || {};
+
+(function () {
   'use strict';
 
-  var DongModel = Backbone.Model.extend({
+  Officials.Models.Dong = Backbone.Model.extend({
+
     urlRoot: '/api/dong',
 
     idAttribute: '_id',
@@ -20,5 +20,4 @@ define([
     }
   });
 
-  return DongModel;
-});
+})();

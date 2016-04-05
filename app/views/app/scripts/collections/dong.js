@@ -1,16 +1,13 @@
-/*global define*/
+/*global Officials, Backbone*/
 
-define([
-  'underscore',
-  'backbone',
-  'dongModel'
-], function (_, Backbone, DongModel) {
+Officials.Collections = Officials.Collections || {};
+
+(function () {
   'use strict';
 
-  var DongCollection = Backbone.Collection.extend({
+  Officials.Collections.Dong = Backbone.Collection.extend({
     url: '/api/dong',
-    model: DongModel
+    model: Officials.Models.Dong
   });
 
-  return DongCollection;
-});
+})();

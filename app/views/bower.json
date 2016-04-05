@@ -1,11 +1,9 @@
 {
-  "name": "official-assets-explorer",
+  "name": "officials",
   "version": "0.0.0",
   "dependencies": {
     "jquery": "~2.1.0",
     "backbone": "~1.1.0",
-    "requirejs": "~2.1.10",
-    "requirejs-text": "~2.0.10",
     "modernizr": "~2.7.1",
     "lodash": "~2.4.1"
   },

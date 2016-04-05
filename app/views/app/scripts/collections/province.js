@@ -1,16 +1,14 @@
-/*global define*/
+/*global Officials, Backbone*/
 
-define([
-  'underscore',
-  'backbone',
-  'provinceModel'
-], function (_, Backbone, ProvinceModel) {
+Officials.Collections = Officials.Collections || {};
+
+(function () {
   'use strict';
 
-  var ProvinceCollection = Backbone.Collection.extend({
+  Officials.Collections.Province = Backbone.Collection.extend({
     url: '/api/province',
-    model: ProvinceModel
+    model: Officials.Models.Province
+
   });
 
-  return ProvinceCollection;
-});
+})();

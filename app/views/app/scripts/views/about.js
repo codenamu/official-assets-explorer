@@ -1,14 +1,12 @@
-/*global define*/
+/*global Officials, Backbone, JST*/
 
-define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'templates'
-], function ($, _, Backbone, JST) {
+Officials.Views = Officials.Views || {};
+
+(function () {
   'use strict';
 
-  var AboutView = Backbone.View.extend({
+  Officials.Views.About = Backbone.View.extend({
+
     template: JST['app/scripts/templates/about.ejs'],
 
     el: '#main',
@@ -21,7 +19,7 @@ define([
     render: function () {
       this.$el.html(this.template());
     }
+
   });
 
-  return AboutView;
-});
+})();

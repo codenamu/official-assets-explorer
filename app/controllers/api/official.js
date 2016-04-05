@@ -236,7 +236,6 @@ module.exports = function() {
           }]
         })
         .then(function(officials) {
-          console.log(officials[0])
           var targets = officials.map(function(o) {
             console.log(o.Person)
             return o.Person.dataValues.uniqueId

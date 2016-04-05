@@ -1,14 +1,12 @@
-/*global define*/
+/*global Officials, Backbone, JST*/
 
-define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'templates'
-], function ($, _, Backbone, JST) {
+Officials.Views = Officials.Views || {};
+
+(function () {
   'use strict';
 
-  var HeaderView = Backbone.View.extend({
+  Officials.Views.Header = Backbone.View.extend({
+
     template: JST['app/scripts/templates/header.ejs'],
 
     el: 'header',
@@ -26,7 +24,7 @@ define([
     afterRender: function() {
       $('.modal-trigger').leanModal();
     }
+
   });
 
-  return HeaderView;
-});
+})();

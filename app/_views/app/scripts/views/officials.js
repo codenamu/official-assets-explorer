@@ -5,8 +5,8 @@ define([
   'underscore',
   'backbone',
   'templates',
-  '../collections/official',
-  '../views/card'
+  'officialCollection',
+  './card'
 ], function ($, _, Backbone, JST, Officials, CardView) {
   'use strict'
 

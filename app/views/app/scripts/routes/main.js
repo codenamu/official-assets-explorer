@@ -1,19 +1,11 @@
-/*global define*/
+/*global Officials, Backbone*/
 
-define([
-  'jquery',
-  'backbone-query-parameters',
-  '../views/header',
-  '../views/nav',
-  '../views/officials',
-  '../views/official',
-  '../views/search',
-  '../views/about',
-  '../views/contact'
-], function ($, _query_params, HeaderView, NavView, OfficialsView, OfficialView, SearchView, AboutView, ContactView) {
-  'use strict'
+Officials.Routers = Officials.Routers || {};
 
-  var MainRouter = Backbone.Router.extend({
+(function () {
+  'use strict';
+
+  Officials.Routers.Main = Backbone.Router.extend({
     routes: {
       ''          : 'main',
       'about'     : 'about',
@@ -23,18 +15,18 @@ define([
     },
 
     initialize: function() {
-      if (!this.navView) {
-        this.navView = new NavView()
+      if (!Officials.ActiveViews.navView) {
+        Officials.ActiveViews.navView = new Officials.Views.Nav()
       }
     },
 
     main: function(params) {
-      if (!this.headerView) {
-        this.headerView = new HeaderView()
+      if (!Officials.ActiveViews.headerView) {
+        Officials.ActiveViews.headerView = new Officials.Views.Header()
       }
 
-      if (this.officialView) {
-        this.officialView.destroy()
+      if (Officials.ActiveViews.officialView) {
+        Officials.ActiveViews.officialView.destroy()
       }
 
       if (!$('header').is(':visible')) {
@@ -46,9 +38,9 @@ define([
       }
 
       if (params) {
-        this.searchView = new SearchView(params)
+        Officials.ActiveViews.searchView = new Officials.Views.Searchbox(params)
       } else {
-        this.searchView = new SearchView()
+        Officials.ActiveViews.searchView = new Officials.Views.Searchbox()
       }
     },
 
@@ -62,30 +54,28 @@ define([
       //   this.searchView = new SearchView()
       // }
 
-      if (!this.headerView) {
-        this.headerView = new HeaderView()
+      if (!Officials.ActiveViews.headerView) {
+        Officials.ActiveViews.headerView = new Officials.Views.Header()
       }
 
-      if (this.officialView) {
-        this.officialView.destroy()
+      if (Officials.ActiveViews.officialView) {
+        Officials.ActiveViews.officialView.destroy()
       }
 
-      this.officialView = new OfficialView({ uniqueId: id })
+      Officials.ActiveViews.officialView = new Officials.Views.Official({ uniqueId: id })
     },
 
     about: function() {
       $('#search').hide()
-      this.headerView = new HeaderView()
-      this.aboutView = new AboutView()
+      Officials.ActiveViews.headerView = new Officials.Views.Header()
+      Officials.ActiveViews.aboutView = new Officials.Views.About()
     },
 
     contact: function() {
       $('#search').hide()
-      this.headerView = new HeaderView()
-      this.contactView = new ContactView()
+      Officials.ActiveViews.headerView = new Officials.Views.Header()
+      Officials.ActiveViews.contactView = new Officials.Views.Contact()
     }
 
-  })
-
-  return MainRouter
-})
+  });
+})();

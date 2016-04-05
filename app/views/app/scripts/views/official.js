@@ -1,16 +1,12 @@
-/*global define*/
+/*global Officials, Backbone, JST*/
 
-define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'chartjs',
-  'templates',
-  '../models/official'
-], function ($, _, Backbone, Chart, JST, Official) {
-  'use strict'
+Officials.Views = Officials.Views || {};
 
-  var OfficialView = Backbone.View.extend({
+(function () {
+  'use strict';
+
+  Officials.Views.Official = Backbone.View.extend({
+
     template: JST['app/scripts/templates/official.ejs'],
 
     el: '#main',
@@ -23,7 +19,7 @@ define([
       // this.listenTo(this.model, 'change', this.render)
       var self = this;
 
-      this.model = new Official({ _id: params.uniqueId})
+      this.model = new Officials.Models.Official({ _id: params.uniqueId})
       this.model.fetch({ success: function () { self.calAssets() }})
     },
 
@@ -247,9 +243,10 @@ define([
       this.undelegateEvents();
       this.$el.empty();
       this.stopListening();
+      delete Officials.ActiveViews['officialView']
       return this;
     }
-  })
 
-  return OfficialView
-})
+  });
+
+})();

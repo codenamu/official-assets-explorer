@@ -1,14 +1,12 @@
-/*global define*/
+/*global Officials, Backbone, JST*/
 
-define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'templates'
-], function ($, _, Backbone, JST) {
+Officials.Views = Officials.Views || {};
+
+(function () {
   'use strict';
 
-  var CardView = Backbone.View.extend({
+  Officials.Views.Card = Backbone.View.extend({
+
     template: JST['app/scripts/templates/card.ejs'],
 
     events: {},
@@ -28,7 +26,7 @@ define([
       this.remove()
       return this;
     }
+
   });
 
-  return CardView;
-});
+})();
