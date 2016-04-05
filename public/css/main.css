@@ -62,8 +62,21 @@ nav#nav ul.right li a {
     height: 56px;
 }
 
+nav#nav ul.right li a:hover {
+    background-color: transparent;
+}
+
 nav#nav ul.right li a img {
     width: 80%;
+}
+
+nav#nav .button-collapse {
+    padding-left: 6px;
+}
+
+nav#nav .button-collapse i {
+    font-size: 2.0rem;
+    color: #97a8c0;
 }
 
 nav.nav-desktop {
@@ -74,8 +87,9 @@ nav.nav-desktop {
 }
 
 nav.nav-desktop ul li a {
-    font-size: 1.2rem;
     padding: 0 35px;
+    font-size: 1.2rem;
+    font-weight: 300;
 }
 
 nav.nav-desktop ul li a:hover {
@@ -99,6 +113,10 @@ nav li.donate a.donate {
     background-size: contain;
 }
 
+#slide-out {
+    margin-top: 57px;
+}
+
 header {
     width: 100%;
     color: #ffffff;
@@ -111,32 +129,35 @@ header > .row {
     margin-bottom: 0px;
 }
 
+header > .row > .col {
+    text-align: right;
+}
+
 header h1 {
     font-size: 1.8rem;
-    font-weight: 300;
+    font-weight: 200;
     letter-spacing: -0.07em;
     text-align: center;
 }
 
 header h1 > a {
-    color: #a7b9d1;
+    font-size: 2.5rem;
+    color: #ffffff;
 }
 
 header h1 > a:hover {
-    color: #a7b9d1;
+    color: #ffffff;
 }
 
-header .subtitle {
+header p.subtitle {
     position: relative;
-}
-
-header .subtitle span, header .subtitle img {
     display: inline-block;
-}
-
-header p {
     color: #a7b9d1;
     text-align: right;
+}
+
+header p.subtitle > img {
+    width: 100px;
 }
 
 #sidenav-overlay {
@@ -566,16 +587,31 @@ footer.page-footer p {
     }
 
     header {
-        padding: 0 10px;
+        padding: 10px;
+    }
+
+    header > .row > .col {
+        text-align: left;
     }
 
     header h1 {
         text-align: left;
+    }
+
+    header h1 > a {
         font-size: 3.5rem;
     }
     
-    header p {
+    header p.subtitle {
         text-align: left;
+        display: inline-block;
+    }
+
+    header p.subtitle > img {
+        width: 150px;
+        position: absolute;
+        top: -5px;
+        left: 5px;
     }
 
     .cards .card .card-action > li {

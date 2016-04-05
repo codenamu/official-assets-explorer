@@ -11,6 +11,10 @@ Officials.Views = Officials.Views || {};
 
     el: '#nav',
 
+    events: {
+      'click a'   : 'hideSlideOut'
+    },
+
     initialize: function () {
       this.render()
     },
@@ -22,6 +26,10 @@ Officials.Views = Officials.Views || {};
 
     afterRender: function(event) {
       $('.button-collapse').sideNav()
+    },
+
+    hideSlideOut: function() {
+      $('.button-collapse').sideNav('hide')
     }
 
   });
