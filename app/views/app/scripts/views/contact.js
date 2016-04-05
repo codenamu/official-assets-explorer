@@ -34,9 +34,10 @@ Officials.Views = Officials.Views || {};
       })
       .done(function(result) {
         if (result[0].status === 'sent') {
-          alert('이메일을 성공적으로 보냈습니다.')
+          alert('보내주신 내용을 잘 살펴보겠습니다. 감사합니다.')
+          window.location.reload()
         } else {
-          alert('이메일을 보내는데 실패하였습니다.')
+          alert('이메일을 보내는데 실패하였습니다. 원인을 찾아볼게요.')
         }
       })
 

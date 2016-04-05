@@ -133,19 +133,19 @@ header > .row {
     margin-bottom: 0px;
 }
 
-header > .row > .col {
+header > .row > section.col {
     text-align: right;
+    width: 100%;
 }
 
 header h1 {
-    font-size: 1.8rem;
     font-weight: 200;
     letter-spacing: -0.07em;
     text-align: center;
 }
 
 header h1 > a {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     color: #ffffff;
 }
 
@@ -175,6 +175,10 @@ header p.subtitle > img {
 
 .dropdown-content li > a, .dropdown-content li > span {
     color: #5C6D85;
+}
+
+ul.dropdown-content.select-dropdown {
+    max-height: 200px;
 }
 
 [type="checkbox"]:checked+label:before {
@@ -608,6 +612,7 @@ footer.page-footer p {
 
     header > .row > .col {
         text-align: left;
+        width: 50% !important;
     }
 
     header h1 {
@@ -615,19 +620,26 @@ footer.page-footer p {
     }
 
     header h1 > a {
-        font-size: 3.5rem;
+        font-size: 3.2rem;
+    }
+
+    header div.subtitle {
+        text-align: left;
     }
     
-    header p.subtitle {
-        text-align: left;
+    header div.subtitle p {
         display: inline-block;
     }
 
-    header p.subtitle > img {
+    header div.subtitle p > img {
         width: 150px;
         position: absolute;
         top: -5px;
         left: 5px;
+    }
+
+    ul.dropdown-content.select-dropdown {
+        max-height: 290px;
     }
 
     .cards .card .card-action > li {
@@ -653,7 +665,7 @@ footer.page-footer p {
     d3.pie Style
  */
 
-#canvas-pie svg > g:not(.p0_lineGroups) path {
+#canvas-pie svg > g:not([class*="_lineGroups"]) path {
     stroke: #5c6d85 !important;
     stroke-width: 2 !important;
 } 

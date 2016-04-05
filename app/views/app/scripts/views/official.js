@@ -191,7 +191,8 @@ Officials.Views = Officials.Views || {};
             decimalPlaces: 0
           },
           lines: {
-            enabled: true
+            enabled: true,
+            style: "straight"
           }
         }
       }

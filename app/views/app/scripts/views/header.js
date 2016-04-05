@@ -19,6 +19,7 @@ Officials.Views = Officials.Views || {};
 
     render: function () {
       this.$el.html(this.template());
+      this.afterRender()
     },
 
     afterRender: function() {
