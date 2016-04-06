@@ -196,7 +196,7 @@ Officials.Views = Officials.Views || {};
 
     selectProvince: function(callback) {
       var self = this
-      var cb = callback ? callback : function(){}
+      var cb = typeof callback == 'function' ? callback : function(){}
       // this.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
 
       self.initRegionOptions($('#selected-municipals'))
@@ -220,7 +220,7 @@ Officials.Views = Officials.Views || {};
 
     selectMunicipal: function(callback) {
       var self = this
-      var cb = callback ? callback : function(){}
+      var cb = typeof callback == 'function' ? callback : function(){}
       // this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
       self.initRegionOptions($('#selected-dongs'))
 
