@@ -340,7 +340,7 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
     color: rgb(52, 59, 70);
 }
 
-.cards .search-cards .card .card-content span.card-title {
+.cards .search-cards .card .card-content span.card-subtitle {
     font-size: 0.9rem;
 }
 

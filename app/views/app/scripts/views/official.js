@@ -157,8 +157,8 @@ Officials.Views = Officials.Views || {};
           title: '자산 구성비'
         },
         size: {
-          canvasWidth: '250',
-          canvasHeight: '250',
+          canvasWidth: 300,
+          canvasHeight: 300,
           pieOuterRadius: "70%"
         },
         data: {
@@ -166,18 +166,18 @@ Officials.Views = Officials.Views || {};
         },
         labels: {
           outer: {
+            format: 'label-percentage2',
             pieDistance: 15
           },
           inner: {
-            hideWhenLessThanPercentage: 2
+            format: 'none'
           },
           mainLabel: {
-            color: '#ffffff'
+            color: '#ffffff',
+            fontSize: 13
           },
           percentage: {
-            color: '#5c6d85',
-            fontSize: 14,
-            decimalPlaces: 0
+            fontSize: 18
           },
           lines: {
             enabled: true,
@@ -192,6 +192,7 @@ Officials.Views = Officials.Views || {};
        */
       if (window.innerWidth > 768) {
         pieOption.size.canvasWidth = 450
+        pieOption.size.canvasHeight = 450
         pieOption.size.pieOuterRadius = '70%'
       }
 
@@ -205,6 +206,7 @@ Officials.Views = Officials.Views || {};
       var pieColor = ['#c8cef6', '#b6c0e6', '#a9b4dc', '#9da9cd', '#909ec2', '#8493b9', '#7b8bb1', '#7a86aa']
 
       for (var y in model) {
+        var total = 0
         pieData[model[y].year] = []
 
         model[y].Assets.forEach(function(d) {
@@ -213,20 +215,21 @@ Officials.Views = Officials.Views || {};
             data.value = d.total
             data.color = self.selectPieColor(d.Cat2.title)
             data.label = d.Cat2.title
+            pieData[model[y].year].push(data)
+
+            total += d.total
           }
-          
-          pieData[model[y].year].push(data)
         })
 
         pieData[model[y].year]
-        .sort(function(a, b) {
-          return parseInt(a.value, 10) - parseInt(b.value, 10)
+          .sort(function(a, b) {
+            return parseInt(a.value, 10) - parseInt(b.value, 10)
+          })
+        .forEach(function(d) {
+          if (!d.color) {
+            d.color = pieColor.shift()
+          }
         })
-        // .forEach(function(d) {
-        //   if (nonRandomColorLabels.indexOf(d.label) < 0) {
-            
-        //   }
-        // })
       }
 
       return pieData
