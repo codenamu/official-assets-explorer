@@ -158,6 +158,7 @@ Officials.Views = Officials.Views || {};
         },
         size: {
           canvasWidth: '250',
+          canvasHeight: '250',
           pieOuterRadius: "70%"
         },
         data: {
@@ -200,6 +201,8 @@ Officials.Views = Officials.Views || {};
     makePieData: function(model) {
       var self = this;
       var pieData = {}
+      var nonRandomColorLabels = ['자동차·선박 등', '예금', '토지', '채무', '건물']
+      var pieColor = ['#c8cef6', '#b6c0e6', '#a9b4dc', '#9da9cd', '#909ec2', '#8493b9', '#7b8bb1', '#7a86aa']
 
       for (var y in model) {
         pieData[model[y].year] = []
@@ -213,12 +216,17 @@ Officials.Views = Officials.Views || {};
           }
           
           pieData[model[y].year].push(data)
-          console.log(pieData[model[y].year])
-          pieData[model[y].year] = pieData[model[y].year].sort(function(a, b) {
-            return parseInt(a.value, 10) - parseInt(b.value, 10)
-          })
-          console.log(pieData[model[y].year])
         })
+
+        pieData[model[y].year]
+        .sort(function(a, b) {
+          return parseInt(a.value, 10) - parseInt(b.value, 10)
+        })
+        // .forEach(function(d) {
+        //   if (nonRandomColorLabels.indexOf(d.label) < 0) {
+            
+        //   }
+        // })
       }
 
       return pieData
@@ -292,10 +300,10 @@ Officials.Views = Officials.Views || {};
       })
       .then(function(result) {
         if (result[0].status === 'sent') {
-          alert('이메일을 성공적으로 보냈습니다.')
+          alert('보내주신 내용을 잘 살펴보겠습니다. 감사합니다.')
           $('#contact-official-' + self.result.person.uniqueId).closeModal();
         } else {
-          alert('이메일을 보내는데 실패하였습니다.')
+          alert('이메일을 보내는데 실패하였습니다. 원인을 찾아볼게요.')
         }
       })
 

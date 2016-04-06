@@ -299,6 +299,7 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 .cards .search-message h5 {
     padding: 1.5rem 0 1.5rem 0;
     font-size: 1.4rem;
+    text-align: center;
     letter-spacing: -0.05em;
     color: #5c6d85;
 }
@@ -337,6 +338,10 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
     font-size: 26px;
     letter-spacing: -0.06em;
     color: rgb(52, 59, 70);
+}
+
+.cards .search-cards .card .card-content span.card-title {
+    font-size: 0.9rem;
 }
 
 .cards .search-cards .card .card-content span.card-subtitle, #page-official .card .card-content span.card-subtitle {
@@ -447,7 +452,11 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 
 #canvas-bar, #cavnas-pie {
     width: 100%;
-    height: 350px;
+    height: 350px
+}
+
+#cavnas-pie {
+    height: 250px;
 }
 
 #page-official .card .card-action .official-pie-chart h6 {
@@ -656,9 +665,9 @@ footer.page-footer p {
         font-size: 0.85rem;
     }
 
-    .cards .search-message {
-        text-align: center;
-    }
+    // .cards .search-message {
+    //     text-align: center;
+    // }
 
     #main .page.page-about h5 {
         font-size: 1.8rem;
@@ -672,6 +681,10 @@ footer.page-footer p {
     
     footer.page-footer .col:last-child{
         text-align: center;
+    }
+
+    #cavnas-pie {
+        height: 350px;
     }
 }
 

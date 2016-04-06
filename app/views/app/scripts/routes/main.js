@@ -15,12 +15,15 @@ Officials.Routers = Officials.Routers || {};
     },
 
     initialize: function() {
+
       if (!Officials.ActiveViews.navView) {
         Officials.ActiveViews.navView = new Officials.Views.Nav()
       }
     },
 
     main: function(params) {
+      this.cleanMain()
+
       if (!Officials.ActiveViews.headerView) {
         Officials.ActiveViews.headerView = new Officials.Views.Header()
       }
@@ -38,13 +41,15 @@ Officials.Routers = Officials.Routers || {};
       }
 
       if (params) {
-        Officials.ActiveViews.searchView = new Officials.Views.Searchbox(params)
+        Officials.MainView = new Officials.Views.Searchbox(params)
       } else {
-        Officials.ActiveViews.searchView = new Officials.Views.Searchbox()
+        Officials.MainView = new Officials.Views.Searchbox()
       }
     },
 
     official: function(id, params) {
+      this.cleanMain()
+
       $('header').hide()
       $('#search').hide()
 
@@ -62,19 +67,29 @@ Officials.Routers = Officials.Routers || {};
         Officials.ActiveViews.officialView.destroy()
       }
 
-      Officials.ActiveViews.officialView = new Officials.Views.Official({ uniqueId: id })
+      Officials.MainView = new Officials.Views.Official({ uniqueId: id })
     },
 
     about: function() {
+      this.cleanMain()
+
       $('#search').hide()
       Officials.ActiveViews.headerView = new Officials.Views.Header()
-      Officials.ActiveViews.aboutView = new Officials.Views.About()
+      Officials.MainView = new Officials.Views.About()
     },
 
     contact: function() {
+      // this.cleanMain()
+
       $('#search').hide()
       Officials.ActiveViews.headerView = new Officials.Views.Header()
-      Officials.ActiveViews.contactView = new Officials.Views.Contact()
+      Officials.MainView = new Officials.Views.Contact()
+    },
+
+    cleanMain: function() {
+      if (Officials.MainView) {
+        Officials.MainView.destroy()
+      }
     }
 
   });

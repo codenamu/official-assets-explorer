@@ -16,6 +16,7 @@ Officials.Views = Officials.Views || {};
       'change #selected-years'           : 'selectYears',
       'change #selected-provinces'       : 'selectProvince',
       'change #selected-municipals'      : 'selectMunicipal',
+      'change #selected-dongs'           : 'selectDong',
       'submit form#form-search-default'  : 'submitDefaultSearch',
       'submit form#form-search-election' : 'submitElectionSearch',
       'click .chip > i'                  : 'closeAChip'
@@ -214,8 +215,13 @@ Officials.Views = Officials.Views || {};
 
         $('#selected-municipals').material_select()
 
+        self.resetTags('election', 'dongs', $('#selected-dongs > option:selected'))
+        self.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
+        self.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
         cb()
       }})
+
+      
     },
 
     selectMunicipal: function(callback) {
@@ -237,6 +243,12 @@ Officials.Views = Officials.Views || {};
         $('#selected-dongs').material_select()
         cb()
       }})
+
+      this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
+    },
+
+    selectDong: function() {
+      this.resetTags('election', 'dongs', $('#selected-dongs > option:selected'))
     },
 
     initRegionOptions: function(target) {
@@ -318,34 +330,52 @@ Officials.Views = Officials.Views || {};
     },
 
     resetTags: function(category, subcategory, values) {
+      var chips = $('#tags-' + category + ' > .col > .chip.chip-' + subcategory)
+      
+
       if (category === 'default') {
         var valLength = values.length - 1
         var initNum = 1
-      } else {
-        var valLength = values.length
-        var initNum = 0
-      }
-      var chips = $('#tags-' + category + ' > .col > .chip.chip-' + subcategory)
 
-      if (valLength > chips.length) {
+        if (valLength > chips.length) {
         // if user added a tag
-        for (; initNum < values.length; initNum++) {
-          var id = $(values[initNum]).attr('id').split('-')[3]
+          for (; initNum < values.length; initNum++) {
+            var id = $(values[initNum]).attr('id').split('-')[3]
+
+            if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
+              $('#tags-' + category + ' > .col').append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[initNum]).val() + '<i class="material-icons">close</i></span>')
+            }
+          }
+        } else {
+          // if user removed a tag
+          for (var i = 0; i < chips.length; i++) {
+            var id = $(chips[i]).attr('id').split('-')[3]
+
+            if ($('#option-' + subcategory + '-id-' + id).prop('selected') === false) {
+               $('#chip-' + subcategory + '-id-' + id).remove()
+            }
+          }
+        }
+
+      } else {
+        var chipId = $(chips[0]).attr('id')
+        var valueId = $(values[0]).attr('id')
+
+        if (chipId) {
+          var id = chipId.split('-')[3]
+          $('#chip-' + subcategory + '-id-' + id).remove()
+        }
+
+        if (valueId) {
+          var id = valueId.split('-')[3]
 
           if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
-            $('#tags-' + category + ' > .col').append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[initNum]).val() + '<i class="material-icons">close</i></span>')
-          }
-        }
-      } else {
-        // if user removed a tag
-        for (var i = 0; i < chips.length; i++) {
-          var id = $(chips[i]).attr('id').split('-')[3]
-
-          if ($('#option-' + subcategory + '-id-' + id).prop('selected') === false) {
-             $('#chip-' + subcategory + '-id-' + id).remove()
+            $('#tags-' + category + ' > .col').append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[0]).val() + '</span>')
           }
         }
       }
+
+      
     },
 
     closeAChip: function(e) {
