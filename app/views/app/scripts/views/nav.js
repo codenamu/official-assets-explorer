@@ -25,7 +25,9 @@ Officials.Views = Officials.Views || {};
     },
 
     afterRender: function(event) {
-      $('.button-collapse').sideNav()
+      if (window.innerWidth < 768) {
+        $('.button-collapse').sideNav()
+      }
     },
 
     hideSlideOut: function() {
