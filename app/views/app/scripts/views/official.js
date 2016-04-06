@@ -148,19 +148,7 @@ Officials.Views = Officials.Views || {};
       delete model['_id']
       delete model['name']
 
-      for (var y in model) {
-        pieData[model[y].year] = []
-
-        model[y].Assets.forEach(function(d) {
-          if (d.total > 0) {
-            var data = {}
-            data.value = d.total
-            data.color = self.selectPieColor(d.Cat2.title)
-            data.label = d.Cat2.title
-            pieData[model[y].year].push(data)
-          }
-        })
-      }
+      var pieData = this.makePieData(model)
 
       if (this.myPie) this.myPie.destroy()
 
@@ -169,7 +157,7 @@ Officials.Views = Officials.Views || {};
           title: '자산 구성비'
         },
         size: {
-          canvasWidth: 350,
+          canvasWidth: '250',
           pieOuterRadius: "70%"
         },
         data: {
@@ -192,7 +180,8 @@ Officials.Views = Officials.Views || {};
           },
           lines: {
             enabled: true,
-            style: "straight"
+            style: 'straight',
+            color: '#ffffff'
           }
         }
       }
@@ -206,6 +195,33 @@ Officials.Views = Officials.Views || {};
       }
 
       this.myPie = new d3pie('canvas-pie', pieOption)
+    },
+
+    makePieData: function(model) {
+      var self = this;
+      var pieData = {}
+
+      for (var y in model) {
+        pieData[model[y].year] = []
+
+        model[y].Assets.forEach(function(d) {
+          if (d.total > 0) {
+            var data = {}
+            data.value = d.total
+            data.color = self.selectPieColor(d.Cat2.title)
+            data.label = d.Cat2.title
+          }
+          
+          pieData[model[y].year].push(data)
+          console.log(pieData[model[y].year])
+          pieData[model[y].year] = pieData[model[y].year].sort(function(a, b) {
+            return parseInt(a.value, 10) - parseInt(b.value, 10)
+          })
+          console.log(pieData[model[y].year])
+        })
+      }
+
+      return pieData
     },
 
     selectPieColor: function(cat) {
