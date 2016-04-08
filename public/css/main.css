@@ -39,9 +39,10 @@ button.btn[type=submit] {
 }
 
 nav#nav {
+    position: fixed;
+    top: 0px;
     background-color: #343B46;
     z-index: 11;
-    position: relative;
     box-shadow: none;
 }
 
@@ -130,7 +131,7 @@ header {
     color: #ffffff;
     background-color: #5C6D85;
     padding: 0px 10px;
-    margin-top: -20px;
+    margin-top: 56px;
 }
 
 header > .row {
@@ -599,14 +600,27 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     background-color: #e9e9e9 !important;
 }
 
+#nav ul.side-nav li a {
+    font-size: 1.3rem;
+    height: 44px;
+    line-height: 44px;
+}
+
+#nav ul.side-nav li:hover, #nav ul.side-nav li a:hover {
+    background-color: #f3f3f3;
+}
+
+
 #nav ul.side-nav li.nav-footer {
     position: fixed;
     width: 240px;
     bottom: 0px;
-    padding: 35px 15px;
+    padding: 5px 15px;
     background-color: #5C6D85;
+    font-size: 0.7rem;
     line-height: 20px;
 }
+
 
 #nav ul.side-nav li.nav-footer p {
     color: #97a8c0;
@@ -714,6 +728,7 @@ footer.page-footer p {
 
     header {
         padding: 10px;
+        margin-top: 90px;
     }
 
     header > .row > .col {
