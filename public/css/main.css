@@ -139,6 +139,7 @@ header > .row {
 header > .row > section.col {
     text-align: right;
     width: 100%;
+    padding: 0px;
 }
 
 header h1 {
@@ -148,7 +149,7 @@ header h1 {
 }
 
 header h1 > a {
-    font-size: 2.4rem;
+    font-size: 2rem;
     color: #ffffff;
 }
 
@@ -202,8 +203,11 @@ input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([rea
 }
 
 input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom-color: #5C6D85;
-    box-shadow: 0 1px 0 0 #5C6D85;
+    box-shadow: none !important;
+}
+
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+    height: 2.5rem;
 }
 
 input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([readonly]) + label, input[type=password]:focus:not([readonly]) + label, input[type=email]:focus:not([readonly]) + label, input[type=url]:focus:not([readonly]) + label, input[type=time]:focus:not([readonly]) + label, input[type=date]:focus:not([readonly]) + label, input[type=datetime-local]:focus:not([readonly]) + label, input[type=tel]:focus:not([readonly]) + label, input[type=number]:focus:not([readonly]) + label, input[type=search]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
@@ -322,13 +326,13 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
     padding: 0px 1px;
 }
 
-.search-cards {
-
+.card {
+    box-shadow: 1px 2px 2px 0 rgba(0,0,0,0.1);
 }
 
 .cards .search-cards .card {
     cursor: pointer;
-    box-shadow: 1px 2px 2px 0 rgba(0,0,0,0.1);
+    /*box-shadow: 1px 2px 2px 0 rgba(0,0,0,0.1);*/
 }
 
 .cards .search-cards .card .card-content, #page-official .card .card-content {
@@ -494,15 +498,60 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 #main .page.page-contact {
     width: 100%;
     height: 100%;
-    background-color: #E7E7E7;
+    background-color: #e7e9ed;
 }
-
-// #main .page.page-contact form > div.row:first-child .input-field {
-//     margin-top: 0px;
-// }
 
 #main .page.page-contact .card {
     padding: 10px 0;
+}
+
+#form-contact {
+    color: #5c6d85;
+}
+
+#form-contact > .row {
+    margin-bottom: 0px;
+}
+
+/*
+* 연락하기 구분자 목록
+*/
+
+#form-contact .input-field input, #form-contact .input-field textarea {
+    border: 1px solid #dee2e7 !important;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+#form-contact > .row:first-child .input-field label {
+    color: #5c6d85;
+}
+
+#form-contact > .row:first-child > .col:last-child {
+    padding: 0px;
+}
+
+#form-contact > .row > .form-label {
+    padding: 0 15px;
+    margin: 18px 0 0 0;
+}
+
+#form-contact [type="radio"]:checked + label:before {
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 12px;
+    height: 12px;
+    margin: 6px;
+    z-index: 1;
+}
+
+#form-contact [type="radio"]:checked + label:after {
+    border: 2px solid #5a5a5a;
+    background-color: #5a5a5a;
+}
+
+#form-contact > .row .input-field textarea {
+    height: 10rem !important;
 }
 
 .color-news {
@@ -674,10 +723,6 @@ footer.page-footer p {
     .cards .card .card-action > li {
         font-size: 0.85rem;
     }
-
-    // .cards .search-message {
-    //     text-align: center;
-    // }
 
     #main .page.page-about h5 {
         font-size: 1.8rem;
