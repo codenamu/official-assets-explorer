@@ -78,19 +78,29 @@ __p += '<section id="page-official">\n  <div class="row">\n      <div class="col
 __e( official.person.name ) +
 '</span>\n                  <span class="card-subtitle">' +
 __e( official.position[official.position.length - 1].title ) +
-'</span>\n              </div>\n              <div class="card-action">\n                  <div class="row official-total">\n                      <h5><li>재산 총액</li></h5>\n                      <span id="official-asset-total" class="value">' +
+'</span>\n              </div>\n              <div class="card-action">\n                  <div class="row official-total">\n                      <h5><li>재산 총액</li></h5>\n                      <span id="official-asset-total" class="value"><span class="number">' +
 __e( official.assets.history[official.latestYear].totalText ) +
-'원 | ' +
+'원</span><span class="year">' +
 __e( official.latestYear ) +
-'년</span>\n                  </div>\n                  <div class="row official-history">\n                      <h5><li>재산 변동 이력</li></h5>\n                      <div class="official-bar-chart">\n                          <canvas id="canvas-bar" height="250"></canvas>\n                      </div>\n                      <div class="official-pie-chart">\n                          <h6></h6>\n                          <div id="canvas-pie"></div>\n                      </div>\n                  </div>\n                  <div class="row">\n                      <h5><li>재산 공개 이력</li></h5>\n                      <ul>\n                      ';
- for (var p in official.position) { ;
+'년</span></span>\n                  </div>\n                  <div class="row official-history">\n                      <h5><li>재산 변동 이력</li></h5>\n                      <div class="official-bar-chart">\n                          <canvas id="canvas-bar" height="250"></canvas>\n                      </div>\n                      <div class="official-pie-chart">\n                          <h6></h6>\n                          <div id="canvas-pie"></div>\n                      </div>\n                  </div>\n                  <div class="row official-positions">\n                      <h5><li>재산 공개 이력</li></h5>\n                      <ul>\n                      ';
+ for (var p in official.reorderedPosition) { ;
 __p += '\n                          <li>- ' +
-__e( official.position[p].year ) +
-'년 ' +
-__e( official.position[p].Org3.title ) +
-' ' +
-__e( official.position[p].title ) +
-'</li>\n                      ';
+__e( official.reorderedPosition[p].title ) +
+' <span class="year">\n                            ';
+ for (var y in official.reorderedPosition[p].year) { ;
+__p += '\n                              ';
+ if (y === official.reorderedPosition[p].year.length - 1) { ;
+__p += '\n                                ' +
+__e( official.reorderedPosition[p].year[y] + ', ' ) +
+'\n                              ';
+ } else { ;
+__p += '\n                                ' +
+__e( official.reorderedPosition[p].year[y] ) +
+'\n                              ';
+ } ;
+__p += '\n                            ';
+ };
+__p += '\n                          </span></li>\n                      ';
  } ;
 __p += '\n                      </ul>\n                  </div>\n                  <div class="row">\n                    <h5><li>원본 보기</li></h5>\n                    <ul>\n                    ';
  for (var p in official.position) { ;
@@ -102,7 +112,7 @@ __e( official.position[p].year ) +
  } ;
 __p += '\n                    </ul>\n                  </div>\n                  <div class="row">\n                    <div class="col s12 m6 offset-m3">\n                      <button id="btn-contact-official-' +
 __e( official.person.uniqueId ) +
-'" class="btn waves-effect color-news-light modal-trigger" type="button" data-target="contact-official-' +
+'" class="btn btn-large waves-effect color-news-light modal-trigger" type="button" data-target="contact-official-' +
 __e( official.person.uniqueId ) +
 '">제보하기</button>\n\n                      <div id="contact-official-' +
 __e( official.person.uniqueId ) +

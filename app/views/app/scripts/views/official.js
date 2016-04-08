@@ -77,11 +77,61 @@ Officials.Views = Officials.Views || {};
             }
           })
         }
-
       })
+
+      this.reorderHistory(this.result.position)
 
       this.result.assets.history[this.result.latestYear].totalText = this.calMeasureMoney(this.result.assets.history[this.result.latestYear].total)
       this.render(this.result)
+    },
+
+    reorderHistory: function(positions) {
+      this.result.reorderedPosition = []
+
+      var self = this
+      var tempPos = {}
+
+
+      positions
+        .map(function(p) {
+          return {
+            year: p.year,
+            orgTitle: p.Org3.title,
+            posTitle: p.title
+          }
+        })
+        .sort(function(a, b) {
+          return a.year - b.year
+        })
+        .forEach(function(p, i) {
+          if (!_.isEmpty(tempPos) && (tempPos.title === (p.orgTitle + ' ' + p.posTitle))) {
+            tempPos.year.push(p.year)
+
+            if (i + 1 === positions.length) {
+              self.result.reorderedPosition.push(tempPos)
+            }
+          } else if (!_.isEmpty(tempPos) && tempPos.title !== (p.orgTitle + ' ' + p.posTitle)) {
+            self.result.reorderedPosition.push(tempPos)
+            tempPos = {}
+            tempPos.title = p.orgTitle + ' ' + p.posTitle
+            tempPos.year = []
+            tempPos.year.push(p.year)
+
+
+            if (i + 1 === positions.length) {
+              self.result.reorderedPosition.push(tempPos)
+            }
+
+          } else {
+            tempPos.title = p.orgTitle + ' ' + p.posTitle
+            tempPos.year = []
+            tempPos.year.push(p.year)
+
+            if (i + 1 === positions.length) {
+              self.result.reorderedPosition.push(tempPos)
+            }
+          }
+        })
     },
 
     drawBarChart: function() {
@@ -134,7 +184,8 @@ Officials.Views = Officials.Views || {};
           // change pie chart on the year
           self.drawPieChart(year)
           // change total asset value on the year
-          $('#official-asset-total').text(self.calMeasureMoney(self.result.assets.history[year].total) + '원 | ' + year + '년')
+          $('#official-asset-total span.value span.number').text(self.calMeasureMoney(self.result.assets.history[year].total) + '원')
+          $('#official-asset-total span.value span.year').text(year)
         }
       });
     },
