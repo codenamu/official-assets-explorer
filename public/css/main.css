@@ -159,22 +159,27 @@ header h1 > a:hover {
     color: #ffffff;
 }
 
+header div.subtitle {
+    position: relative;
+}
+
 header p.subtitle {
     position: relative;
     display: inline-block;
     color: #a7b9d1;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     text-align: right;
     margin-top: 0px;
 }
 
 header p.subtitle:first-child {
     position: absolute;
-    right: 120px;
+    top: 3px;
+    right: 125px;
 }
 
 header p.subtitle > img {
-    width: 100px;
+    width: 120px;
 }
 
 #sidenav-overlay {
