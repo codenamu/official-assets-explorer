@@ -354,18 +354,18 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     font-weight: bold;
 }
 
-.cards .search-cards .card .card-content span.card-title {
+.card .card-content span.card-title {
     font-weight: 500;
     font-size: 26px;
     letter-spacing: -0.06em;
     color: rgb(52, 59, 70);
 }
 
-.cards .search-cards .card .card-content span.card-subtitle {
+.card .card-content span.card-subtitle {
     font-size: 0.9rem;
 }
 
-.cards .search-cards .card .card-content span.card-subtitle, #page-official .card .card-content span.card-subtitle {
+.card .card-content span.card-subtitle {
     font-weight: 400;
     color: #5C6D85;
 }
