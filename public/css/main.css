@@ -366,12 +366,10 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
 }
 
 .card .card-content span.card-subtitle {
-    font-size: 0.9rem;
-}
-
-.card .card-content span.card-subtitle {
     font-weight: 400;
     color: #5C6D85;
+    font-size: 0.9rem;
+    letter-spacing: -0.05em:
 }
 
 .cards .search-cards .card .card-content span.card-title, .cards .search-cards .card .card-content .card-subtitle, #page-official .card .card-content span.card-title, #page-official .card .card-content .card-subtitle {
