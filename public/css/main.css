@@ -145,12 +145,13 @@ header > .row > section.col {
 
 header h1 {
     font-weight: 200;
-    letter-spacing: -0.07em;
+    /*letter-spacing: -0.07em;*/
     text-align: center;
+    margin: 0px;
 }
 
 header h1 > a {
-    font-size: 2rem;
+    font-size: 1.85rem;
     color: #ffffff;
 }
 
@@ -162,7 +163,14 @@ header p.subtitle {
     position: relative;
     display: inline-block;
     color: #a7b9d1;
+    font-size: 0.85rem;
     text-align: right;
+    margin-top: 0px;
+}
+
+header p.subtitle:first-child {
+    position: absolute;
+    right: 120px;
 }
 
 header p.subtitle > img {
@@ -547,6 +555,10 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     margin: 18px 0 0 0;
 }
 
+#form-contact [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+    font-size: 0.8rem
+}
+
 #form-contact [type="radio"]:checked + label:before {
     border-radius: 50%;
     border: 2px solid white;
@@ -727,6 +739,11 @@ footer.page-footer p {
         left: 5px;
     }
 
+    header p.subtitle:first-child {
+        position: relative;;
+        right: inherit;
+    }
+
     ul.dropdown-content.select-dropdown {
         max-height: 290px;
     }
@@ -740,6 +757,10 @@ footer.page-footer p {
         line-height: 2rem;
         letter-spacing: 0px;
         margin: 1.82rem 0 0.656rem 0;
+    }
+
+    #form-contact [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+        font-size: 1rem
     }
 
 
