@@ -600,11 +600,17 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
 
 #form-contact > .row > .form-label {
     padding: 0 15px;
-    margin: 18px 0 0 0;
+    margin-top: 18px;
+    min-width: 75px;
 }
 
 #form-contact [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
-    font-size: 0.8rem
+    font-size: 0.8rem;
+    padding-left: 25px;
+}
+
+#form-contact [type="radio"]:not(:checked) + label:before {
+    border: 2px solid #97a8c0;
 }
 
 #form-contact [type="radio"]:checked + label:before {
@@ -617,8 +623,8 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
 }
 
 #form-contact [type="radio"]:checked + label:after {
-    border: 2px solid #5a5a5a;
-    background-color: #5a5a5a;
+    border: 2px solid #5c6d85;
+    background-color: #5c6d85;
 }
 
 #form-contact > .row .input-field textarea {
