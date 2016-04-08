@@ -132,9 +132,9 @@ this["JST"]["app/scripts/templates/searchresult.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<section class="container">\n  <div class="row search-message">\n    <div class="col s12">\n      <h5>총 <span class="value">' +
+__p += '<section class="container">\n  <div class="row search-message">\n    <div class="col s12">\n      <h5 class="col s8 m12">총 <span class="value">' +
 __e( count ) +
-'</span>개의 결과를 찾았습니다</h5>\n    </div>\n    <!-- <div class="col s3">\n      <button id="btn-research" class="btn waves-effect color-news hide-desktop" type="button">다시 검색하기</button>\n    </div> -->\n  </div>\n  <div class="row search-cards" style="position: relative;">\n\n  </div>\n</section>\n';
+'</span>개의 결과를 찾았습니다</h5>\n      <button id="btn-scroll-searchbox" class="btn color-news col s4 hide-desktop" type="button" name="button">다시 검색하기</button>\n    </div>\n    <!-- <div class="col s3">\n      <button id="btn-research" class="btn waves-effect color-news hide-desktop" type="button">다시 검색하기</button>\n    </div> -->\n  </div>\n  <div class="row search-cards" style="position: relative;">\n\n  </div>\n</section>\n';
 
 }
 return __p

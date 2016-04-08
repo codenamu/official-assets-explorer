@@ -300,11 +300,18 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 }
 
 .cards .search-message h5 {
-    padding: 1.5rem 0 1.5rem 0;
-    font-size: 1.4rem;
+    display: inline-block;
+    padding: 0.9rem 0 0.9rem 0;
+    font-size: 1rem;
     text-align: center;
-    letter-spacing: -0.05em;
+    /*letter-spacing: em;*/
     color: #5c6d85;
+}
+
+.cards .search-message button {
+    display: inline-block;
+    margin: 0.82rem 0 0.656rem 0;
+    font-size: 0.85rem;
 }
 
 .cards .search-message h5 .value {

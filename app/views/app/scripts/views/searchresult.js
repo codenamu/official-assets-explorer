@@ -10,7 +10,8 @@ Officials.Views = Officials.Views || {};
     template: JST['app/scripts/templates/searchresult.ejs'],
 
     events: {
-      'click .card'         : 'clickCard'
+      'click .card'                 : 'clickCard',
+      'click #btn-scroll-searchbox' : 'scrollSearchbox'
     },
 
     subViews: [],
@@ -159,6 +160,13 @@ Officials.Views = Officials.Views || {};
     clickCard: function(event) {
       Backbone.history.navigate($(event.target).closest('.card').attr('id').slice(9) + '?' + this.fixEncodeURI($.param(this.params)))
       window.location.reload()
+    },
+
+    scrollSearchbox: function() {
+      $('#page-search').velocity('scroll', {
+        duration: 500,
+        easing: 'ease-in-out'
+      })
     },
 
     fixEncodeURI: function(param) {
