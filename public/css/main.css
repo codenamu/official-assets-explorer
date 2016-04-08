@@ -29,7 +29,7 @@ button.btn[type=submit] {
 }
 
 .hide-mobile {
-    display: none;
+    display: none !important;
 }
 
 .input-field.input-field-integrated > input[type=text] {
@@ -45,25 +45,28 @@ nav#nav {
 }
 
 nav#nav a.brand-logo {
-    left: 115px;
+    left: 92px;
     padding: 2px 0px;
 }
 
 nav#nav a.brand-logo > img {
-    width: 155px;
+    width: 65px;
 }
 
 nav#nav ul.right {
-    width: 40%;
+    /*width: */
 }
 
 nav#nav ul.right li {
     float: right;
+    margin: 0 17px;
+    width: 38px;
 }
 
 nav#nav ul.right li a {
-    padding: 8px 3px;
+    padding: 8px 0;
     height: 56px;
+    text-align: center;
 }
 
 nav#nav ul.right li a:hover {
@@ -75,7 +78,7 @@ nav#nav ul.right li a img {
 }
 
 nav#nav .button-collapse {
-    padding-left: 6px;
+    padding-left: 12px;
 }
 
 nav#nav .button-collapse i {
@@ -313,7 +316,7 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 }
 
 .search-cards {
-    
+
 }
 
 .cards .search-cards .card {
@@ -367,7 +370,7 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
     font-size: 14px;
     letter-spacing: -0.03em;
     list-style: none;
-} 
+}
 
 .cards .search-cards .card .card-action > li:before {
     content: ' ';
@@ -546,11 +549,11 @@ footer.page-footer p {
 
 @media only screen and (min-width: 768px) {
     .hide-mobile {
-        display: block;
+        display: block !important;
     }
 
     .hide-desktop {
-        display: none; 
+        display: none !important;
     }
 
     .input-field.input-field-integrated > input:focus, .input-field.input-field-integrated > input:active {
@@ -573,29 +576,29 @@ footer.page-footer p {
     nav#nav {
         height: 90px;
     }
-    
+
     nav#nav a.brand-logo {
         left: 10px;
         padding: 15px 0px;
     }
-    
+
     nav#nav a.brand-logo img {
         width: 196px;
     }
-    
+
     nav#nav ul.right {
         width: initial;
     }
-    
+
     nav#nav ul.right li a {
         padding: 15px 15px;
         height: 90px;
     }
-    
+
     nav#nav ul.right li a img {
         width: auto;
     }
-    
+
     nav#nav ul a {
         font-size: 2rem;
     }
@@ -645,7 +648,7 @@ footer.page-footer p {
     header div.subtitle {
         text-align: left;
     }
-    
+
     header div.subtitle p {
         display: inline-block;
     }
@@ -678,7 +681,7 @@ footer.page-footer p {
     footer.page-footer {
         display: block;
     }
-    
+
     footer.page-footer .col:last-child{
         text-align: center;
     }
