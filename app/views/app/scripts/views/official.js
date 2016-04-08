@@ -159,7 +159,7 @@ Officials.Views = Officials.Views || {};
         size: {
           canvasWidth: 300,
           canvasHeight: 300,
-          pieOuterRadius: "70%"
+          pieOuterRadius: "40%"
         },
         data: {
           content: pieData[year]
