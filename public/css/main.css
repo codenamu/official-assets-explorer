@@ -35,13 +35,14 @@ button.btn[type=submit] {
 .input-field.input-field-integrated > input[type=text] {
     border: 1px solid #5C6D85;
     padding: 0 16px;
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
 
 nav#nav {
     background-color: #343B46;
     z-index: 11;
     position: relative;
+    box-shadow: none;
 }
 
 nav#nav a.brand-logo {
@@ -206,9 +207,9 @@ input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]),
     box-shadow: none !important;
 }
 
-input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+/*input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
     height: 2.5rem;
-}
+}*/
 
 input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([readonly]) + label, input[type=password]:focus:not([readonly]) + label, input[type=email]:focus:not([readonly]) + label, input[type=url]:focus:not([readonly]) + label, input[type=time]:focus:not([readonly]) + label, input[type=date]:focus:not([readonly]) + label, input[type=datetime-local]:focus:not([readonly]) + label, input[type=tel]:focus:not([readonly]) + label, input[type=number]:focus:not([readonly]) + label, input[type=search]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
     color: #5C6D85;
@@ -496,6 +497,7 @@ input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, 
 
 #main .page.page-about p {
     margin-top: 60px;
+    letter-spacing: -0.05em;
 }
 
 #main .page.page-about h5 {
