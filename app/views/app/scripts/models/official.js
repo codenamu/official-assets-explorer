@@ -15,7 +15,6 @@ Officials.Models = Officials.Models || {};
     },
 
     defaults: {
-      id: 0,
       name: ''
     }
   });
