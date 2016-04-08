@@ -243,6 +243,10 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     height: 100%;
 }
 
+#page-search .tabs, #search-tabs {
+    overflow-x: hidden;
+}
+
 #page-search .tabs, #page-search .tabs .tab {
     height: 58px;
 }
