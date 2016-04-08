@@ -153,8 +153,11 @@ Officials.Views = Officials.Views || {};
       if (this.myPie) this.myPie.destroy()
 
       var pieOption = {
-        header: {
-          title: '자산 구성비'
+        footer: {
+          text: '자산 구성비',
+          color: '#ffffff',
+          fontSize: 22,
+          location: 'bottom-center'
         },
         size: {
           canvasWidth: 300,

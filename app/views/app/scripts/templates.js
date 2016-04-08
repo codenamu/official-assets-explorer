@@ -82,7 +82,7 @@ __e( official.position[official.position.length - 1].title ) +
 __e( official.assets.history[official.latestYear].totalText ) +
 '원 | ' +
 __e( official.latestYear ) +
-'년</span>\n                  </div>\n                  <div class="row official-history">\n                      <h5><li>재산 변동 이력</li></h5>\n                      <div class="official-bar-chart">\n                          <canvas id="canvas-bar" height="250"></canvas>\n                      </div>\n                      <div class="official-pie-chart">\n                          <h6>자산 구성비</h6>\n                          <div id="canvas-pie"></div>\n                      </div>\n                  </div>\n                  <div class="row">\n                      <h5><li>재산 공개 이력</li></h5>\n                      <ul>\n                      ';
+'년</span>\n                  </div>\n                  <div class="row official-history">\n                      <h5><li>재산 변동 이력</li></h5>\n                      <div class="official-bar-chart">\n                          <canvas id="canvas-bar" height="250"></canvas>\n                      </div>\n                      <div class="official-pie-chart">\n                          <h6></h6>\n                          <div id="canvas-pie"></div>\n                      </div>\n                  </div>\n                  <div class="row">\n                      <h5><li>재산 공개 이력</li></h5>\n                      <ul>\n                      ';
  for (var p in official.position) { ;
 __p += '\n                          <li>- ' +
 __e( official.position[p].year ) +
@@ -112,7 +112,7 @@ __e( official.person.name ) +
 __e( official.person.uniqueId ) +
 '-' +
 __e( official.person.name ) +
-'">\n                                <textarea id="contact-official-content" name="contact-official-content" class="materialize-textarea"></textarea>\n                                <label for="contact-official-content">내용</label>\n                              </div>\n                            </div>\n                            <div class="row">\n                              <div class="col s12 m4 offset-m4">\n                                <button type="submit" class="btn btn-larget color-news">보내기</button>\n                              </div>\n                            </div>\n                          </div>\n                        </form>\n                      </div>\n                    </div>\n                  </div>\n              </div>\n          </div>\n      </div>\n  </div>\n</section>\n\n';
+'">\n                                <textarea id="contact-official-content" name="contact-official-content" class="materialize-textarea"></textarea>\n                                <label for="contact-official-content">내용</label>\n                              </div>\n                            </div>\n                            <div class="row">\n                              <div class="col s12 m4 offset-m4">\n                                <button type="submit" class="btn btn-larget color-news">보내기</button>\n                              </div>\n                            </div>\n                          </div>\n                        </form>\n                      </div>\n                    </div>\n                  </div>\n              </div>\n          </div>\n      </div>\n  </div>\n</section>\n';
 
 }
 return __p
