@@ -3333,10 +3333,13 @@ $(document).ready(function(){
         var swipeLeft = false;
         var swipeRight = false;
 
+        console.log('here')
+
         $this.hammer({
             prevent_default: true,
             drag_lock_to_axis: true
         }).bind('pan', function(e) {
+          $('body').style('overflow', 'hidden')
           if (e.gesture.pointerType === "touch") {
 
             // reset interval
