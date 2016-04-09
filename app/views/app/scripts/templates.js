@@ -74,55 +74,55 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<section id="page-official">\n  <div class="row">\n      <div class="col s12 m6 offset-m3">\n          <div class="card">\n              <div class="card-content">\n                  <span class="card-title">' +
+__p += '<section id="page-official">\n    <div class="row">\n        <div class="col s12 m6 offset-m3">\n            <div class="card">\n                <div class="card-content">\n                    <span class="card-title">' +
 __e( official.person.name ) +
-'</span>\n                  <span class="card-subtitle">' +
+'</span>\n                    <span class="card-subtitle">' +
 __e( official.position[official.position.length - 1].title ) +
-'</span>\n              </div>\n              <div class="card-action">\n                  <div class="row official-total">\n                      <h5><li>재산 총액</li></h5>\n                      <span id="official-asset-total" class="value"><span class="number">' +
+'</span>\n                </div>\n                <div class="card-action">\n                    <div class="row official-total">\n                        <h5><li>재산 총액</li></h5>\n                        <span id="official-asset-total" class="value"><span class="number">' +
 __e( official.assets.history[official.latestYear].totalText ) +
 '원</span><span class="year">' +
 __e( official.latestYear ) +
-'년</span></span>\n                  </div>\n                  <div class="row official-history">\n                      <h5><li>재산 변동 이력</li></h5>\n                      <div class="official-bar-chart">\n                          <canvas id="canvas-bar" height="250"></canvas>\n                      </div>\n                      <div class="official-pie-chart">\n                          <h6></h6>\n                          <div id="canvas-pie"></div>\n                      </div>\n                  </div>\n                  <div class="row official-positions">\n                      <h5><li>재산 공개 이력</li></h5>\n                      <ul>\n                      ';
+'년</span></span>\n                    </div>\n                    <div class="row official-history">\n                        <h5><li>재산 총액의 변동 이력</li></h5>\n                        <div class="official-bar-chart">\n                            <div id="canvas-bar"></div>\n                        </div>\n                        <div class="official-pie-chart">\n                            <h6></h6>\n                            <div id="canvas-pie"></div>\n                        </div>\n                    </div>\n                    <div class="row official-positions">\n                        <h5><li>재산 공개 이력</li></h5>\n                        <ul>\n                        ';
  for (var p in official.reorderedPosition) { ;
-__p += '\n                          <li>- ' +
+__p += '\n                            <li>- ' +
 __e( official.reorderedPosition[p].title ) +
-' <span class="year">\n                            ';
+' <span class="year">\n                              ';
  for (var y in official.reorderedPosition[p].year) { ;
-__p += '\n                              ';
+__p += '\n                                ';
  if (y === official.reorderedPosition[p].year.length - 1) { ;
-__p += '\n                                ' +
+__p += '\n                                  ' +
 __e( official.reorderedPosition[p].year[y] + ', ' ) +
-'\n                              ';
+'\n                                ';
  } else { ;
-__p += '\n                                ' +
+__p += '\n                                  ' +
 __e( official.reorderedPosition[p].year[y] ) +
-'\n                              ';
+'\n                                ';
  } ;
-__p += '\n                            ';
+__p += '\n                              ';
  };
-__p += '\n                          </span></li>\n                      ';
+__p += '\n                            </span></li>\n                        ';
  } ;
-__p += '\n                      </ul>\n                  </div>\n                  <div class="row">\n                    <h5><li>원본 보기</li></h5>\n                    <ul>\n                    ';
+__p += '\n                        </ul>\n                    </div>\n                    <div class="row">\n                      <h5><li>원본 보기</li></h5>\n                      <ul>\n                      ';
  for (var p in official.position) { ;
-__p += '\n                      <li><a href="' +
+__p += '\n                        <li><a href="' +
 __e( official.position[p].pdfUrl ) +
 '" target="_blank">- ' +
 __e( official.position[p].year ) +
-'년</a></li>\n                    ';
+'년</a></li>\n                      ';
  } ;
-__p += '\n                    </ul>\n                  </div>\n                  <div class="row">\n                    <div class="col s12 m6 offset-m3">\n                      <button id="btn-contact-official-' +
+__p += '\n                      </ul>\n                    </div>\n                    <div class="row">\n                      <div class="col s12 m6 offset-m3">\n                        <button id="btn-contact-official-' +
 __e( official.person.uniqueId ) +
 '" class="btn btn-large waves-effect color-news-light modal-trigger" type="button" data-target="contact-official-' +
 __e( official.person.uniqueId ) +
-'">제보하기</button>\n\n                      <div id="contact-official-' +
+'">제보하기</button>\n\n                        <div id="contact-official-' +
 __e( official.person.uniqueId ) +
-'" class="modal">\n                        <form id="form-contact-official" class="col s12">\n                          <div class="modal-content">\n                            <div class="row">\n                              <h5>제보하기</h5>\n                              <p>' +
+'" class="modal">\n                            <form id="form-contact-official" class="col s12">\n                                <div class="modal-content">\n                                  <div class="row">\n                                    <h5>제보하기</h5>\n                                    <p>' +
 __e( official.person.name ) +
-' 관련 정보 제보하기</p>\n                            </div>\n                            <div class="row">\n                              <div class="input-field col s12">\n                                <input id="contact-official-email" class="validate" type="email" name="contact=official-email" placeholder="필수" required/>\n                                <label for="contact-official-email">이메일</label>\n                              </div>\n                            </div>\n                            <div class="row">\n                              <div class="input-field col s12">\n                                <input type="hidden" name="official-id-name" id="contact-official-type" value="' +
+' 관련 정보 제보하기</p>\n                                  </div>\n                                  <div class="row">\n                                    <div class="input-field col s12">\n                                      <input id="contact-official-email" class="validate" type="email" name="contact=official-email" placeholder="필수" required/>\n                                      <label for="contact-official-email">이메일</label>\n                                    </div>\n                                  </div>\n                                  <div class="row">\n                                    <div class="input-field col s12">\n                                      <input type="hidden" name="official-id-name" id="contact-official-type" value="' +
 __e( official.person.uniqueId ) +
 '-' +
 __e( official.person.name ) +
-'">\n                                <textarea id="contact-official-content" name="contact-official-content" class="materialize-textarea"></textarea>\n                                <label for="contact-official-content">내용</label>\n                              </div>\n                            </div>\n                            <div class="row">\n                              <div class="col s12 m4 offset-m4">\n                                <button type="submit" class="btn btn-larget color-news">보내기</button>\n                              </div>\n                            </div>\n                          </div>\n                        </form>\n                      </div>\n                    </div>\n                  </div>\n              </div>\n          </div>\n      </div>\n  </div>\n</section>\n';
+'">\n                                      <textarea id="contact-official-content" name="contact-official-content" class="materialize-textarea"></textarea>\n                                      <label for="contact-official-content">내용</label>\n                                    </div>\n                                  </div>\n                                  <div class="row">\n                                    <div class="col s12 m4 offset-m4">\n                                      <button type="submit" class="btn btn-larget color-news">보내기</button>\n                                    </div>\n                                  </div>\n                                </div>\n                            </form>\n                        </div>\n                      </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>\n';
 
 }
 return __p
