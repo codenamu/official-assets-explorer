@@ -129,7 +129,6 @@
         });
 
         dragTarget.hammer({
-          drag_lock_to_axis: true,
           prevent_default: true
         }).bind('pan', function(e) {
 
