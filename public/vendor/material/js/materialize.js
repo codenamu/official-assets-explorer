@@ -2006,6 +2006,10 @@ $(document).ready(function(){
         // Add Touch Area
         var dragTarget = $('<div class="drag-target"></div>');
         $('body').append(dragTarget);
+        $('html, body').on('touchstart touchmove', function(e){
+           //prevent native touch activity like scrolling
+           e.preventDefault();
+        });
 
         if (options.edge == 'left') {
           menu_id.css('left', -1 * (options.menuWidth + 10));
@@ -3333,13 +3337,10 @@ $(document).ready(function(){
         var swipeLeft = false;
         var swipeRight = false;
 
-        console.log('here')
-
         $this.hammer({
             prevent_default: true,
             drag_lock_to_axis: true
         }).bind('pan', function(e) {
-          $('body').style('overflow', 'hidden')
           if (e.gesture.pointerType === "touch") {
 
             // reset interval
