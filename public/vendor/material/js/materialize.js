@@ -3334,7 +3334,7 @@ $(document).ready(function(){
         var swipeRight = false;
 
         $this.hammer({
-            prevent_default: false
+            prevent_default: true
         }).bind('pan', function(e) {
           if (e.gesture.pointerType === "touch") {
 
