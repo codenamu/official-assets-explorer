@@ -136,6 +136,7 @@ Officials.Views = Officials.Views || {};
 
     drawBarChart: function() {
       var self = this
+      var datasets = []
       var barChartData = {
         labels : [],
         datasets : [
@@ -150,44 +151,130 @@ Officials.Views = Officials.Views || {};
       }
 
       this.result.position.forEach(function(p) {
-        barChartData.labels.push(p.year)
+        var pos = {};
+        pos.year = p.year
+        pos.total = 0
 
-        var total = 0;
         self.result.assets.history[p.year].assets.forEach(function(h) {
-          total += h.total
+          pos.total += h.total
         })
 
-        barChartData.datasets[0].data.push(total)
+        datasets.push(pos)
       })
 
 
-      var ctx = $('#canvas-bar')[0].getContext('2d');
-      var measureYAxis = 10000 // Y Axis 레이블 표현 단위
+      // var ctx = $('#canvas-bar')[0].getContext('2d');
+      // var measureYAxis = 10000 // Y Axis 레이블 표현 단위
 
-      this.myBar = new Chart(ctx).Bar(barChartData, {
-        responsive : true,
-        scaleGridLineColor : '#5F718A',
-        scaleFontColor: "#fff",
-        isFixedWidth:true,
-        barWidth:20,
-        // barDatasetSpacing:30,
-        // barValueSpacing:60,
-        scaleLabel: function(label) {
-          return self.calMeasureMoney(parseInt(label.value, 10)).slice(0, -4)
-        },
-        customTooltips: function(tooltip) {
-          if (!tooltip) {
-            return;
-          }
+      var graphWidth = 500
 
-          var year = parseInt(tooltip.text.split(':')[0], 10)
-          // change pie chart on the year
-          self.drawPieChart(year)
-          // change total asset value on the year
-          $('#official-asset-total span.value span.number').text(self.calMeasureMoney(self.result.assets.history[year].total) + '원')
-          $('#official-asset-total span.value span.year').text(year)
+      if (window.innerWidth < 768) {
+        graphWidth = 350
+
+        if (datasets.length > 5) {
+          graphWidth += 50 * (datasets.length - 5)
         }
-      });
+      }
+
+
+
+      // if datasets.
+      var margin = {top: 20, right: 20, bottom: 70, left: 40}
+      var width = graphWidth - margin.left - margin.right
+      var height = 290 - margin.top - margin.bottom
+      var barWidth = 26
+
+      // Parse the date / time
+      var	parseDate = d3.time.format("%Y-%m").parse;
+
+      var x = d3.scale.ordinal().rangeRoundBands([0, width], 1);
+
+      var y = d3.scale.linear().range([height, 0]);
+
+      var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient('bottom')
+          // .tickFormat(d3.time.format('%Y'));
+
+      var yAxis = d3.svg.axis()
+          .scale(y)
+          .orient("left")
+          .ticks(5)
+          .tickFormat(this.formatBarYAxis)
+
+
+      var svg = d3.select('#canvas-bar').append('svg')
+          .attr('width', width + margin.left + margin.right)
+          .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+          .attr('transform',
+                'translate(' + margin.left + ',' + margin.top + ')');
+
+        x.domain(datasets.map(function(p) { return p.year; }))
+        // .rangeBands([0, graphWidth]);
+        // y.domain([0, d3.max(datasets, function(p) { console.log(p); return p.total; })]);
+        y.domain([0, d3.max(datasets, function(p) { console.log(p); return p.total; })])
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis)
+          .selectAll('text')
+            .style('text-anchor', 'end')
+            // .attr('x', function(d) {})
+            .attr('dx', '-.8em')
+            .attr('dy', '-.55em')
+            .attr('transform', 'rotate(-90)' );
+
+        svg.append('g')
+            .attr('class', 'y axis')
+            .call(yAxis)
+          .append('text')
+            .attr('transform', 'rotate(-90)')
+            .attr('y', 6)
+            .attr('dy', '.71em')
+            .style('text-anchor', 'end')
+            .text('원');
+
+        svg.selectAll('bar')
+            .data(datasets)
+          .enter().append('rect')
+            .style('fill', '#ffffff')
+            .attr('x', function(d) { return x(d.year) - barWidth/2; })
+            .attr('width', barWidth)
+            .attr('y', function(d) { return y(d.total); })
+            .attr('height', function(d) { return height - y(d.total); })
+          .on("mouseover", function(d) {
+            self.drawPieChart(d.year)
+
+            d3.select(this)
+              .style('fill', '#fffca9');
+          })
+          .on("mouseout", function(d) {
+            d3.select(this)
+              .style('fill', '#ffffff')
+          })
+    },
+
+    formatBarYAxis: function(value) {
+      var value = value.toString()
+      var count = value.match(/0/g).length
+
+      if (count === 4) {
+        return value.slice(0, -1 * count) + '만'
+      } else if (count === 5) {
+        return value.slice(0, -1 * count) + '십만'
+      } else if (count === 6) {
+        return value.slice(0, -1 * count) + '백만'
+      } else if (count === 7) {
+        return value.slice(0, -1 * count) + '천만'
+      } else if (count === 8) {
+        return value.slice(0, -1 * count) + '억'
+      } else if (count === 9) {
+        return value.slice(0, -1 * count) + '0억'
+      } else if (count === 9) {
+        return value.slice(0, -1 * count) + '00억'
+      }
     },
 
     drawPieChart: function(year) {
@@ -211,9 +298,9 @@ Officials.Views = Officials.Views || {};
           location: 'bottom-center'
         },
         size: {
-          canvasWidth: 300,
+          canvasWidth: 320,
           canvasHeight: 300,
-          pieOuterRadius: "40%"
+          pieOuterRadius: "70%"
         },
         data: {
           content: pieData[year]
@@ -221,6 +308,7 @@ Officials.Views = Officials.Views || {};
         labels: {
           outer: {
             format: 'label-percentage2',
+            fontSize: 10,
             pieDistance: 15
           },
           inner: {
@@ -231,7 +319,7 @@ Officials.Views = Officials.Views || {};
             fontSize: 13
           },
           percentage: {
-            fontSize: 18
+            fontSize: 13
           },
           lines: {
             enabled: true,

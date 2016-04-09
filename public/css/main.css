@@ -558,15 +558,6 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     font-size: 1.3rem;
 }
 
-#canvas-bar, #cavnas-pie {
-    width: 100%;
-    height: 350px
-}
-
-#cavnas-pie {
-    height: 250px;
-}
-
 #page-official .card .card-action .official-pie-chart h6 {
     text-align: left;
 }
@@ -852,6 +843,33 @@ footer.page-footer p {
 /*
     d3.pie Style
  */
+
+ #canvas-bar, #cavnas-pie {
+     width: 100%;
+     height: 300px
+ }
+
+ #cavnas-pie {
+     /*height: 250px;*/
+ }
+
+#canvas-bar {
+    overflow-x: scroll;
+}
+
+#canvas-bar .axis {
+  font: 10px sans-serif;
+}
+
+#canvas-bar .axis path, #canvas-bar .axis line {
+  fill: none;
+  stroke: #fff;
+  /*shape-rendering: crispEdges;*/
+}
+
+#canvas-bar .axis text {
+    fill: white;
+}
 
 #canvas-pie svg > g:not([class*="_lineGroups"]) path {
     stroke: #5c6d85 !important;
