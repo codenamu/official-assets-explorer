@@ -1,86 +1,86 @@
 <section id="page-official">
-  <div class="row">
-      <div class="col s12 m6 offset-m3">
-          <div class="card">
-              <div class="card-content">
-                  <span class="card-title"><%- official.person.name %></span>
-                  <span class="card-subtitle"><%- official.position[official.position.length - 1].title %></span>
-              </div>
-              <div class="card-action">
-                  <div class="row official-total">
-                      <h5><li>재산 총액</li></h5>
-                      <span id="official-asset-total" class="value"><span class="number"><%- official.assets.history[official.latestYear].totalText %>원</span><span class="year"><%- official.latestYear %>년</span></span>
-                  </div>
-                  <div class="row official-history">
-                      <h5><li>재산 변동 이력</li></h5>
-                      <div class="official-bar-chart">
-                          <canvas id="canvas-bar" height="250"></canvas>
-                      </div>
-                      <div class="official-pie-chart">
-                          <h6></h6>
-                          <div id="canvas-pie"></div>
-                      </div>
-                  </div>
-                  <div class="row official-positions">
-                      <h5><li>재산 공개 이력</li></h5>
+    <div class="row">
+        <div class="col s12 m6 offset-m3">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title"><%- official.person.name %></span>
+                    <span class="card-subtitle"><%- official.position[official.position.length - 1].title %></span>
+                </div>
+                <div class="card-action">
+                    <div class="row official-total">
+                        <h5><li>재산 총액</li></h5>
+                        <span id="official-asset-total" class="value"><span class="number"><%- official.assets.history[official.latestYear].totalText %>원</span><span class="year"><%- official.latestYear %>년</span></span>
+                    </div>
+                    <div class="row official-history">
+                        <h5><li>재산 변동 이력</li></h5>
+                        <div class="official-bar-chart">
+                            <canvas id="canvas-bar" height="250"></canvas>
+                        </div>
+                        <div class="official-pie-chart">
+                            <h6></h6>
+                            <div id="canvas-pie"></div>
+                        </div>
+                    </div>
+                    <div class="row official-positions">
+                        <h5><li>재산 공개 이력</li></h5>
+                        <ul>
+                        <% for (var p in official.reorderedPosition) { %>
+                            <li>- <%- official.reorderedPosition[p].title %> <span class="year">
+                              <% for (var y in official.reorderedPosition[p].year) { %>
+                                <% if (y === official.reorderedPosition[p].year.length - 1) { %>
+                                  <%- official.reorderedPosition[p].year[y] + ', ' %>
+                                <% } else { %>
+                                  <%- official.reorderedPosition[p].year[y] %>
+                                <% } %>
+                              <% }%>
+                            </span></li>
+                        <% } %>
+                        </ul>
+                    </div>
+                    <div class="row">
+                      <h5><li>원본 보기</li></h5>
                       <ul>
-                      <% for (var p in official.reorderedPosition) { %>
-                          <li>- <%- official.reorderedPosition[p].title %> <span class="year">
-                            <% for (var y in official.reorderedPosition[p].year) { %>
-                              <% if (y === official.reorderedPosition[p].year.length - 1) { %>
-                                <%- official.reorderedPosition[p].year[y] + ', ' %>
-                              <% } else { %>
-                                <%- official.reorderedPosition[p].year[y] %>
-                              <% } %>
-                            <% }%>
-                          </span></li>
+                      <% for (var p in official.position) { %>
+                        <li><a href="<%- official.position[p].pdfUrl %>" target="_blank">- <%- official.position[p].year %>년</a></li>
                       <% } %>
                       </ul>
-                  </div>
-                  <div class="row">
-                    <h5><li>원본 보기</li></h5>
-                    <ul>
-                    <% for (var p in official.position) { %>
-                      <li><a href="<%- official.position[p].pdfUrl %>" target="_blank">- <%- official.position[p].year %>년</a></li>
-                    <% } %>
-                    </ul>
-                  </div>
-                  <div class="row">
-                    <div class="col s12 m6 offset-m3">
-                      <button id="btn-contact-official-<%- official.person.uniqueId %>" class="btn btn-large waves-effect color-news-light modal-trigger" type="button" data-target="contact-official-<%- official.person.uniqueId %>">제보하기</button>
+                    </div>
+                    <div class="row">
+                      <div class="col s12 m6 offset-m3">
+                        <button id="btn-contact-official-<%- official.person.uniqueId %>" class="btn btn-large waves-effect color-news-light modal-trigger" type="button" data-target="contact-official-<%- official.person.uniqueId %>">제보하기</button>
 
-                      <div id="contact-official-<%- official.person.uniqueId %>" class="modal">
-                        <form id="form-contact-official" class="col s12">
-                          <div class="modal-content">
-                            <div class="row">
-                              <h5>제보하기</h5>
-                              <p><%- official.person.name %> 관련 정보 제보하기</p>
-                            </div>
-                            <div class="row">
-                              <div class="input-field col s12">
-                                <input id="contact-official-email" class="validate" type="email" name="contact=official-email" placeholder="필수" required/>
-                                <label for="contact-official-email">이메일</label>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="input-field col s12">
-                                <input type="hidden" name="official-id-name" id="contact-official-type" value="<%- official.person.uniqueId %>-<%- official.person.name %>">
-                                <textarea id="contact-official-content" name="contact-official-content" class="materialize-textarea"></textarea>
-                                <label for="contact-official-content">내용</label>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col s12 m4 offset-m4">
-                                <button type="submit" class="btn btn-larget color-news">보내기</button>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
+                        <div id="contact-official-<%- official.person.uniqueId %>" class="modal">
+                            <form id="form-contact-official" class="col s12">
+                                <div class="modal-content">
+                                  <div class="row">
+                                    <h5>제보하기</h5>
+                                    <p><%- official.person.name %> 관련 정보 제보하기</p>
+                                  </div>
+                                  <div class="row">
+                                    <div class="input-field col s12">
+                                      <input id="contact-official-email" class="validate" type="email" name="contact=official-email" placeholder="필수" required/>
+                                      <label for="contact-official-email">이메일</label>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="input-field col s12">
+                                      <input type="hidden" name="official-id-name" id="contact-official-type" value="<%- official.person.uniqueId %>-<%- official.person.name %>">
+                                      <textarea id="contact-official-content" name="contact-official-content" class="materialize-textarea"></textarea>
+                                      <label for="contact-official-content">내용</label>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col s12 m4 offset-m4">
+                                      <button type="submit" class="btn btn-larget color-news">보내기</button>
+                                    </div>
+                                  </div>
+                                </div>
+                            </form>
+                        </div>
                       </div>
                     </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
