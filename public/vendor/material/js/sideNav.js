@@ -120,8 +120,6 @@
           }
         }
 
-
-
         // Touch Event
         var panning = false;
         var menuOut = false;
@@ -131,7 +129,8 @@
         });
 
         dragTarget.hammer({
-          prevent_default: false
+          drag_lock_to_axis: true,
+          prevent_default: true
         }).bind('pan', function(e) {
 
           if (e.gesture.pointerType == "touch") {
