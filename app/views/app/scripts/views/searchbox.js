@@ -286,7 +286,9 @@ Officials.Views = Officials.Views || {};
 
 
       // set current url with query parameters
-      // Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
+      if (Backbone.history.getFragment().split('?')[0] !== "") {
+        Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
+      }
       // find results
       this.getResult(params)
     },
@@ -317,7 +319,9 @@ Officials.Views = Officials.Views || {};
       params.election = 1
 
       // set current url with query parameters
-      // Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
+      if (Backbone.history.getFragment().split('?')[0] !== "") {
+        Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
+      } 
       // find results
       this.getResult(params)
     },
