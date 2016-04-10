@@ -47,6 +47,7 @@ Officials.Views = Officials.Views || {};
       $('#search-tabs > ul.tabs').tabs();
       this.setInitSelectOptions()
       this.drawForms()
+      this.fixMaterialFormBug()
 
 
       if (!_.isEmpty(this.params)) {
@@ -70,8 +71,6 @@ Officials.Views = Officials.Views || {};
       } else {
         this.hideLoadingDiv()
       }
-
-
     },
 
     showLoadingDiv: function() {
@@ -325,6 +324,12 @@ Officials.Views = Officials.Views || {};
 
     fixEncodeURI: function(param) {
       return param.replace(/%5B/g, '').replace(/%5D/g, '');
+    },
+
+    fixMaterialFormBug: function() {
+      $('input[readonly]').on('focus', function(ev) {
+        $(this).trigger('blur');
+      });
     },
 
     getResult: function(params) {
