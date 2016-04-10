@@ -27,7 +27,6 @@ Officials.Views = Officials.Views || {};
       var params = params || {}
       this.params = (Object.keys(params).length === 1 && Object.keys(params).indexOf('keyword') > -1 && !params.keyword) ? undefined : params;
 
-      alert(params.org)
       this.orgs = new Officials.Collections.Org()
       this.provinces = new Officials.Collections.Province()
 
@@ -318,7 +317,7 @@ Officials.Views = Officials.Views || {};
       params.election = 1
 
       // set current url with query parameters
-      Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
+      // Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
       // find results
       this.getResult(params)
     },
