@@ -66,7 +66,7 @@ Officials.Routers = Officials.Routers || {};
         Officials.ActiveViews.officialView.destroy()
       }
 
-      Officials.MainView = new Officials.Views.Official({ uniqueId: id })
+      Officials.MainView = new Officials.Views.Official({ uniqueId: id, params: params })
     },
 
     about: function() {

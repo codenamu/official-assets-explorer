@@ -74,7 +74,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<section id="page-official">\n    <div class="row">\n        <div class="col s12 m6 offset-m3">\n            <div class="card">\n                <div class="card-content">\n                    <span class="card-title">' +
+__p += '<section id="page-official">\n    <div class="row">\n        <div class="col s12 m6 offset-m3">\n            <div class="card ontop">\n                <div class="backnforth backward">\n\n                </div>\n                <div class="backnforth forward">\n                    \n                </div>\n                <div class="card-content">\n                    <span class="card-title">' +
 __e( official.person.name ) +
 '</span>\n                    <span class="card-subtitle">' +
 __e( official.position[official.position.length - 1].title ) +

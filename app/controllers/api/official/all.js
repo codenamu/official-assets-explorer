@@ -1,5 +1,5 @@
 var express = require('express')
-var db = require('../../models')
+var db = require('../../../models')
 
 module.exports = function() {
   var router = express.Router()
@@ -141,7 +141,7 @@ module.exports = function() {
             var targetOfficialIds = officials.map(function(o) {
               return o.Person.dataValues.uniqueId
             })
-            
+
             where['$and'].push({
               '$Person.uniqueId$': {
                 $in: targetOfficialIds
@@ -187,7 +187,7 @@ module.exports = function() {
       /**
        * START
        * query parameters to search officials with default options
-       * SUCH AS Org, Year, Position, Name 
+       * SUCH AS Org, Year, Position, Name
        */
 
       if (queries.keyword) {
@@ -245,12 +245,16 @@ module.exports = function() {
             model: db.Person
           }, {
             model: db.Position,
+            attributes: ['title'],
             include: [{
               model: db.Org3,
+              attributes: ['title'],
               include: [{
                 model: db.Org2,
+                attributes: ['title'],
                 include: [{
-                  model: db.Org1
+                  model: db.Org1,
+                  attributes: ['title']
                 }]
               }]
             }]
@@ -288,56 +292,15 @@ module.exports = function() {
             result.officials = officials
             res.json(result)
           })
-          
+
         })
       })
       /**
        * END
        * query parameters to search officials with default options
-       * SUCH AS Org, Year, Position, Name 
+       * SUCH AS Org, Year, Position, Name
        */
     }
-  })
-
-  router.get('/:uniqueId', function (req, res, next) {
-    var uniqueId = req.params.uniqueId
-
-    db.Official.findAll({
-      order: [
-        ['year', 'ASC']
-      ],
-      include: [{
-        model: db.Person,
-        attributes: ['uniqueId', 'name'],
-        where: { uniqueId: uniqueId }
-      }, {
-        model: db.Position,
-        attributes: ['title'],
-        include: [{
-          model: db.Org3,
-          attribute: ['title'],
-          incude: [{
-            model: db.Org2,
-            attribute: ['title'],
-            include: [{
-              model: db.Org1,
-              attribute: ['title']
-            }]
-          }]
-        }]
-      }, {
-        model: db.Asset,
-        include: [{
-          model: db.Cat2,
-          include: [{
-            model: db.Cat1
-          }]
-        }]
-      }]
-    })
-    .then(function (officials) {
-      res.json(officials)
-    })
   })
 
   return router

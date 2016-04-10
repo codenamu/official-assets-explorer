@@ -556,6 +556,10 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     color: #5c6d85;
 }
 
+#page-official > .row {
+    margin-bottom: 0px;
+}
+
 
 #form-contact {
     color: #5c6d85;
@@ -752,10 +756,6 @@ footer.page-footer p {
         padding: 0px 50px;
     }
 
-    #page-search.closed {
-        top: 0px;
-    }
-
     header {
         padding: 10px;
         margin-top: 90px;
@@ -807,6 +807,43 @@ footer.page-footer p {
         line-height: 2rem;
         letter-spacing: 0px;
         margin: 1.82rem 0 0.656rem 0;
+    }
+
+    #page-official .backward, #page-official .forward {
+        cursor: pointer;
+        color: #97a8c0;
+    }
+
+    #page-official .backward .row , #page-official .forward .row {
+        margin-bottom: 0px;
+    }
+
+    #page-official .backward .row.icon, #page-official .forward .row.icon {
+        text-align: center;
+    }
+
+    #page-official .card.ontop .backward {
+        position: absolute;
+        left: -11.5%;
+        top: 350px;
+    }
+
+    #page-official .card:not(.ontop) .backward {
+        position: fixed;
+        left: 20%;
+        top: 50%;
+    }
+
+    #page-official .card.ontop .forward {
+        position: absolute;
+        right: -11.5%;
+        top: 350px;
+    }
+
+    #page-official .card:not(.ontop) .forward {
+        position: fixed;
+        right: 20%;
+        top: 50%;
     }
 
     #form-contact [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {

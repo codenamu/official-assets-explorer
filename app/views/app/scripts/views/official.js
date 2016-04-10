@@ -12,12 +12,20 @@ Officials.Views = Officials.Views || {};
     el: '#main',
 
     events: {
+      'click .forward'                 : 'clickBackNForth',
+      'click .backward'                : 'clickBackNForth',
       'submit #form-contact-official'  : 'sendEmail'
     },
 
     initialize: function (params) {
       // this.listenTo(this.model, 'change', this.render)
       var self = this;
+      this.params = params.params
+
+      this.getBacknForth(params)
+
+      _.bindAll(self, 'detectScroll')
+      $(window).scroll(self.detectScroll)
 
       this.model = new Officials.Models.Official({ _id: params.uniqueId})
       this.model.fetch({ success: function () { self.calAssets() }})
@@ -30,15 +38,66 @@ Officials.Views = Officials.Views || {};
 
     afterRender: function(model) {
       this.drawBarChart()
-      d3.select('rect:last-child').style('fill', '#fffca9')
       this.drawPieChart(model.latestYear)
+      // fill yellow on bar graph of lastest year
+      d3.select('rect:last-child').style('fill', '#fffca9')
 
-      $('#btn-contact-official-' + model.person.uniqueId).leanModal();
-      $('#page-official').velocity('scroll', {
+      $('#main').velocity('scroll', {
         offset: this.getVelocityOffset(),
         duration: 500,
         easing: 'ease-in-out'
       })
+
+      $('#btn-contact-official-' + model.person.uniqueId).leanModal();
+
+    },
+
+    getBacknForth: function (params) {
+      var queries = params.params
+      queries.uniqueId = params.uniqueId
+      $.get('/api/official/backnforth', queries, function(result) {
+
+        if (result.back) {
+          $('#page-official .card .backward').attr('id', result.back.Person.uniqueId)
+          $('#page-official .card .backward').html(
+            '<div class="row icon"><img src="/img/arrow-left.png" alt="좌측 화살표" /></div>' +
+            '<div class="row name">' + result.back.Person.name + '</div>'
+          )
+        } else {
+          $('#page-official .card .backward').html('')
+        }
+
+        if (result.forth) {
+          $('#page-official .card .forward').attr('id', result.forth.Person.uniqueId)
+          $('#page-official .card .forward').html(
+            '<div class="row icon"><img src="/img/arrow-right.png" alt="우측 화살표" /></div>' +
+            '<div class="row name">' + result.forth.Person.name + '</div>'
+          )
+        } else {
+          $('#page-official .card .forward').html('')
+        }
+
+      })
+    },
+
+    clickBackNForth: function(e) {
+      Backbone.history.navigate($(e.target).closest('.backnforth').attr('id') + '?' + this.fixEncodeURI($.param(this.params)))
+      window.location.reload()
+    },
+
+    fixEncodeURI: function(param) {
+      return param.replace(/%5B/g, '').replace(/%5D/g, '');
+    },
+
+    detectScroll: function() {
+      var currentPos = $('body').scrollTop()
+      var mainPos = $('#main').position().top
+
+      if (mainPos - currentPos < 90) {
+        $('#page-official .card').removeClass('ontop')
+      } else {
+        $('#page-official .card').addClass('ontop')
+      }
     },
 
     calAssets: function() {
