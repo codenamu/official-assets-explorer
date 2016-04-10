@@ -24,7 +24,8 @@ Officials.Views = Officials.Views || {};
 
     initialize: function (params) {
       var self = this
-      this.params = params
+      var params = params || {}
+      this.params = (Object.keys(params).length === 1 && Object.keys(params).indexOf('keyword') > -1 && !params.keyword) ? undefined : params;
 
       this.orgs = new Officials.Collections.Org()
       this.provinces = new Officials.Collections.Province()
@@ -55,10 +56,10 @@ Officials.Views = Officials.Views || {};
         /**
          * if use request with default search option
          */
-        if (this.params['keyword'] !== undefined) {
+        if (!this.params['election']) {
           this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
           this.resetTags('default', 'years', $('#selected-years > option:selected'))
-        } else if (this.params['election'] !== undefined) {
+        } else {
           /**
          * if use request with election cadidates search option
          */
@@ -221,7 +222,7 @@ Officials.Views = Officials.Views || {};
         cb()
       }})
 
-      
+
     },
 
     selectMunicipal: function(callback) {
@@ -240,11 +241,12 @@ Officials.Views = Officials.Views || {};
           }))
         })
 
+        self.resetTags('election', 'dongs', $('#selected-dongs > option:selected'))
+        self.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
         $('#selected-dongs').material_select()
         cb()
       }})
 
-      this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
     },
 
     selectDong: function() {
@@ -319,19 +321,14 @@ Officials.Views = Officials.Views || {};
     },
 
     getResult: function(params) {
-      if (this.resultView) {
-        this.resultView.destroy()
+      if (Backbone.history.getFragment().split('?')[0] === "") {
+        Officials.ActiveViews = new Officials.Views.Searchresult(params)
       }
-
-      // show results in the active tab
-      // between #search-default and #search-election
-      params.el = $('#search-tabs li.tab > a.active').attr('href') + '-result'
-      this.resultView = new Officials.Views.Searchresult(params)
     },
 
     resetTags: function(category, subcategory, values) {
       var chips = $('#tags-' + category + ' > .col > .chip.chip-' + subcategory)
-      
+
 
       if (category === 'default') {
         var valLength = values.length - 1
@@ -375,7 +372,7 @@ Officials.Views = Officials.Views || {};
         }
       }
 
-      
+
     },
 
     closeAChip: function(e) {

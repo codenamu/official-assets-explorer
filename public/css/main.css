@@ -226,56 +226,60 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     box-shadow: 0 1px 0 0 #5C6D85;
 }*/
 
+#search {
+    margin-top: 56px;
+}
+
 #search > section {
     z-index: 10;
 }
 
-#page-search > section.content {
+#search > section.content {
     margin: 0px;
 }
 
-#page-search > section.content .tab-content {
+#search > section.content .tab-content {
     padding-left: 0px;
     padding-right: 0px;
 }
 
-#page-search > section.content .tab-content .cards {
+#search > section.content .tab-content .cards {
     height: 100%;
 }
 
-#page-search .tabs, #search-tabs {
+#search .tabs, #search-tabs {
     overflow-x: hidden;
 }
 
-#page-search .tabs, #page-search .tabs .tab {
+#search .tabs, #search .tabs .tab {
     height: 58px;
 }
 
-#page-search .tabs .tab {
+#search .tabs .tab {
     padding: 10px 0;
     border-top: 2px solid #ababab;
 }
 
-#page-search .tabs .tab a {
+#search .tabs .tab a {
     color: #5C6D85;
     font-size: 1.5rem;
 }
 
-#page-search .tabs .tab a:not(.active) {
+#search .tabs .tab a:not(.active) {
     color: #ababab;
 }
 
-#page-search .tabs .tab a:hover {
+#search .tabs .tab a:hover {
     color: #5C6D85;
 }
 
-#page-search .tabs .indicator {
+#search .tabs .indicator {
     top: 0px;
     height: 6px;
     background-color: #5C6D85;
 }
 
-#page-search {
+#search {
     position: relative;
     top: 0px;
     z-index: 10;
@@ -285,36 +289,36 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     transition-duration: 0.1s;
 }
 
-#page-search.closed {
+#search.closed {
     top: -650px;
 }
 
-#page-search > section {
+#search > section {
     padding: 35px 0 0;
 }
 
-#page-search form {
+#search form {
     padding: 25px 0px;
 }
 
-#page-search form > .row.container {
+#search form > .row.container {
     margin: 0 auto;
 }
 
-#page-search form input, #page-search form .caret {
+#search form input, #search form .caret {
     color: #5c6d85;
     border-bottom-color: #5c6d85;
 }
 
-#page-search .dropdown-content li.active, #page-search .dropdown-content li.selected {
+#search .dropdown-content li.active, #search .dropdown-content li.selected {
     background-color: transparent;
 }
 
-.cards {
+#main {
     background-color: #e7e9ed;
 }
 
-.cards .search-message h5 {
+#main .search-message h5 {
     display: inline-block;
     padding: 0.9rem 0 0.9rem 0;
     font-size: 1rem;
@@ -323,13 +327,13 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     color: #5c6d85;
 }
 
-.cards .search-message button {
+#main .search-message button {
     display: inline-block;
     margin: 0.82rem 0 0.656rem 0;
     font-size: 0.85rem;
 }
 
-.cards .search-message h5 .value {
+#main .search-message h5 .value {
     font-weight: 700;
 }
 
@@ -341,20 +345,20 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     box-shadow: 1px 2px 2px 0 rgba(0,0,0,0.1);
 }
 
-.cards .search-cards .card {
+#main .search-cards .card {
     cursor: pointer;
     /*box-shadow: 1px 2px 2px 0 rgba(0,0,0,0.1);*/
 }
 
-.cards .search-cards .card .card-content, #page-official .card .card-content {
+#main .search-cards .card .card-content, #main .card .card-content {
     text-align: center;
 }
 
-.cards .search-cards .card .card-content img.card-profile {
+#main .search-cards .card .card-content img.card-profile {
     width: 75px;
 }
 
-.cards .search-cards .card .card-content span.card-title, #page-official .card .card-content span.card-title {
+#main .search-cards .card .card-content span.card-title, #main .card .card-content span.card-title {
     font-weight: bold;
 }
 
@@ -372,11 +376,11 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     letter-spacing: -0.05em:
 }
 
-.cards .search-cards .card .card-content span.card-title, .cards .search-cards .card .card-content .card-subtitle, #page-official .card .card-content span.card-title, #page-official .card .card-content .card-subtitle {
+#main .search-cards .card .card-content span.card-title, #main .search-cards .card .card-content .card-subtitle, .card .card-content span.card-title, .card .card-content .card-subtitle {
     display: block;
 }
 
-.cards .search-cards .card .card-action {
+#main .search-cards .card .card-action {
     position: relative;
     min-height: 100px;
     background-color: #f8f8f8;
@@ -384,7 +388,7 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     border-top: none;
 }
 
-.cards .search-cards .card .card-action > li {
+#main .search-cards .card .card-action > li {
     position: relative;
     color: #7b7b7b;
     font-size: 14px;
@@ -392,7 +396,7 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     list-style: none;
 }
 
-.cards .search-cards .card .card-action > li:before {
+#main .search-cards .card .card-action > li:before {
     content: ' ';
     position: absolute;
     width: 3px;
@@ -403,23 +407,17 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     left: -8px;
 }
 
-
-
-.cards .search-cards .card .card-action .card-link-to-btn {
+#main .search-cards .card .card-action .card-link-to-btn {
     position: absolute;
     bottom: 15px;
     right: 15px;
 }
 
-.cards .search-cards .card .card-action .card-link-to-btn > a > img {
+#main .search-cards .card .card-action .card-link-to-btn > a > img {
     width: 10px;
     position: absolute;
     top: 10px;
     left: 15px;
-}
-
-#main {
-    margin-top: 56px;
 }
 
 #main > section {
@@ -468,7 +466,7 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     padding: 10px 0;
 }
 
-#page-search .search-loading {
+#main .search-loading {
     position: relative;
     height: 50px;
     background-color: #e7e9ed;
@@ -480,50 +478,42 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     border-color: #5c6d84;
 }
 
-#page-official {
-    background-color: #E7E8EC;
-}
-
-#page-official > .row {
-    margin-bottom: 0px;
-}
-
-#page-official .card {
+#main .card {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 2px 2px 0 rgba(0,0,0,0.12);
 }
 
-#page-official .card .card-action {
+#main .card .card-action {
     color: #ffffff;
     background-color: #5A6C84;
 }
 
-#page-official .card .card-action a {
+#main .card .card-action a {
     color: #ffffff;
 }
 
-#page-official .card .card-action a:hover {
+#main .card .card-action a:hover {
     color: #ffffff;
 }
 
-#page-official .card .card-action > .row {
+#main .card .card-action > .row {
     padding: 30px 0px;
     border-bottom: 1px solid #e7e9ed;
 }
 
-#page-official .card .card-action > .row:last-child {
+#main .card .card-action > .row:last-child {
     border-bottom: none;
 }
 
-#page-official .card .card-action h5 {
+#main .card .card-action h5 {
     position: relative;
 }
 
-#page-official .card .card-action h5 > li {
+#main .card .card-action h5 > li {
     font-size: 1.3rem;
     list-style: none;
 }
 
-#page-official .card .card-action h5 > li:before {
+#main .card .card-action h5 > li:before {
     content: ' ';
     position: absolute;
     width: 4px;
@@ -534,35 +524,35 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     left: -8px;
 }
 
-#page-official .card .card-action .official-total > span.value > span.number {
+#main .card .card-action .official-total > span.value > span.number {
     font-size: 2.2rem;
     color: rgb(255, 252, 169);
 }
 
-#page-official .card .card-action .official-total > span.value > span.year {
+#main .card .card-action .official-total > span.value > span.year {
     font-size: 1.1rem;
     color: #e7e9ed;
 }
 
-#page-official .card .card-action .official-pie-chart, #page-official .card .card-action .official-bar-chart {
+#main .card .card-action .official-pie-chart, #main .card .card-action .official-bar-chart {
     width: 100%;
     text-align: center;
 }
 
-#page-official .card .card-action .official-positions span.year {
+#main .card .card-action .official-positions span.year {
     color: #97a8c0;
     font-size: 0.8rem;
 }
 
-#page-official .card .card-action button.btn.btn-large {
+#main .card .card-action button.btn.btn-large {
     font-size: 1.3rem;
 }
 
-#page-official .card .card-action .official-pie-chart h6 {
+#main .card .card-action .official-pie-chart h6 {
     text-align: left;
 }
 
-#page-official .modal {
+#main .modal {
     color: #5c6d85;
 }
 
@@ -753,8 +743,9 @@ footer.page-footer p {
     }
 
     #search {
+        margin-top: 90px;
         display: block;
-        min-height: 500px;
+        min-height: 370px;
     }
 
     #tags-default, #tags-election {
@@ -809,10 +800,6 @@ footer.page-footer p {
 
     .cards .card .card-action > li {
         font-size: 0.85rem;
-    }
-
-    #main {
-        margin-top: 90px;
     }
 
     #main .page.page-about h5 {

@@ -20,6 +20,10 @@ window.Officials = {
       return this;
     }
 
+    Backbone.View.prototype.getVelocityOffset = function() {
+      return (window.innerWidth < 768) ? -56 : -95
+    }
+
     Backbone.history.start()
   }
 }

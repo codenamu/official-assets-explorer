@@ -9,6 +9,8 @@ Officials.Views = Officials.Views || {};
 
     template: JST['app/scripts/templates/searchresult.ejs'],
 
+    el: '#main',
+
     events: {
       'click .card'                 : 'clickCard',
       'click #btn-scroll-searchbox' : 'scrollSearchbox'
@@ -52,6 +54,7 @@ Officials.Views = Officials.Views || {};
 
     beforeRender: function() {
       $('#' + this.$el.attr('id')).velocity('scroll', {
+        offset: this.getVelocityOffset(),
         duration: 500,
         easing: 'ease-in-out'
       })
@@ -88,7 +91,7 @@ Officials.Views = Officials.Views || {};
     checkSearchEnded: function(count) {
       if (this.searchStatus.count === parseInt(count, 10)) {
         this.searchStatus.isEnded = true
-        $('#page-search .search-loading > .preloader-wrapper').removeClass('active')
+        $('#main .search-loading > .preloader-wrapper').removeClass('active')
       }
     },
 
@@ -146,15 +149,15 @@ Officials.Views = Officials.Views || {};
     },
 
     showLoadingDiv: function() {
-      $('#page-search .search-loading').show()
+      $('#main .search-loading').show()
     },
 
     activateLoadingSignal: function() {
-      $('#page-search .search-loading > .preloader-wrapper').addClass('active')
+      $('#main .search-loading > .preloader-wrapper').addClass('active')
     },
 
     deactivateLoadingSignal: function() {
-      $('#page-search .search-loading > .preloader-wrapper').removeClass('active')
+      $('#main .search-loading > .preloader-wrapper').removeClass('active')
     },
 
     clickCard: function(event) {
@@ -163,7 +166,7 @@ Officials.Views = Officials.Views || {};
     },
 
     scrollSearchbox: function() {
-      $('#page-search').velocity('scroll', {
+      $('#main').velocity('scroll', {
         duration: 500,
         easing: 'ease-in-out'
       })

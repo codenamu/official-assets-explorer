@@ -34,6 +34,7 @@ Officials.Views = Officials.Views || {};
 
       $('#btn-contact-official-' + model.person.uniqueId).leanModal();
       $('#page-official').velocity('scroll', {
+        offset: this.getVelocityOffset(),
         duration: 500,
         easing: 'ease-in-out'
       })
@@ -212,8 +213,7 @@ Officials.Views = Officials.Views || {};
 
         x.domain(datasets.map(function(p) { return p.year; }))
         // .rangeBands([0, graphWidth]);
-        // y.domain([0, d3.max(datasets, function(p) { console.log(p); return p.total; })]);
-        y.domain([0, d3.max(datasets, function(p) { console.log(p); return p.total; })])
+        y.domain([0, d3.max(datasets, function(p) { return p.total; })])
 
         svg.append("g")
             .attr("class", "x axis")

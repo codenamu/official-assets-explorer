@@ -51,13 +51,12 @@ Officials.Routers = Officials.Routers || {};
       this.cleanMain()
 
       $('header').hide()
-      $('#search').hide()
 
-      // if (params) {
-      //   this.searchView = new SearchView(params)
-      // } else {
-      //   this.searchView = new SearchView()
-      // }
+      if (params) {
+        Officials.MainView = new Officials.Views.Searchbox(params)
+      } else {
+        Officials.MainView = new Officials.Views.Searchbox()
+      }
 
       if (!Officials.ActiveViews.headerView) {
         Officials.ActiveViews.headerView = new Officials.Views.Header()

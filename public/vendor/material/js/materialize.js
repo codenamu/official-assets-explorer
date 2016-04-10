@@ -2006,10 +2006,6 @@ $(document).ready(function(){
         // Add Touch Area
         var dragTarget = $('<div class="drag-target"></div>');
         $('body').append(dragTarget);
-        $('html, body').on('touchstart touchmove', function(e){
-           //prevent native touch activity like scrolling
-           e.preventDefault();
-        });
 
         if (options.edge == 'left') {
           menu_id.css('left', -1 * (options.menuWidth + 10));
