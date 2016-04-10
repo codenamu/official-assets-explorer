@@ -47,7 +47,7 @@ Officials.Views = Officials.Views || {};
       $('#search-tabs > ul.tabs').tabs();
       this.setInitSelectOptions()
       this.drawForms()
-      // this.fixMaterialFormBug()
+      this.fixMaterialFormBug()
 
 
       if (!_.isEmpty(this.params)) {
@@ -286,7 +286,7 @@ Officials.Views = Officials.Views || {};
 
 
       // set current url with query parameters
-      // Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
+      Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
       // find results
       this.getResult(params)
     },
@@ -317,7 +317,7 @@ Officials.Views = Officials.Views || {};
       params.election = 1
 
       // set current url with query parameters
-      // Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
+      Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
       // find results
       this.getResult(params)
     },
@@ -327,9 +327,9 @@ Officials.Views = Officials.Views || {};
     },
 
     fixMaterialFormBug: function() {
-      $('input[readonly]').on('focus', function(ev) {
-        $(this).trigger('blur');
-      });
+      // $('input[readonly]').on('focus', function(ev) {
+      //   $(this).trigger('blur');
+      // });
     },
 
     getResult: function(params) {
