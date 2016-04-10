@@ -6,10 +6,5 @@ module.exports = function() {
 
   router.get('/', function(req, res, next) {
     var uniqueId = req.params.uniqueId
-    console.log(uniqueId)
-    console.lot(this.uniqueId)
-
-    
-
   return router
 }
