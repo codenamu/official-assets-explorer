@@ -111,6 +111,13 @@ Officials.Views = Officials.Views || {};
       var self = this
       var params = this.params
 
+      if (params.keyword && !params.election) {
+        $('#selected-keyword').val(params.keyword)
+      } else if (params.keyword && params.election) {
+        $('#selected-keyword-election').val(params.keyword)
+      }
+
+
       if (params.org) {
         var orgOps = $('#selected-orgs > option')
 
@@ -121,6 +128,8 @@ Officials.Views = Officials.Views || {};
         for (var i = 0; i < orgOps.length; i++) {
           if (params.org.indexOf($(orgOps[i]).val()) > -1) $(orgOps[i]).attr('selected', 'selected')
         }
+
+        $('#selected-orgs').material_select()
       }
 
       if (params.year) {
@@ -133,13 +142,11 @@ Officials.Views = Officials.Views || {};
         for (var i = 0; i < yearOps.length; i++) {
           if (params.year.indexOf($(yearOps[i]).val()) > -1) $(yearOps[i]).attr('selected', 'selected')
         }
+
+        $('#selected-years').material_select()
       }
 
       if (params.election) {
-        if (params.keyword) {
-          $('#selected-keyword-election').val(params.keyword)
-        }
-
         var provinceOps = $('#selected-provinces > option:not(:disabled)')
 
         for (var i = 0; i < provinceOps.length; i++) {
