@@ -30,6 +30,7 @@ Officials.Views = Officials.Views || {};
 
     afterRender: function(model) {
       this.drawBarChart()
+      d3.select('rect:last-child').style('fill', '#fffca9')
       this.drawPieChart(model.latestYear)
 
       $('#btn-contact-official-' + model.person.uniqueId).leanModal();
@@ -138,18 +139,6 @@ Officials.Views = Officials.Views || {};
     drawBarChart: function() {
       var self = this
       var datasets = []
-      var barChartData = {
-        labels : [],
-        datasets : [
-          {
-            fillColor : '#ffffff',
-            strokeColor : '#ffffff',
-            highlightFill: '#fffca9',
-            highlightStroke: '#fffca9',
-            data : []
-          }
-        ]
-      }
 
       this.result.position.forEach(function(p) {
         var pos = {};
@@ -163,10 +152,6 @@ Officials.Views = Officials.Views || {};
         datasets.push(pos)
       })
 
-
-      // var ctx = $('#canvas-bar')[0].getContext('2d');
-      // var measureYAxis = 10000 // Y Axis 레이블 표현 단위
-
       var graphWidth = 500
 
       if (window.innerWidth < 768) {
@@ -177,32 +162,22 @@ Officials.Views = Officials.Views || {};
         }
       }
 
-
-
-      // if datasets.
       var margin = {top: 20, right: 20, bottom: 70, left: 40}
       var width = graphWidth - margin.left - margin.right
       var height = 290 - margin.top - margin.bottom
       var barWidth = 26
 
-      // Parse the date / time
-      var	parseDate = d3.time.format("%Y-%m").parse;
-
       var x = d3.scale.ordinal().rangeRoundBands([0, width], 1);
-
       var y = d3.scale.linear().range([height, 0]);
 
       var xAxis = d3.svg.axis()
           .scale(x)
           .orient('bottom')
-          // .tickFormat(d3.time.format('%Y'));
-
       var yAxis = d3.svg.axis()
           .scale(y)
           .orient("left")
           .ticks(5)
           .tickFormat(this.formatBarYAxis)
-
 
       var svg = d3.select('#canvas-bar').append('svg')
           .attr('width', width + margin.left + margin.right)
@@ -221,7 +196,6 @@ Officials.Views = Officials.Views || {};
             .call(xAxis)
           .selectAll('text')
             .style('text-anchor', 'end')
-            // .attr('x', function(d) {})
             .attr('dx', '-.8em')
             .attr('dy', '-.55em')
             .attr('transform', 'rotate(-90)' );
@@ -245,14 +219,15 @@ Officials.Views = Officials.Views || {};
             .attr('y', function(d) { return y(d.total); })
             .attr('height', function(d) { return height - y(d.total); })
           .on("mouseover", function(d) {
+            $('#official-asset-total > .number').text(self.calMeasureMoney(d.total))
+            $('#official-asset-total > .year').text(d.year + '년')
             self.drawPieChart(d.year)
+
+            d3.selectAll('rect')
+              .style('fill', '#ffffff')
 
             d3.select(this)
               .style('fill', '#fffca9');
-          })
-          .on("mouseout", function(d) {
-            d3.select(this)
-              .style('fill', '#ffffff')
           })
     },
 
