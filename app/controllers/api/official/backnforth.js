@@ -28,9 +28,6 @@ module.exports = function() {
     }
 
     if (queries.election) {
-      console.log('=======')
-      console.log('election')
-      console.log('=======')
       /**
        * START
        * query parameters to search candidations in this election
@@ -146,7 +143,6 @@ module.exports = function() {
             }]
           })
           .then(function(officials) {
-            console.log(officials)
             officials = _.uniq(officials, function(o) {
               return o.Person.dataValues.uniqueId
             })
