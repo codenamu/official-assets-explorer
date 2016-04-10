@@ -328,7 +328,7 @@ Officials.Views = Officials.Views || {};
 
     fixMaterialFormBug: function() {
       $('input[readonly]').on('focus', function(ev) {
-        $(this).blur()
+        // $(this).blur()
       });
     },
 
