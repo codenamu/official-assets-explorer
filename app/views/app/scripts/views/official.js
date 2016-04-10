@@ -90,6 +90,14 @@ Officials.Views = Officials.Views || {};
       window.history.back()
     },
 
+    getVelocityOffset: function() {
+      if (window.innerWidth < 768) {
+        return -56
+      } else {
+        return 96
+      }
+    },
+
     fixEncodeURI: function(param) {
       return param.replace(/%5B/g, '').replace(/%5D/g, '');
     },

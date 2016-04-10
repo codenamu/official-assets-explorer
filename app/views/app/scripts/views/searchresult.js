@@ -41,6 +41,7 @@ Officials.Views = Officials.Views || {};
         self.searchStatus.count += officialsRearranged.length
         self.checkSearchEnded(officials.models[0].get('count'))
 
+        self.beforeRender()
         self.$el.html(self.template({count: officials.models[0].get('count')}))
         self.afterRender(officialsRearranged)
       }})
@@ -52,7 +53,11 @@ Officials.Views = Officials.Views || {};
     },
 
     beforeRender: function() {
-
+      $('#main').velocity('scroll', {
+        offset: this.getVelocityOffset(),
+        duration: 500,
+        easing: 'ease-in-out'
+      })
     },
 
     afterRender: function(model) {
@@ -155,13 +160,22 @@ Officials.Views = Officials.Views || {};
       $('#main .search-loading > .preloader-wrapper').removeClass('active')
     },
 
+    getVelocityOffset: function() {
+      if (window.innerWidth < 768) {
+        return -56
+      } else {
+        return 96
+      }
+    },
+
     clickCard: function(event) {
       Backbone.history.navigate($(event.target).closest('.card').attr('id').slice(9) + '?' + this.fixEncodeURI($.param(this.params)))
       window.location.reload()
     },
 
     scrollSearchbox: function() {
-      $('#main').velocity('scroll', {
+      $('#search').velocity('scroll', {
+        offset: this.getVelocityOffset(),
         duration: 500,
         easing: 'ease-in-out'
       })
