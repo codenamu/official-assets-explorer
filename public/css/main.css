@@ -38,6 +38,10 @@ button.btn[type=submit] {
     box-sizing: border-box;
 }
 
+img.cc-by-license {
+    width: 120px;
+}
+
 nav#nav {
     position: fixed;
     top: 0px;
@@ -46,9 +50,23 @@ nav#nav {
     box-shadow: none;
 }
 
-nav#nav a.brand-logo {
+nav#nav a.brand-logo.logo-main {
     left: 92px;
     padding: 2px 0px;
+}
+
+nav#nav a.brand-logo.logo-main:not(.active) {
+    display: none;
+}
+
+nav#nav a.brand-logo.logo-normal {
+    font-size: 1.2rem;
+    left: 139px;
+    padidng: 0px;
+}
+
+nav#nav a.brand-logo.logo-normal:not(.active) {
+    display: none;
 }
 
 nav#nav a.brand-logo > img {
@@ -61,7 +79,6 @@ nav#nav ul.right {
 
 nav#nav ul.right li {
     float: right;
-    margin: 0 17px;
     width: 38px;
 }
 
@@ -75,8 +92,24 @@ nav#nav ul.right li a:hover {
     background-color: transparent;
 }
 
-nav#nav ul.right li a img {
-    width: 80%;
+nav#nav ul.right li.donate-mobile img {
+    width: 20px;
+}
+
+nav#nav ul.right li.kakao a {
+    padding-top: 10px;
+}
+
+nav#nav ul.right li.kakao img {
+    width: 13px;
+}
+
+nav#nav ul.right li.facebook img {
+    width: 12px;
+}
+
+nav#nav ul.right li.twitter img {
+    width: 24px;
 }
 
 nav#nav .button-collapse {
@@ -92,7 +125,7 @@ nav.nav-desktop {
     display: none;
     background: transparent;
     box-shadow: none;
-    padding: 40px 0px !important;
+    padding: 28px 0px !important;
 }
 
 nav.nav-desktop ul li a {
@@ -425,12 +458,16 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
 }
 
 #main .page {
-    padding: 20px 0;
+    padding: 100px 0;
     color: #5c6d85;
 }
 
 #main .page.page-about {
     max-width: 712px;
+}
+
+#main .page.page-about .col {
+    padding: 0px;
 }
 
 #main .page.page-about p {
@@ -442,6 +479,10 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     font-size: 1.3rem;
     line-height: 2.6rem;
     letter-spacing: -1.5px
+}
+
+#main .page.page-about .about-codenamu {
+    padding-top: 100px;
 }
 
 #main .page.page-about .about-codenamu .col.m8 {
@@ -556,8 +597,21 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     color: #5c6d85;
 }
 
-#page-official > .row {
+#page-official {
+    color: #5c6d85;
+}
+
+#page-official .row {
     margin-bottom: 0px;
+}
+
+#page-official .row.history-back {
+    display: none;
+    cursor: pointer;
+}
+
+#page-official .backward, #page-official .forward {
+    display: none;
 }
 
 
@@ -663,6 +717,10 @@ input:not([type]):focus:not([readonly]) + label, input[type=text]:focus:not([rea
     width: 150px;
 }
 
+#nav ul.side-nav li.nav-footer img.cc-by-license {
+    width: 120px;
+}
+
 footer.page-footer {
     display: none;
 }
@@ -718,16 +776,40 @@ footer.page-footer p {
     }
 
     nav#nav ul.right {
-        width: initial;
+        width: 400px;
+    }
+
+    nav#nav ul.right li:not(.donate) {
+        width: 45px;
+    }
+
+    nav#nav ul.right li.donate {
+        width: 200px;
     }
 
     nav#nav ul.right li a {
-        padding: 15px 15px;
+        padding: 15px 0;
         height: 90px;
+    }
+
+    nav#nav ul.right li.kakao a {
+        padding-top: 15px;
     }
 
     nav#nav ul.right li a img {
         width: auto;
+    }
+
+    nav#nav ul.right li.kakao img {
+        width: 15px;
+    }
+
+    nav#nav ul.right li.facebook img {
+        width: 13px;
+    }
+
+    nav#nav ul.right li.twitter img {
+        width: 30px;
     }
 
     nav#nav ul a {
@@ -757,6 +839,7 @@ footer.page-footer p {
     }
 
     header {
+        height: 140px;
         padding: 10px;
         margin-top: 90px;
     }
@@ -809,7 +892,16 @@ footer.page-footer p {
         margin: 1.82rem 0 0.656rem 0;
     }
 
+    #page-official {
+        padding: 45px 0;
+    }
+
+    #page-official .row.history-back {
+        display: block;
+    }
+
     #page-official .backward, #page-official .forward {
+        display: block;
         cursor: pointer;
         color: #97a8c0;
     }

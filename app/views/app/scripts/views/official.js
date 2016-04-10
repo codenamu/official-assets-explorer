@@ -14,6 +14,7 @@ Officials.Views = Officials.Views || {};
     events: {
       'click .forward'                 : 'clickBackNForth',
       'click .backward'                : 'clickBackNForth',
+      'click .history-back'            : 'clickHistoryBack',
       'submit #form-contact-official'  : 'sendEmail'
     },
 
@@ -42,14 +43,14 @@ Officials.Views = Officials.Views || {};
       // fill yellow on bar graph of lastest year
       d3.select('rect:last-child').style('fill', '#fffca9')
 
-      $('#main').velocity('scroll', {
-        offset: this.getVelocityOffset(),
-        duration: 500,
-        easing: 'ease-in-out'
-      })
 
       $('#btn-contact-official-' + model.person.uniqueId).leanModal();
 
+      $('#page-official').velocity('scroll', {
+        offset: this.getVelocityOffset(),
+        duration: 250,
+        easing: 'ease-in-out'
+      })
     },
 
     getBacknForth: function (params) {
@@ -83,6 +84,10 @@ Officials.Views = Officials.Views || {};
     clickBackNForth: function(e) {
       Backbone.history.navigate($(e.target).closest('.backnforth').attr('id') + '?' + this.fixEncodeURI($.param(this.params)))
       window.location.reload()
+    },
+
+    clickHistoryBack: function() {
+      window.history.back()
     },
 
     fixEncodeURI: function(param) {

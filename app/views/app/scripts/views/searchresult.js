@@ -41,7 +41,6 @@ Officials.Views = Officials.Views || {};
         self.searchStatus.count += officialsRearranged.length
         self.checkSearchEnded(officials.models[0].get('count'))
 
-        self.beforeRender()
         self.$el.html(self.template({count: officials.models[0].get('count')}))
         self.afterRender(officialsRearranged)
       }})
@@ -53,11 +52,7 @@ Officials.Views = Officials.Views || {};
     },
 
     beforeRender: function() {
-      $('#' + this.$el.attr('id')).velocity('scroll', {
-        offset: this.getVelocityOffset(),
-        duration: 500,
-        easing: 'ease-in-out'
-      })
+
     },
 
     afterRender: function(model) {

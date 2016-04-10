@@ -15,13 +15,13 @@ Officials.Routers = Officials.Routers || {};
     },
 
     initialize: function() {
-
       if (!Officials.ActiveViews.navView) {
         Officials.ActiveViews.navView = new Officials.Views.Nav()
       }
     },
 
     main: function(params) {
+      this.switchLogoImg('main')
       this.cleanMain()
 
       if (!Officials.ActiveViews.headerView) {
@@ -48,6 +48,7 @@ Officials.Routers = Officials.Routers || {};
     },
 
     official: function(id, params) {
+      this.switchLogoImg('normal')
       this.cleanMain()
 
       $('header').hide()
@@ -70,6 +71,7 @@ Officials.Routers = Officials.Routers || {};
     },
 
     about: function() {
+      this.switchLogoImg('normal')
       this.cleanMain()
 
       $('#search').hide()
@@ -78,6 +80,7 @@ Officials.Routers = Officials.Routers || {};
     },
 
     contact: function() {
+      this.switchLogoImg('normal')
       // this.cleanMain()
 
       $('#search').hide()
@@ -88,6 +91,16 @@ Officials.Routers = Officials.Routers || {};
     cleanMain: function() {
       if (Officials.MainView) {
         Officials.MainView.destroy()
+      }
+    },
+
+    switchLogoImg: function(type) {
+      if (type === 'main') {
+        $('.brand-logo.hide-desktop.logo-main').addClass('active')
+        $('.brand-logo.hide-desktop.logo-normal').removeClass('active')
+      } else {
+        $('.brand-logo.hide-desktop.logo-main').removeClass('active')
+        $('.brand-logo.hide-desktop.logo-normal').addClass('active')
       }
     }
 
