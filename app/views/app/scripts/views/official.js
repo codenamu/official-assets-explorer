@@ -23,7 +23,9 @@ Officials.Views = Officials.Views || {};
       var self = this;
       this.params = params.params
 
-      this.getBacknForth(params)
+      if (!this.isMobile()) {
+        this.getBacknForth(params)
+      }
 
       _.bindAll(self, 'detectScroll')
       $(window).scroll(self.detectScroll)
@@ -57,7 +59,6 @@ Officials.Views = Officials.Views || {};
       var queries = params.params
       queries.uniqueId = params.uniqueId
       $.get('/api/official/backnforth', queries, function(result) {
-
         if (result.back) {
           $('#page-official .card .backward').attr('id', result.back.Person.uniqueId)
           $('#page-official .card .backward').html(
@@ -499,6 +500,14 @@ Officials.Views = Officials.Views || {};
         }
       })
 
+    },
+
+    isMobile: function() {
+      if (window.innerWidth < 768) {
+        return true
+      } else {
+        return false
+      }
     },
 
     destroy: function() {
