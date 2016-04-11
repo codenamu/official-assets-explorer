@@ -124,8 +124,6 @@ Officials.Views = Officials.Views || {};
           params.org = params.org.split(',')
         }
 
-
-
         for (var i = 0; i < orgOps.length; i++) {
           if (params.org.indexOf(decodeURI($(orgOps[i]).val())) > -1) $(orgOps[i]).attr('selected', 'selected')
         }
@@ -287,9 +285,9 @@ Officials.Views = Officials.Views || {};
       params.keyword = $('#selected-keyword').val()
 
       // set current url with query parameters
-      if (Backbone.history.getFragment().split('?')[0] !== "") {
-        Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)), {replace: true})
-      }
+      // if (Backbone.history.getFragment().split('?')[0] !== "") {
+        Backbone.history.navigate('/?' + this.fixEncodeURI($.param(params)))
+      // }
       // find results
       this.getResult(params)
     },
@@ -320,9 +318,9 @@ Officials.Views = Officials.Views || {};
       params.election = 1
 
       // set current url with query parameters
-      if (Backbone.history.getFragment().split('?')[0] !== "") {
-        Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)), {replace: true})
-      }
+      // if (Backbone.history.getFragment().split('?')[0] !== "") {
+        Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
+      // }
       // location.href = "http://stackoverflow.com";
       // find results
       this.getResult(params)
