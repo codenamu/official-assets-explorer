@@ -618,6 +618,14 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     margin-bottom: 0px;
 }
 
+#page-official .card .card-action {
+    padding: 35px;
+}
+
+#page-official .card .card-action > .row > ul, #page-official .card .card-action > .row > span {
+    padding-left: 5px;
+}
+
 #page-official .row.history-back {
     display: none;
     cursor: pointer;
