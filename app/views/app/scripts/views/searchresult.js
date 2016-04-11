@@ -169,7 +169,8 @@ Officials.Views = Officials.Views || {};
     },
 
     clickCard: function(event) {
-      Backbone.history.navigate($(event.target).closest('.card').attr('id').slice(9) + '?' + this.fixEncodeURI($.param(this.params)))
+
+      Backbone.history.navigate($(event.target).closest('.card').attr('id').slice(9) + '?' + this.fixEncodeURI($.param(this.params)), {replace: true})
       window.location.reload()
     },
 

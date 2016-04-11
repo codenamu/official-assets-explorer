@@ -21,9 +21,9 @@ Officials.Views = Officials.Views || {};
     initialize: function (params) {
       // this.listenTo(this.model, 'change', this.render)
       var self = this;
-      this.params = params.params
+      this.params = (Object.keys(params).length === 1 && Object.keys(params).indexOf('keyword') > -1 && !params.params.keyword) ? undefined : params.params;
 
-      if (!this.isMobile()) {
+      if (!this.isMobile() && this.params !== undefined) {
         this.getBacknForth(params)
       }
 
