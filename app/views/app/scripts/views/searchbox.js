@@ -286,7 +286,7 @@ Officials.Views = Officials.Views || {};
 
       // set current url with query parameters
       // if (Backbone.history.getFragment().split('?')[0] !== "") {
-        Backbone.history.navigate('/?' + this.fixEncodeURI($.param(params)))
+        Backbone.history.navigate('/?' + this.fixEncodeURI($.param(params)), {trigger: false, replace: true})
       // }
       // find results
       this.getResult(params)

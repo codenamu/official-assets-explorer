@@ -95,7 +95,7 @@ Officials.Views = Officials.Views || {};
       if (window.innerWidth < 768) {
         return -56
       } else {
-        return 96
+        return -96
       }
     },
 
