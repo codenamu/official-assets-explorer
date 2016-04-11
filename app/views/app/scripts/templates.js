@@ -77,7 +77,9 @@ with (obj) {
 __p += '<section id="page-official">\n    <div class="row">\n        <div class="col s12 m6 offset-m3">\n            <div class="row history-back">\n                <img src="/img/history-back.png" alt="뒤로가기" /> 목록보기\n            </div>\n            <div class="card ontop">\n                <div class="backnforth backward">\n\n                </div>\n                <div class="backnforth forward">\n\n                </div>\n                <div class="card-content">\n                    <span class="card-title">' +
 __e( official.person.name ) +
 '</span>\n                    <span class="card-subtitle">' +
-__e( official.position[0].title ) +
+__e( official.position[official.position.length - 1].Org3.title ) +
+'<br>' +
+__e( official.position[official.position.length - 1].title ) +
 '</span>\n                </div>\n                <div class="card-action">\n                    <div class="row official-total">\n                        <h5><li>재산 총액</li></h5>\n                        <span id="official-asset-total" class="value"><span class="number">' +
 __e( official.assets.history[official.latestYear].totalText ) +
 '</span><span class="year">' +

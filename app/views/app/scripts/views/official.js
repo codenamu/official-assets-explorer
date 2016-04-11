@@ -147,16 +147,16 @@ Officials.Views = Officials.Views || {};
 
         if (model[m].Assets.length) {
           model[m].Assets.forEach(function(a) {
-            if (a.Cat2.title !== '채무') {
+            // if (a.Cat2.title !== '채무') {
               self.result.assets.history[model[m].year].total += a.total
-            }
+            // }
           })
         }
       })
 
-      this.reorderHistory(this.result.position)
 
       this.result.assets.history[this.result.latestYear].totalText = this.calMeasureMoney(this.result.assets.history[this.result.latestYear].total)
+      this.reorderHistory(this.result.position)
       this.render(this.result)
     },
 
@@ -235,7 +235,7 @@ Officials.Views = Officials.Views || {};
         }
       }
 
-      var margin = {top: 20, right: 20, bottom: 70, left: 40}
+      var margin = {top: 50, right: 20, bottom: 70, left: 40}
       var width = graphWidth - margin.left - margin.right
       var height = 290 - margin.top - margin.bottom
       var barWidth = 26
@@ -281,7 +281,13 @@ Officials.Views = Officials.Views || {};
             .call(xAxis)
           .selectAll('text')
             .style('text-anchor', 'end')
-            .attr('dx', '-.8em')
+            .attr('dx', function(d) {
+              if (self.result.assets.history[d].total < 0) {
+                return '3em'
+              } else {
+                return '-.8em'
+              }
+            })
             .attr('dy', '-.55em')
             .attr('transform', 'rotate(-90)' );
 
@@ -317,7 +323,6 @@ Officials.Views = Officials.Views || {};
                   return height - y(d.total)
                 }
               } else {
-                console.log(d.total)
                 return y(d.total)
               }
 
@@ -336,24 +341,35 @@ Officials.Views = Officials.Views || {};
     },
 
     formatBarYAxis: function(value) {
-      var value = value.toString()
+      var result = ''
+      var value = value < 0 ? value.toString().slice(1) : value.toString()
       var count = value.match(/0/g).length
 
       if (count === 4) {
-        return value.slice(0, -1 * count) + '만'
+        result =  value.slice(0, -1 * count) + '만'
       } else if (count === 5) {
-        return value.slice(0, -1 * count) + '십만'
+        result =  value.slice(0, -1 * count) + '십만'
       } else if (count === 6) {
-        return value.slice(0, -1 * count) + '백만'
+        result =  value.slice(0, -1 * count) + '백만'
       } else if (count === 7) {
-        return value.slice(0, -1 * count) + '천만'
+        result =  value.slice(0, -1 * count) + '천만'
       } else if (count === 8) {
-        return value.slice(0, -1 * count) + '억'
+        result =  value.slice(0, -1 * count) + '억'
       } else if (count === 9) {
-        return value.slice(0, -1 * count) + '0억'
+        result =  value.slice(0, -1 * count) + '0억'
       } else if (count === 9) {
-        return value.slice(0, -1 * count) + '00억'
+        result =  value.slice(0, -1 * count) + '00억'
+      } else if (count === 10) {
+        result =  value.slice(0, -1 * count) + '00억'
+      } else if (count === 11) {
+        result =  value.slice(0, -1 * count) + '000억'
+      } else if (count === 12) {
+        result =  value.slice(0, -1 * count) + '조'
+      } else if (count === 13) {
+        result =  value.slice(0, -1 * count) + '0조'
       }
+
+      return value < 0 ? '-' + result : result
     },
 
     drawPieChart: function(year) {
@@ -483,19 +499,61 @@ Officials.Views = Officials.Views || {};
      * @param  {[type]} str [asset value on str type]
      * @return {[type]} str [asset value adapted korean WON measure]
      */
-    calMeasureMoney: function(str) {
-      var target = str.toString()
-      // var num = Math.floor(result.length / 4)
+    calMeasureMoney: function(val) {
+      var target = val < 0 ? val.toString().slice(1) : val.toString()
+      var result = ''
+      var thousand = ''
+      var man = ''
+      var eok = ''
+      var jo = ''
 
-      if (target.length < 4) {
-        return parseInt(str.toString(), 10) + '원'
-      } else if (target.length < 8) {
-        return parseInt(target.slice(0, -4), 10) + '만 ' + parseInt(target.slice(-4), 10) + '원'
-      } else if (target.length < 12) {
-        return parseInt(target.slice(0, -8), 10) + '억 ' + parseInt(target.slice(-8, -4), 10) + '만' + parseInt(target.slice(-4), 10) + '원'
-      } else if (target.length < 16) {
-        return parseInt(target.slice(0, -12), 10) + '조 ' + parseInt(target.slice(-12, -8), 10) + '억' + parseInt(target.slice(-8, -4), 10) + '만 ' + parseInt(target.slice(-4), 10) + '원'
+
+      if (target.length < 5) {
+        result = parseInt(val.toString(), 10) + '원'
+      } else if (target.length < 9) {
+        man = parseInt(target.slice(0, -4), 10)
+        thousand = parseInt(target.slice(-4), 10) === 0 ? '' : ' ' + parseInt(target.slice(-4), 10)
+        result = man + '만' + thousand + '원'
+      } else if (target.length < 13) {
+        eok = parseInt(target.slice(0, -8), 10)
+        man = parseInt(target.slice(-8, -4), 10) === 0 ? '' : ' ' + parseInt(target.slice(-8, -4), 10)
+        thousand = parseInt(target.slice(-4), 10) === 0 ? '' : ' ' + parseInt(target.slice(-4), 10)
+
+        if (!man && !thousand) {
+          result =  eok + '억원'
+        } else if (!man && thousand) {
+          result =  eok + '억' + thousand + '원'
+        } else if (man && !thousand) {
+          result =  eok + '억' + man + '만원'
+        }  else {
+          result =  eok + '억' + man + '만' + thousand + '원'
+        }
+      } else if (target.length < 17) {
+        jo = parseInt(target.slice(0, -12), 10)
+        eok = parseInt(target.slice(-12, -8), 10)
+        man = parseInt(target.slice(-8, -4), 10)
+        thousand = parseInt(target.slice(-4), 10)
+
+        if (!eok && !man && !thousand) {
+          result = jo + '조원'
+        } else if (!eok && !man && thousand) {
+          result = jo + '조' + thousand + '원'
+        } else if (!eok && man && !thousand) {
+          result = jo + '조' + man + '만원'
+        } else if (eok && !man && !thousand) {
+          result = jo + '조' + eok + '억원'
+        } else if (eok && man && !thousand) {
+          result = jo + '조' + eok + '억' + man + '만원'
+        } else if (eok && !man && thousand) {
+          result = jo + '조' + eok + '억' + thousand + '원'
+        } else if (!eok && man && thousand) {
+          result = jo + '조' + man + '만' + thousand + '원'
+        } else {
+          result = jo + '조' + eok + '억' + man + '만' + thousand + '원'
+        }
       }
+
+      return val < 0 ? '-' + result : result
 
       //
       // for (var i = 0; i < num; i++) {
