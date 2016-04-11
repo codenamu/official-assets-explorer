@@ -51,8 +51,6 @@ Officials.Routers = Officials.Routers || {};
       this.switchLogoImg('normal')
       this.cleanMain()
 
-      $('header').hide()
-
       if (params) {
         Officials.MainView = new Officials.Views.Searchbox(params)
       } else {
@@ -81,7 +79,6 @@ Officials.Routers = Officials.Routers || {};
 
     contact: function() {
       this.switchLogoImg('normal')
-      // this.cleanMain()
 
       $('#search').hide()
       Officials.ActiveViews.headerView = new Officials.Views.Header()
