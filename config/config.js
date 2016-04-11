@@ -9,7 +9,7 @@ var config = {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://root:@localhost:3306/publicassets'
+    db: 'mysql://root:wkd486@localhost:3306/publicassets'
   },
 
   test: {
