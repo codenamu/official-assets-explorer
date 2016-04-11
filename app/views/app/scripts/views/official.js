@@ -23,9 +23,9 @@ Officials.Views = Officials.Views || {};
       var self = this;
       this.params = (Object.keys(params).length === 1 && Object.keys(params).indexOf('keyword') > -1 && !params.params.keyword) ? undefined : params.params;
 
-      if (!this.isMobile() && this.params !== undefined) {
-        this.getBacknForth(params)
-      }
+      // if (!this.isMobile() && this.params !== undefined) {
+      //   this.getBacknForth(params)
+      // }
 
       _.bindAll(self, 'detectScroll')
       $(window).scroll(self.detectScroll)
@@ -83,12 +83,12 @@ Officials.Views = Officials.Views || {};
     },
 
     clickBackNForth: function(e) {
-      Backbone.history.navigate($(e.target).closest('.backnforth').attr('id') + '?' + this.fixEncodeURI($.param(this.params)))
-      window.location.reload()
+      location.href = '/#' + $(e.target).closest('.backnforth').attr('id') + '?' + this.fixEncodeURI($.param(this.params))
     },
 
     clickHistoryBack: function() {
-      window.history.back()
+      delete this.params['uniqueId']
+      location.href = '/#?' + this.fixEncodeURI($.param(this.params))
     },
 
     getVelocityOffset: function() {
@@ -259,13 +259,25 @@ Officials.Views = Officials.Views || {};
           .attr('transform',
                 'translate(' + margin.left + ',' + margin.top + ')');
 
+        var yMax = (d3.max(datasets, function(p) { return p.total; }))
+        var yMin = (d3.min(datasets, function(p) { return p.total; }))
+
+        if (yMax < 0) {
+          var yDomainMax = 0
+        } else {
+          var yDomainMax = yMax
+        }
+
         x.domain(datasets.map(function(p) { return p.year; }))
         // .rangeBands([0, graphWidth]);
-        y.domain([0, d3.max(datasets, function(p) { return p.total; })])
+
+
+        y.domain([yMin, yDomainMax])
+
 
         svg.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
+            .attr("transform", "translate(0," + y(0) + ")")
             .call(xAxis)
           .selectAll('text')
             .style('text-anchor', 'end')
@@ -289,8 +301,27 @@ Officials.Views = Officials.Views || {};
             .style('fill', '#ffffff')
             .attr('x', function(d) { return x(d.year) - barWidth/2; })
             .attr('width', barWidth)
-            .attr('y', function(d) { return y(d.total); })
-            .attr('height', function(d) { return height - y(d.total); })
+            .attr('y', function(d) {
+              if (yMax < 0) {
+                return y(0)
+              } else {
+                return d.total < 0 ? y(0) : y(d.total);
+              }
+
+            })
+            .attr('height', function(d) {
+              if (yMax > 0) {
+                if (yMin < 0) {
+                  return (d.total < 0) ? height - y(-1 * d.total) : (height - (y(yMin) - y(0)) - y(d.total));
+                } else {
+                  return height - y(d.total)
+                }
+              } else {
+                console.log(d.total)
+                return y(d.total)
+              }
+
+            })
           .on("mouseover", function(d) {
             $('#official-asset-total > .number').text(self.calMeasureMoney(d.total))
             $('#official-asset-total > .year').text(d.year + '년')
@@ -333,6 +364,7 @@ Officials.Views = Officials.Views || {};
       delete model['id']
       delete model['_id']
       delete model['name']
+
 
       var pieData = this.makePieData(model)
 
@@ -400,7 +432,7 @@ Officials.Views = Officials.Views || {};
         pieData[model[y].year] = []
 
         model[y].Assets.forEach(function(d) {
-          if (d.total > 0) {
+          if (d.total !== 0) {
             var data = {}
             data.value = d.total
             data.color = self.selectPieColor(d.Cat2.title)
@@ -452,34 +484,44 @@ Officials.Views = Officials.Views || {};
      * @return {[type]} str [asset value adapted korean WON measure]
      */
     calMeasureMoney: function(str) {
-      var result = str.toString()
-      var num = Math.floor(result.length / 4)
+      var target = str.toString()
+      // var num = Math.floor(result.length / 4)
 
-      if (result.length % 4 === 0) {
-        num -= 1
+      if (target.length < 4) {
+        return parseInt(str.toString(), 10) + '원'
+      } else if (target.length < 8) {
+        return parseInt(target.slice(0, -4), 10) + '만 ' + parseInt(target.slice(-4), 10) + '원'
+      } else if (target.length < 12) {
+        return parseInt(target.slice(0, -8), 10) + '억 ' + parseInt(target.slice(-8, -4), 10) + '만' + parseInt(target.slice(-4), 10) + '원'
+      } else if (target.length < 16) {
+        return parseInt(target.slice(0, -12), 10) + '조 ' + parseInt(target.slice(-12, -8), 10) + '억' + parseInt(target.slice(-8, -4), 10) + '만 ' + parseInt(target.slice(-4), 10) + '원'
       }
 
-      for (var i = 0; i < num; i++) {
-        var index = (i + 1) * (-1) * 4 + 2 * (i * (-1))
-        var measure = ''
+      //
+      // for (var i = 0; i < num; i++) {
+      //   var index = (i + 1) * (-1) * 4 + 2 * (i * (-1))
+      //   var measure = ''
+      //   10억0000만0000원
+      //
+      //
+      //
+      //   switch (index) {
+      //     case -4:
+      //       measure = '만 '
+      //       break;
+      //     case -10:
+      //       measure = '억 '
+      //       break;
+      //     case -16:
+      //       measure = '조 '
+      //       break;
+      //     default:
+      //       break;
+      //   }
+      //   result = result.substr(0, result.length + index) + measure + result.substr(index);
+      // }
 
-        switch (index) {
-          case -4:
-            measure = '만 '
-            break;
-          case -10:
-            measure = '억 '
-            break;
-          case -16:
-            measure = '조 '
-            break;
-          default:
-            break;
-        }
-        result = result.substr(0, result.length + index) + measure + result.substr(index);
-      }
-
-      return result
+      // return result
     },
 
     sendEmail: function(e) {

@@ -6,13 +6,13 @@ p {
     color: #5c6d85;
 }
 
-button.btn, button.btn-large {
+button.btn, button.btn-large a.btn.btn-floating {
     width: 100%;
     box-shadow: none;
     border-radius: 0px;
 }
 
-button.btn:hover, button.btn-large:hover {
+button.btn:hover, button.btn-large:hover, a.btn.btn-floating:hover {
     box-shadow: none;
 }
 
@@ -241,6 +241,10 @@ ul.dropdown-content.select-dropdown {
 /*input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([readonly]), input[type=text].valid, input[type=text]:focus.valid {
     border-bottom-color: 2px solid #5C6D85;
 }*/
+
+input {
+    background-color: #ffffff !important;
+}
 
 input[type=text][readonly] {
     color: #fff !important;

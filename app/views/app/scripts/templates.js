@@ -20,9 +20,9 @@ __e( model.Person.uniqueId ) +
 '" class="card">\n    <div class="card-content">\n      <span class="card-title">' +
 __e( model.Person.name ) +
 '</span>\n      <span class="card-subtitle">' +
-__e( model.Position[model.Position.length - 1].Org3.title ) +
+__e( model.Position[0].Org3.title ) +
 '<br>' +
-__e( model.Position[model.Position.length - 1].title ) +
+__e( model.Position[0].title ) +
 '</span>\n    </div>\n    <div class="card-action">\n      ';
  model.Position.forEach(function(p) {;
 __p += '\n        <li>' +
@@ -33,7 +33,7 @@ __e( p.Org3.title ) +
 __e( p.title ) +
 '</li>\n      ';
  }) ;
-__p += '\n      <span class="card-link-to-btn">\n      <a class="btn btn-floating waves-effect waves-light color-news">\n        <img src="/img/arrow.png" alt="arrow-right" />\n      </a>\n      </span>\n    </div>\n  </div>\n</div>\n';
+__p += '\n      <span class="card-link-to-btn">\n      <a class="btn btn-floating color-news">\n        <img src="/img/arrow.png" alt="arrow-right" />\n      </a>\n      </span>\n    </div>\n  </div>\n</div>\n';
 
 }
 return __p
@@ -77,10 +77,10 @@ with (obj) {
 __p += '<section id="page-official">\n    <div class="row">\n        <div class="col s12 m6 offset-m3">\n            <div class="row history-back">\n                <img src="/img/history-back.png" alt="뒤로가기" /> 목록보기\n            </div>\n            <div class="card ontop">\n                <div class="backnforth backward">\n\n                </div>\n                <div class="backnforth forward">\n\n                </div>\n                <div class="card-content">\n                    <span class="card-title">' +
 __e( official.person.name ) +
 '</span>\n                    <span class="card-subtitle">' +
-__e( official.position[official.position.length - 1].title ) +
+__e( official.position[0].title ) +
 '</span>\n                </div>\n                <div class="card-action">\n                    <div class="row official-total">\n                        <h5><li>재산 총액</li></h5>\n                        <span id="official-asset-total" class="value"><span class="number">' +
 __e( official.assets.history[official.latestYear].totalText ) +
-'원</span><span class="year">' +
+'</span><span class="year">' +
 __e( official.latestYear ) +
 '년</span></span>\n                    </div>\n                    <div class="row official-history">\n                        <h5><li>재산 총액의 변동 이력</li></h5>\n                        <div class="official-bar-chart">\n                            <div id="canvas-bar"></div>\n                        </div>\n                        <div class="official-pie-chart">\n                            <h6></h6>\n                            <div id="canvas-pie"></div>\n                        </div>\n                    </div>\n                    <div class="row official-positions">\n                        <h5><li>재산 공개 이력</li></h5>\n                        <ul>\n                        ';
  for (var p in official.reorderedPosition) { ;
