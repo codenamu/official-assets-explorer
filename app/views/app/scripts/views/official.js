@@ -261,18 +261,11 @@ Officials.Views = Officials.Views || {};
 
         var yMax = (d3.max(datasets, function(p) { return p.total; }))
         var yMin = (d3.min(datasets, function(p) { return p.total; }))
-
-        if (yMax < 0) {
-          var yDomainMax = 0
-        } else {
-          var yDomainMax = yMax
-        }
+        var yDomainMin = yMin < 0 ? yMin : 0
+        var yDomainMax = yMax < 0 ? 0 : yMax
 
         x.domain(datasets.map(function(p) { return p.year; }))
-        // .rangeBands([0, graphWidth]);
-
-
-        y.domain([yMin, yDomainMax])
+        y.domain([yDomainMin, yDomainMax])
 
 
         svg.append("g")
