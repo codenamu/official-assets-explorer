@@ -14,6 +14,10 @@ Officials.Views = Officials.Views || {};
     events: {
       'change #selected-orgs'            : 'selectOrgs',
       'change #selected-years'           : 'selectYears',
+      'change #selected-orgs-mobile'     : 'selectOrgsMobile',
+      // 'change #selected-years-mobile'    : 'selectYearsMobile',
+      'click #selected-orgs-mobile > option'     : 'selectOrgsMobile',
+      'click #selected-years-mobile > option'    : 'selectYearsMobile',
       'change #selected-provinces'       : 'selectProvince',
       'change #selected-municipals'      : 'selectMunicipal',
       'change #selected-dongs'           : 'selectDong',
@@ -198,8 +202,18 @@ Officials.Views = Officials.Views || {};
       this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
     },
 
-    selectYears: function() {
+    selectOrgsMobile: function(e) {
+      $(this).attr('selected', true)
+      this.resetTags('default', 'orgs', $('#selected-orgs-mobile > option:selected'))
+    },
+
+    selectYears: function(e) {
       this.resetTags('default', 'years', $('#selected-years > option:selected'))
+    },
+
+    selectYearsMobile: function(e) {
+      $('#' + e.currentTarget.id).attr('selected', true)
+      this.resetTags('default', 'years', $('#selected-years-mobile > option:selected'))
     },
 
     selectProvince: function(callback) {
@@ -353,9 +367,11 @@ Officials.Views = Officials.Views || {};
         if (valLength > chips.length) {
         // if user added a tag
           for (; initNum < values.length; initNum++) {
-            var id = $(values[initNum]).attr('id').split('-')[3]
+            // var id = $(values[initNum]).attr('id').split('-')[3]
+            var id = $(values[initNum]).val()
 
             if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
+              console.log($('#tags-' + category + ' > .col'))
               $('#tags-' + category + ' > .col').append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[initNum]).val() + '<i class="material-icons">close</i></span>')
             }
           }

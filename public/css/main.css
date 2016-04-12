@@ -32,6 +32,27 @@ button.btn[type=submit] {
     display: none !important;
 }
 
+/*.hide-desktop {
+    display: block !important;
+}*/
+
+#selected-orgs, #selected-years {
+    display: none;
+}
+
+input.select-dropdown[type=text] {
+    display: none;
+}
+
+.select-wrapper > span.caret {
+    display: none;
+}
+
+#selected-orgs-mobile, #selected-years-mobile {
+    display: block;
+    height: 5rem;
+}
+
 .input-field.input-field-integrated > input[type=text] {
     border: 1px solid #5C6D85;
     padding: 0 16px;
@@ -764,6 +785,18 @@ footer.page-footer p {
 
     .hide-desktop {
         display: none !important;
+    }
+
+    #selected-orgs-mobile, #selected-years-mobile {
+        display: none;
+    }
+
+    input.select-dropdown[type=text] {
+        display: block;
+    }
+
+    .select-wrapper > span.caret {
+        display: block;
     }
 
     .input-field.input-field-integrated > input:focus, .input-field.input-field-integrated > input:active {
