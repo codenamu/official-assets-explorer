@@ -449,8 +449,13 @@ Officials.Views = Officials.Views || {};
       var chips = $('#tags-' + category + ' > .col > .chip.chip-' + subcategory)
 
       if (category === 'default') {
-        var valLength = isMobile === 'mobile' ? values.length : values.length - 1
-        var initNum = 1
+        if (isMobile === 'mobile') {
+          var varLength = values.length
+          var initNum = 0
+        } else {
+          var valLength = values.length - 1
+          var initNum = 1
+        }
 
         if (valLength > chips.length) {
         // if user added a tag
