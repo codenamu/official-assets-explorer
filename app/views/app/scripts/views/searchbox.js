@@ -97,7 +97,7 @@ Officials.Views = Officials.Views || {};
         }))
 
         $('#selected-orgs-mobile').append($('<option>', {
-          id: 'option-orgs-mobile-id-' + m.get('id'),
+          id: 'option-mobile-orgs-id-' + m.get('id'),
           value: m.get('title'),
           text: m.get('title')
         }))
@@ -111,7 +111,7 @@ Officials.Views = Officials.Views || {};
         }))
 
         $('#selected-provinces-mobile').append($('<option>', {
-          id: 'option-provinces-mobile-id-' + p.get('id'),
+          id: 'option-mobile-provinces-id-' + p.get('id'),
           value: p.get('name'),
           text: p.get('name')
         }))
@@ -136,6 +136,7 @@ Officials.Views = Officials.Views || {};
 
       if (params.org) {
         var orgOps = $('#selected-orgs > option')
+        var orgOpsMobile = $('#selected-orgs > option')
 
         if (typeof params.org === 'string') {
           params.org = params.org.split(',')
@@ -143,6 +144,7 @@ Officials.Views = Officials.Views || {};
 
         for (var i = 0; i < orgOps.length; i++) {
           if (params.org.indexOf(decodeURI($(orgOps[i]).val())) > -1) $(orgOps[i]).attr('selected', 'selected')
+          if (params.org.indexOf(decodeURI($(orgOpsMobile[i]).val())) > -1) $(orgOpsMobile[i]).attr('selected', 'selected')
         }
 
         $('#selected-orgs').material_select()
@@ -150,6 +152,7 @@ Officials.Views = Officials.Views || {};
 
       if (params.year) {
         var yearOps = $('#selected-years > option')
+        var yearOpsMobile = $('#selected-years-mobile > option')
 
         if (typeof params.year === 'string') {
           params.year = params.year.split(',')
@@ -157,6 +160,7 @@ Officials.Views = Officials.Views || {};
 
         for (var i = 0; i < yearOps.length; i++) {
           if (params.year.indexOf($(yearOps[i]).val()) > -1) $(yearOps[i]).attr('selected', 'selected')
+          if (params.year.indexOf($(yearOpsMobile[i]).val()) > -1) $(yearOpsMobile[i]).attr('selected', 'selected')
         }
 
         $('#selected-years').material_select()
@@ -164,6 +168,7 @@ Officials.Views = Officials.Views || {};
 
       if (params.election) {
         var provinceOps = $('#selected-provinces > option:not(:disabled)')
+        var provinceOpsMobile = $('#selected-provinces-mobile > option:not(:disabled)')
 
         for (var i = 0; i < provinceOps.length; i++) {
           if (params.province === $(provinceOps[i]).val()) {
@@ -171,10 +176,16 @@ Officials.Views = Officials.Views || {};
             $('#selected-provinces').material_select()
             break;
           }
+
+          if (params.province === $(provinceOpsMobile[i]).val()) {
+            $(provinceOpsMobile[i]).prop('selected', true)
+            break;
+          }
         }
 
         this.selectProvince(function() {
           var municipalOps = $('#selected-municipals > option:not(:disabled)')
+          var municipalOpsMobile = $('#selected-municipals-mobile > option:not(:disabled)')
 
           for (var i = 0; i < municipalOps.length; i++) {
             if (params.municipal === $(municipalOps[i]).val()) {
@@ -182,15 +193,26 @@ Officials.Views = Officials.Views || {};
               $('#selected-municipals').material_select()
               break;
             }
+
+            if (params.municipal === $(municipalOpsMobile[i]).val()) {
+              $(municipalOpsMobile[i]).prop('selected', true)
+              break;
+            }
           }
 
           self.selectMunicipal(function() {
             var dongOps = $('#selected-dongs > option:not(:disabled)')
+            var dongOps = $('#selected-dongs-mobile > option:not(:disabled)')
 
             for (var i = 0; i < dongOps.length; i++) {
               if (params.dong === $(dongOps[i]).val()) {
                 $(dongOps[i]).prop('selected', true)
                 $('#selected-dongs').material_select()
+                break;
+              }
+
+              if (params.dong === $(dongOpsMobile[i]).val()) {
+                $(dongOpsMobile[i]).prop('selected', true)
                 break;
               }
             }
@@ -267,7 +289,7 @@ Officials.Views = Officials.Views || {};
       this.municipals.fetch({data: 'province=' + $('#selected-provinces-mobile').val(), success: function() {
         self.municipals.models.forEach(function(m) {
           $('#selected-municipals-mobile').append($('<option>', {
-            id: 'option-municipals-id-' + m.get('id'),
+            id: 'option-mobile-municipals-id-' + m.get('id'),
             value: m.get('name'),
             text: m.get('name')
           }))
@@ -314,7 +336,7 @@ Officials.Views = Officials.Views || {};
       this.dongs.fetch({data: 'municipal=' + $('#selected-municipals-mobile').val(), success: function() {
         self.dongs.models.forEach(function(m) {
           $('#selected-dongs-mobile').append($('<option>', {
-            id: 'option-dongs-mobile-id-' + m.get('id'),
+            id: 'option-mobile-dongs-id-' + m.get('id'),
             value: m.get('name'),
             text: m.get('name')
           }))
@@ -355,8 +377,8 @@ Officials.Views = Officials.Views || {};
       if (e) e.preventDefault()
 
       var params = {}
-      params.org = $('#selected-orgs').val()
-      params.year = $('#selected-years').val()
+      params.org = $('#selected-orgs').val() || $('#selected-orgs-mobile').val()
+      params.year = $('#selected-years').val() || $('#selected-years-mobile').val()
       params.keyword = $('#selected-keyword').val()
 
       // set current url with query parameters
@@ -376,14 +398,20 @@ Officials.Views = Officials.Views || {};
       var params = {}
       if ($('#selected-provinces').val()) {
         params.province = $('#selected-provinces').val()
+      } else if ($('#selected-provinces-mobile').val()) {
+        params.province = $('#selected-provinces-mobile').val()
       }
 
       if ($('#selected-municipals').val()) {
         params.municipal = $('#selected-municipals').val()
+      } else if ($('#selected-municipals-mobile').val()) {
+        params.municipal = $('#selected-municipals-mobile').val()
       }
 
       if ($('#selected-dongs').val()) {
         params.dong = $('#selected-dongs').val()
+      } else if ($('#selected-dongs-mobile').val()) {
+        params.dong = $('#selected-dongs-mobile').val()
       }
 
       if ($('#selected-keyword-election').val()) {
@@ -429,18 +457,17 @@ Officials.Views = Officials.Views || {};
         // if user added a tag
           for (; initNum < values.length; initNum++) {
             // var id = $(values[initNum]).attr('id').split('-')[3]
-            var id = $(values[initNum]).val()
+            var id = $(values[initNum]).attr('id').split('-').length === 4 ? $(values[initNum]).attr('id').split('-')[3] : $(values[initNum]).attr('id').split('-')[4]
 
             if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
-              console.log($('#tags-' + category + ' > .col'))
               $('#tags-' + category + ' > .col').append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[initNum]).val() + '<i class="material-icons">close</i></span>')
             }
           }
         } else {
           // if user removed a tag
           for (var i = 0; i < chips.length; i++) {
-            var id = $(chips[i]).attr('id').split('-')[3]
-
+            // check user select options on mobile or desktop
+            var id = $(chips[i]).attr('id').split('-').length === 4 ? $(chips[i]).attr('id').split('-')[3] : $(chips[i]).attr('id').split('-')[4]
             if ($('#option-' + subcategory + '-id-' + id).prop('selected') === false) {
                $('#chip-' + subcategory + '-id-' + id).remove()
             }
@@ -469,6 +496,7 @@ Officials.Views = Officials.Views || {};
     },
 
     closeAChip: function(e) {
+      var id = 'option-' + $(e.target).closest('.chip').attr('id').split('-').slice(1).join('-')
       var id = 'option-' + $(e.target).closest('.chip').attr('id').split('-').slice(1).join('-')
 
       $('option#' + id).prop('selected', false)
