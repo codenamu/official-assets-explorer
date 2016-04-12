@@ -16,11 +16,12 @@ Officials.Views = Officials.Views || {};
       'change #selected-years'           : 'selectYears',
       'change #selected-orgs-mobile'     : 'selectOrgsMobile',
       'change #selected-years-mobile'    : 'selectYearsMobile',
-      // 'click #selected-orgs-mobile > option'     : 'selectOrgsMobile',
-      // 'click #selected-years-mobile > option'    : 'selectYearsMobile',
       'change #selected-provinces'       : 'selectProvince',
       'change #selected-municipals'      : 'selectMunicipal',
       'change #selected-dongs'           : 'selectDong',
+      'change #selected-provinces-mobile'       : 'selectProvinceMobile',
+      'change #selected-municipals-mobile'      : 'selectMunicipalMobile',
+      'change #selected-dongs-mobile'           : 'selectDongMobile',
       'submit form#form-search-default'  : 'submitDefaultSearch',
       'submit form#form-search-election' : 'submitElectionSearch',
       'click .chip > i'                  : 'closeAChip'
@@ -94,11 +95,23 @@ Officials.Views = Officials.Views || {};
           value: m.get('title'),
           text: m.get('title')
         }))
+
+        $('#selected-orgs-mobile').append($('<option>', {
+          id: 'option-orgs-mobile-id-' + m.get('id'),
+          value: m.get('title'),
+          text: m.get('title')
+        }))
       })
 
       this.provinces.models.forEach(function(p) {
         $('#selected-provinces').append($('<option>', {
           id: 'option-provinces-id-' + p.get('id'),
+          value: p.get('name'),
+          text: p.get('name')
+        }))
+
+        $('#selected-provinces-mobile').append($('<option>', {
+          id: 'option-provinces-mobile-id-' + p.get('id'),
           value: p.get('name'),
           text: p.get('name')
         }))
@@ -203,7 +216,6 @@ Officials.Views = Officials.Views || {};
     },
 
     selectOrgsMobile: function(e) {
-      $(this).attr('selected', true)
       this.resetTags('default', 'orgs', $('#selected-orgs-mobile > option:selected'))
     },
 
@@ -241,8 +253,31 @@ Officials.Views = Officials.Views || {};
         self.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
         cb()
       }})
+    },
 
+    selectProvinceMobile: function(callback) {
+      var self = this
+      var cb = typeof callback == 'function' ? callback : function(){}
+      // this.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
 
+      self.initRegionOptions($('#selected-municipals-mobile'))
+      self.initRegionOptions($('#selected-dongs-mobile'))
+
+      this.municipals = new Officials.Collections.Municipal()
+      this.municipals.fetch({data: 'province=' + $('#selected-provinces-mobile').val(), success: function() {
+        self.municipals.models.forEach(function(m) {
+          $('#selected-municipals-mobile').append($('<option>', {
+            id: 'option-municipals-id-' + m.get('id'),
+            value: m.get('name'),
+            text: m.get('name')
+          }))
+        })
+
+        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'))
+        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:selected'))
+        self.resetTags('election', 'provinces', $('#selected-provinces-mobile > option:selected'))
+        cb()
+      }})
     },
 
     selectMunicipal: function(callback) {
@@ -269,8 +304,34 @@ Officials.Views = Officials.Views || {};
 
     },
 
+    selectMunicipalMobile: function(callback) {
+      var self = this
+      var cb = typeof callback == 'function' ? callback : function(){}
+      // this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
+      self.initRegionOptions($('#selected-dongs-mobile'))
+
+      this.dongs = new Officials.Collections.Dong()
+      this.dongs.fetch({data: 'municipal=' + $('#selected-municipals-mobile').val(), success: function() {
+        self.dongs.models.forEach(function(m) {
+          $('#selected-dongs-mobile').append($('<option>', {
+            id: 'option-dongs-mobile-id-' + m.get('id'),
+            value: m.get('name'),
+            text: m.get('name')
+          }))
+        })
+
+        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'))
+        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:selected'))
+        cb()
+      }})
+    },
+
     selectDong: function() {
       this.resetTags('election', 'dongs', $('#selected-dongs > option:selected'))
+    },
+
+    selectDongMobile: function() {
+      this.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'))
     },
 
     initRegionOptions: function(target) {

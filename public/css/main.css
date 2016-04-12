@@ -48,7 +48,7 @@ input.select-dropdown[type=text] {
     display: none;
 }
 
-#selected-orgs-mobile, #selected-years-mobile {
+#selected-orgs-mobile, #selected-years-mobile, #selected-provinces-mobile, #selected-municipals-mobile,  #selected-dongs-mobile {
     display: block;
     height: 5rem;
 }
@@ -787,7 +787,7 @@ footer.page-footer p {
         display: none !important;
     }
 
-    #selected-orgs-mobile, #selected-years-mobile {
+    #selected-orgs-mobile, #selected-years-mobile, #selected-provinces-mobile, #selected-municipals-mobile, #selected-dongs-mobile  {
         display: none;
     }
 
