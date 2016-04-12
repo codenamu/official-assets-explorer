@@ -238,7 +238,7 @@ Officials.Views = Officials.Views || {};
     },
 
     selectOrgsMobile: function(e) {
-      this.resetTags('default', 'orgs', $('#selected-orgs-mobile > option:selected'))
+      this.resetTags('default', 'orgs', $('#selected-orgs-mobile > option:selected'), 'mobile')
     },
 
     selectYears: function(e) {
@@ -247,7 +247,7 @@ Officials.Views = Officials.Views || {};
 
     selectYearsMobile: function(e) {
       // $('#' + e.currentTarget.id).attr('selected', true)
-      this.resetTags('default', 'years', $('#selected-years-mobile > option:selected'))
+      this.resetTags('default', 'years', $('#selected-years-mobile > option:selected'), 'mobile')
     },
 
     selectProvince: function(callback) {
@@ -295,9 +295,9 @@ Officials.Views = Officials.Views || {};
           }))
         })
 
-        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'))
-        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:selected'))
-        self.resetTags('election', 'provinces', $('#selected-provinces-mobile > option:selected'))
+        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'), 'mobile')
+        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:selected'), 'mobile')
+        self.resetTags('election', 'provinces', $('#selected-provinces-mobile > option:selected'), 'mobile')
         cb()
       }})
     },
@@ -342,8 +342,8 @@ Officials.Views = Officials.Views || {};
           }))
         })
 
-        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'))
-        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:selected'))
+        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'), 'mobile')
+        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:selected'), 'mobile')
         cb()
       }})
     },
@@ -353,7 +353,7 @@ Officials.Views = Officials.Views || {};
     },
 
     selectDongMobile: function() {
-      this.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'))
+      this.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'), 'mobile')
     },
 
     initRegionOptions: function(target) {
@@ -445,12 +445,11 @@ Officials.Views = Officials.Views || {};
       }
     },
 
-    resetTags: function(category, subcategory, values) {
+    resetTags: function(category, subcategory, values, isMobile) {
       var chips = $('#tags-' + category + ' > .col > .chip.chip-' + subcategory)
 
-
       if (category === 'default') {
-        var valLength = values.length - 1
+        var valLength = isMobile === 'mobile' ? values.length : values.length - 1
         var initNum = 1
 
         if (valLength > chips.length) {
