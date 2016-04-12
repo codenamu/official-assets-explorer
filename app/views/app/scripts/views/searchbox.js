@@ -498,7 +498,7 @@ Officials.Views = Officials.Views || {};
     closeAChip: function(e) {
       var id = 'option-' + $(e.target).closest('.chip').attr('id').split('-').slice(1).join('-')
       var idMobile = 'option-mobile-' + $(e.target).closest('.chip').attr('id').split('-').slice(1).join('-')
-      
+
       $('option#' + id).attr('selected', false)
       $('option#' + idMobile).attr('selected', false)
       $('#selected-' + $(e.target).closest('.chip').attr('id').split('-')[1]).material_select()
