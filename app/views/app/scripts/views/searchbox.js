@@ -15,9 +15,9 @@ Officials.Views = Officials.Views || {};
       'change #selected-orgs'            : 'selectOrgs',
       'change #selected-years'           : 'selectYears',
       'change #selected-orgs-mobile'     : 'selectOrgsMobile',
-      // 'change #selected-years-mobile'    : 'selectYearsMobile',
-      'click #selected-orgs-mobile > option'     : 'selectOrgsMobile',
-      'click #selected-years-mobile > option'    : 'selectYearsMobile',
+      'change #selected-years-mobile'    : 'selectYearsMobile',
+      // 'click #selected-orgs-mobile > option'     : 'selectOrgsMobile',
+      // 'click #selected-years-mobile > option'    : 'selectYearsMobile',
       'change #selected-provinces'       : 'selectProvince',
       'change #selected-municipals'      : 'selectMunicipal',
       'change #selected-dongs'           : 'selectDong',
@@ -212,7 +212,7 @@ Officials.Views = Officials.Views || {};
     },
 
     selectYearsMobile: function(e) {
-      $('#' + e.currentTarget.id).attr('selected', true)
+      // $('#' + e.currentTarget.id).attr('selected', true)
       this.resetTags('default', 'years', $('#selected-years-mobile > option:selected'))
     },
 
