@@ -986,10 +986,6 @@ footer.page-footer p {
      height: 300px
  }
 
- #cavnas-pie {
-     /*height: 250px;*/
- }
-
 #canvas-bar {
     overflow-x: scroll;
 }

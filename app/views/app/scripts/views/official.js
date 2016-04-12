@@ -383,7 +383,7 @@ Officials.Views = Officials.Views || {};
         footer: {
           text: '자산 구성비',
           color: '#ffffff',
-          fontSize: 22,
+          fontSize: 18,
           location: 'bottom-center'
         },
         size: {
@@ -422,12 +422,13 @@ Officials.Views = Officials.Views || {};
        * make pie bigger if user's browser is from desktop
        */
       if (window.innerWidth > 768) {
-        pieOption.size.canvasWidth = 450
+        pieOption.size.canvasWidth = 500
         pieOption.size.canvasHeight = 450
-        pieOption.size.pieOuterRadius = '70%'
+        pieOption.size.pieOuterRadius = '80%'
       }
 
       this.myPie = new d3pie('canvas-pie', pieOption)
+      $('#p0_footer').attr('y', 428)
     },
 
     makePieData: function(model) {
