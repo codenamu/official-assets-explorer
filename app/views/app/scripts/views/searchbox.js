@@ -451,7 +451,7 @@ Officials.Views = Officials.Views || {};
       if (category === 'default') {
         if (isMobile === 'mobile') {
           var valLength = values.length
-          var initNum = 1
+          var initNum = 0
         } else {
           var valLength = values.length - 1
           var initNum = 1
