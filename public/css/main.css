@@ -14,6 +14,12 @@ p {
     color: #5c6d85;
 }
 
+input[type=text], textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 #canvas-pie svg {
     margin-left: -35px;
     margin-right: -35px;
@@ -45,9 +51,6 @@ button.btn[type=submit] {
     display: none !important;
 }
 
-/*.hide-desktop {
-    display: block !important;
-}*/
 
 #selected-orgs, #selected-years {
     display: none;
@@ -680,6 +683,18 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     margin-bottom: 0px;
 }
 
+#form-contact .input-field {
+    text-align: left;
+}
+
+#form-contact > .row:first-child .input-field {
+    padding: 0 0.05rem;
+}
+
+#form-contact > .row:first-child .input-field label {
+    font-size: 0.9rem;
+}
+
 #form-contact .input-field input, #form-contact .input-field textarea {
     border: 1px solid #dee2e7 !important;
     padding: 0 10px;
@@ -698,6 +713,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     padding: 0 15px;
     margin-top: 18px;
     min-width: 75px;
+    text-align: left;
 }
 
 #form-contact [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
