@@ -135,7 +135,7 @@ Officials.Views = Officials.Views || {};
 
       if (params.org) {
         var orgOps = $('#selected-orgs > option:not(:disabled)')
-        var orgOpsMobile = $('#selected-orgs > option:not(:disabled)')
+        var orgOpsMobile = $('#selected-orgs-mobile > option:not(:disabled)')
 
         if (typeof params.org === 'string') {
           params.org = params.org.split(',')
@@ -144,7 +144,7 @@ Officials.Views = Officials.Views || {};
 
         for (var i = 0; i < orgOps.length; i++) {
           if (params.org.indexOf($(orgOps[i]).val()) > -1) $(orgOps[i]).prop('selected', true)
-          if (params.org.indexOf($(orgOpsMobile[i]).val()) > -1) $(orgOpsMobile[i]).attr('selected', 'selected')
+          if (params.org.indexOf($(orgOpsMobile[i]).val()) > -1) $(orgOpsMobile[i]).prop('selected', true)
         }
 
         $('#selected-orgs').material_select()
@@ -153,7 +153,6 @@ Officials.Views = Officials.Views || {};
       if (params.year) {
         var yearOps = $('#selected-years > option:not(:disabled)')
         var yearOpsMobile = $('#selected-years-mobile > option:not(:disabled)')
-        console.log(yearOpsMobile)
 
         if (typeof params.year === 'string') {
           params.year = params.year.split(',')
