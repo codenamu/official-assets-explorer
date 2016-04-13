@@ -357,7 +357,16 @@ Officials.Views = Officials.Views || {};
     },
 
     initRegionOptions: function(target) {
-      var text = target.attr('id') === 'selected-municipals' ? '시/군/구를 선택하세요' : '읍/면/동을 선택하세요'
+      switch (target.attr('id')) {
+        case 'selected-municipals', 'selected-municipals-mobile':
+          var text = '시/군/구를 선택하세요'
+          break
+        case 'selected-dongs', 'selected-dongs-mobile':
+          var text = '읍/면/동을 선택하세요'
+          break
+      }
+
+      // var text = target.attr('id') === ('selected-municipals' || 'selected-municipals-mobile')? '시/군/구를 선택하세요' : '읍/면/동을 선택하세요'
       target.html('')
 
       target.append($('<option>', {
@@ -377,13 +386,14 @@ Officials.Views = Officials.Views || {};
       if (e) e.preventDefault()
 
       var params = {}
-      params.org = $('#selected-orgs').val() || $('#selected-orgs-mobile').val()
-      params.year = $('#selected-years').val() || $('#selected-years-mobile').val()
+
+      params.org = ($('#selected-orgs').attr('display') === 'none') ? $('#selected-orgs').val() : $('#selected-orgs-mobile').val()
+      params.year = ($('#selected-years').attr('display') === 'none') ? $('#selected-years').val() : $('#selected-years-mobile').val()
       params.keyword = $('#selected-keyword').val()
 
       // set current url with query parameters
       // if (Backbone.history.getFragment().split('?')[0] !== "") {
-        Backbone.history.navigate('/?' + this.fixEncodeURI($.param(params)), {trigger: false, replace: true})
+      Backbone.history.navigate('/?' + this.fixEncodeURI($.param(params)), {trigger: false, replace: true})
       // }
       // find results
       this.getResult(params)
@@ -396,6 +406,7 @@ Officials.Views = Officials.Views || {};
       if (e) e.preventDefault()
 
       var params = {}
+
       if ($('#selected-provinces').val()) {
         params.province = $('#selected-provinces').val()
       } else if ($('#selected-provinces-mobile').val()) {
@@ -451,7 +462,7 @@ Officials.Views = Officials.Views || {};
       if (category === 'default') {
         if (isMobile === 'mobile') {
           var valLength = values.length
-          var initNum = 0
+          var initNum = 1
         } else {
           var valLength = values.length - 1
           var initNum = 1
