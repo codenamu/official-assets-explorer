@@ -589,20 +589,35 @@ Officials.Views = Officials.Views || {};
       var self = this
       e.preventDefault()
 
-      $.post('/api/send', {
-        type: $('#contact-official-type').val(),
-        fromEmail: $('#contact-official-email').val(),
-        content: $('#contact-official-content').val()
-      })
-      .then(function(result) {
-        if (result[0].status === 'sent') {
-          alert('보내주신 내용을 잘 살펴보겠습니다. 감사합니다.')
-          $('#contact-official-' + self.result.person.uniqueId).closeModal();
-        } else {
-          alert('이메일을 보내는데 실패하였습니다. 원인을 찾아볼게요.')
-        }
-      })
+      if (document.getElementById('form-contact-official').checkValidity() === false) {
+        this.checkValidate()
+      } else {
+        $.post('/api/send', {
+          type: $('#contact-official-type').val(),
+          fromEmail: $('#contact-official-email').val(),
+          content: $('#contact-official-content').val()
+        })
+        .then(function(result) {
+          if (result[0].status === 'sent') {
+            alert('보내주신 내용을 잘 살펴보겠습니다. 감사합니다.')
+            $('#contact-official-' + self.result.person.uniqueId).closeModal();
+          } else {
+            alert('이메일을 보내는데 실패하였습니다. 원인을 찾아볼게요.')
+          }
+        })
+      }
+    },
 
+    checkValidate: function() {
+      var contactEmail = $('input[name=contact-official-email]', '#form-contact-official').val()
+      var contactContent = $('textarea[name=contact-official-content]', '#form-contact-official').val()
+      var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (contactEmail === '' || !emailRegex.test(contactEmail)) {
+        alert('이메일 주소를 확인해주세요')
+      } else if (contactContent === '') {
+        alert('제보할 내용을 확인해주세요')
+      }
     },
 
     isMobile: function() {
