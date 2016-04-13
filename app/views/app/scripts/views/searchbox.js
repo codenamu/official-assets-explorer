@@ -52,7 +52,6 @@ Officials.Views = Officials.Views || {};
       $('#search-tabs > ul.tabs').tabs();
       this.setInitSelectOptions()
       this.drawForms()
-      this.fixMaterialFormBug()
 
 
       if (!_.isEmpty(this.params)) {
@@ -171,6 +170,8 @@ Officials.Views = Officials.Views || {};
         var provinceOpsMobile = $('#selected-provinces-mobile > option:not(:disabled)')
 
         for (var i = 0; i < provinceOps.length; i++) {
+          console.log(params.province)
+          console.log($(provinceOps[i]).val())
           if (params.province === $(provinceOps[i]).val()) {
             $(provinceOps[i]).prop('selected', true)
             $('#selected-provinces').material_select()
@@ -357,11 +358,14 @@ Officials.Views = Officials.Views || {};
     },
 
     initRegionOptions: function(target) {
+      console.log(target.attr('id'))
       switch (target.attr('id')) {
-        case 'selected-municipals', 'selected-municipals-mobile':
+        case 'selected-municipals':
+        case 'selected-municipals-mobile':
           var text = '시/군/구를 선택하세요'
           break
-        case 'selected-dongs', 'selected-dongs-mobile':
+        case 'selected-dongs':
+        case 'selected-dongs-mobile':
           var text = '읍/면/동을 선택하세요'
           break
       }
@@ -387,8 +391,8 @@ Officials.Views = Officials.Views || {};
 
       var params = {}
 
-      params.org = ($('#selected-orgs').attr('display') === 'none') ? $('#selected-orgs').val() : $('#selected-orgs-mobile').val()
-      params.year = ($('#selected-years').attr('display') === 'none') ? $('#selected-years').val() : $('#selected-years-mobile').val()
+      params.org = ($('#selected-orgs').css('display') === 'none') ? $('#selected-orgs').val() : $('#selected-orgs-mobile').val()
+      params.year = ($('#selected-years').css('display') === 'none') ? $('#selected-years').val() : $('#selected-years-mobile').val()
       params.keyword = $('#selected-keyword').val()
 
       // set current url with query parameters
@@ -432,22 +436,16 @@ Officials.Views = Officials.Views || {};
       params.election = 1
 
       // set current url with query parameters
-      // if (Backbone.history.getFragment().split('?')[0] !== "") {
-        Backbone.history.navigate('?' + this.fixEncodeURI($.param(params)))
-      // }
+
+      Backbone.history.navigate('/?' + this.fixEncodeURI($.param(params)), {trigger: false, replace: true})
       // location.href = "http://stackoverflow.com";
       // find results
       this.getResult(params)
+
     },
 
     fixEncodeURI: function(param) {
       return param.replace(/%5B/g, '').replace(/%5D/g, '');
-    },
-
-    fixMaterialFormBug: function() {
-      $('input[readonly]').on('focus', function(ev) {
-        $(this).blur()
-      });
     },
 
     getResult: function(params) {

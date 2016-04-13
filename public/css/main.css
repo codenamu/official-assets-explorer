@@ -1,5 +1,13 @@
 html, body {
     font-family: "Noto Sans KR";
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    min-height: 100%;
+    position: relative;
 }
 
 p {
@@ -373,6 +381,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 #search .dropdown-content li.active, #search .dropdown-content li.selected {
     background-color: transparent;
+}
+
+#selected-keyword, #selected-keyword-election {
+    height: 3.15rem;
 }
 
 #search-result {
@@ -935,6 +947,10 @@ footer.page-footer p {
         font-size: 0.85rem;
     }
 
+    #main {
+        padding-bottom: 180px;
+    }
+
     #main .page.page-about h5 {
         font-size: 1.4rem;
         line-height: 2rem;
@@ -995,6 +1011,10 @@ footer.page-footer p {
 
     footer.page-footer {
         display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 
     footer.page-footer .col:last-child{
