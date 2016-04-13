@@ -450,8 +450,8 @@ Officials.Views = Officials.Views || {};
 
       if (category === 'default') {
         if (isMobile === 'mobile') {
-          var varLength = values.length
-          var initNum = 0
+          var valLength = values.length
+          var initNum = 1
         } else {
           var valLength = values.length - 1
           var initNum = 1
@@ -460,6 +460,7 @@ Officials.Views = Officials.Views || {};
         if (valLength > chips.length) {
         // if user added a tag
           for (; initNum < values.length; initNum++) {
+
             // var id = $(values[initNum]).attr('id').split('-')[3]
             var id = $(values[initNum]).attr('id').split('-').length === 4 ? $(values[initNum]).attr('id').split('-')[3] : $(values[initNum]).attr('id').split('-')[4]
 
