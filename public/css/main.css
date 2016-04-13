@@ -736,9 +736,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 
 #nav ul.side-nav li.nav-footer {
-    position: fixed;
+    position: absolute;;
     width: 240px;
-    bottom: 0px;
+    bottom: 115px;
     padding: 5px 15px;
     background-color: #5C6D85;
     font-size: 0.7rem;
