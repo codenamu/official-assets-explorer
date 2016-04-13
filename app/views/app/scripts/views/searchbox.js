@@ -235,20 +235,20 @@ Officials.Views = Officials.Views || {};
     },
 
     selectOrgs: function(e) {
-      this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
+      this.resetTags('default', 'orgs', $('#selected-orgs > option:not(:disabled):selected'))
     },
 
     selectOrgsMobile: function(e) {
-      this.resetTags('default', 'orgs', $('#selected-orgs-mobile > option:selected'), 'mobile')
+      this.resetTags('default', 'orgs', $('#selected-orgs-mobile > option:not(:disabled):selected'), 'mobile')
     },
 
     selectYears: function(e) {
-      this.resetTags('default', 'years', $('#selected-years > option:selected'))
+      this.resetTags('default', 'years', $('#selected-years > option:not(:disabled):selected'))
     },
 
     selectYearsMobile: function(e) {
       // $('#' + e.currentTarget.id).attr('selected', true)
-      this.resetTags('default', 'years', $('#selected-years-mobile > option:selected'), 'mobile')
+      this.resetTags('default', 'years', $('#selected-years-mobile > option:not(:disabled):selected'), 'mobile')
     },
 
     selectProvince: function(callback) {
@@ -271,9 +271,9 @@ Officials.Views = Officials.Views || {};
 
         $('#selected-municipals').material_select()
 
-        self.resetTags('election', 'dongs', $('#selected-dongs > option:selected'))
-        self.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
-        self.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
+        self.resetTags('election', 'dongs', $('#selected-dongs > option:not(:disabled):selected'))
+        self.resetTags('election', 'municipals', $('#selected-municipals > option:not(:disabled):selected'))
+        self.resetTags('election', 'provinces', $('#selected-provinces > option:not(:disabled):selected'))
         cb()
       }})
     },
@@ -296,9 +296,9 @@ Officials.Views = Officials.Views || {};
           }))
         })
 
-        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'), 'mobile')
-        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:selected'), 'mobile')
-        self.resetTags('election', 'provinces', $('#selected-provinces-mobile > option:selected'), 'mobile')
+        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
+        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:not(:disabled):selected'), 'mobile')
+        self.resetTags('election', 'provinces', $('#selected-provinces-mobile > option:not(:disabled):selected'), 'mobile')
         cb()
       }})
     },
@@ -319,8 +319,8 @@ Officials.Views = Officials.Views || {};
           }))
         })
 
-        self.resetTags('election', 'dongs', $('#selected-dongs > option:selected'))
-        self.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
+        self.resetTags('election', 'dongs', $('#selected-dongs > option:not(:disabled):selected'))
+        self.resetTags('election', 'municipals', $('#selected-municipals > option:not(:disabled):selected'))
         $('#selected-dongs').material_select()
         cb()
       }})
@@ -343,18 +343,18 @@ Officials.Views = Officials.Views || {};
           }))
         })
 
-        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'), 'mobile')
-        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:selected'), 'mobile')
+        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
+        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:not(:disabled):selected'), 'mobile')
         cb()
       }})
     },
 
     selectDong: function() {
-      this.resetTags('election', 'dongs', $('#selected-dongs > option:selected'))
+      this.resetTags('election', 'dongs', $('#selected-dongs > option:not(:disabled):selected'))
     },
 
     selectDongMobile: function() {
-      this.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:selected'), 'mobile')
+      this.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
     },
 
     initRegionOptions: function(target) {
@@ -458,13 +458,8 @@ Officials.Views = Officials.Views || {};
       var chips = $('#tags-' + category + ' > .col > .chip.chip-' + subcategory)
 
       if (category === 'default') {
-        if (isMobile === 'mobile') {
-          var valLength = values.length
-          var initNum = 1
-        } else {
-          var valLength = values.length - 1
-          var initNum = 1
-        }
+        var valLength = values.length
+        var initNum = 0
 
         if (valLength > chips.length) {
         // if user added a tag
