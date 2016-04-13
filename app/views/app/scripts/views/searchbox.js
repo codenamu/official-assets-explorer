@@ -141,9 +141,10 @@ Officials.Views = Officials.Views || {};
           params.org = params.org.split(',')
         }
 
+
         for (var i = 0; i < orgOps.length; i++) {
           if (params.org.indexOf($(orgOps[i]).val()) > -1) $(orgOps[i]).prop('selected', true)
-          if (params.org.indexOf($(orgOpsMobile[i]).val()) > -1) $(orgOpsMobile[i]).prop('selected', true)
+          if (params.org.indexOf($(orgOpsMobile[i]).val()) > -1) $(orgOpsMobile[i]).attr('selected', 'selected')
         }
 
         $('#selected-orgs').material_select()
