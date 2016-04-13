@@ -142,8 +142,8 @@ Officials.Views = Officials.Views || {};
         }
 
         for (var i = 0; i < orgOps.length; i++) {
-          if (params.org.indexOf(decodeURI($(orgOps[i]).val())) > -1) $(orgOps[i]).attr('selected', 'selected')
-          if (params.org.indexOf(decodeURI($(orgOpsMobile[i]).val())) > -1) $(orgOpsMobile[i]).attr('selected', 'selected')
+          if (params.org.indexOf(decodeURI($(orgOps[i]).val())) > -1) $(orgOps[i]).prop('selected', true)
+          if (params.org.indexOf(decodeURI($(orgOpsMobile[i]).val())) > -1) $(orgOpsMobile[i]).prop('selected', true)
         }
 
         $('#selected-orgs').material_select()
@@ -158,8 +158,8 @@ Officials.Views = Officials.Views || {};
         }
 
         for (var i = 0; i < yearOps.length; i++) {
-          if (params.year.indexOf($(yearOps[i]).val()) > -1) $(yearOps[i]).attr('selected', 'selected')
-          if (params.year.indexOf($(yearOpsMobile[i]).val()) > -1) $(yearOpsMobile[i]).attr('selected', 'selected')
+          if (params.year.indexOf($(yearOps[i]).val()) > -1) $(yearOps[i]).prop('selected', true)
+          if (params.year.indexOf($(yearOpsMobile[i]).val()) > -1) $(yearOpsMobile[i]).prop('selected', true)
         }
 
         $('#selected-years').material_select()
@@ -170,8 +170,6 @@ Officials.Views = Officials.Views || {};
         var provinceOpsMobile = $('#selected-provinces-mobile > option:not(:disabled)')
 
         for (var i = 0; i < provinceOps.length; i++) {
-          console.log(params.province)
-          console.log($(provinceOps[i]).val())
           if (params.province === $(provinceOps[i]).val()) {
             $(provinceOps[i]).prop('selected', true)
             $('#selected-provinces').material_select()
