@@ -652,7 +652,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 #main .card .card-action .official-total > span.value > span.number {
-    font-size: 2.2rem;
+    font-size: 1.2rem;
     color: rgb(255, 252, 169);
 }
 
@@ -1032,6 +1032,10 @@ footer.page-footer p {
 
     #page-official {
         padding: 45px 0;
+    }
+
+    #page-official .card .card-action .official-total > span.value > span.number {
+        font-size: 2.2rem;
     }
 
     #page-official .row.history-back {
