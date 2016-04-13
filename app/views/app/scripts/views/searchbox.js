@@ -142,8 +142,8 @@ Officials.Views = Officials.Views || {};
         }
 
         for (var i = 0; i < orgOps.length; i++) {
-          if (params.org.indexOf(decodeURI($(orgOps[i]).val())) > -1) $(orgOps[i]).prop('selected', true)
-          if (params.org.indexOf(decodeURI($(orgOpsMobile[i]).val())) > -1) $(orgOpsMobile[i]).prop('selected', true)
+          if (params.org.indexOf($(orgOps[i]).val()) > -1) $(orgOps[i]).prop('selected', true)
+          if (params.org.indexOf($(orgOpsMobile[i]).val()) > -1) $(orgOpsMobile[i]).prop('selected', true)
         }
 
         $('#selected-orgs').material_select()
@@ -152,6 +152,7 @@ Officials.Views = Officials.Views || {};
       if (params.year) {
         var yearOps = $('#selected-years > option:not(:disabled)')
         var yearOpsMobile = $('#selected-years-mobile > option:not(:disabled)')
+        console.log(yearOpsMobile)
 
         if (typeof params.year === 'string') {
           params.year = params.year.split(',')
@@ -464,7 +465,6 @@ Officials.Views = Officials.Views || {};
           for (; initNum < values.length; initNum++) {
 
             // var id = $(values[initNum]).attr('id').split('-')[3]
-            console.log(values)
             var id = $(values[initNum]).attr('id').split('-').length === 4 ? $(values[initNum]).attr('id').split('-')[3] : $(values[initNum]).attr('id').split('-')[4]
 
             if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
