@@ -267,11 +267,6 @@ input {
     background-color: #ffffff !important;
 }
 
-input[type=text][readonly] {
-    color: #fff !important;
-    -webkit-text-fill-color: #5C6D85;
-}
-
 input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
     box-shadow: none !important;
 }
@@ -797,6 +792,7 @@ footer.page-footer p {
 
     .select-wrapper > span.caret {
         display: block;
+        z-index: 1;
     }
 
     .input-field.input-field-integrated > input:focus, .input-field.input-field-integrated > input:active {
