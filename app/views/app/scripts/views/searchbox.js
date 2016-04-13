@@ -62,8 +62,8 @@ Officials.Views = Officials.Views || {};
          * if use request with default search option
          */
         if (!this.params['election']) {
-          this.resetTags('default', 'orgs', $('#selected-orgs > option:selected'))
-          this.resetTags('default', 'years', $('#selected-years > option:selected'))
+          this.resetTags('default', 'orgs', $('#selected-orgs > option:not(:disabled):selected'))
+          this.resetTags('default', 'years', $('#selected-years > option:not(:disabled):selected'))
         } else {
           /**
          * if use request with election cadidates search option
@@ -134,8 +134,8 @@ Officials.Views = Officials.Views || {};
 
 
       if (params.org) {
-        var orgOps = $('#selected-orgs > option')
-        var orgOpsMobile = $('#selected-orgs > option')
+        var orgOps = $('#selected-orgs > option:not(:disabled)')
+        var orgOpsMobile = $('#selected-orgs > option:not(:disabled)')
 
         if (typeof params.org === 'string') {
           params.org = params.org.split(',')
@@ -150,8 +150,8 @@ Officials.Views = Officials.Views || {};
       }
 
       if (params.year) {
-        var yearOps = $('#selected-years > option')
-        var yearOpsMobile = $('#selected-years-mobile > option')
+        var yearOps = $('#selected-years > option:not(:disabled)')
+        var yearOpsMobile = $('#selected-years-mobile > option:not(:disabled)')
 
         if (typeof params.year === 'string') {
           params.year = params.year.split(',')
@@ -466,6 +466,7 @@ Officials.Views = Officials.Views || {};
           for (; initNum < values.length; initNum++) {
 
             // var id = $(values[initNum]).attr('id').split('-')[3]
+            console.log(values)
             var id = $(values[initNum]).attr('id').split('-').length === 4 ? $(values[initNum]).attr('id').split('-')[3] : $(values[initNum]).attr('id').split('-')[4]
 
             if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
