@@ -99,8 +99,9 @@ nav#nav a.brand-logo.logo-main:not(.active) {
 
 nav#nav a.brand-logo.logo-normal {
     font-size: 1.2rem;
-    left: 139px;
+    left: 125px;
     padidng: 0px;
+    letter-spacing: -0.15rem
 }
 
 nav#nav a.brand-logo.logo-normal:not(.active) {
@@ -161,9 +162,25 @@ nav#nav .button-collapse i {
 
 nav.nav-desktop {
     display: none;
+    position: relative;
     background: transparent;
     box-shadow: none;
     padding: 28px 0px !important;
+}
+
+nav.nav-desktop ul li {
+    position: relative;
+}
+
+nav.nav-desktop ul li:not(:first-child) a:before {
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 23px;
+    background-image: url('/img/menu-bar.png');
+    background-size: cover;
+    width: 1px;
+    height: 19px;
 }
 
 nav.nav-desktop ul li a {
