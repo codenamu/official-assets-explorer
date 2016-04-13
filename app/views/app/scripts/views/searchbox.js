@@ -391,15 +391,15 @@ Officials.Views = Officials.Views || {};
 
       var params = {}
 
-      params.org = ($('#selected-orgs').css('display') === 'none') ? $('#selected-orgs').val() : $('#selected-orgs-mobile').val()
-      params.year = ($('#selected-years').css('display') === 'none') ? $('#selected-years').val() : $('#selected-years-mobile').val()
+      params.org = ($('input.select-dropdown').css('display') !== 'none') ? $('#selected-orgs').val() : $('#selected-orgs-mobile').val()
+      params.year = ($('input.select-dropdown').css('display') !== 'none') ? $('#selected-years').val() : $('#selected-years-mobile').val()
       params.keyword = $('#selected-keyword').val()
 
       // set current url with query parameters
       // if (Backbone.history.getFragment().split('?')[0] !== "") {
       Backbone.history.navigate('/?' + this.fixEncodeURI($.param(params)), {trigger: false, replace: true})
-      // }
-      // find results
+      // // }
+      // // find results
       this.getResult(params)
     },
 

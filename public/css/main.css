@@ -53,9 +53,9 @@ button.btn[type=submit] {
 }
 
 
-#selected-orgs, #selected-years {
+/*#selected-orgs, #selected-years {
     display: none;
-}
+}*/
 
 input.select-dropdown[type=text] {
     display: none;
