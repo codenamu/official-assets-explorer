@@ -225,17 +225,21 @@ Officials.Views = Officials.Views || {};
         datasets.push(pos)
       })
 
-      var graphWidth = 500
+      var graphWidth = 600
 
       if (window.innerWidth < 768) {
-        graphWidth = 350
+        graphWidth = window.innerWidth
 
-        if (datasets.length > 5) {
-          graphWidth += 50 * (datasets.length - 5)
+        if (datasets.length < 3) {
+          graphWidth -= 50 * (datasets.length)
         }
       }
 
-      var margin = {top: 50, right: 20, bottom: 70, left: 40}
+      if (datasets.length > 5) {
+        graphWidth += 50 * (datasets.length - 5)
+      }
+
+      var margin = {top: 50, right: 40, bottom: 70, left: 40}
       var width = graphWidth - margin.left - margin.right
       var height = 290 - margin.top - margin.bottom
       var barWidth = 26
@@ -256,6 +260,7 @@ Officials.Views = Officials.Views || {};
           .attr('width', width + margin.left + margin.right)
           .attr('height', height + margin.top + margin.bottom)
         .append('g')
+          .attr('width', width)
           .attr('transform',
                 'translate(' + margin.left + ',' + margin.top + ')');
 
@@ -306,7 +311,6 @@ Officials.Views = Officials.Views || {};
               } else {
                 return d.total < 0 ? y(0) : y(d.total);
               }
-
             })
             .attr('height', function(d) {
               if (yMax > 0) {
@@ -374,10 +378,15 @@ Officials.Views = Officials.Views || {};
       delete model['_id']
       delete model['name']
 
-
       var pieData = this.makePieData(model)
-
       if (this.myPie) this.myPie.destroy()
+
+      var canvasWidth = 600
+
+      if (window.innerWidth < 768) {
+        canvasWidth = window.innerWidth - 20
+      }
+
 
       var pieOption = {
         footer: {
@@ -387,9 +396,9 @@ Officials.Views = Officials.Views || {};
           location: 'bottom-center'
         },
         size: {
-          canvasWidth: 320,
+          canvasWidth: canvasWidth,
           canvasHeight: 300,
-          pieOuterRadius: "70%"
+          pieOuterRadius: "60%"
         },
         data: {
           content: pieData[year]
