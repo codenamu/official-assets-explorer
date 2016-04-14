@@ -25,7 +25,7 @@ Officials.Views = Officials.Views || {};
     },
 
     afterRender: function(event) {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth <= 768) {
         $('.button-collapse').sideNav()
         $('.drag-target').css('touch-action', 'no')
       }

@@ -74,9 +74,10 @@ input.select-dropdown[type=text] {
     font: inherit;
     outline: none;
     line-height: 1.2;
-    background: #ffffff;
+    background-color: transparent;
     color: #5c6d85;
     -webkit-appearance: none;
+    z-index: 12;
 }
 
 .input-field.input-field-integrated > input[type=text] {
@@ -302,9 +303,14 @@ ul.dropdown-content.select-dropdown {
     border-bottom-color: #5C6D85;
 }
 
-/*input[type=text]:focus, input[type=text]:active, input[type=text]:focus:not([readonly]), input[type=text].valid, input[type=text]:focus.valid {
-    border-bottom-color: 2px solid #5C6D85;
-}*/
+input[type=text].select-dropdown {
+    background-color: transparent;
+    z-index: 12;
+}
+
+span.caret {
+    z-index: 11;
+}
 
 input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
     box-shadow: none !important;
@@ -416,7 +422,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 #search form .input-field .caret-mobile {
     position: absolute;
-    z-index: 1;
+    z-index: 11;
     top: 10px;
     right: 20px;
     color: #5c6d85;
@@ -844,50 +850,7 @@ footer.page-footer p {
     font-size: 0.8rem;
 }
 
-@media only screen and (min-width: 768px) {
-    svg {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .hide-mobile {
-        display: block !important;
-    }
-
-    .hide-desktop {
-        display: none !important;
-    }
-
-    #selected-orgs-mobile, #selected-years-mobile, #selected-provinces-mobile, #selected-municipals-mobile, #selected-dongs-mobile  {
-        display: none;
-    }
-
-    input.select-dropdown[type=text] {
-        display: block;
-    }
-
-    .select-wrapper > span.caret {
-        display: block;
-        z-index: 1;
-    }
-
-    .input-field.input-field-integrated > input:focus, .input-field.input-field-integrated > input:active {
-        height: 2.95rem;
-    }
-
-    .input-field.input-field-integrated > button {
-        position: absolute;
-        top: 0px;
-        right: -88px;
-        width: 100px;
-        height: 45px;
-        line-height: 47px;
-    }
-
-    button.btn[type=submit] {
-        font-size: 1rem;
-    }
-
+@media only screen and (min-width: 769px) {
     nav#nav {
         height: 90px;
     }
@@ -954,6 +917,74 @@ footer.page-footer p {
         display: block;
     }
 
+    header {
+        height: 140px;
+        padding: 10px;
+        margin-top: 90px;
+    }
+
+    header h1 > a {
+        font-size: 3.2rem;
+    }
+
+    #main {
+        padding-bottom: 180px;
+    }
+
+}
+
+@media only screen and (min-width: 768px) {
+    svg {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .hide-mobile {
+        display: block !important;
+    }
+
+    .hide-desktop {
+        display: none !important;
+    }
+
+    #selected-orgs-mobile, #selected-years-mobile, #selected-provinces-mobile, #selected-municipals-mobile, #selected-dongs-mobile  {
+        display: none;
+    }
+
+    input.select-dropdown[type=text] {
+        display: block;
+    }
+
+    .select-wrapper > span.caret {
+        display: block;
+        z-index: 1;
+    }
+
+    .input-field.input-field-integrated > input:focus, .input-field.input-field-integrated > input:active {
+        height: 2.95rem;
+    }
+
+    .input-field.input-field-integrated > button {
+        position: absolute;
+        top: 0px;
+        right: -88px;
+        width: 100px;
+        height: 45px;
+        line-height: 47px;
+    }
+
+    button.btn[type=submit] {
+        font-size: 1rem;
+    }
+
+    nav#nav a.brand-logo {
+        left: 135px;
+    }
+
+    nav#nav a.brand-logo img {
+        width: 165px;
+    }
+
     #search {
         margin-top: 90px;
         display: block;
@@ -967,7 +998,7 @@ footer.page-footer p {
     header {
         height: 140px;
         padding: 10px;
-        margin-top: 90px;
+        margin-top: 56px;
     }
 
     header > .row > .col {
@@ -980,7 +1011,7 @@ footer.page-footer p {
     }
 
     header h1 > a {
-        font-size: 3.2rem;
+        font-size: 2.2rem;
     }
 
     header div.subtitle {
@@ -1012,7 +1043,7 @@ footer.page-footer p {
     }
 
     #main {
-        padding-bottom: 180px;
+        padding-bottom: 320px;
     }
 
     #main .page.page-about p {

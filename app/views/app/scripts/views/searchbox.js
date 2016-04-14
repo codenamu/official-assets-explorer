@@ -12,19 +12,21 @@ Officials.Views = Officials.Views || {};
     el: '#search',
 
     events: {
-      'change #selected-orgs'            : 'selectOrgs',
-      'change #selected-years'           : 'selectYears',
-      'change #selected-orgs-mobile'     : 'selectOrgsMobile',
-      'change #selected-years-mobile'    : 'selectYearsMobile',
-      'change #selected-provinces'       : 'selectProvince',
-      'change #selected-municipals'      : 'selectMunicipal',
-      'change #selected-dongs'           : 'selectDong',
-      'change #selected-provinces-mobile'       : 'selectProvinceMobile',
-      'change #selected-municipals-mobile'      : 'selectMunicipalMobile',
-      'change #selected-dongs-mobile'           : 'selectDongMobile',
-      'submit form#form-search-default'  : 'submitDefaultSearch',
-      'submit form#form-search-election' : 'submitElectionSearch',
-      'click .chip > i'                  : 'closeAChip'
+      'change #selected-orgs'               : 'selectOrgs',
+      'change #selected-years'              : 'selectYears',
+      'change #selected-orgs-mobile'        : 'selectOrgsMobile',
+      'change #selected-years-mobile'       : 'selectYearsMobile',
+      'change #selected-provinces'          : 'selectProvince',
+      'change #selected-municipals'         : 'selectMunicipal',
+      'change #selected-dongs'              : 'selectDong',
+      'change #selected-provinces-mobile'   : 'selectProvinceMobile',
+      'change #selected-municipals-mobile'  : 'selectMunicipalMobile',
+      'change #selected-dongs-mobile'       : 'selectDongMobile',
+      'submit form#form-search-default'     : 'submitDefaultSearch',
+      'submit form#form-search-election'    : 'submitElectionSearch',
+      'click .chip > i'                     : 'closeAChip',
+      'click .caret'                        : 'clickCaret',
+      'click .caret-mobile'                 : 'clickCaretMobile'
     },
 
     initialize: function (params) {
@@ -505,6 +507,19 @@ Officials.Views = Officials.Views || {};
       }
 
 
+    },
+
+    clickCaret: function(e) {
+      $($(e.target).nextAll('input')[0]).trigger('mousedown')
+      $($(e.target).nextAll('ul')[0]).trigger('mousedown')
+      $($(e.target).nextAll('select')[0]).trigger('mousedown')
+      $(e.target).nextAll('input').trigger('mousedown')
+      $(e.target).nextAll('ul').trigger('mousedown')
+      $(e.target).nextAll('select').trigger('mousedown')
+    },
+
+    clickCaretMobile: function(e) {
+      console.log($(e.target))
     },
 
     closeAChip: function(e) {

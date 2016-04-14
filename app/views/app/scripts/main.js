@@ -1,16 +1,11 @@
 /*global officials, $*/
-
-
 window.Officials = {
   Models: {},
   Collections: {},
   Views: {},
   Routers: {},
   ActiveViews: {},
-  init: function () {
-    'use strict';
-    var App = new Officials.Routers.Main
-
+  initViews: function() {
     Backbone.View.prototype.destroy = function(){
       if (this.subViews) {
         subViews.forEach(function(v) { v.destroy() })
@@ -24,8 +19,19 @@ window.Officials = {
     }
 
     Backbone.View.prototype.getVelocityOffset = function() {
-      return (window.innerWidth < 768) ? -56 : -95
+      return (window.innerWidth <= 768) ? -56 : -95
     }
+  },
+
+  initGoogleAnalytics: function() {
+    window.ga('create', '' , 'mysite.com');
+  },
+  init: function () {
+    'use strict';
+    var App = new Officials.Routers.Main
+
+    this.initViews()
+    this.initGoogleAnalytics()
 
     Backbone.history.start()
   }

@@ -18,6 +18,13 @@ Officials.Routers = Officials.Routers || {};
       if (!Officials.ActiveViews.navView) {
         Officials.ActiveViews.navView = new Officials.Views.Nav()
       }
+
+      this.bind('route', this._pageView);
+    },
+
+    _pageView: function() {
+      var path = Backbone.history.getFragment();
+      ga('send', 'pageview', {page: "/" + path});
     },
 
     main: function(params) {

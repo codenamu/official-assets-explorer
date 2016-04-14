@@ -227,7 +227,7 @@ Officials.Views = Officials.Views || {};
 
       var graphWidth = 500
 
-      if (window.innerWidth < 768) {
+      if (window.innerWidth <= 768) {
         graphWidth = window.innerWidth
 
         if (datasets.length < 3) {
@@ -383,7 +383,9 @@ Officials.Views = Officials.Views || {};
 
       var canvasWidth = 600
 
-      if (window.innerWidth < 768) {
+      if (window.innerWidth <= 768 && window.innerWidth > 599) {
+        canvasWidth = 300
+      } else if (window.innerWidth < 600) {
         canvasWidth = window.innerWidth - 20
       }
 

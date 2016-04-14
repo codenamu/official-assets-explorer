@@ -4,6 +4,8 @@ var path = require('path'),
 
 var config = {
   development: {
+    smtp: {},
+    analytics: '',
     root: rootPath,
     app: {
       name: 'publicassets'
@@ -13,6 +15,8 @@ var config = {
   },
 
   test: {
+    smtp: {},
+    analytics: '',
     root: rootPath,
     app: {
       name: 'publicassets'
@@ -22,6 +26,8 @@ var config = {
   },
 
   production: {
+    smtp: {},
+    analytics: '',
     root: rootPath,
     app: {
       name: 'publicassets'
