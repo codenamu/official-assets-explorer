@@ -225,7 +225,7 @@ Officials.Views = Officials.Views || {};
         datasets.push(pos)
       })
 
-      var graphWidth = 600
+      var graphWidth = 500
 
       if (window.innerWidth < 768) {
         graphWidth = window.innerWidth
