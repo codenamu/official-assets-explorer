@@ -449,7 +449,11 @@ Officials.Views = Officials.Views || {};
 
     getResult: function(params) {
       if (Backbone.history.getFragment().split('?')[0] === "") {
-        Officials.ActiveViews = new Officials.Views.Searchresult(params)
+        if (Officials.ActiveViews.resultView) {
+          Officials.ActiveViews.resultView.destroy()
+        }
+
+        Officials.ActiveViews.resultView = new Officials.Views.Searchresult(params)
       }
     },
 
