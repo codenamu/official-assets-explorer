@@ -23,10 +23,6 @@ Officials.Views = Officials.Views || {};
       var self = this;
       this.params = (Object.keys(params).length === 1 && Object.keys(params).indexOf('keyword') > -1 && !params.params.keyword) ? undefined : params.params;
 
-      // if (!this.isMobile() && this.params !== undefined) {
-      //   this.getBacknForth(params)
-      // }
-
       _.bindAll(self, 'detectScroll')
       $(window).scroll(self.detectScroll)
 

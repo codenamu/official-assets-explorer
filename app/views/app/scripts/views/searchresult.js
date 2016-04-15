@@ -176,6 +176,7 @@ Officials.Views = Officials.Views || {};
     },
 
     clickCard: function(event) {
+      this.destroy()
       location.href = '/#'  + $(event.target).closest('.card').attr('id').slice(9) + '?' + this.fixEncodeURI($.param(this.params))
     },
 

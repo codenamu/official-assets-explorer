@@ -508,19 +508,6 @@ Officials.Views = Officials.Views || {};
 
     },
 
-    clickCaret: function(e) {
-      $($(e.target).nextAll('input')[0]).trigger('mousedown')
-      $($(e.target).nextAll('ul')[0]).trigger('mousedown')
-      $($(e.target).nextAll('select')[0]).trigger('mousedown')
-      $(e.target).nextAll('input').trigger('mousedown')
-      $(e.target).nextAll('ul').trigger('mousedown')
-      $(e.target).nextAll('select').trigger('mousedown')
-    },
-
-    clickCaretMobile: function(e) {
-      console.log($(e.target))
-    },
-
     closeAChip: function(e) {
       var id = 'option-' + $(e.target).closest('.chip').attr('id').split('-').slice(1).join('-')
       var idMobile = 'option-mobile-' + $(e.target).closest('.chip').attr('id').split('-').slice(1).join('-')
@@ -528,16 +515,7 @@ Officials.Views = Officials.Views || {};
       $('option#' + id).attr('selected', false)
       $('option#' + idMobile).attr('selected', false)
       $('#selected-' + $(e.target).closest('.chip').attr('id').split('-')[1]).material_select()
-    },
-
-    destroy: function() {
-      this.undelegateEvents();
-      this.$el.empty();
-      this.stopListening();
-      delete Officials.ActiveViews['SearchboxView']
-      return this;
     }
-
   });
 
 })();
