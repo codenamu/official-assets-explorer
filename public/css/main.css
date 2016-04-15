@@ -68,7 +68,7 @@ input.select-dropdown[type=text] {
     position: relative;
     display: inline-block;
     border: none;
-    border-bottom: 2px solid #5c6d85;
+    border-bottom: 1px solid #5c6d85;
     padding: 4px 3px 3px 5px;
     margin: 0;
     font: inherit;
