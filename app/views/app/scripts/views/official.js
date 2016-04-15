@@ -140,9 +140,7 @@ Officials.Views = Officials.Views || {};
 
           if (model[m].Assets.length) {
             model[m].Assets.forEach(function(a) {
-              // if (a.Cat2.title !== '채무') {
-                self.result.assets.history[model[m].year].total += a.total
-              // }
+              self.result.assets.history[model[m].year].total += a.total
             })
           }
         }

@@ -8,7 +8,7 @@ window.Officials = {
   initViews: function() {
     Backbone.View.prototype.destroy = function(){
       if (this.subViews) {
-        subViews.forEach(function(v) { v.destroy() })
+        this.subViews.forEach(function(v) { v.destroy() })
       }
       $(this.el).removeData().unbind();
       this.undelegateEvents();
