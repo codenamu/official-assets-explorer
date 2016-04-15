@@ -120,26 +120,25 @@ Officials.Views = Officials.Views || {};
       this.result.assets.history = {}
 
       Object.keys(model).forEach(function(m) {
-        if (model[m].isMain) {
-          var position = $.extend(true, {}, model[m].Position)
-          position.year = model[m].year
-          position.pdfUrl = model[m].pdfUrl
+        var position = $.extend(true, {}, model[m].Position)
+        position.isMain = model[m].isMain
+        position.year = model[m].year
+        position.pdfUrl = model[m].pdfUrl
 
-          if (model[m].year > self.result.latestYear) {
-            self.result.latestYear = model[m].year
-          }
+        if (model[m].year > self.result.latestYear) {
+          self.result.latestYear = model[m].year
+        }
 
-          self.result.position.push(position)
-          self.result.assets.history[model[m].year] = {}
-          self.result.assets.history[model[m].year].pdfUrl = model[m].pdfUrl
-          self.result.assets.history[model[m].year].assets = model[m].Assets
-          self.result.assets.history[model[m].year].total = 0
+        self.result.position.push(position)
+        self.result.assets.history[model[m].year] = {}
+        self.result.assets.history[model[m].year].pdfUrl = model[m].pdfUrl
+        self.result.assets.history[model[m].year].assets = model[m].Assets
+        self.result.assets.history[model[m].year].total = 0
 
-          if (model[m].Assets.length) {
-            model[m].Assets.forEach(function(a) {
-              self.result.assets.history[model[m].year].total += a.total
-            })
-          }
+        if (model[m].Assets.length) {
+          model[m].Assets.forEach(function(a) {
+            self.result.assets.history[model[m].year].total += a.total
+          })
         }
 
         if (model[m].openId.slice(0, 4) === 'elec') {
@@ -209,15 +208,17 @@ Officials.Views = Officials.Views || {};
       var datasets = []
 
       this.result.position.forEach(function(p) {
-        var pos = {};
-        pos.year = p.year
-        pos.total = 0
+        if (p.isMain) {
+          var pos = {};
+          pos.year = p.year
+          pos.total = 0
 
-        self.result.assets.history[p.year].assets.forEach(function(h) {
-          pos.total += h.total
-        })
+          self.result.assets.history[p.year].assets.forEach(function(h) {
+            pos.total += h.total
+          })
 
-        datasets.push(pos)
+          datasets.push(pos)
+        }
       })
 
       var graphWidth = 500

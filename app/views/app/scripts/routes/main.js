@@ -23,7 +23,7 @@ Officials.Routers = Officials.Routers || {};
     },
 
     _pageView: function() {
-      var path = Backbone.history.getFragment();
+      var path = decodeURI(Backbone.history.getFragment());
       ga('send', 'pageview', {page: "/" + path});
     },
 
