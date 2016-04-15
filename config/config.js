@@ -18,7 +18,11 @@ var config = {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://root:@localhost:3306/publicassets'
+    db: {
+      database: 'publicassets',
+      username: 'root',
+      password: ''
+    }
   },
 
   test: {
@@ -36,7 +40,11 @@ var config = {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://' + process.env.mysqlUsername + ':' + process.env.mysqlPassword + '@localhost:3306/process.env.officialDbName'
+    db: {
+      database: 'publicassets-test',
+      username: process.env.mysqlUsername,
+      password: process.env.mysqlPassword
+    }
   },
 
   production: {
@@ -54,7 +62,11 @@ var config = {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://' + process.env.mysqlUsername + ':' + process.env.mysqlPassword + '@localhost:3306/publicassets-production'
+    db: {
+      database: 'publicassets',
+      username: process.env.mysqlUsername,
+      password: process.env.mysqlPassword
+    }
   }
 };
 

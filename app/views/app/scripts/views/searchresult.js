@@ -107,17 +107,18 @@ Officials.Views = Officials.Views || {};
           officials[id].Position.push(o.Position)
         } else {
           officials[id] = {}
+          officials[id].isElec = false
           o.Position.year = o.year
           officials[id].Person = o.Person
           officials[id].Position = []
           officials[id].Position.push(o.Position)
         }
 
+        // set the main org/pos party/region if he/she was elected on 20th election
         if (o.openId.slice(0, 4) === 'elec') {
           officials[id].isElec = true
+          officials[id].mainOrg = o.Position.Org3.title
           officials[id].mainPos = o.Position.title
-        } else {
-          officials[id].isElec = false
         }
       })
 

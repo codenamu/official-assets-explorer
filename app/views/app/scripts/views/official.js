@@ -112,6 +112,7 @@ Officials.Views = Officials.Views || {};
 
       this.result = {}
       this.result.person = model[0].Person
+      this.result.isElec = false
       this.result.latestYear = 0
       this.result.position = []
       this.result.assets = {}
@@ -143,9 +144,8 @@ Officials.Views = Officials.Views || {};
 
         if (model[m].openId.slice(0, 4) === 'elec') {
           self.result.isElec = true
+          self.result.mainOrg = model[m].Position.Org3.title
           self.result.mainPos = model[m].Position.title
-        } else {
-          self.result.isElec = false
         }
       })
 

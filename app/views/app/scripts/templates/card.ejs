@@ -2,7 +2,13 @@
   <div id="official-<%- model.Person.uniqueId %>" class="card">
     <div class="card-content">
       <span class="card-title"><%- model.Person.name %></span>
-      <span class="card-subtitle"><%- model.Position[0].Org3.title %><br><%- model.isElec ? model.Position[0].title : model.mainPos %></span>
+      <span class="card-subtitle">
+        <% if (model.isElec) { %>
+          <%- model.mainOrg %><br><%- model.mainPos %>
+        <% } else { %>
+          <%- model.Position[0].Org3.title %><br><%- model.Position[0].title%>
+        <% } %>
+      </span>
     </div>
     <div class="card-action">
       <% model.Position.forEach(function(p) {%>
