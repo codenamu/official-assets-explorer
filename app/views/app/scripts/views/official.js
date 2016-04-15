@@ -122,6 +122,7 @@ Officials.Views = Officials.Views || {};
       Object.keys(model).forEach(function(m) {
         var position = $.extend(true, {}, model[m].Position)
         position.isMain = model[m].isMain
+        position.isElec = model[m].openId.slice(0, 4) === 'elec' ? true : false
         position.year = model[m].year
         position.pdfUrl = model[m].pdfUrl
 
@@ -141,8 +142,7 @@ Officials.Views = Officials.Views || {};
           })
         }
 
-        if (model[m].openId.slice(0, 4) === 'elec') {
-          self.result.isElec = true
+        if (position.isElec) {
           self.result.mainOrg = model[m].Position.Org3.title
           self.result.mainPos = model[m].Position.title
         }

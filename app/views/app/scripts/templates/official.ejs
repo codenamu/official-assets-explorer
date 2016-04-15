@@ -57,7 +57,9 @@
                       <h5><li>원본 보기</li></h5>
                       <ul>
                       <% for (var p in official.position) { %>
-                        <li><a href="<%- official.position[p].pdfUrl %>" target="_blank">- <%- official.position[p].year %>년</a></li>
+                          <% if (!official.position[p].isElec) { %>
+                              <li><a href="<%- official.position[p].pdfUrl %>" target="_blank">- <%- official.position[p].year %>년</a></li>
+                          <% } %>
                       <% } %>
                       </ul>
                     </div>

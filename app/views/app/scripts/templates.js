@@ -126,11 +126,15 @@ __p += '\n                            </span></li>\n                        ';
  } ;
 __p += '\n                        </ul>\n                    </div>\n                    <div class="row">\n                      <h5><li>원본 보기</li></h5>\n                      <ul>\n                      ';
  for (var p in official.position) { ;
-__p += '\n                        <li><a href="' +
+__p += '\n                          ';
+ if (!official.position[p].isElec) { ;
+__p += '\n                              <li><a href="' +
 __e( official.position[p].pdfUrl ) +
 '" target="_blank">- ' +
 __e( official.position[p].year ) +
-'년</a></li>\n                      ';
+'년</a></li>\n                          ';
+ } ;
+__p += '\n                      ';
  } ;
 __p += '\n                      </ul>\n                    </div>\n                    <div class="row">\n                      <div class="col s12 m6 offset-m3">\n                        <button id="btn-contact-official-' +
 __e( official.person.uniqueId ) +
