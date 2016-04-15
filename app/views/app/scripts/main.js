@@ -22,17 +22,11 @@ window.Officials = {
       return (window.innerWidth <= 768) ? -56 : -95
     }
   },
-
-  initGoogleAnalytics: function() {
-    window.ga('create', config.analytics , config.host);
-  },
   init: function () {
     'use strict';
     var App = new Officials.Routers.Main
-
     this.initViews()
-    this.initGoogleAnalytics()
-
+    
     Backbone.history.start()
   }
 }

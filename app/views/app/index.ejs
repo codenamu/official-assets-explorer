@@ -57,18 +57,16 @@
           <a href="/#" class=" modal-action modal-close waves-effect waves-green btn-flat">확인</a>
         </div>
       </div>
-
     </section>
 
-
-
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script src="/config.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '<%= ga %>' , '<%= host %>');
     </script>
 
     <script src="/vendor/jquery/jquery.min.js"></script>

@@ -4,8 +4,15 @@ var path = require('path'),
 
 var config = {
   development: {
-    smtp: {},
-    analytics: '',
+    smtp: {
+      host: '',
+      port: 0,
+      user: '',
+      password: '',
+      tlsOrSsl: false
+    },
+    host: 'http://newstapa.org',
+    ga: 'XXX',
     root: rootPath,
     app: {
       name: 'publicassets'
@@ -15,19 +22,33 @@ var config = {
   },
 
   test: {
-    smtp: {},
-    analytics: '',
+    smtp: {
+      host: '',
+      port: 0,
+      user: '',
+      password: '',
+      tlsOrSsl: false
+    },
+    host: 'http://newstapa.org',
+    ga: 'XXX',
     root: rootPath,
     app: {
       name: 'publicassets'
     },
     port: 3000,
-    db: 'mysql://' + process.env.mysqlUsername + ':' + process.env.mysqlPassword + '@localhost:3306/publicassets-test'
+    db: 'mysql://' + process.env.mysqlUsername + ':' + process.env.mysqlPassword + '@localhost:3306/process.env.officialDbName'
   },
 
   production: {
-    smtp: {},
-    analytics: '',
+    smtp: {
+      host: '',
+      port: 0,
+      user: '',
+      password: '',
+      tlsOrSsl: false
+    },
+    host: 'http://newstapa.org',
+    ga: 'XXX',
     root: rootPath,
     app: {
       name: 'publicassets'
