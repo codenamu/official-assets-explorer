@@ -109,9 +109,9 @@ nav#nav a.brand-logo.logo-main:not(.active) {
 
 nav#nav a.brand-logo.logo-normal {
     font-size: 1.2rem;
-    left: 125px;
+    left: 130px;
     padidng: 0px;
-    letter-spacing: -0.15rem
+    letter-spacing: -0.1rem
 }
 
 nav#nav a.brand-logo.logo-normal:not(.active) {
@@ -122,17 +122,13 @@ nav#nav a.brand-logo > img {
     width: 65px;
 }
 
-nav#nav ul.right {
-    /*width: */
-}
-
 nav#nav ul.right li {
     float: right;
-    width: 38px;
+    width: 24px;
 }
 
 nav#nav ul.right li a {
-    padding: 8px 0;
+    padding: 4px 0;
     height: 56px;
     text-align: center;
 }
@@ -142,23 +138,23 @@ nav#nav ul.right li a:hover {
 }
 
 nav#nav ul.right li.donate-mobile img {
-    width: 20px;
+    width: 17px;
 }
 
 nav#nav ul.right li.kakao a {
-    padding-top: 10px;
+    padding-top: 5px;
 }
 
 nav#nav ul.right li.kakao img {
-    width: 13px;
+    width: 10px;
 }
 
 nav#nav ul.right li.facebook img {
-    width: 12px;
+    width: 9px;
 }
 
 nav#nav ul.right li.twitter img {
-    width: 24px;
+    width: 21px;
 }
 
 nav#nav .button-collapse {
