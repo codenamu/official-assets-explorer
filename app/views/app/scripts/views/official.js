@@ -391,12 +391,11 @@ Officials.Views = Officials.Views || {};
         canvasWidth = window.innerWidth - 20
       }
 
-
       var pieOption = {
         footer: {
           text: '자산 구성비',
           color: '#ffffff',
-          fontSize: 18,
+          fontSize: 14,
           location: 'bottom-center'
         },
         size: {
@@ -438,6 +437,7 @@ Officials.Views = Officials.Views || {};
         pieOption.size.canvasWidth = 500
         pieOption.size.canvasHeight = 450
         pieOption.size.pieOuterRadius = '80%'
+        pieOption.footer.fontSize = 18
       }
 
       this.myPie = new d3pie('canvas-pie', pieOption)
