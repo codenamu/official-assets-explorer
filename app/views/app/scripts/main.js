@@ -24,7 +24,7 @@ window.Officials = {
   },
 
   initGoogleAnalytics: function() {
-    window.ga('create', '' , 'mysite.com');
+    window.ga('create', config.analytics , config.host);
   },
   init: function () {
     'use strict';
