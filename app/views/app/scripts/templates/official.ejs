@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title"><%- official.person.name %></span>
-                    <span class="card-subtitle"><%- official.position[official.position.length - 1].Org3.title %><br><%- official.position[official.position.length - 1].title %></span>
+                    <span class="card-subtitle"><%- official.position[official.position.length - 1].Org3.title %><br><%- official.isElec ? official.mainPos : official.position[official.position.length - 1].title %></span>
                 </div>
                 <div class="card-action">
                     <div class="row official-total">

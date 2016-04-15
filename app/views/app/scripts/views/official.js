@@ -48,7 +48,7 @@ Officials.Views = Officials.Views || {};
 
       $('#btn-contact-official-' + model.person.uniqueId).leanModal();
 
-      $('#page-official').velocity('scroll', {
+      $('#main').velocity('scroll', {
         offset: this.getVelocityOffset(),
         duration: 250,
         easing: 'ease-in-out'
@@ -91,14 +91,6 @@ Officials.Views = Officials.Views || {};
       location.href = '/#?' + this.fixEncodeURI($.param(this.params))
     },
 
-    getVelocityOffset: function() {
-      if (window.innerWidth < 768) {
-        return -56
-      } else {
-        return -96
-      }
-    },
-
     fixEncodeURI: function(param) {
       return param.replace(/%5B/g, '').replace(/%5D/g, '');
     },
@@ -131,7 +123,6 @@ Officials.Views = Officials.Views || {};
       this.result.assets.history = {}
 
       Object.keys(model).forEach(function(m) {
-        console.log(model[m].isMain)
         if (model[m].isMain) {
           var position = $.extend(true, {}, model[m].Position)
           position.year = model[m].year
@@ -156,12 +147,17 @@ Officials.Views = Officials.Views || {};
           }
         }
 
+        if (model[m].openId.slice(0, 4) === 'elec') {
+          self.result.isElec = true
+          self.result.mainPos = model[m].Position.title
+        } else {
+          self.result.isElec = false
+        }
       })
 
 
       this.result.assets.history[this.result.latestYear].totalText = this.calMeasureMoney(this.result.assets.history[this.result.latestYear].total)
       this.reorderHistory(this.result.position)
-      console.log(this.result)
       this.render(this.result)
     },
 

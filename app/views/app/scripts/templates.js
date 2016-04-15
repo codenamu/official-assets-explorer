@@ -22,7 +22,7 @@ __e( model.Person.name ) +
 '</span>\n      <span class="card-subtitle">' +
 __e( model.Position[0].Org3.title ) +
 '<br>' +
-__e( model.Position[0].title ) +
+__e( model.isElec ? model.Position[0].title : model.mainPos ) +
 '</span>\n    </div>\n    <div class="card-action">\n      ';
  model.Position.forEach(function(p) {;
 __p += '\n        <li>' +
@@ -79,7 +79,7 @@ __e( official.person.name ) +
 '</span>\n                    <span class="card-subtitle">' +
 __e( official.position[official.position.length - 1].Org3.title ) +
 '<br>' +
-__e( official.position[official.position.length - 1].title ) +
+__e( official.isElec ? official.mainPos : official.position[official.position.length - 1].title ) +
 '</span>\n                </div>\n                <div class="card-action">\n                    <div class="row official-total">\n                        <h5><li>재산 총액</li></h5>\n                        <span id="official-asset-total" class="value"><span class="number">' +
 __e( official.assets.history[official.latestYear].totalText ) +
 '</span><span class="year">' +

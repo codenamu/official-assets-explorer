@@ -107,10 +107,17 @@ Officials.Views = Officials.Views || {};
           officials[id].Position.push(o.Position)
         } else {
           officials[id] = {}
+          o.Position.year = o.year
           officials[id].Person = o.Person
           officials[id].Position = []
-          o.Position.year = o.year
           officials[id].Position.push(o.Position)
+        }
+
+        if (o.openId.slice(0, 4) === 'elec') {
+          officials[id].isElec = true
+          officials[id].mainPos = o.Position.title
+        } else {
+          officials[id].isElec = false
         }
       })
 
@@ -182,15 +189,6 @@ Officials.Views = Officials.Views || {};
 
     fixEncodeURI: function(param) {
       return param.replace(/%5B/g, '').replace(/%5D/g, '');
-    },
-
-    destroy: function() {
-      this.destroyCards()
-      this.undelegateEvents();
-      this.$el.empty();
-      this.stopListening();
-      this.searchStatus = {}
-      return this;
     },
 
     destroyCards: function() {

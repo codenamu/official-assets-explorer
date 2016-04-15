@@ -979,7 +979,7 @@ footer.page-footer p {
     }
 
     #page-official {
-        padding: 45px 0;
+        padding: 45px 0 110px;
     }
 
     #page-official .card .card-action .official-total > span.value > span.number {
