@@ -131,32 +131,37 @@ Officials.Views = Officials.Views || {};
       this.result.assets.history = {}
 
       Object.keys(model).forEach(function(m) {
-        var position = $.extend(true, {}, model[m].Position)
-        position.year = model[m].year
-        position.pdfUrl = model[m].pdfUrl
+        console.log(model[m].isMain)
+        if (model[m].isMain) {
+          var position = $.extend(true, {}, model[m].Position)
+          position.year = model[m].year
+          position.pdfUrl = model[m].pdfUrl
 
-        if (model[m].year > self.result.latestYear) {
-          self.result.latestYear = model[m].year
+          if (model[m].year > self.result.latestYear) {
+            self.result.latestYear = model[m].year
+          }
+
+          self.result.position.push(position)
+          self.result.assets.history[model[m].year] = {}
+          self.result.assets.history[model[m].year].pdfUrl = model[m].pdfUrl
+          self.result.assets.history[model[m].year].assets = model[m].Assets
+          self.result.assets.history[model[m].year].total = 0
+
+          if (model[m].Assets.length) {
+            model[m].Assets.forEach(function(a) {
+              // if (a.Cat2.title !== '채무') {
+                self.result.assets.history[model[m].year].total += a.total
+              // }
+            })
+          }
         }
 
-        self.result.position.push(position)
-        self.result.assets.history[model[m].year] = {}
-        self.result.assets.history[model[m].year].pdfUrl = model[m].pdfUrl
-        self.result.assets.history[model[m].year].assets = model[m].Assets
-        self.result.assets.history[model[m].year].total = 0
-
-        if (model[m].Assets.length) {
-          model[m].Assets.forEach(function(a) {
-            // if (a.Cat2.title !== '채무') {
-              self.result.assets.history[model[m].year].total += a.total
-            // }
-          })
-        }
       })
 
 
       this.result.assets.history[this.result.latestYear].totalText = this.calMeasureMoney(this.result.assets.history[this.result.latestYear].total)
       this.reorderHistory(this.result.position)
+      console.log(this.result)
       this.render(this.result)
     },
 
@@ -303,7 +308,14 @@ Officials.Views = Officials.Views || {};
             .data(datasets)
           .enter().append('rect')
             .style('fill', '#ffffff')
-            .attr('x', function(d) { return x(d.year) - barWidth/2; })
+            .attr('x', function(d) {
+              return x(d.year) - barWidth/2
+              // if (datasets.length < 5) {
+              //   return x(d.year) - graphWidth/3;
+              // } else {
+              //   return x(d.year) - barWidth/2;
+              // }
+            })
             .attr('width', barWidth)
             .attr('y', function(d) {
               if (yMax < 0) {

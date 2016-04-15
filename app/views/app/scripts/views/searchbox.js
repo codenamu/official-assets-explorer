@@ -359,7 +359,6 @@ Officials.Views = Officials.Views || {};
     },
 
     initRegionOptions: function(target) {
-      console.log(target.attr('id'))
       switch (target.attr('id')) {
         case 'selected-municipals':
         case 'selected-municipals-mobile':

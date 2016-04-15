@@ -630,7 +630,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 #main .card .card-action > .row {
     padding: 30px 0px;
-    border-bottom: 1px solid #e7e9ed;
+    border-bottom: 1px solid #949faf;
 }
 
 #main .card .card-action > .row:last-child {
@@ -850,89 +850,6 @@ footer.page-footer p {
     font-size: 0.8rem;
 }
 
-@media only screen and (min-width: 769px) {
-    nav#nav {
-        height: 90px;
-    }
-
-    nav#nav a.brand-logo {
-        left: 10px;
-        padding: 15px 0px;
-    }
-
-    nav#nav a.brand-logo img {
-        width: 196px;
-    }
-
-    nav#nav ul.right {
-        width: 400px;
-    }
-
-    nav#nav ul.right li:not(.donate) {
-        width: 45px;
-    }
-
-    nav#nav ul.right li.donate {
-        width: 200px;
-    }
-
-    nav#nav ul.right li a {
-        padding: 15px 0;
-        height: 90px;
-    }
-
-    nav#nav ul.right li.kakao a {
-        padding-top: 15px;
-    }
-
-    nav#nav ul.right li a img {
-        width: auto;
-    }
-
-    nav#nav ul.right li.kakao img {
-        width: 15px;
-    }
-
-    nav#nav ul.right li.facebook img {
-        width: 13px;
-    }
-
-    nav#nav ul.right li.twitter img {
-        width: 30px;
-    }
-
-    nav#nav ul a {
-        font-size: 2rem;
-    }
-
-    nav#nav li > a > i {
-        height: 39px;
-    }
-
-    nav#nav li.donate {
-        display: block;
-    }
-
-    nav.nav-desktop {
-        display: block;
-    }
-
-    header {
-        height: 140px;
-        padding: 10px;
-        margin-top: 90px;
-    }
-
-    header h1 > a {
-        font-size: 3.2rem;
-    }
-
-    #main {
-        padding-bottom: 180px;
-    }
-
-}
-
 @media only screen and (min-width: 768px) {
     svg {
         margin-left: 0;
@@ -1145,6 +1062,89 @@ footer.page-footer p {
     #cavnas-pie {
         height: 350px;
     }
+}
+
+@media only screen and (min-width: 769px) {
+    nav#nav {
+        height: 90px;
+    }
+
+    nav#nav a.brand-logo {
+        left: 10px;
+        padding: 15px 0px;
+    }
+
+    nav#nav a.brand-logo img {
+        width: 196px;
+    }
+
+    nav#nav ul.right {
+        width: 400px;
+    }
+
+    nav#nav ul.right li:not(.donate) {
+        width: 45px;
+    }
+
+    nav#nav ul.right li.donate {
+        width: 200px;
+    }
+
+    nav#nav ul.right li a {
+        padding: 15px 0;
+        height: 90px;
+    }
+
+    nav#nav ul.right li.kakao a {
+        padding-top: 15px;
+    }
+
+    nav#nav ul.right li a img {
+        width: auto;
+    }
+
+    nav#nav ul.right li.kakao img {
+        width: 15px;
+    }
+
+    nav#nav ul.right li.facebook img {
+        width: 13px;
+    }
+
+    nav#nav ul.right li.twitter img {
+        width: 30px;
+    }
+
+    nav#nav ul a {
+        font-size: 2rem;
+    }
+
+    nav#nav li > a > i {
+        height: 39px;
+    }
+
+    nav#nav li.donate {
+        display: block;
+    }
+
+    nav.nav-desktop {
+        display: block;
+    }
+
+    header {
+        height: 140px;
+        padding: 10px;
+        margin-top: 90px;
+    }
+
+    header h1 > a {
+        font-size: 3.2rem;
+    }
+
+    #main {
+        padding-bottom: 100px;
+    }
+
 }
 
 /*
