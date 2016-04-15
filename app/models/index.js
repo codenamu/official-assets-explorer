@@ -4,7 +4,10 @@ var fs = require('fs'),
   config = require('../../config/config'),
   db = {}
 
-var sequelize = new Sequelize(config.db.database, config.db.username, config.db.password)
+var sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, {
+  host: config.db.host ? config.db.host : 'localhost',
+  port: config.db.port ? config.db.port : 3306
+})
 
 fs.readdirSync(__dirname).filter(function (file) {
   return (file.indexOf('.') !== 0) && (file !== 'index.js')

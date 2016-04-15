@@ -19,6 +19,8 @@ var config = {
     },
     port: 3000,
     db: {
+      host: '',
+      port: 3306,
       database: 'publicassets',
       username: 'root',
       password: ''
@@ -41,6 +43,8 @@ var config = {
     },
     port: 3000,
     db: {
+      host: '',
+      port: 3306,
       database: 'publicassets-test',
       username: process.env.mysqlUsername,
       password: process.env.mysqlPassword
@@ -63,6 +67,8 @@ var config = {
     },
     port: 3000,
     db: {
+      host: '',
+      port: 3306,
       database: 'publicassets',
       username: process.env.mysqlUsername,
       password: process.env.mysqlPassword
