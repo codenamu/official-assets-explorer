@@ -122,6 +122,8 @@ module.exports = function() {
             order: [['year', 'DESC']],
             where: where,
             group: 'Person.uniqueId',
+            limit: queries.limit ? parseInt(queries.limit, 10) : 40,
+            offset: queries.offset ? parseInt(queries.offset, 10) : 0,
             include: [{
               model: db.Person
             }, {
