@@ -38,6 +38,7 @@ Officials.Views = Officials.Views || {};
       var officials = new Officials.Collections.Official()
       officials.fetch({data: $.param(params), success: function () {
         var officialsRearranged = self.rearrangeOfficials(officials.models[0].get('officials'))
+        console.log(officials.models[0].get('count'))
         self.searchStatus.count += officialsRearranged.length
         self.checkSearchEnded(officials.models[0].get('count'))
 

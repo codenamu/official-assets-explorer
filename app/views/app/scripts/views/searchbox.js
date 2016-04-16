@@ -58,7 +58,7 @@ Officials.Views = Officials.Views || {};
 
       if (!_.isEmpty(this.params)) {
         this.setParams()
-        this.getResult(this.params)
+
 
         /**
          * if use request with default search option
@@ -66,6 +66,7 @@ Officials.Views = Officials.Views || {};
         if (!this.params['election']) {
           this.resetTags('default', 'orgs', $('#selected-orgs > option:not(:disabled):selected'))
           this.resetTags('default', 'years', $('#selected-years > option:not(:disabled):selected'))
+          this.getResult(this.params)
         } else {
           /**
          * if use request with election cadidates search option
@@ -453,7 +454,7 @@ Officials.Views = Officials.Views || {};
         if (Officials.ActiveViews.resultView) {
           Officials.ActiveViews.resultView.destroy()
         }
-
+        console.log('get!')
         Officials.ActiveViews.resultView = new Officials.Views.Searchresult(params)
       }
     },
