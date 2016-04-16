@@ -12,7 +12,7 @@ var config = {
       tlsOrSsl: false
     },
     host: 'http://newstapa.org',
-    ga: 'XXX',
+    ga: 'UA-61309870-1',
     root: rootPath,
     app: {
       name: 'publicassets'
@@ -36,7 +36,7 @@ var config = {
       tlsOrSsl: false
     },
     host: 'http://newstapa.org',
-    ga: 'XXX',
+    ga: 'UA-61309870-1',
     root: rootPath,
     app: {
       name: 'publicassets'
@@ -60,7 +60,7 @@ var config = {
       tlsOrSsl: false
     },
     host: 'http://newstapa.org',
-    ga: 'XXX',
+    ga: 'UA-61309870-1',
     root: rootPath,
     app: {
       name: 'publicassets'
