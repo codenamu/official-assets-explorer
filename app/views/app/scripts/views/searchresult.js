@@ -13,7 +13,8 @@ Officials.Views = Officials.Views || {};
 
     events: {
       'click .card'                 : 'clickCard',
-      'click #btn-scroll-searchbox' : 'scrollSearchbox'
+      'click #btn-scroll-searchbox' : 'scrollSearchbox',
+      'scroll body'                      : 'detectScroll'
     },
 
     subViews: [],
@@ -23,23 +24,22 @@ Officials.Views = Officials.Views || {};
     initialize: function (params) {
       var self = this
       this.params = params
-
       delete params['el']
 
-      this.searchStatus = {
-        // is data user requested at this time loaded
-        isLoaded: true,
-        // is entired data for the parameters loaded?
-        isEnded: false,
-        // the current number of data loaded(not the entire data)
-        count: 0
-      }
+
 
       var officials = new Officials.Collections.Official()
       officials.fetch({data: $.param(params), success: function () {
+        self.searchStatus = jQuery.extend({}, {
+          // is data user requested at this time loaded
+          isLoaded: true,
+          // is entired data for the parameters loaded?
+          isEnded: true,
+          // the current number of data loaded(not the entire data)
+          count: 0
+        })
         var officialsRearranged = self.rearrangeOfficials(officials.models[0].get('officials'))
-        console.log(officials.models[0].get('count'))
-        self.searchStatus.count += officialsRearranged.length
+        self.searchStatus.count = officialsRearranged.length
         self.checkSearchEnded(officials.models[0].get('count'))
 
         self.beforeRender()
@@ -54,11 +54,7 @@ Officials.Views = Officials.Views || {};
     },
 
     beforeRender: function() {
-      $('#main').velocity('scroll', {
-        offset: this.getVelocityOffset(),
-        duration: 500,
-        easing: 'ease-in-out'
-      })
+      this.scrollToTarget()
     },
 
     afterRender: function(model) {
@@ -68,7 +64,6 @@ Officials.Views = Officials.Views || {};
         self.subViews.push(new Officials.Views.Card({el: '#' + self.$el.attr('id') + ' .search-cards', model: m}))
       })
 
-      this.saveCurrentsearchStatus()
       this.deactivateLoadingSignal()
 
       var wookmark = new Wookmark('.search-cards', {
@@ -80,19 +75,38 @@ Officials.Views = Officials.Views || {};
       });
 
       // bind detectScroll event to this
-      _.bindAll(self, 'detectScroll')
-      $(window).scroll(self.detectScroll)
+      // _.bindAll(this, 'detectScroll')
+      // this.detectScroll = _.bind(this.detectScroll, this);
+      $(window).bind('scroll', function () {
+        self.detectScroll();
+      });
+      // $(window).scroll(this.detectScroll)
+    },
+
+    scrollToTarget: function() {
+      var self = this
+      $('#main').velocity('scroll', {
+        offset: self.getVelocityOffset(),
+        duration: 500,
+        easing: 'ease-in-out'
+      })
     },
 
     saveCurrentsearchStatus: function() {
       // save current cards status to searchStatus after loading new cards
       this.searchStatus.isLoaded = true
+      // this.searchStatus.isEnded = true
     },
 
     checkSearchEnded: function(count) {
-      if (this.searchStatus.count === parseInt(count, 10)) {
+      if (this.searchStatus.count !== parseInt(count, 10)) {
+        this.searchStatus.isEnded = false
+        this.activateLoadingSignal()
+        // $('#main .search-loading > .preloader-wrapper').addClass('active')
+      } else {
         this.searchStatus.isEnded = true
-        $('#main .search-loading > .preloader-wrapper').removeClass('active')
+        this.deactivateLoadingSignal()
+        // $('#main .search-loading > .preloader-wrapper').removeClass('active')
       }
     },
 
@@ -140,7 +154,6 @@ Officials.Views = Officials.Views || {};
         this.showLoadingDiv()
         this.activateLoadingSignal()
 
-
         this.searchStatus.isLoaded = false
 
         var officials = new Officials.Collections.Official()
@@ -149,6 +162,7 @@ Officials.Views = Officials.Views || {};
         params.limit = 20
 
         officials.fetch({data: $.param(params), success: function () {
+          self.saveCurrentsearchStatus()
           var officialsRearranged = self.rearrangeOfficials(officials.models[0].get('officials'))
           self.searchStatus.count += officialsRearranged.length
           self.checkSearchEnded(officials.models[0].get('count'))
@@ -192,11 +206,6 @@ Officials.Views = Officials.Views || {};
 
     fixEncodeURI: function(param) {
       return param.replace(/%5B/g, '').replace(/%5D/g, '');
-    },
-
-    destroyCards: function() {
-      _.invoke(this.subViews, 'destroy')
-      this.subViews.length = 0
     }
 
   });

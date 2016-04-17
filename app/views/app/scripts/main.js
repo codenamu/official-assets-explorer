@@ -7,9 +7,15 @@ window.Officials = {
   ActiveViews: {},
   initViews: function() {
     Backbone.View.prototype.destroy = function(){
+      // destroy all subviews if the view has subviews
       if (this.subViews) {
         this.subViews.forEach(function(v) { v.destroy() })
+        this.subViews.length = 0
+
+        // unbind all events on window
+        $(window).unbind('scroll')
       }
+
       $(this.el).removeData().unbind();
       this.undelegateEvents();
       this.$el.empty();
@@ -26,7 +32,7 @@ window.Officials = {
     'use strict';
     var App = new Officials.Routers.Main
     this.initViews()
-    
+
     Backbone.history.start()
   }
 }

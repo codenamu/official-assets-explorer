@@ -14,6 +14,7 @@ var config = {
     host: 'http://newstapa.org',
     ga: 'UA-61309870-1',
     root: rootPath,
+    force: false,
     app: {
       name: 'publicassets'
     },
@@ -38,6 +39,7 @@ var config = {
     host: 'http://newstapa.org',
     ga: 'UA-61309870-1',
     root: rootPath,
+    force: false,
     app: {
       name: 'publicassets'
     },
@@ -62,6 +64,7 @@ var config = {
     host: 'http://newstapa.org',
     ga: 'UA-61309870-1',
     root: rootPath,
+    force: false,
     app: {
       name: 'publicassets'
     },

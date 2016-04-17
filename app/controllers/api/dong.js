@@ -10,7 +10,13 @@ module.exports = function() {
         model: db.Municipal,
         where: {
           name: req.query.municipal
-        }
+        },
+        include: [{
+          model: db.Province,
+          where: {
+            name: req.query.province
+          }
+        }]
       }]
     })
     .then(function(dongs) {

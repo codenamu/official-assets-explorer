@@ -58,8 +58,6 @@ Officials.Views = Officials.Views || {};
 
       if (!_.isEmpty(this.params)) {
         this.setParams()
-
-
         /**
          * if use request with default search option
          */
@@ -312,7 +310,7 @@ Officials.Views = Officials.Views || {};
       self.initRegionOptions($('#selected-dongs'))
 
       this.dongs = new Officials.Collections.Dong()
-      this.dongs.fetch({data: 'municipal=' + $('#selected-municipals').val(), success: function() {
+      this.dongs.fetch({data: 'municipal=' + $('#selected-municipals').val() + '&province=' + $('#selected-provinces').val(), success: function() {
         self.dongs.models.forEach(function(m) {
           $('#selected-dongs').append($('<option>', {
             id: 'option-dongs-id-' + m.get('id'),
@@ -336,7 +334,7 @@ Officials.Views = Officials.Views || {};
       self.initRegionOptions($('#selected-dongs-mobile'))
 
       this.dongs = new Officials.Collections.Dong()
-      this.dongs.fetch({data: 'municipal=' + $('#selected-municipals-mobile').val(), success: function() {
+      this.dongs.fetch({data: 'municipal=' + $('#selected-municipals-mobile').val() + '&province=' + $('#selected-provinces-mobile').val(), success: function() {
         self.dongs.models.forEach(function(m) {
           $('#selected-dongs-mobile').append($('<option>', {
             id: 'option-mobile-dongs-id-' + m.get('id'),
@@ -454,7 +452,7 @@ Officials.Views = Officials.Views || {};
         if (Officials.ActiveViews.resultView) {
           Officials.ActiveViews.resultView.destroy()
         }
-        console.log('get!')
+
         Officials.ActiveViews.resultView = new Officials.Views.Searchresult(params)
       }
     },

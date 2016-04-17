@@ -41,6 +41,7 @@ module.exports = function() {
        * START
        * query parameters to search candidations in this election
        */
+
       if (queries.province) {
           where['$Dongs.Municipal.Province.name$'] = queries.province
       }
@@ -68,18 +69,23 @@ module.exports = function() {
           return r.id
         })
 
-        where = {
-          $and: [{
-            '$Person.election$': 1
-          }, {
-            '$Person.ConstituencyId$': {
-              $in: targetConsIds
-            }
-          }]
+        where = {}
+        where['$and'] = []
+        where['$Person.election$'] = 1
+
+        console.log(queries)
+
+        // 비례대표가 constituency 테이블에 포함되지 않아 포함시켜야함
+        if (targetConsIds.length && (queries.province || queries.municipal || queries.dong)) {
+          where['$Person.ConstituencyId$'] = {
+            $in: targetConsIds
+          }
         }
+
 
         if (queries.keyword) {
           var keyword = queries.keyword.replace('/ /g', '%')
+
           where['$and'].push({
             $or: [{
               '$Person.name$': {

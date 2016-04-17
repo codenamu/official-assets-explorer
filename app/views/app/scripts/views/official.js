@@ -23,11 +23,12 @@ Officials.Views = Officials.Views || {};
       var self = this;
       this.params = (Object.keys(params).length === 1 && Object.keys(params).indexOf('keyword') > -1 && !params.params.keyword) ? undefined : params.params;
 
-      _.bindAll(self, 'detectScroll')
-      $(window).scroll(self.detectScroll)
-
       this.model = new Officials.Models.Official({ _id: params.uniqueId})
       this.model.fetch({ success: function () { self.calAssets() }})
+
+      // $(window).bind('scroll', function () {
+      //   self.detectScroll();
+      // });
     },
 
     render: function (model) {
@@ -36,6 +37,7 @@ Officials.Views = Officials.Views || {};
     },
 
     afterRender: function(model) {
+      var self = this
       this.drawBarChart()
       this.drawPieChart(model.latestYear)
       // fill yellow on bar graph of lastest year
@@ -44,11 +46,14 @@ Officials.Views = Officials.Views || {};
 
       $('#btn-contact-official-' + model.person.uniqueId).leanModal();
 
-      $('#main').velocity('scroll', {
-        offset: this.getVelocityOffset(),
-        duration: 250,
-        easing: 'ease-in-out'
-      })
+      setTimeout(function() {
+        $('#main').velocity('scroll', {
+          offset: self.getVelocityOffset(),
+          duration: 500,
+          easing: 'ease-in-out'
+        })
+      }, 500)
+
     },
 
     getBacknForth: function (params) {
