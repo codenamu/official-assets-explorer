@@ -11,7 +11,7 @@ var config = {
       password: '',
       tlsOrSsl: false
     },
-    host: 'http://newstapa.org',
+    host: 'http://jaesan.newstapa.org',
     ga: 'UA-61309870-1',
     root: rootPath,
     force: false,
@@ -36,7 +36,7 @@ var config = {
       password: '',
       tlsOrSsl: false
     },
-    host: 'http://newstapa.org',
+    host: 'http://jaesan.newstapa.org',
     ga: 'UA-61309870-1',
     root: rootPath,
     force: false,
@@ -61,7 +61,7 @@ var config = {
       password: '',
       tlsOrSsl: false
     },
-    host: 'http://newstapa.org',
+    host: 'http://jaesan.newstapa.org',
     ga: 'UA-61309870-1',
     root: rootPath,
     force: false,
