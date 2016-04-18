@@ -328,6 +328,25 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-color: #ffffff !important;
 }
 
+
+.select2-container .select2-search--inline .select2-search__field {
+    margin-top: 0px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: transparent;
+    border: none;
+    color: #5C6D85;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    max-height: 2.6rem;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    display: none;
+}
+
 #search {
     margin-top: 56px;
 }
@@ -426,6 +445,17 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 #search .dropdown-content li.active, #search .dropdown-content li.selected {
     background-color: transparent;
+}
+
+#search span.select2-selection {
+    height: 2.8rem;
+    border: none;
+    border-bottom: 1px solid #5c6d85;
+    border-radius: 0px;
+}
+
+#search span.select2, #search span.select2-selection {
+    cursor: pointer;
 }
 
 #selected-keyword, #selected-keyword-election {

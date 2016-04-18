@@ -177,6 +177,12 @@ Officials.Views = Officials.Views || {};
       }
 
       $('#selected-' + target).material_select()
+
+      if (target === 'orgs' || target === 'years') {
+        $('#selected-' + target + '-mobile').select2({
+          placeholder: target === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요'
+        })
+      }
     },
 
     drawForms: function() {
@@ -186,10 +192,12 @@ Officials.Views = Officials.Views || {};
       $('#selected-municipals').material_select()
       $('#selected-dongs').material_select()
 
-      $('#selected-orgs').select2({
-        placeholder: '소속을 선택하세요'
+      $('#selected-orgs-mobile').select2({
+        placeholder: '소속을 선택하세요',
+        minimumResultsForSearch: 50
       })
-      $('#selected-years').select2({
+
+      $('#selected-years-mobile').select2({
         placeholder: '년도를 선택하세요'
       })
     },
@@ -474,6 +482,9 @@ Officials.Views = Officials.Views || {};
       $('option#' + id).attr('selected', false)
       $('option#' + idMobile).attr('selected', false)
       $('#selected-' + $(e.target).closest('.chip').attr('id').split('-')[1]).material_select()
+      $('#selected-' + $(e.target).closest('.chip').attr('id').split('-')[1] + '-mobile').select2({
+        placeholder: $(e.target).closest('.chip').attr('id').split('-')[1] === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요'
+      })
     }
   });
 
