@@ -894,6 +894,10 @@ footer.page-footer p {
         display: none;
     }
 
+    span.select2 {
+        display: none;
+    }
+
     input.select-dropdown[type=text] {
         display: block;
     }

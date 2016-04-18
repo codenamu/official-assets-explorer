@@ -371,8 +371,8 @@ Officials.Views = Officials.Views || {};
 
       params.org = ($('input.select-dropdown').css('display') !== 'none') ? $('#selected-orgs').val() : $('#selected-orgs-mobile').val()
       params.year = ($('input.select-dropdown').css('display') !== 'none') ? $('#selected-years').val() : $('#selected-years-mobile').val()
-      params.keyword = $('#selected-keyword').val()
-
+      params.keyword = this.escapeSymbols($('#selected-keyword').val())
+      $('#selected-keyword').val(params.keyword)
       // set current url with query parameters
       // if (Backbone.history.getFragment().split('?')[0] !== "") {
       Backbone.history.navigate('/?' + this.fixEncodeURI($.param(params)), {trigger: false, replace: true})
@@ -401,7 +401,8 @@ Officials.Views = Officials.Views || {};
       }
 
       if ($('#selected-keyword-election').val()) {
-        params.keyword = $('#selected-keyword-election').val()
+        params.keyword = this.escapeSymbols($('#selected-keyword-election').val())
+        $('#selected-keyword-election').val(params.keyword)
       }
 
       // set current url with query parameters
@@ -413,6 +414,14 @@ Officials.Views = Officials.Views || {};
 
     fixEncodeURI: function(param) {
       return param.replace(/%5B/g, '').replace(/%5D/g, '');
+    },
+
+    escapeSymbols: function(str) {
+      return str.split(',')
+        .map(function(s) {
+          return s.replace(/["-[\]{}()*+?.^$|#\s]/g, '')
+        })
+        .join(' ')
     },
 
     getResult: function(params) {
