@@ -180,11 +180,18 @@ Officials.Views = Officials.Views || {};
     },
 
     drawForms: function() {
-      $('#selected-orgs').material_select();
-      $('#selected-years').material_select();
-      $('#selected-provinces').material_select();
-      $('#selected-municipals').material_select();
-      $('#selected-dongs').material_select();
+      $('#selected-orgs').material_select()
+      $('#selected-years').material_select()
+      $('#selected-provinces').material_select()
+      $('#selected-municipals').material_select()
+      $('#selected-dongs').material_select()
+
+      $('#selected-orgs').select2({
+        placeholder: '소속을 선택하세요'
+      })
+      $('#selected-years').select2({
+        placeholder: '년도를 선택하세요'
+      })
     },
 
     selectOrgs: function(e) {
