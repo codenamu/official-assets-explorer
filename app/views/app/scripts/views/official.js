@@ -38,6 +38,7 @@ Officials.Views = Officials.Views || {};
 
     afterRender: function(model) {
       var self = this
+      this.setMetaTags()
       this.drawBarChart()
       this.drawPieChart(model.latestYear)
       // fill yellow on bar graph of lastest year
@@ -54,6 +55,16 @@ Officials.Views = Officials.Views || {};
         })
       }, 500)
 
+    },
+
+    setMetaTags: function() {
+      var title = this.result.person.name + ' - 고위공직자 재산 공개 | 뉴스타파 x 코드나무'
+      $('title').remove();
+      $('meta[property="og:title"]').remove();
+      $('meta[name="twitter:title"]').remove();
+      $('head').append( '<meta property="og:title" content="' + title + '">' );
+      $('head').append( '<meta name="twitter:title" content="' + title + '">' );
+      $('head').append( '<title>' + title + '</title>' );
     },
 
     getBacknForth: function (params) {

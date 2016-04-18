@@ -6,14 +6,15 @@
         <% if (model.isElec) { %>
           <%- model.mainOrg %><br><%- model.mainPos %>
         <% } else { %>
-          <%- model.Position[0].Org3.title %><br><%- model.Position[0].title%>
+          <%- model.Position[0].title.split(' ')[0] %><br />
+          <%- model.Position[0].title.split(' ')[1] %>
         <% } %>
       </span>
     </div>
     <div class="card-action">
-      <% model.Position.forEach(function(p) {%>
-        <li><%- p.year %>년 <%- p.Org3.title %> <%- p.title %></li>
-      <% }) %>
+        <% model.Position.forEach(function(p) {%>
+          <li class='position'><%- p.title %><span class='year'><% for (var y in p.year) { %> <%- p.year[y] + ' ' %> <% } %></span></li>
+        <% }) %>
       <span class="card-link-to-btn">
       <a class="btn btn-floating color-news">
         <img src="/img/arrow.png" alt="arrow-right" />

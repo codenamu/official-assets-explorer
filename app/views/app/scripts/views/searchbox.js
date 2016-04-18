@@ -215,7 +215,7 @@ Officials.Views = Officials.Views || {};
     selectProvince: function(callback) {
       var self = this
       var cb = typeof callback == 'function' ? callback : function(){}
-      var isMobile = $('selected-provinces').css('display') === 'none' ? '-mobile' : ''
+      var isMobile = $('input.select-dropdown').css('display') === 'none' ? '-mobile' : ''
 
       self.initRegionOptions($('#selected-municipals'))
       self.initRegionOptions($('#selected-dongs'))
@@ -376,8 +376,8 @@ Officials.Views = Officials.Views || {};
       // set current url with query parameters
       // if (Backbone.history.getFragment().split('?')[0] !== "") {
       Backbone.history.navigate('/?' + this.fixEncodeURI($.param(params)), {trigger: false, replace: true})
-      // // }
-      // // find results
+      // }
+      // find results
       this.getResult(params)
     },
 
@@ -386,7 +386,7 @@ Officials.Views = Officials.Views || {};
       // if user click the submit button
       if (e) e.preventDefault()
       var params = {}
-      var isMobile = $('#selected-provinces').css('display') === 'none'
+      var isMobile = ($('input.select-dropdown').css('display') === 'none')
 
       params.election = 1
 
@@ -419,7 +419,7 @@ Officials.Views = Officials.Views || {};
     escapeSymbols: function(str) {
       return str.split(',')
         .map(function(s) {
-          return s.replace(/["-[\]{}()*+?.^$|#\s]/g, '')
+          return s.replace(/[<>-[\]{}()*+?.\\^$|#\s\]\"]/g, '')
         })
         .join(' ')
     },

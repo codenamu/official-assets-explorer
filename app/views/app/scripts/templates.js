@@ -28,20 +28,22 @@ __e( model.mainPos ) +
 '\n        ';
  } else { ;
 __p += '\n          ' +
-__e( model.Position[0].Org3.title ) +
-'<br>' +
-__e( model.Position[0].title) +
+__e( model.Position[0].title.split(' ')[0] ) +
+'<br />\n          ' +
+__e( model.Position[0].title.split(' ')[1] ) +
 '\n        ';
  } ;
-__p += '\n      </span>\n    </div>\n    <div class="card-action">\n      ';
+__p += '\n      </span>\n    </div>\n    <div class="card-action">\n        ';
  model.Position.forEach(function(p) {;
-__p += '\n        <li>' +
-__e( p.year ) +
-'년 ' +
-__e( p.Org3.title ) +
-' ' +
+__p += '\n          <li class=\'position\'>' +
 __e( p.title ) +
-'</li>\n      ';
+'<span class=\'year\'>';
+ for (var y in p.year) { ;
+__p += ' ' +
+__e( p.year[y] + ' ' ) +
+' ';
+ } ;
+__p += '</span></li>\n        ';
  }) ;
 __p += '\n      <span class="card-link-to-btn">\n      <a class="btn btn-floating color-news">\n        <img src="/img/arrow.png" alt="arrow-right" />\n      </a>\n      </span>\n    </div>\n  </div>\n</div>\n';
 
