@@ -14,14 +14,14 @@ Officials.Views = Officials.Views || {};
     events: {
       'change #selected-orgs'               : 'selectOrgs',
       'change #selected-years'              : 'selectYears',
-      'change #selected-orgs-mobile'        : 'selectOrgsMobile',
-      'change #selected-years-mobile'       : 'selectYearsMobile',
+      'change #selected-orgs-mobile'        : 'selectOrgs',
+      'change #selected-years-mobile'       : 'selectYears',
       'change #selected-provinces'          : 'selectProvince',
       'change #selected-municipals'         : 'selectMunicipal',
       'change #selected-dongs'              : 'selectDong',
-      'change #selected-provinces-mobile'   : 'selectProvinceMobile',
-      'change #selected-municipals-mobile'  : 'selectMunicipalMobile',
-      'change #selected-dongs-mobile'       : 'selectDongMobile',
+      'change #selected-provinces-mobile'   : 'selectProvince',
+      'change #selected-municipals-mobile'  : 'selectMunicipal',
+      'change #selected-dongs-mobile'       : 'selectDong',
       'submit form#form-search-default'     : 'submitDefaultSearch',
       'submit form#form-search-election'    : 'submitElectionSearch',
       'click .chip > i'                     : 'closeAChip',
@@ -70,7 +70,6 @@ Officials.Views = Officials.Views || {};
          * if use request with election cadidates search option
          */
           $('#search-tabs > ul.tabs').tabs('select_tab', 'search-election');
-          this.setParams()
           this.getResult(this.params)
         }
       } else {
@@ -135,88 +134,21 @@ Officials.Views = Officials.Views || {};
 
 
       if (params.org) {
-        var orgOps = $('#selected-orgs > option:not(:disabled)')
-        var orgOpsMobile = $('#selected-orgs-mobile > option:not(:disabled)')
-
-        if (typeof params.org === 'string') {
-          params.org = params.org.split(',')
-        }
-
-
-        for (var i = 0; i < orgOps.length; i++) {
-          if (params.org.indexOf($(orgOps[i]).val()) > -1) $(orgOps[i]).prop('selected', true)
-          if (params.org.indexOf($(orgOpsMobile[i]).val()) > -1) $(orgOpsMobile[i]).prop('selected', true)
-        }
-
-        $('#selected-orgs').material_select()
+        this.selectOptions('orgs')
       }
 
       if (params.year) {
-        var yearOps = $('#selected-years > option:not(:disabled)')
-        var yearOpsMobile = $('#selected-years-mobile > option:not(:disabled)')
-
-        if (typeof params.year === 'string') {
-          params.year = params.year.split(',')
-        }
-
-        for (var i = 0; i < yearOps.length; i++) {
-          if (params.year.indexOf($(yearOps[i]).val()) > -1) $(yearOps[i]).prop('selected', true)
-          if (params.year.indexOf($(yearOpsMobile[i]).val()) > -1) $(yearOpsMobile[i]).prop('selected', true)
-        }
-
-        $('#selected-years').material_select()
+        this.selectOptions('years')
       }
 
       if (params.election) {
-        var provinceOps = $('#selected-provinces > option:not(:disabled)')
-        var provinceOpsMobile = $('#selected-provinces-mobile > option:not(:disabled)')
-
-        for (var i = 0; i < provinceOps.length; i++) {
-          if (params.province === $(provinceOps[i]).val()) {
-            $(provinceOps[i]).prop('selected', true)
-            $('#selected-provinces').material_select()
-            break;
-          }
-
-          if (params.province === $(provinceOpsMobile[i]).val()) {
-            $(provinceOpsMobile[i]).prop('selected', true)
-            break;
-          }
-        }
+        this.selectOptions('provinces')
 
         this.selectProvince(function() {
-          var municipalOps = $('#selected-municipals > option:not(:disabled)')
-          var municipalOpsMobile = $('#selected-municipals-mobile > option:not(:disabled)')
-
-          for (var i = 0; i < municipalOps.length; i++) {
-            if (params.municipal === $(municipalOps[i]).val()) {
-              $(municipalOps[i]).prop('selected', true)
-              $('#selected-municipals').material_select()
-              break;
-            }
-
-            if (params.municipal === $(municipalOpsMobile[i]).val()) {
-              $(municipalOpsMobile[i]).prop('selected', true)
-              break;
-            }
-          }
+          self.selectOptions('municipals')
 
           self.selectMunicipal(function() {
-            var dongOps = $('#selected-dongs > option:not(:disabled)')
-            var dongOps = $('#selected-dongs-mobile > option:not(:disabled)')
-
-            for (var i = 0; i < dongOps.length; i++) {
-              if (params.dong === $(dongOps[i]).val()) {
-                $(dongOps[i]).prop('selected', true)
-                $('#selected-dongs').material_select()
-                break;
-              }
-
-              if (params.dong === $(dongOpsMobile[i]).val()) {
-                $(dongOpsMobile[i]).prop('selected', true)
-                break;
-              }
-            }
+            self.selectOptions('dongs')
 
           })
         })
@@ -225,6 +157,27 @@ Officials.Views = Officials.Views || {};
     /**
      * end of setParams
      */
+
+    selectOptions: function(target) {
+      var ops = $('#selected-' + target + ' > option:not(:disabled)')
+      var opsMobile = $('#selected-' + target + '-mobile > option:not(:disabled)')
+      var targetParam = this.params[target.slice(0, -1)]
+
+      if (typeof targetParam === 'string') {
+        targetParam = targetParam.split(',')
+      }
+
+      if (targetParam) {
+        for (var i = 0; i < ops.length; i++) {
+          if (targetParam.indexOf($(ops[i]).val()) > -1) {
+            $(ops[i]).prop('selected', true)
+          }
+          if (targetParam.indexOf($(opsMobile[i]).val()) > -1) $(opsMobile[i]).prop('selected', true)
+        }
+      }
+
+      $('#selected-' + target).material_select()
+    },
 
     drawForms: function() {
       $('#selected-orgs').material_select();
@@ -236,34 +189,37 @@ Officials.Views = Officials.Views || {};
 
     selectOrgs: function(e) {
       this.resetTags('default', 'orgs', $('#selected-orgs > option:not(:disabled):selected'))
-    },
-
-    selectOrgsMobile: function(e) {
       this.resetTags('default', 'orgs', $('#selected-orgs-mobile > option:not(:disabled):selected'), 'mobile')
     },
 
     selectYears: function(e) {
       this.resetTags('default', 'years', $('#selected-years > option:not(:disabled):selected'))
-    },
-
-    selectYearsMobile: function(e) {
-      // $('#' + e.currentTarget.id).attr('selected', true)
       this.resetTags('default', 'years', $('#selected-years-mobile > option:not(:disabled):selected'), 'mobile')
     },
 
     selectProvince: function(callback) {
       var self = this
       var cb = typeof callback == 'function' ? callback : function(){}
-      // this.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
+      var isMobile = $('selected-provinces').css('display') === 'none' ? '-mobile' : ''
 
       self.initRegionOptions($('#selected-municipals'))
       self.initRegionOptions($('#selected-dongs'))
+      self.initRegionOptions($('#selected-municipals-mobile'))
+      self.initRegionOptions($('#selected-dongs-mobile'))
 
       this.municipals = new Officials.Collections.Municipal()
-      this.municipals.fetch({data: 'province=' + $('#selected-provinces').val(), success: function() {
+      this.municipals.fetch({data: 'province=' + $('#selected-provinces' + isMobile).val(), success: function() {
         self.municipals.models.forEach(function(m) {
           $('#selected-municipals').append($('<option>', {
             id: 'option-municipals-id-' + m.get('id'),
+            value: m.get('name'),
+            text: m.get('name')
+          }))
+        })
+
+        self.municipals.models.forEach(function(m) {
+          $('#selected-municipals-mobile').append($('<option>', {
+            id: 'option-mobile-municipals-id-' + m.get('id'),
             value: m.get('name'),
             text: m.get('name')
           }))
@@ -274,28 +230,6 @@ Officials.Views = Officials.Views || {};
         self.resetTags('election', 'dongs', $('#selected-dongs > option:not(:disabled):selected'))
         self.resetTags('election', 'municipals', $('#selected-municipals > option:not(:disabled):selected'))
         self.resetTags('election', 'provinces', $('#selected-provinces > option:not(:disabled):selected'))
-        cb()
-      }})
-    },
-
-    selectProvinceMobile: function(callback) {
-      var self = this
-      var cb = typeof callback == 'function' ? callback : function(){}
-      // this.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
-
-      self.initRegionOptions($('#selected-municipals-mobile'))
-      self.initRegionOptions($('#selected-dongs-mobile'))
-
-      this.municipals = new Officials.Collections.Municipal()
-      this.municipals.fetch({data: 'province=' + $('#selected-provinces-mobile').val(), success: function() {
-        self.municipals.models.forEach(function(m) {
-          $('#selected-municipals-mobile').append($('<option>', {
-            id: 'option-mobile-municipals-id-' + m.get('id'),
-            value: m.get('name'),
-            text: m.get('name')
-          }))
-        })
-
         self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
         self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:not(:disabled):selected'), 'mobile')
         self.resetTags('election', 'provinces', $('#selected-provinces-mobile > option:not(:disabled):selected'), 'mobile')
@@ -303,14 +237,40 @@ Officials.Views = Officials.Views || {};
       }})
     },
 
+    // selectProvinceMobile: function(callback) {
+    //   var self = this
+    //   var cb = typeof callback == 'function' ? callback : function(){}
+    //   // this.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
+    //
+    //   self.initRegionOptions($('#selected-municipals-mobile'))
+    //   self.initRegionOptions($('#selected-dongs-mobile'))
+    //
+    //   this.municipals = new Officials.Collections.Municipal()
+    //   this.municipals.fetch({data: 'province=' + $('#selected-provinces-mobile').val(), success: function() {
+    //     self.municipals.models.forEach(function(m) {
+    //       $('#selected-municipals-mobile').append($('<option>', {
+    //         id: 'option-mobile-municipals-id-' + m.get('id'),
+    //         value: m.get('name'),
+    //         text: m.get('name')
+    //       }))
+    //     })
+    //
+    //     self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
+    //     self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:not(:disabled):selected'), 'mobile')
+    //     self.resetTags('election', 'provinces', $('#selected-provinces-mobile > option:not(:disabled):selected'), 'mobile')
+    //     cb()
+    //   }})
+    // },
+
     selectMunicipal: function(callback) {
       var self = this
       var cb = typeof callback == 'function' ? callback : function(){}
-      // this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
+      var isMobile = $('selected-municipals').css('display') === 'none' ? '-mobile' : ''
       self.initRegionOptions($('#selected-dongs'))
+      self.initRegionOptions($('#selected-dongs-mobile'))
 
       this.dongs = new Officials.Collections.Dong()
-      this.dongs.fetch({data: 'municipal=' + $('#selected-municipals').val() + '&province=' + $('#selected-provinces').val(), success: function() {
+      this.dongs.fetch({data: 'municipal=' + $('#selected-municipals' + isMobile).val() + '&province=' + $('#selected-provinces' + isMobile).val(), success: function() {
         self.dongs.models.forEach(function(m) {
           $('#selected-dongs').append($('<option>', {
             id: 'option-dongs-id-' + m.get('id'),
@@ -319,22 +279,6 @@ Officials.Views = Officials.Views || {};
           }))
         })
 
-        self.resetTags('election', 'dongs', $('#selected-dongs > option:not(:disabled):selected'))
-        self.resetTags('election', 'municipals', $('#selected-municipals > option:not(:disabled):selected'))
-        $('#selected-dongs').material_select()
-        cb()
-      }})
-
-    },
-
-    selectMunicipalMobile: function(callback) {
-      var self = this
-      var cb = typeof callback == 'function' ? callback : function(){}
-      // this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
-      self.initRegionOptions($('#selected-dongs-mobile'))
-
-      this.dongs = new Officials.Collections.Dong()
-      this.dongs.fetch({data: 'municipal=' + $('#selected-municipals-mobile').val() + '&province=' + $('#selected-provinces-mobile').val(), success: function() {
         self.dongs.models.forEach(function(m) {
           $('#selected-dongs-mobile').append($('<option>', {
             id: 'option-mobile-dongs-id-' + m.get('id'),
@@ -343,17 +287,34 @@ Officials.Views = Officials.Views || {};
           }))
         })
 
+        self.resetTags('election', 'dongs', $('#selected-dongs > option:not(:disabled):selected'))
+        self.resetTags('election', 'municipals', $('#selected-municipals > option:not(:disabled):selected'))
         self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
         self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:not(:disabled):selected'), 'mobile')
+
+        $('#selected-dongs').material_select()
         cb()
       }})
+
     },
+
+    // selectMunicipalMobile: function(callback) {
+    //   var self = this
+    //   var cb = typeof callback == 'function' ? callback : function(){}
+    //   // this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
+    //
+    //
+    //   this.dongs = new Officials.Collections.Dong()
+    //   this.dongs.fetch({data: 'municipal=' + $('#selected-municipals-mobile').val() + '&province=' + $('#selected-provinces-mobile').val(), success: function() {
+    //
+    //
+    //
+    //     cb()
+    //   }})
+    // },
 
     selectDong: function() {
       this.resetTags('election', 'dongs', $('#selected-dongs > option:not(:disabled):selected'))
-    },
-
-    selectDongMobile: function() {
       this.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
     },
 
@@ -375,11 +336,14 @@ Officials.Views = Officials.Views || {};
       target.append($('<option>', {
         selected: true,
         disabled: true,
+        hidden: true,
         value: text,
         text: text
       }))
 
-      target.material_select()
+      if (target.attr('id').slice(-6) !== 'mobile') {
+        target.material_select()
+      }
     },
 
     submitDefaultSearch: function(e) {
@@ -404,40 +368,29 @@ Officials.Views = Officials.Views || {};
 
     submitElectionSearch: function(e) {
       var self = this
-
       // if user click the submit button
       if (e) e.preventDefault()
-
       var params = {}
+      var isMobile = $('#selected-provinces').css('display') === 'none'
 
-      if ($('#selected-provinces').val()) {
-        params.province = $('#selected-provinces').val()
-      } else if ($('#selected-provinces-mobile').val()) {
+      params.election = 1
+
+      if (isMobile) {
         params.province = $('#selected-provinces-mobile').val()
-      }
-
-      if ($('#selected-municipals').val()) {
-        params.municipal = $('#selected-municipals').val()
-      } else if ($('#selected-municipals-mobile').val()) {
         params.municipal = $('#selected-municipals-mobile').val()
-      }
-
-      if ($('#selected-dongs').val()) {
-        params.dong = $('#selected-dongs').val()
-      } else if ($('#selected-dongs-mobile').val()) {
         params.dong = $('#selected-dongs-mobile').val()
+      } else {
+        params.province = $('#selected-provinces').val()
+        params.municipal = $('#selected-municipals').val()
+        params.dong = $('#selected-dongs').val()
       }
 
       if ($('#selected-keyword-election').val()) {
         params.keyword = $('#selected-keyword-election').val()
       }
 
-      params.election = 1
-
       // set current url with query parameters
-
       Backbone.history.navigate('/?' + this.fixEncodeURI($.param(params)), {trigger: false, replace: true})
-      // location.href = "http://stackoverflow.com";
       // find results
       this.getResult(params)
 

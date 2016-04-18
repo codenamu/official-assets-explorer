@@ -414,7 +414,7 @@ Officials.Views = Officials.Views || {};
         },
         labels: {
           outer: {
-            hideWhenLessThanPercentage: 3,
+            hideWhenLessThanPercentage: 1,
             format: 'label-percentage2',
             fontSize: 10,
             pieDistance: 15

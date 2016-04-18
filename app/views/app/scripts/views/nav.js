@@ -27,8 +27,9 @@ Officials.Views = Officials.Views || {};
     afterRender: function(event) {
       if (window.innerWidth <= 768) {
         $('.button-collapse').sideNav()
-        $('.drag-target').css('touch-action', 'no')
       }
+      
+      $('.drag-target').css('touch-action', 'no')
     },
 
     hideSlideOut: function() {
