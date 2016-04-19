@@ -197,8 +197,6 @@ Officials.Views = Officials.Views || {};
         minimumResultsForSearch: -1
       })
 
-\
-
       $('#selected-years-mobile').select2({
         placeholder: '년도를 선택하세요'
       })
