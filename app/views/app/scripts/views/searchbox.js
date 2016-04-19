@@ -180,7 +180,8 @@ Officials.Views = Officials.Views || {};
 
       if (target === 'orgs' || target === 'years') {
         $('#selected-' + target + '-mobile').select2({
-          placeholder: target === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요'
+          placeholder: target === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요',
+          dropdownCssClass : 'no-search'
         })
       }
     },
@@ -194,7 +195,8 @@ Officials.Views = Officials.Views || {};
 
       $('#selected-orgs-mobile').select2({
         placeholder: '소속을 선택하세요',
-        minimumResultsForSearch: 50
+        dropdownCssClass : 'no-search'
+        // minimumResultsForSearch: -1
       })
 
       $('#selected-years-mobile').select2({
@@ -492,7 +494,8 @@ Officials.Views = Officials.Views || {};
       $('option#' + idMobile).attr('selected', false)
       $('#selected-' + $(e.target).closest('.chip').attr('id').split('-')[1]).material_select()
       $('#selected-' + $(e.target).closest('.chip').attr('id').split('-')[1] + '-mobile').select2({
-        placeholder: $(e.target).closest('.chip').attr('id').split('-')[1] === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요'
+        placeholder: $(e.target).closest('.chip').attr('id').split('-')[1] === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요',
+        dropdownCssClass : 'no-search'
       })
     }
   });

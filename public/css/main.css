@@ -1,3 +1,7 @@
+.no-search .select2-search {
+display:none
+}
+
 html, body {
     font-family: "Noto Sans KR";
     height: 100%;
