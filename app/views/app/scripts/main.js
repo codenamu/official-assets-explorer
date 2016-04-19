@@ -33,8 +33,7 @@ window.Officials = {
 
   bindDataForm: function() {
     if (window.localStorage.getItem('surveyed') === 'yes') {
-      $('.modal-content.content-survey').hide()
-      $('.modal-content.content-data').show()
+      movePage('data')
     }
 
     var self = this
@@ -66,10 +65,35 @@ window.Officials = {
             window.localStorage.setItem("surveyed", 'yes');
           }
 
-          console.log(result)
+          alert('설문조사에 응해주셔서 감사합니다.')
+          movePage('data')
         })
       }
     })
+
+    function showDataList() {
+      $('.modal-content.content-data').append(
+        '<ul>' +
+        '<li><a href="#">2011년도 데이터</a></li>' +
+        '<li><a href="#">2012년도 데이터</a></li>' +
+        '<li><a href="#">2013년도 데이터</a></li>' +
+        '<li><a href="#">2014년도 데이터</a></li>' +
+        '<li><a href="#">2015년도 데이터</a></li>' +
+        '</ul>'
+      )
+    }
+
+    function movePage(target) {
+      if (target === 'data') {
+        showDataList()
+
+        $('.modal-content.content-survey').hide()
+        $('.modal-content.content-data').show()
+      } else {
+        $('.modal-content.content-survey').show()
+        $('.modal-content.content-data').hide()
+      }
+    }
   },
 
   validateForm: function(target, msg) {

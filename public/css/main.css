@@ -892,6 +892,10 @@ footer.page-footer p {
     margin-top: 0.7rem;
 }
 
+#modal-data .modal-content.content-data {
+    display: none;
+}
+
 @media only screen and (min-width: 768px) {
     svg {
         margin-left: 0;
