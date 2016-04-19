@@ -196,7 +196,6 @@ Officials.Views = Officials.Views || {};
           }
         })
 
-        console.log(reorderedPosition)
       return reorderedPosition
     },
 

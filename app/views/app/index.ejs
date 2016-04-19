@@ -66,14 +66,143 @@
       </footer>
 
       <!-- Modal Structure -->
-      <div id="data-alert" class="modal">
-        <div class="modal-content">
-          <h4>조금만 기다려주세요!</h4>
-          <p>이 프로젝트에 사용된 데이터 중 2011년부터 2016년에 해당하는 데이터를 4월 중으로 CC BY-SA 4.0 라이선스를 통해 공개할 예정입니다. 조금만 기다려주세요.</p>
+      <div id="modal-data" class="modal">
+        <div class="modal-content content-survey">
+          <h5>공직자 재산 데이터 이용자 설문조사</h5>
+          <form id="form-data">
+            <div class="row">
+                <div class="col s12 m1 offset-m1 form-label">
+                    <h6>성별</h6>
+                </div>
+                <div class="col s12 m9">
+                    <div class="input-field col s6 m3">
+                        <input id="data-gender-man" name="data-gender" type="radio" value="남" />
+                        <label for="data-gender-man">남</label>
+                    </div>
+                    <div class="input-field col s6 m3">
+                        <input id="data-gender-woman" name="data-gender" type="radio" value="여" />
+                        <label for="data-gender-woman">여</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m1 offset-m1 form-label">
+                    <h6>나이</h6>
+                </div>
+                <div class="col s12 m9">
+                  <div class="input-field col s12 m6">
+                    <select class="browser-default" name="data-age" required>
+                      <option value="" disabled selected>나이를 선택해주세요</option>
+                      <option value="10">10대(-19세)</option>
+                      <option value="20">20대(-29세)</option>
+                      <option value="30">30대(-39세)</option>
+                      <option value="40">40대(-49세)</option>
+                      <option value="50">50대(-59세)</option>
+                      <option value="60">60대(-69세)</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m1 offset-m1 form-label">
+                    <h6>거주지역</h6>
+                </div>
+                <div class="col s12 m9">
+                  <div class="input-field col s12 m6">
+                    <select class="browser-default" name="data-region" required>
+                      <option value="" disabled selected>거주지역을 선택해주세요</option>
+                      <option value="서울특별시">서울특별시</option>
+                      <option value="부산광역시">부산광역시</option>
+                      <option value="대구광역시">대구광역시</option>
+                      <option value="인천광역시">인천광역시</option>
+                      <option value="광주광역시">광주광역시</option>
+                      <option value="대전광역시">대전광역시</option>
+                      <option value="울산광역시">울산광역시</option>
+                      <option value="세종특별자치시">세종특별자치시</option>
+                      <option value="경기도">경기도</option>
+                      <option value="강원도">강원도</option>
+                      <option value="충청북도">충청북도</option>
+                      <option value="충청남도">충청남도</option>
+                      <option value="전라북도">전라북도</option>
+                      <option value="전라남도">전라남도</option>
+                      <option value="경상북도">경상북도</option>
+                      <option value="경상남도">경상남도</option>
+                      <option value="제주특별자치도">제주특별자치도</option>
+                      <option value="해외거주">해외거주</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m1 offset-m1 form-label">
+                    <h6>직업</h6>
+                </div>
+                <div class="col s12 m9">
+                  <div class="input-field col s12 m6">
+                    <select class="browser-default" name="data-job" required>
+                      <option value="" disabled selected>Choose your option</option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m1 offset-m1 form-label">
+                    <h6>이용 목적</h6>
+                </div>
+                <div class="col s12 m9">
+                  <div class="input-field col s12 m6">
+                    <select class="browser-default" name="data-purpose" required>
+                      <option value="" disabled selected>Choose your option</option>
+                      <option value="연구분석">연구분석</option>
+                      <option value="정책수립">정책수립</option>
+                      <option value="통계작성">통계작성</option>
+                      <option value="의정활동">의정활동</option>
+                      <option value="보고서(또는 논문) 작성,">보고서(또는 논문) 작성</option>
+                      <option value="교육자료">교육자료</option>
+                      <option value="간행물 발간">간행물 발간</option>
+                      <option value="기타">기타</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m1 offset-m1 form-label">
+                    <h6>이용 목적 내용</h6>
+                </div>
+                <div class="input-field col s12 m9">
+                    <textarea id="data-purpose-detail" class="materialize-textarea" name="data-purpose-detail" required></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s10 offset-s1 m4 offset-m4">
+                    <button class="btn btn-large color-news" type="submit">보내기</button>
+                </div>
+            </div>
+          </form>
         </div>
-        <div class="modal-footer">
+        <div class="modal-content content-data">
+          <h5>공직자 재산 데이터 다운로드</h5>
+          <ul>
+            <li>
+              <a href="#">2011년도 데이터</a>
+            </li>
+            <li>
+              <a href="#">2012년도 데이터</a>
+            </li>
+            <li>
+              <a href="#">2013년도 데이터</a>
+            </li>
+            <li>
+              <a href="#">2014년도 데이터</a>
+            </li>
+          </ul>
+        </div>
+        <%# <div class="modal-footer">
           <a href="/#" class=" modal-action modal-close waves-effect waves-green btn-flat">확인</a>
-        </div>
+        </div>%>
       </div>
     </section>
 

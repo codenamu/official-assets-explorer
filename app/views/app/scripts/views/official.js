@@ -400,66 +400,77 @@ Officials.Views = Officials.Views || {};
       var pieData = this.makePieData(model)
       if (this.myPie) this.myPie.destroy()
 
-      var canvasWidth = 600
+      $('.official-pie-chart tbody').html('')
+      pieData[year].assets.forEach(function(a) {
+        $('.official-pie-chart tbody').append(
+          '<tr>' +
+          '<td>' + a.label + '</td>' +
+          '<td>' + ((a.label !== '채무') ? ((a.value * 100)/pieData[year].total).toFixed(2) + '%' : '') + '</td>' +
+          '<td>' + self.calMeasureMoney(a.value) + '</td>' +
+          '</tr>'
+        )
+      })
 
-      if (window.innerWidth <= 768 && window.innerWidth > 599) {
-        canvasWidth = 300
-      } else if (window.innerWidth < 600) {
-        canvasWidth = window.innerWidth - 20
-      }
-
-      var pieOption = {
-        footer: {
-          text: '자산 구성비',
-          color: '#ffffff',
-          fontSize: 14,
-          location: 'bottom-center'
-        },
-        size: {
-          canvasWidth: canvasWidth,
-          canvasHeight: 300,
-          pieOuterRadius: "60%"
-        },
-        data: {
-          content: pieData[year]
-        },
-        labels: {
-          outer: {
-            hideWhenLessThanPercentage: 1,
-            format: 'label-percentage2',
-            fontSize: 10,
-            pieDistance: 15
-          },
-          inner: {
-            format: 'none'
-          },
-          mainLabel: {
-            color: '#ffffff',
-            fontSize: 13
-          },
-          percentage: {
-            fontSize: 13
-          },
-          lines: {
-            enabled: true,
-            style: 'straight',
-            color: '#ffffff'
-          }
-        }
-      }
-
-      /**
-       * make pie bigger if user's browser is from desktop
-       */
-      if (window.innerWidth > 768) {
-        pieOption.size.canvasWidth = 500
-        pieOption.size.canvasHeight = 450
-        pieOption.size.pieOuterRadius = '80%'
-        pieOption.footer.fontSize = 18
-      }
-
-      this.myPie = new d3pie('canvas-pie', pieOption)
-      $('#p0_footer').attr('y', 428)
+      // var canvasWidth = 600
+      //
+      // if (window.innerWidth <= 768 && window.innerWidth > 599) {
+      //   canvasWidth = 300
+      // } else if (window.innerWidth < 600) {
+      //   canvasWidth = window.innerWidth - 20
+      // }
+      //
+      // var pieOption = {
+      //   footer: {
+      //     text: '자산 구성비',
+      //     color: '#ffffff',
+      //     fontSize: 14,
+      //     location: 'bottom-center'
+      //   },
+      //   size: {
+      //     canvasWidth: canvasWidth,
+      //     canvasHeight: 300,
+      //     pieOuterRadius: "60%"
+      //   },
+      //   data: {
+      //     content: pieData[year]
+      //   },
+      //   labels: {
+      //     outer: {
+      //       hideWhenLessThanPercentage: 1,
+      //       format: 'label-percentage2',
+      //       fontSize: 10,
+      //       pieDistance: 15
+      //     },
+      //     inner: {
+      //       format: 'none'
+      //     },
+      //     mainLabel: {
+      //       color: '#ffffff',
+      //       fontSize: 13
+      //     },
+      //     percentage: {
+      //       fontSize: 13
+      //     },
+      //     lines: {
+      //       enabled: true,
+      //       style: 'straight',
+      //       color: '#ffffff'
+      //     }
+      //   }
+      // }
+      //
+      // /**
+      //  * make pie bigger if user's browser is from desktop
+      //  */
+      // if (window.innerWidth > 768) {
+      //   pieOption.size.canvasWidth = 500
+      //   pieOption.size.canvasHeight = 450
+      //   pieOption.size.pieOuterRadius = '80%'
+      //   pieOption.footer.fontSize = 18
+      // }
+      //
+      // this.myPie = new d3pie('canvas-pie', pieOption)
+      // $('#p0_footer').attr('y', 428)
     },
 
     makePieData: function(model) {
@@ -470,7 +481,9 @@ Officials.Views = Officials.Views || {};
 
       for (var y in model) {
         var total = 0
-        pieData[model[y].year] = []
+        pieData[model[y].year] = {}
+        pieData[model[y].year].total = 0
+        pieData[model[y].year].assets = []
 
         model[y].Assets.forEach(function(d) {
           if (d.total !== 0) {
@@ -478,21 +491,23 @@ Officials.Views = Officials.Views || {};
             data.value = d.total
             data.color = self.selectPieColor(d.Cat2.title)
             data.label = d.Cat2.title
-            pieData[model[y].year].push(data)
+            pieData[model[y].year].assets.push(data)
 
-            total += d.total
+            if (data.label !== '채무') {
+              pieData[model[y].year].total += d.total
+            }
           }
         })
 
-        pieData[model[y].year]
-          .sort(function(a, b) {
-            return parseInt(a.value, 10) - parseInt(b.value, 10)
-          })
-        .forEach(function(d) {
-          if (!d.color) {
-            d.color = pieColor.shift()
-          }
-        })
+        // pieData[model[y].year].assets
+        //   .sort(function(a, b) {
+        //     return parseInt(a.value, 10) - parseInt(b.value, 10)
+        //   })
+        // .forEach(function(d) {
+        //   if (!d.color) {
+        //     d.color = pieColor.shift()
+        //   }
+        // })
       }
 
       return pieData

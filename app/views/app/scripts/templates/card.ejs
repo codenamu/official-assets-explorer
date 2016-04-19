@@ -6,8 +6,8 @@
         <% if (model.isElec) { %>
           <%- model.mainOrg %><br><%- model.mainPos %>
         <% } else { %>
-          <%- model.Position[0].title.split(' ')[0] %><br />
-          <%- model.Position[0].title.split(' ')[1] %>
+          <%- model.Position[model.Position.length - 1].title.split(' ')[0] %><br />
+          <%- model.Position[model.Position.length - 1].title.split(' ')[2] ? model.Position[model.Position.length - 1].title.split(' ')[1] + ' ' + model.Position[model.Position.length - 1].title.split(' ')[2] : model.Position[model.Position.length - 1].title.split(' ')[1] %>
         <% } %>
       </span>
     </div>

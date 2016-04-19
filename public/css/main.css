@@ -746,57 +746,65 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 
-#form-contact {
+#form-contact, #form-data {
     color: #5c6d85;
 }
 
-#form-contact > .row {
+#form-contact > .row, #form-data > .row {
     margin-bottom: 0px;
 }
 
-#form-contact .input-field {
+#form-data .col {
+    padding: 0px;
+}
+
+#form-contact .input-field, #form-data .input-field {
     text-align: left;
 }
 
-#form-contact > .row:first-child .input-field {
+#form-contact > .row:first-child .input-field, #form-data > .row:first-child .input-field {
     padding: 0 0.05rem;
 }
 
-#form-contact > .row:first-child .input-field label {
+#form-contact > .row:first-child .input-field label, #form-data > .row:first-child .input-field label {
     font-size: 0.9rem;
 }
 
-#form-contact .input-field input, #form-contact .input-field textarea {
+#form-contact .input-field input, #form-contact .input-field textarea, #form-data .input-field input, #form-data .input-field textarea {
     border: 1px solid #dee2e7 !important;
     padding: 0 10px;
     box-sizing: border-box;
 }
 
-#form-contact > .row:first-child .input-field label {
+#form-contact > .row:first-child .input-field label, #form-data > .row:first-child .input-field label {
     color: #5c6d85;
 }
 
-#form-contact > .row:first-child > .col:last-child {
+#form-contact > .row:first-child > .col:last-child, #form-data > .row:first-child > .col:last-child {
     padding: 0px;
 }
 
-#form-contact > .row > .form-label {
+#form-contact > .row > .form-label, #form-data > .row > .form-label {
     padding: 0 15px;
     margin-top: 18px;
     min-width: 75px;
     text-align: left;
 }
 
-#form-contact [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+#form-data > .row > .form-label {
+    padding: 0px;
+}
+
+#form-contact [type="radio"]:not(:checked) + label, [type="radio"]:checked + label, #form-data [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
     font-size: 0.8rem;
     padding-left: 25px;
 }
 
-#form-contact [type="radio"]:not(:checked) + label:before {
+#form-contact [type="radio"]:not(:checked) + label:before, #form-data [type="radio"]:not(:checked) + label:before {
     border: 2px solid #97a8c0;
 }
 
-#form-contact [type="radio"]:checked + label:before {
+#form-contact [type="radio"]:checked + label:before, #form-data [type="radio"]:checked + label:before {
     border-radius: 50%;
     border: 2px solid white;
     width: 12px;
@@ -805,12 +813,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     z-index: 1;
 }
 
-#form-contact [type="radio"]:checked + label:after {
+#form-contact [type="radio"]:checked + label:after, #form-data [type="radio"]:checked + label:after {
     border: 2px solid #5c6d85;
     background-color: #5c6d85;
 }
 
-#form-contact > .row .input-field textarea {
+#form-contact > .row .input-field textarea, #form-data > .row .input-field textarea {
     height: 10rem !important;
 }
 
@@ -878,6 +886,10 @@ footer.page-footer {
 footer.page-footer p {
     color: rgba(255, 255, 255, 0.33);
     font-size: 0.8rem;
+}
+
+#modal-data .input-field {
+    margin-top: 0.7rem;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1076,7 +1088,7 @@ footer.page-footer p {
         margin-top: 60px;
     }
 
-    #form-contact [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+    #form-contact [type="radio"]:not(:checked) + label, [type="radio"]:checked + label, #form-data [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
         font-size: 1rem
     }
 
