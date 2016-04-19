@@ -1,5 +1,5 @@
-.no-search .select2-search {
-display:none
+ul.select2-selection__rendered li {
+    display: none !important;
 }
 
 html, body {
