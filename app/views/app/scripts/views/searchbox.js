@@ -421,21 +421,16 @@ Officials.Views = Officials.Views || {};
         var chipId = $(chips[0]).attr('id') ? $(chips[0]).attr('id').split('-')[3] : ''
         var valueId = $(values[0]).attr('id') ? $(values[0]).attr('id').split('-')[3] : ''
 
-        if (chipId && chipId !== valueId) {
+        if (chipId) {
           $('.chip-' + subcategory + '-id-' + chipId).remove()
-          console.log(chipId)
-          console.log(valueId)
         }
 
-        if (valueId) {
-          console.log(valueId)
-          if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
-            $('#tags-' + category + ' > .col').append($('<span>', {
-              id: 'chip-' + subcategory + '-id-' + valueId,
-              class: 'chip chip-' + subcategory + ' chip-' + subcategory + '-id-' + valueId,
-              text: $(values[0]).val()
-            }))
-          }
+        if (valueId  && $('#chip-' + subcategory + '-id-' + id).length === 0) {
+          $('#tags-' + category + ' > .col').append($('<span>', {
+            id: 'chip-' + subcategory + '-id-' + valueId,
+            class: 'chip chip-' + subcategory + ' chip-' + subcategory + '-id-' + valueId,
+            text: $(values[0]).val()
+          }))
         }
       }
 
