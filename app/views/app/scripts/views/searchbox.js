@@ -180,8 +180,7 @@ Officials.Views = Officials.Views || {};
 
       if (target === 'orgs' || target === 'years') {
         $('#selected-' + target + '-mobile').select2({
-          placeholder: target === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요',
-          minimumResultsForSearch: 100
+          placeholder: target === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요'
         })
       }
     },
@@ -198,8 +197,7 @@ Officials.Views = Officials.Views || {};
       })
 
       $('#selected-years-mobile').select2({
-        placeholder: '년도를 선택하세요',
-        minimumResultsForSearch: 100
+        placeholder: '년도를 선택하세요'
       })
     },
 
@@ -223,6 +221,7 @@ Officials.Views = Officials.Views || {};
       self.initRegionOptions($('#selected-municipals-mobile'))
       self.initRegionOptions($('#selected-dongs-mobile'))
 
+
       this.municipals = new Officials.Collections.Municipal()
       this.municipals.fetch({data: 'province=' + $('#selected-provinces' + isMobile).val(), success: function() {
         self.municipals.models.forEach(function(m) {
@@ -243,40 +242,12 @@ Officials.Views = Officials.Views || {};
 
         $('#selected-municipals').material_select()
 
-        self.resetTags('election', 'dongs', $('#selected-dongs > option:not(:disabled):selected'))
-        self.resetTags('election', 'municipals', $('#selected-municipals > option:not(:disabled):selected'))
-        self.resetTags('election', 'provinces', $('#selected-provinces > option:not(:disabled):selected'))
-        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
-        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:not(:disabled):selected'), 'mobile')
-        self.resetTags('election', 'provinces', $('#selected-provinces-mobile > option:not(:disabled):selected'), 'mobile')
+        self.resetTags('election', 'provinces', $('#selected-provinces' + isMobile + ' > option:not(:disabled):selected'))
+        self.resetTags('election', 'dongs', $('#selected-dongs' + isMobile + ' > option:not(:disabled):selected'))
+        self.resetTags('election', 'municipals', $('#selected-municipals' + isMobile + ' > option:not(:disabled):selected'))
         cb()
       }})
     },
-
-    // selectProvinceMobile: function(callback) {
-    //   var self = this
-    //   var cb = typeof callback == 'function' ? callback : function(){}
-    //   // this.resetTags('election', 'provinces', $('#selected-provinces > option:selected'))
-    //
-    //   self.initRegionOptions($('#selected-municipals-mobile'))
-    //   self.initRegionOptions($('#selected-dongs-mobile'))
-    //
-    //   this.municipals = new Officials.Collections.Municipal()
-    //   this.municipals.fetch({data: 'province=' + $('#selected-provinces-mobile').val(), success: function() {
-    //     self.municipals.models.forEach(function(m) {
-    //       $('#selected-municipals-mobile').append($('<option>', {
-    //         id: 'option-mobile-municipals-id-' + m.get('id'),
-    //         value: m.get('name'),
-    //         text: m.get('name')
-    //       }))
-    //     })
-    //
-    //     self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
-    //     self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:not(:disabled):selected'), 'mobile')
-    //     self.resetTags('election', 'provinces', $('#selected-provinces-mobile > option:not(:disabled):selected'), 'mobile')
-    //     cb()
-    //   }})
-    // },
 
     selectMunicipal: function(callback) {
       var self = this
@@ -303,35 +274,17 @@ Officials.Views = Officials.Views || {};
           }))
         })
 
-        self.resetTags('election', 'dongs', $('#selected-dongs > option:not(:disabled):selected'))
-        self.resetTags('election', 'municipals', $('#selected-municipals > option:not(:disabled):selected'))
-        self.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
-        self.resetTags('election', 'municipals', $('#selected-municipals-mobile > option:not(:disabled):selected'), 'mobile')
+        self.resetTags('election', 'dongs', $('#selected-dongs' + isMobile + ' > option:not(:disabled):selected'))
+        self.resetTags('election', 'municipals', $('#selected-municipals' + isMobile + ' > option:not(:disabled):selected'))
 
         $('#selected-dongs').material_select()
         cb()
       }})
-
     },
 
-    // selectMunicipalMobile: function(callback) {
-    //   var self = this
-    //   var cb = typeof callback == 'function' ? callback : function(){}
-    //   // this.resetTags('election', 'municipals', $('#selected-municipals > option:selected'))
-    //
-    //
-    //   this.dongs = new Officials.Collections.Dong()
-    //   this.dongs.fetch({data: 'municipal=' + $('#selected-municipals-mobile').val() + '&province=' + $('#selected-provinces-mobile').val(), success: function() {
-    //
-    //
-    //
-    //     cb()
-    //   }})
-    // },
-
     selectDong: function() {
-      this.resetTags('election', 'dongs', $('#selected-dongs > option:not(:disabled):selected'))
-      this.resetTags('election', 'dongs', $('#selected-dongs-mobile > option:not(:disabled):selected'), 'mobile')
+      var isMobile = $('input.select-dropdown').css('display') === 'none' ? '-mobile' : ''
+      this.resetTags('election', 'dongs', $('#selected-dongs' + isMobile + ' > option:not(:disabled):selected'))
     },
 
     initRegionOptions: function(target) {
@@ -465,19 +418,23 @@ Officials.Views = Officials.Views || {};
         }
 
       } else {
-        var chipId = $(chips[0]).attr('id')
-        var valueId = $(values[0]).attr('id')
+        var chipId = $(chips[0]).attr('id') ? $(chips[0]).attr('id').split('-')[3] : ''
+        var valueId = $(values[0]).attr('id') ? $(values[0]).attr('id').split('-')[3] : ''
 
-        if (chipId) {
-          var id = chipId.split('-')[3]
-          $('#chip-' + subcategory + '-id-' + id).remove()
+        if (chipId && chipId !== valueId) {
+          $('.chip-' + subcategory + '-id-' + chipId).remove()
+          console.log(chipId)
+          console.log(valueId)
         }
 
         if (valueId) {
-          var id = valueId.split('-')[3]
-
+          console.log(valueId)
           if ($('#chip-' + subcategory + '-id-' + id).length === 0) {
-            $('#tags-' + category + ' > .col').append('<span id="chip-' + subcategory + '-id-' + id + '" class="chip chip-' + subcategory + '">' + $(values[0]).val() + '</span>')
+            $('#tags-' + category + ' > .col').append($('<span>', {
+              id: 'chip-' + subcategory + '-id-' + valueId,
+              class: 'chip chip-' + subcategory + ' chip-' + subcategory + '-id-' + valueId,
+              text: $(values[0]).val()
+            }))
           }
         }
       }
@@ -493,8 +450,7 @@ Officials.Views = Officials.Views || {};
       $('option#' + idMobile).attr('selected', false)
       $('#selected-' + $(e.target).closest('.chip').attr('id').split('-')[1]).material_select()
       $('#selected-' + $(e.target).closest('.chip').attr('id').split('-')[1] + '-mobile').select2({
-        placeholder: $(e.target).closest('.chip').attr('id').split('-')[1] === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요',
-        minimumResultsForSearch: 100
+        placeholder: $(e.target).closest('.chip').attr('id').split('-')[1] === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요'
       })
     }
   });

@@ -297,6 +297,19 @@ header p.subtitle > img {
     margin: 1px 5px;
 }
 
+.chip-provinces, .chip-municipals, .chip-dongs {
+    display: inline-block;
+    height: 32px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 32px;
+    padding: 0 12px;
+    border-radius: 16px;
+    background-color: #e4e4e4;
+    color: #5c6d85;
+    margin: 1px 5px;
+}
+
 .dropdown-content li > a, .dropdown-content li > span {
     color: #5C6D85;
 }
