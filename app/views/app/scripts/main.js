@@ -48,7 +48,7 @@ window.Officials = {
       var purpose = $('select[name=data-purpose]', '#form-data').val()
       var purposeDetail = $('textarea[name=data-purpose-detail]', '#form-data').val()
 
-      if (!self.validateForm(gender, '성별') || !self.validateForm(gender, '나이') || !self.validateForm(gender, '사는 지역') || !self.validateForm(gender, '직업') || !self.validateForm(gender, '이용 목적') || !self.validateForm(gender, '이용 목적 내용')) {
+      if (!validateForm(gender, '성별') || !validateForm(gender, '나이') || !validateForm(gender, '사는 지역') || !validateForm(gender, '직업') || !validateForm(gender, '이용 목적')) {
         return false;
       } else {
         $.post('/api/survey', {
@@ -74,11 +74,11 @@ window.Officials = {
     function showDataList() {
       $('.modal-content.content-data').append(
         '<ul>' +
-        '<li><a href="#">2011년도 데이터</a></li>' +
-        '<li><a href="#">2012년도 데이터</a></li>' +
-        '<li><a href="#">2013년도 데이터</a></li>' +
-        '<li><a href="#">2014년도 데이터</a></li>' +
-        '<li><a href="#">2015년도 데이터</a></li>' +
+        '<li>- <a href="#">2011년도 데이터</a></li>' +
+        '<li>- <a href="#">2012년도 데이터</a></li>' +
+        '<li>- <a href="#">2013년도 데이터</a></li>' +
+        '<li>- <a href="#">2014년도 데이터</a></li>' +
+        '<li>- <a href="#">2015년도 데이터</a></li>' +
         '</ul>'
       )
     }
@@ -94,14 +94,14 @@ window.Officials = {
         $('.modal-content.content-data').hide()
       }
     }
-  },
 
-  validateForm: function(target, msg) {
-    if (!target) {
-      alert(msg + '를 확인해주세요.')
-      return false
-    } else {
-      return true
+    function validateForm(target, msg) {
+      if (!target) {
+        alert(msg + '를 확인해주세요.')
+        return false
+      } else {
+        return true
+      }
     }
   },
 

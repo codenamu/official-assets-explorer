@@ -923,6 +923,14 @@ footer.page-footer p {
     font-size: 0.8rem;
 }
 
+#modal-data h5 {
+    color: #5C6D85;
+}
+
+#modal-data a {
+    color: #5C6D85;
+}
+
 #modal-data .input-field {
     margin-top: 0.7rem;
 }

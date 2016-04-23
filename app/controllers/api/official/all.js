@@ -73,8 +73,6 @@ module.exports = function() {
         where['$and'] = []
         where['$Person.election$'] = 1
 
-        console.log(queries)
-
         // 비례대표가 constituency 테이블에 포함되지 않아 포함시켜야함
         if (targetConsIds.length && (queries.province || queries.municipal || queries.dong)) {
           where['$Person.ConstituencyId$'] = {
