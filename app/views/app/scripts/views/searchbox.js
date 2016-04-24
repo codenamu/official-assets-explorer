@@ -371,7 +371,8 @@ Officials.Views = Officials.Views || {};
     },
 
     escapeSymbols: function(str) {
-      return str.split(',')
+      return str.toLowerCase()
+        .split(',')
         .map(function(s) {
           return s.replace(/[<>-[\]{}()$%&*+?.\\^|#\s\]\"]/g, '')
         })
