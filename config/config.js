@@ -25,6 +25,9 @@ var config = {
       database: 'publicassets',
       username: 'root',
       password: ''
+    },
+    redis: {
+      expired: 3600 * 3 // cache expired after 3 hours
     }
   },
 
