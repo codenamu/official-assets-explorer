@@ -23,10 +23,12 @@ var config = {
       host: '',
       port: 3306,
       database: 'publicassets',
-      username: 'root',
-      password: ''
+      username: process.env.mysqlUsername || 'root',
+      password: process.env.mysqlPassword || ''
     },
     redis: {
+      port: process.env.REDIS_PORT || 6379,
+      host: process.env.REDIS_HOST || '127.0.0.1',
       expired: 3600 * 3 // cache expired after 3 hours
     }
   },
@@ -51,8 +53,13 @@ var config = {
       host: '',
       port: 3306,
       database: 'publicassets-test',
-      username: process.env.mysqlUsername,
-      password: process.env.mysqlPassword
+      username: process.env.mysqlUsername || 'root',
+      password: process.env.mysqlPassword || ''
+    },
+    redis: {
+      port: process.env.REDIS_PORT || 6379,
+      host: process.env.REDIS_HOST || '127.0.0.1',
+      expired: 3600 * 3 // cache expired after 3 hours
     }
   },
 
@@ -76,8 +83,13 @@ var config = {
       host: '',
       port: 3306,
       database: 'publicassets',
-      username: process.env.mysqlUsername,
-      password: process.env.mysqlPassword
+      username: process.env.mysqlUsername || 'root',
+      password: process.env.mysqlPassword || ''
+    },
+    redis: {
+      port: process.env.REDIS_PORT || 6379,
+      host: process.env.REDIS_HOST || '127.0.0.1',
+      expired: 3600 * 3 // cache expired after 3 hours
     }
   }
 };
