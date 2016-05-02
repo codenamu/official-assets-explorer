@@ -32,11 +32,18 @@ window.Officials = {
   },
 
   bindDataForm: function() {
+    var self = this
+
+    // if user already submited this survey
     if (window.localStorage.getItem('surveyed') === 'yes') {
       movePage('data')
     }
 
-    var self = this
+    // if user do not want to submit this survey
+    $('#skip-survey').bind('click', function(e) {
+      movePage('data')
+    })
+
 
     $('#form-data').bind('submit', function(e) {
       e.preventDefault()
@@ -71,7 +78,7 @@ window.Officials = {
       }
     })
 
-    function showDataList() {
+    function showDataPage() {
       $('.modal-content.content-data').append(
         '<ul>' +
         '<li>- <a href="#">2011년도 데이터</a></li>' +
@@ -81,11 +88,23 @@ window.Officials = {
         '<li>- <a href="#">2015년도 데이터</a></li>' +
         '</ul>'
       )
+
+      $('.modal-content.content-data').append(
+        '<hr>' +
+        '<div class="row">' +
+        '<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">' +
+        '<img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />' +
+        '</a>' +
+        '<br />' +
+        '<a xmlns:cc="http://creativecommons.org/ns#" href="http://jaesan.newstapa.org" property="cc:attributionName" rel="cc:attributionURL">뉴스타파</a>' +
+        '에 의해 작성된 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">고위공직자 재산 데이터</span>은(는) <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.' +
+        '</div>'
+      )
     }
 
     function movePage(target) {
       if (target === 'data') {
-        showDataList()
+        showDataPage()
 
         $('.modal-content.content-survey').hide()
         $('.modal-content.content-data').show()
