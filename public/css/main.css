@@ -626,7 +626,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     color: #5c6d85;
 }
 
-#main .page.page-about {
+#main .page {
     max-width: 712px;
 }
 
@@ -634,22 +634,26 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     padding: 0px 10px;
 }
 
-#main .page.page-about p {
+#main .page p {
     margin-top: 20px;
     padding: 0 1rem;
     line-height: 1.6rem;
     letter-spacing: -0.05em;
 }
 
-#main .page.page-about h5 {
+#main .page h5 {
     font-size: 1.3rem;
     line-height: 1.9rem;
     letter-spacing: -0.04em;
 }
 
-#main  .page.page-about img {
+#main  .page img {
     width: 90px;
     margin: 20px 0px;
+}
+
+#main .page.container .row {
+    margin: 0px;
 }
 
 #main .page.page-about .about-codenamu {
@@ -668,6 +672,23 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 #main .page.page-contact .card {
     padding: 10px 0;
+}
+
+
+#main .page.page-data .h5 {
+    color: #5C6D85;
+}
+
+#main .page.page-data a {
+    color: #5C6D85;
+}
+
+#main .page.page-data .input-field {
+    margin-top: 0.7rem;
+}
+
+#main .page.page-data .row.row-buttons .col:first-child {
+    padding: 18px 0;
 }
 
 #main .search-loading {
@@ -933,25 +954,6 @@ footer.page-footer p {
     font-size: 0.8rem;
 }
 
-#modal-data h5 {
-    color: #5C6D85;
-}
-
-#modal-data a {
-    color: #5C6D85;
-}
-
-#modal-data .input-field {
-    margin-top: 0.7rem;
-}
-
-#modal-data .modal-content.content-data {
-    display: none;
-}
-
-#modal-data .row.row-buttons .col:first-child {
-    padding: 18px 0;
-}
 
 @media only screen and (min-width: 768px) {
     svg {

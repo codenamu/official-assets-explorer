@@ -178,12 +178,6 @@ Officials.Views = Officials.Views || {};
       }
 
       $('#selected-' + target).material_select()
-
-      // if (target === 'orgs' || target === 'years') {
-      //   $('#selected-' + target + '-mobile').select2({
-      //     placeholder: target === 'orgs' ? '소속을 선택하세요' : '년도를 선택하세요'
-      //   })
-      // }
     },
 
     drawForms: function() {
@@ -401,8 +395,6 @@ Officials.Views = Officials.Views || {};
       if (category === 'default') {
         var valLength = values.length
         var initNum = 0
-
-        console.log(values)
 
         if (valLength > chips.length) {
         // if user added a tag

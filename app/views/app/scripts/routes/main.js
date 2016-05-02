@@ -10,6 +10,7 @@ Officials.Routers = Officials.Routers || {};
       ''          : 'main',
       'about'     : 'about',
       'contact'   : 'contact',
+      'data'      : 'data',
       'officials' : 'officials',
       ':id'       : 'official'
     },
@@ -82,6 +83,15 @@ Officials.Routers = Officials.Routers || {};
       $('#search').hide()
       Officials.ActiveViews.headerView = new Officials.Views.Header()
       Officials.MainView = new Officials.Views.About()
+    },
+
+    data: function() {
+      this.switchLogoImg('normal')
+      this.cleanMain()
+
+      $('#search').hide()
+      Officials.ActiveViews.headerView = new Officials.Views.Header()
+      Officials.MainView = new Officials.Views.Data()
     },
 
     contact: function() {

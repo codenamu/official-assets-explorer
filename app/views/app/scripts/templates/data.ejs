@@ -1,0 +1,153 @@
+<section class="page page-data container">
+    <section id="data-survey">
+        <div class="row">
+            <h5>공직자 재산 데이터 이용자 설문조사</h5>
+        </div>
+        <div class="row">
+            <form id="form-data">
+                <div class="row">
+                    <div class="col s12 m1 offset-m1 form-label">
+                        <h6>성별</h6>
+                    </div>
+                    <div class="col s12 m9">
+                        <div class="input-field col s6 m3">
+                            <input id="data-gender-man" name="data-gender" type="radio" value="남" />
+                            <label for="data-gender-man">남</label>
+                        </div>
+                        <div class="input-field col s6 m3">
+                            <input id="data-gender-woman" name="data-gender" type="radio" value="여" />
+                            <label for="data-gender-woman">여</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m1 offset-m1 form-label">
+                        <h6>나이</h6>
+                    </div>
+                    <div class="col s12 m9">
+                        <div class="input-field col s12 m6">
+                            <select class="browser-default" name="data-age" required>
+                                <option value="" disabled selected>나이를 선택해주세요</option>
+                                <option value="10">10대(-19세)</option>
+                                <option value="20">20대(-29세)</option>
+                                <option value="30">30대(-39세)</option>
+                                <option value="40">40대(-49세)</option>
+                                <option value="50">50대(-59세)</option>
+                                <option value="60">60대(-69세)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m1 offset-m1 form-label">
+                        <h6>거주지역</h6>
+                    </div>
+                    <div class="col s12 m9">
+                        <div class="input-field col s12 m6">
+                            <select class="browser-default" name="data-region" required>
+                                <option value="" disabled selected>거주지역을 선택해주세요</option>
+                                <option value="서울특별시">서울특별시</option>
+                                <option value="부산광역시">부산광역시</option>
+                                <option value="대구광역시">대구광역시</option>
+                                <option value="인천광역시">인천광역시</option>
+                                <option value="광주광역시">광주광역시</option>
+                                <option value="대전광역시">대전광역시</option>
+                                <option value="울산광역시">울산광역시</option>
+                                <option value="세종특별자치시">세종특별자치시</option>
+                                <option value="경기도">경기도</option>
+                                <option value="강원도">강원도</option>
+                                <option value="충청북도">충청북도</option>
+                                <option value="충청남도">충청남도</option>
+                                <option value="전라북도">전라북도</option>
+                                <option value="전라남도">전라남도</option>
+                                <option value="경상북도">경상북도</option>
+                                <option value="경상남도">경상남도</option>
+                                <option value="제주특별자치도">제주특별자치도</option>
+                                <option value="해외거주">해외거주</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m1 offset-m1 form-label">
+                        <h6>직업</h6>
+                    </div>
+                    <div class="col s12 m9">
+                        <div class="input-field col s12 m6">
+                            <select class="browser-default" name="data-job" required>
+                                <option value="" disabled selected>직업을 선택해주세요</option>
+                                <option value="학생">학생</option>
+                                <option value="언론">언론</option>
+                                <option value="공무원">공무원</option>
+                                <option value="시민단체">시민단체</option>
+                                <option value="교수">교수</option>
+                                <option value="연구원">연구원</option>
+                                <option value="리서치/여론조사업">리서치/여론조사업</option>
+                                <option value="마케팅">마케팅</option>
+                                <option value="금융/증권/보험업">금융/증권/보험업</option>
+                                <option value="유통업">유통업</option>
+                                <option value="예술">예술</option>
+                                <option value="의료">의료</option>
+                                <option value="법률">법률</option>
+                                <option value="서비스업">서비스업</option>
+                                <option value="교육">교육</option>
+                                <option value="컴퓨터/인터넷">컴퓨터/인터넷</option>
+                                <option value="부동산업">부동산업</option>
+                                <option value="건설업">건설업</option>
+                                <option value="제조업">제조업</option>
+                                <option value="운송업">운송업</option>
+                                <option value="농/수/임업">농/수/임업</option>
+                                <option value="광산업">광산업</option>
+                                <option value="회사원">회사원</option>
+                                <option value="군인">군인</option>
+                                <option value="자영업">자영업</option>
+                                <option value="가사">가사</option>
+                                <option value="무직">무직</option>
+                                <option value="기타">기타</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m1 offset-m1 form-label">
+                        <h6>이용 목적</h6>
+                    </div>
+                    <div class="col s12 m9">
+                        <div class="input-field col s12 m6">
+                            <select class="browser-default" name="data-purpose" required>
+                                <option value="" disabled selected>이용 목적을 선택해주세요.</option>
+                                <option value="연구분석">연구분석</option>
+                                <option value="정책수립">정책수립</option>
+                                <option value="통계작성">통계작성</option>
+                                <option value="의정활동">의정활동</option>
+                                <option value="보고서(또는 논문) 작성,">보고서(또는 논문) 작성</option>
+                                <option value="교육자료">교육자료</option>
+                                <option value="간행물 발간">간행물 발간</option>
+                                <option value="기타">기타</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m1 offset-m1 form-label">
+                        <h6>이용 목적 내용</h6>
+                    </div>
+                    <div class="input-field col s12 m9">
+                        <textarea id="data-purpose-detail" class="materialize-textarea" name="data-purpose-detail"></textarea>
+                    </div>
+                </div>
+                <div class="row row-buttons">
+                    <div class="col s2 offset-s1">
+                        <a id="skip-survey" href="#"><u>건너뛰기</u></a>
+                    </div>
+                    <div class="col s4 offset-s5">
+                        <button class="btn btn-large color-news" type="submit">보내기</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section id="data-list">
+
+    </section>
+</section>
