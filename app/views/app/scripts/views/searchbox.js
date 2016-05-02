@@ -160,7 +160,11 @@ Officials.Views = Officials.Views || {};
 
     selectOptions: function(target) {
       var ops = $('#selected-' + target + ' > option:not(:disabled)')
-      var opsMobile = $('#selected-' + target + '-mobile > option:not(:disabled)')
+      if (target == 'orgs' || target == 'years') {
+        var opsMobile = $('#selected-' + target + '-mobile > optgroup > option:not(:disabled)')
+      } else {
+        var opsMobile = $('#selected-' + target + '-mobile > option:not(:disabled)')
+      }
       var targetParam = this.params[target.slice(0, -1)]
 
       if (typeof targetParam === 'string') {
