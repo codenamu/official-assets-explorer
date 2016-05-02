@@ -17,17 +17,20 @@ Officials.Views = Officials.Views || {};
     },
 
     initialize: function () {
-      if (typeof(Storage) !== "undefined" && window.localStorage.getItem('surveyed') === 'yes') {
-        this.showDataList()
-      } else {
-        this.hideDataList()
-      }
-
       this.render()
     },
 
     render: function () {
       this.$el.html(this.template())
+      this.checkIsSubmitted()
+    },
+
+    checkIsSubmitted: function() {
+      if (typeof(Storage) !== "undefined" && window.localStorage.getItem('surveyed') === 'yes') {
+        this.showDataList()
+      } else {
+        this.hideDataList()
+      }
     },
 
     showDataList: function(e) {
@@ -45,7 +48,7 @@ Officials.Views = Officials.Views || {};
     getDataList: function() {
       $('#data-list').append(
         '<div class="row">' +
-          '<h5>고위공직자 재산 데이터 다운로드</h5>' +
+          '<h4>고위공직자 재산 데이터 다운로드</h4>' +
         '</div>'
       )
 
@@ -63,13 +66,25 @@ Officials.Views = Officials.Views || {};
 
       $('#data-list').append(
         '<div class="row">' +
+        '<hr>' +
           '<div class="row">' +
-          '<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">' +
-          '<img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />' +
-          '</a>' +
+            // '<div class="col s2">' +
+              '<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">' +
+              '<img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />' +
+              '</a>' +
+            // '</div>' +
+            // '<div class="col s10">' +
           '<br />' +
-          '<a xmlns:cc="http://creativecommons.org/ns#" href="http://jaesan.newstapa.org" property="cc:attributionName" rel="cc:attributionURL">뉴스타파</a>' +
-          '에 의해 작성된 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">고위공직자 재산 데이터</span>은(는) <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.' +
+              '<a xmlns:cc="http://creativecommons.org/ns#" href="http://jaesan.newstapa.org" property="cc:attributionName" rel="cc:attributionURL">뉴스타파</a>' +
+              '에 의해 작성된 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">고위공직자 재산 데이터</span>은(는) <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.' +
+            // '</div>' +
+          '</div>' +
+          '<div class="row">' +
+            '<ul>' +
+              '<li>- 이 사이트에서 제공되는 데이터의 원 자료 출처는 관보, 국회공보, 헌법재판소공보입니다.</li>' +
+              '<li>- 뉴스타파는 PDF 형태의 원본 자료를 입력, 정제하여 데이터베이스로 정리했습니다. 이 자료의 저작권은 뉴스타파에 있습니다.</li>' +
+              '<li>- 이 데이터를 이용하여 2차 저작물을 발간한 경우, 반드시 뉴스타파를 인용 표기해야 합니다.</li>' +
+            '</ul>' +
           '</div>' +
         '</div>'
       )
@@ -86,7 +101,7 @@ Officials.Views = Officials.Views || {};
       var purpose = $('select[name=data-purpose]', '#form-data').val()
       var purposeDetail = $('textarea[name=data-purpose-detail]', '#form-data').val()
 
-      if (!validateForm(gender, '성별') || !validateForm(gender, '나이') || !validateForm(gender, '사는 지역') || !validateForm(gender, '직업') || !validateForm(gender, '이용 목적')) {
+      if (!this.validateForm(gender, '성별') || !this.validateForm(age, '나이') || !this.validateForm(region, '사는 지역') || !this.validateForm(job, '직업') || !this.validateForm(purpose, '이용 목적')) {
         return false;
       } else {
         $.post('/api/survey', {
