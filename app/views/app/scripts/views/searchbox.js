@@ -63,7 +63,7 @@ Officials.Views = Officials.Views || {};
          */
         if (!this.params['election']) {
           this.resetTags('default', 'orgs', $('#selected-orgs > option:not(:disabled):selected'))
-          this.resetTags('default', 'years', $('#selected-years > option:not(:disabled):selected'))
+          this.resetTags('default', 'years', $('#selected-years option:not(:disabled):selected'))
           this.getResult(this.params)
         } else {
           /**
@@ -95,7 +95,7 @@ Officials.Views = Officials.Views || {};
           text: m.get('title')
         }))
 
-        $('#selected-orgs-mobile').append($('<option>', {
+        $('#selected-orgs-mobile > optgroup').append($('<option>', {
           id: 'option-mobile-orgs-id-' + m.get('id'),
           value: m.get('title'),
           text: m.get('title')
@@ -203,12 +203,12 @@ Officials.Views = Officials.Views || {};
 
     selectOrgs: function(e) {
       this.resetTags('default', 'orgs', $('#selected-orgs > option:not(:disabled):selected'))
-      this.resetTags('default', 'orgs', $('#selected-orgs-mobile > option:not(:disabled):selected'), 'mobile')
+      this.resetTags('default', 'orgs', $('#selected-orgs-mobile option:not(:disabled):selected'), 'mobile')
     },
 
     selectYears: function(e) {
       this.resetTags('default', 'years', $('#selected-years > option:not(:disabled):selected'))
-      this.resetTags('default', 'years', $('#selected-years-mobile > option:not(:disabled):selected'), 'mobile')
+      this.resetTags('default', 'years', $('#selected-years-mobile option:not(:disabled):selected'), 'mobile')
     },
 
     selectProvince: function(callback) {

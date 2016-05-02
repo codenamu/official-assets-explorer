@@ -66,10 +66,12 @@ input.select-dropdown[type=text] {
 }
 
 #selected-orgs-mobile, #selected-years-mobile, #selected-provinces-mobile, #selected-municipals-mobile,  #selected-dongs-mobile {
+    color: white;
     position: relative;
     display: inline-block;
     border: none;
     border-bottom: 1px solid #5c6d85;
+    border-radius: 0px;
     padding: 4px 3px 3px 5px;
     margin: 0;
     font: inherit;
@@ -127,6 +129,7 @@ ul.select2-selection__rendered li {
     font-weight: 300;
     position: absolute;
     top: 10px;
+    left: 15px;
 }
 
 .input-field.input-field-integrated > input[type=text] {
