@@ -95,7 +95,7 @@ Officials.Views = Officials.Views || {};
           text: m.get('title')
         }))
 
-        $('#selected-orgs-mobile > optgroup').append($('<option>', {
+        $('#selected-orgs-mobile').append($('<option>', {
           id: 'option-mobile-orgs-id-' + m.get('id'),
           value: m.get('title'),
           text: m.get('title')
@@ -232,9 +232,7 @@ Officials.Views = Officials.Views || {};
             value: m.get('name'),
             text: m.get('name')
           }))
-        })
 
-        self.municipals.models.forEach(function(m) {
           $('#selected-municipals-mobile').append($('<option>', {
             id: 'option-mobile-municipals-id-' + m.get('id'),
             value: m.get('name'),
@@ -244,6 +242,7 @@ Officials.Views = Officials.Views || {};
 
         $('#selected-municipals').material_select()
 
+        var target = isMobile ? isMobile + ' > optgroup' : isMobile
         self.resetTags('election', 'provinces', $('#selected-provinces' + isMobile + ' > option:not(:disabled):selected'))
         self.resetTags('election', 'dongs', $('#selected-dongs' + isMobile + ' > option:not(:disabled):selected'))
         self.resetTags('election', 'municipals', $('#selected-municipals' + isMobile + ' > option:not(:disabled):selected'))
@@ -254,21 +253,23 @@ Officials.Views = Officials.Views || {};
     selectMunicipal: function(callback) {
       var self = this
       var cb = typeof callback == 'function' ? callback : function(){}
-      var isMobile = $('selected-municipals').css('display') === 'none' ? '-mobile' : ''
+      var isMobile = $('input.select-dropdown').css('display') === 'none' ? '-mobile' : ''
       self.initRegionOptions($('#selected-dongs'))
       self.initRegionOptions($('#selected-dongs-mobile'))
+
+      console.log(isMobile)
 
       this.dongs = new Officials.Collections.Dong()
       this.dongs.fetch({data: 'municipal=' + $('#selected-municipals' + isMobile).val() + '&province=' + $('#selected-provinces' + isMobile).val(), success: function() {
         self.dongs.models.forEach(function(m) {
+          // options on desktop mode
           $('#selected-dongs').append($('<option>', {
             id: 'option-dongs-id-' + m.get('id'),
             value: m.get('name'),
             text: m.get('name')
           }))
-        })
 
-        self.dongs.models.forEach(function(m) {
+          // options on mobile mode
           $('#selected-dongs-mobile').append($('<option>', {
             id: 'option-mobile-dongs-id-' + m.get('id'),
             value: m.get('name'),
@@ -276,6 +277,7 @@ Officials.Views = Officials.Views || {};
           }))
         })
 
+        // var target = isMobile ? isMobile + ' > optgroup' : isMobile
         self.resetTags('election', 'dongs', $('#selected-dongs' + isMobile + ' > option:not(:disabled):selected'))
         self.resetTags('election', 'municipals', $('#selected-municipals' + isMobile + ' > option:not(:disabled):selected'))
 
@@ -286,6 +288,7 @@ Officials.Views = Officials.Views || {};
 
     selectDong: function() {
       var isMobile = $('input.select-dropdown').css('display') === 'none' ? '-mobile' : ''
+      var target = isMobile ? isMobile + ' > optgroup' : isMobile
       this.resetTags('election', 'dongs', $('#selected-dongs' + isMobile + ' > option:not(:disabled):selected'))
     },
 
@@ -305,20 +308,15 @@ Officials.Views = Officials.Views || {};
 
       // var text = target.attr('id') === ('selected-municipals' || 'selected-municipals-mobile')? '시/군/구를 선택하세요' : '읍/면/동을 선택하세요'
       target.html('')
+      target.append($('<option>', {
+        selected: true,
+        disabled: true,
+        hidden: true,
+        value: text,
+        text: text
+      }))
 
-      if (isMobile) {
-        target.append($('<optgroup>', {
-          label: text
-        }))
-      } else {
-        target.append($('<option>', {
-          selected: true,
-          disabled: true,
-          hidden: true,
-          value: text,
-          text: text
-        }))
-
+      if (!isMobile) {
         target.material_select()
       }
 

@@ -66,7 +66,6 @@ input.select-dropdown[type=text] {
 }
 
 #selected-orgs-mobile, #selected-years-mobile, #selected-provinces-mobile, #selected-municipals-mobile,  #selected-dongs-mobile {
-    color: transparent;
     position: relative;
     display: inline-block;
     border: none;
@@ -78,9 +77,13 @@ input.select-dropdown[type=text] {
     outline: none;
     line-height: 1.2;
     background-color: transparent;
-    /*color: #5c6d85;*/
+    color: #5c6d85;
     -webkit-appearance: none;
     z-index: 12;
+}
+
+#selected-orgs-mobile, #selected-years-mobile {
+    color: transparent;
 }
 
 #search span.select2.select2-container {
@@ -489,6 +492,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     z-index: 11;
     top: 10px;
     right: 20px;
+    color: #5c6d85;
+}
+
+#search form#form-search-default label {
     color: #5c6d85;
 }
 
