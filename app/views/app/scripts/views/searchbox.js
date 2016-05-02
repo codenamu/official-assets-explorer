@@ -160,7 +160,7 @@ Officials.Views = Officials.Views || {};
 
     selectOptions: function(target) {
       var ops = $('#selected-' + target + ' > option:not(:disabled)')
-      var opsMobile = $('#selected-' + target + '-mobile > optgroup > option:not(:disabled)')
+      var opsMobile = $('#selected-' + target + '-mobile > option:not(:disabled)')
 
       var targetParam = this.params[target.slice(0, -1)]
 
@@ -256,8 +256,6 @@ Officials.Views = Officials.Views || {};
       var isMobile = $('input.select-dropdown').css('display') === 'none' ? '-mobile' : ''
       self.initRegionOptions($('#selected-dongs'))
       self.initRegionOptions($('#selected-dongs-mobile'))
-
-      console.log(isMobile)
 
       this.dongs = new Officials.Collections.Dong()
       this.dongs.fetch({data: 'municipal=' + $('#selected-municipals' + isMobile).val() + '&province=' + $('#selected-provinces' + isMobile).val(), success: function() {
