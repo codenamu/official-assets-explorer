@@ -160,11 +160,8 @@ Officials.Views = Officials.Views || {};
 
     selectOptions: function(target) {
       var ops = $('#selected-' + target + ' > option:not(:disabled)')
-      if (target == 'orgs' || target == 'years') {
-        var opsMobile = $('#selected-' + target + '-mobile > optgroup > option:not(:disabled)')
-      } else {
-        var opsMobile = $('#selected-' + target + '-mobile > option:not(:disabled)')
-      }
+      var opsMobile = $('#selected-' + target + '-mobile > optgroup > option:not(:disabled)')
+
       var targetParam = this.params[target.slice(0, -1)]
 
       if (typeof targetParam === 'string') {
@@ -228,6 +225,7 @@ Officials.Views = Officials.Views || {};
 
       this.municipals = new Officials.Collections.Municipal()
       this.municipals.fetch({data: 'province=' + $('#selected-provinces' + isMobile).val(), success: function() {
+
         self.municipals.models.forEach(function(m) {
           $('#selected-municipals').append($('<option>', {
             id: 'option-municipals-id-' + m.get('id'),
@@ -292,6 +290,8 @@ Officials.Views = Officials.Views || {};
     },
 
     initRegionOptions: function(target) {
+      var isMobile = target.attr('id').slice(-6) === 'mobile';
+
       switch (target.attr('id')) {
         case 'selected-municipals':
         case 'selected-municipals-mobile':
@@ -306,17 +306,23 @@ Officials.Views = Officials.Views || {};
       // var text = target.attr('id') === ('selected-municipals' || 'selected-municipals-mobile')? '시/군/구를 선택하세요' : '읍/면/동을 선택하세요'
       target.html('')
 
-      target.append($('<option>', {
-        selected: true,
-        disabled: true,
-        hidden: true,
-        value: text,
-        text: text
-      }))
+      if (isMobile) {
+        target.append($('<optgroup>', {
+          label: text
+        }))
+      } else {
+        target.append($('<option>', {
+          selected: true,
+          disabled: true,
+          hidden: true,
+          value: text,
+          text: text
+        }))
 
-      if (target.attr('id').slice(-6) !== 'mobile') {
         target.material_select()
       }
+
+
     },
 
     submitDefaultSearch: function(e) {
