@@ -78,7 +78,7 @@ input.select-dropdown[type=text] {
     outline: none;
     line-height: 1.2;
     background-color: transparent;
-    color: #5c6d85;
+    /*color: #5c6d85;*/
     -webkit-appearance: none;
     z-index: 12;
 }
