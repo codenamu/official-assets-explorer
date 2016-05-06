@@ -6,7 +6,8 @@ var fs = require('fs'),
 
 var sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, {
   host: config.db.host ? config.db.host : 'localhost',
-  port: config.db.port ? config.db.port : 3306
+  port: config.db.port ? config.db.port : 3306,
+  logging: process.env.NODE_ENV == 'production' ? false : true
 })
 
 fs.readdirSync(__dirname).filter(function (file) {
