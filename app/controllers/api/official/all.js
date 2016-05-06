@@ -20,7 +20,7 @@ module.exports = function() {
 
     getRedis(req.query, function(err, values) {
       if (values) {
-        res.json(values)
+        return res.json(values)
       } else {
         /**
          * make query parameters to array to use in `where` clause
@@ -63,7 +63,7 @@ module.exports = function() {
               where['$Dongs.name$'] = queries.dong
           }
 
-          db.Constituency.findAll({
+          return db.Constituency.findAll({
             where: where,
             include: [{
               model: db.Dong,
@@ -112,7 +112,7 @@ module.exports = function() {
               })
             }
 
-            getCount(db.Official, {
+            return getCount(db.Official, {
               where: where,
               group: 'Person.uniqueId',
               include: [{
@@ -133,7 +133,7 @@ module.exports = function() {
             .then(function(count) {
               result.count = count.length
 
-              getOfficials({
+              return getOfficials({
                 order: [['year', 'DESC']],
                 where: where,
                 group: 'Person.uniqueId',
@@ -165,7 +165,7 @@ module.exports = function() {
                   }
                 })
 
-                getOfficials({
+                return getOfficials({
                   order: [['year', 'DESC']],
                   where: where,
                   include: [{
@@ -191,7 +191,8 @@ module.exports = function() {
                 .then(function(officials) {
                   result.officials = officials
                   setRedis(req.query, result)
-                  res.json(result)
+
+                  return res.json(result)
                 })
               })
             })
@@ -328,8 +329,8 @@ module.exports = function() {
     function getRedis(query, callback) {
       var cb = typeof callback == 'function' ? callback : function(){}
 
-      client.get(JSON.stringify(query), function(err, result) {
-          cb(err, JSON.parse(result))
+      return client.get(JSON.stringify(query), function(err, result) {
+          return cb(err, JSON.parse(result))
       })
     }
 
