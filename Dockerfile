@@ -10,7 +10,7 @@ RUN { \
     echo 'set -o vi'; \
 } >> /root/.bashrc
 
-RUN apt-get -qy update && apt-get install -qy redis-server locales \
+RUN apt-get -qy update && apt-get install -qy locales \
     && echo en_US.UTF-8 UTF-8 > /etc/locale.gen && locale-gen
 
 WORKDIR /usr/src/app
