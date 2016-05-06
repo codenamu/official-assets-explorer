@@ -1,14 +1,9 @@
 /*global Officials, Backbone*/
 
-Officials.Collections = Officials.Collections || {};
+Officials.Collections = Officials.Collections || {}
 
-(function () {
-  'use strict';
+Officials.Collections.Org = Backbone.Collection.extend({
+  url: '/api/org',
+  model: Officials.Models.Org
 
-  Officials.Collections.Org = Backbone.Collection.extend({
-    url: '/api/org',
-    model: Officials.Models.Org
-
-  });
-
-})();
+})

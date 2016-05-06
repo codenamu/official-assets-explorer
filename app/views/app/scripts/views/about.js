@@ -2,24 +2,19 @@
 
 Officials.Views = Officials.Views || {};
 
-(function () {
-  'use strict';
+Officials.Views.About = Backbone.View.extend({
 
-  Officials.Views.About = Backbone.View.extend({
+  template: JST['app/scripts/templates/about.ejs'],
 
-    template: JST['app/scripts/templates/about.ejs'],
+  el: '#main',
 
-    el: '#main',
+  initialize: function () {
+    // this.listenTo(this.model, 'change', this.render);
+    this.render()
+  },
 
-    initialize: function () {
-      // this.listenTo(this.model, 'change', this.render);
-      this.render()
-    },
+  render: function () {
+    this.$el.html(this.template());
+  }
 
-    render: function () {
-      this.$el.html(this.template());
-    }
-
-  });
-
-})();
+});

@@ -2,30 +2,25 @@
 
 Officials.Views = Officials.Views || {};
 
-(function () {
-  'use strict';
+Officials.Views.Header = Backbone.View.extend({
 
-  Officials.Views.Header = Backbone.View.extend({
+  template: JST['app/scripts/templates/header.ejs'],
 
-    template: JST['app/scripts/templates/header.ejs'],
+  el: 'header',
 
-    el: 'header',
+  events: {},
 
-    events: {},
+  initialize: function () {
+    this.render()
+  },
 
-    initialize: function () {
-      this.render()
-    },
+  render: function () {
+    this.$el.html(this.template());
+    this.afterRender()
+  },
 
-    render: function () {
-      this.$el.html(this.template());
-      this.afterRender()
-    },
+  afterRender: function() {
+    $('.modal-trigger').leanModal();
+  }
 
-    afterRender: function() {
-      $('.modal-trigger').leanModal();
-    }
-
-  });
-
-})();
+});

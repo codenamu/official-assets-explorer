@@ -2,21 +2,16 @@
 
 Officials.Models = Officials.Models || {};
 
-(function () {
-  'use strict';
+Officials.Models.Province = Backbone.Model.extend({
 
-  Officials.Models.Province = Backbone.Model.extend({
+  urlRoot: '/api/province',
 
-    urlRoot: '/api/province',
+  idAttribute: '_id',
 
-    idAttribute: '_id',
+  initialize: function() {
+  },
 
-    initialize: function() {
-    },
-
-    defaults: {
-      name  : ''
-    }
-  });
-
-})();
+  defaults: {
+    name  : ''
+  }
+});

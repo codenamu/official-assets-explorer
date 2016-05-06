@@ -2,12 +2,7 @@
 
 Officials.Collections = Officials.Collections || {};
 
-(function () {
-  'use strict';
-
-  Officials.Collections.Dong = Backbone.Collection.extend({
-    url: '/api/dong',
-    model: Officials.Models.Dong
-  });
-
-})();
+Officials.Collections.Dong = Backbone.Collection.extend({
+  url: '/api/dong',
+  model: Officials.Models.Dong
+});

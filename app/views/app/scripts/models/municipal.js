@@ -2,21 +2,16 @@
 
 Officials.Models = Officials.Models || {};
 
-(function () {
-  'use strict';
+Officials.Models.Municipal = Backbone.Model.extend({
 
-  Officials.Models.Municipal = Backbone.Model.extend({
+  urlRoot: '/api/municipal',
 
-    urlRoot: '/api/municipal',
+  idAttribute: '_id',
 
-    idAttribute: '_id',
+  initialize: function() {
+  },
 
-    initialize: function() {
-    },
-
-    defaults: {
-      name  : ''
-    }
-  });
-
-})();
+  defaults: {
+    name  : ''
+  }
+});

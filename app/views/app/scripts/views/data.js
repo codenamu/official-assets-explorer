@@ -2,9 +2,6 @@
 
 Officials.Views = Officials.Views || {};
 
-(function () {
-  'use strict'
-
   Officials.Views.Data = Backbone.View.extend({
 
     template: JST['app/scripts/templates/data.ejs'],
@@ -22,7 +19,26 @@ Officials.Views = Officials.Views || {};
 
     render: function () {
       this.$el.html(this.template())
+      this.afterRender()
+    },
+
+    afterRender: function() {
       this.checkIsSubmitted()
+      this.initForms()
+    },
+
+    initForms: function() {
+      if (window.innerWidth > 768) {
+        for (var i = 0; i < $('#form-data').find('select').length; i++) {
+          $($('#form-data').find('select')[i]).material_select()
+        }
+      } else {
+        for (var i = 0; i < $('#form-data').find('select').length; i++) {
+          $($('#form-data').find('select')[i]).addClass('browser-default')
+        }
+      }
+
+
     },
 
     checkIsSubmitted: function() {
@@ -133,5 +149,3 @@ Officials.Views = Officials.Views || {};
       }
     }
   })
-
-})()

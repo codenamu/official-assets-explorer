@@ -2,21 +2,16 @@
 
 Officials.Models = Officials.Models || {};
 
-(function () {
-  'use strict';
+Officials.Models.Org = Backbone.Model.extend({
 
-  Officials.Models.Org = Backbone.Model.extend({
+  urlRoot: '/api/org',
 
-    urlRoot: '/api/org',
+  idAttribute: '_id',
 
-    idAttribute: '_id',
+  initialize: function() {
+  },
 
-    initialize: function() {
-    },
-
-    defaults: {
-      title : ''
-    }
-  });
-
-})();
+  defaults: {
+    title : ''
+  }
+});

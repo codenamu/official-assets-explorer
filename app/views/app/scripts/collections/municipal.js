@@ -2,13 +2,8 @@
 
 Officials.Collections = Officials.Collections || {};
 
-(function () {
-  'use strict';
+Officials.Collections.Municipal = Backbone.Collection.extend({
+  url: '/api/municipal',
+  model: Officials.Models.Municipal
 
-  Officials.Collections.Municipal = Backbone.Collection.extend({
-    url: '/api/municipal',
-    model: Officials.Models.Municipal
-
-  });
-
-})();
+});

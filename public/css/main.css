@@ -626,10 +626,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     color: #5c6d85;
 }
 
-#main .page {
-    max-width: 712px;
-}
-
 #main .page.page-about .col {
     padding: 0px 10px;
 }
@@ -689,6 +685,14 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 #main .page.page-data .row.row-buttons .col:first-child {
     padding: 18px 0;
+}
+
+#main .page.page-data table thead tr {
+
+}
+
+#main .page.page-data table tbody tr {
+    border-bottom: 1px solid #E
 }
 
 #main .search-loading {
@@ -811,6 +815,13 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     display: none;
 }
 
+#page-official .official-pie-chart {
+    padding: 0px 50px;
+}
+
+#page-official table tbody {
+    font-weight: 300;
+}
 
 #form-contact, #form-data {
     color: #5c6d85;
@@ -836,7 +847,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     font-size: 0.9rem;
 }
 
-#form-contact .input-field input, #form-contact .input-field textarea, #form-data .input-field input, #form-data .input-field textarea {
+#form-contact .input-field input, #form-contact .input-field textarea, #form-data .input-field textarea {
     border: 1px solid #dee2e7 !important;
     padding: 0 10px;
     box-sizing: border-box;
@@ -859,7 +870,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 #form-data > .row > .form-label {
     padding: 0px 10px;
-    text-align: right;
+    text-align: left;
 }
 
 #form-contact [type="radio"]:not(:checked) + label, [type="radio"]:checked + label, #form-data [type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
@@ -1252,11 +1263,15 @@ footer.page-footer p {
     }
 
     #main {
-        padding-bottom: 100px;
+        padding-bottom: 150px;
     }
 
     #search form#form-search-default label {
         display: none;
+    }
+
+    #form-data > .row > .form-label {
+        text-align: right;
     }
 
 }
