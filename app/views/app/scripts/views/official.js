@@ -632,7 +632,7 @@ Officials.Views.Official = Backbone.View.extend({
         content: $('#contact-official-content').val()
       })
       .then(function(result) {
-        if (result[0].status === 'sent') {
+        if (result.message === 'success') {
           alert('보내주신 내용을 잘 살펴보겠습니다. 감사합니다.')
           $('#contact-official-' + self.result.person.uniqueId).closeModal();
         } else {
