@@ -11,8 +11,8 @@ module.exports = function() {
       .then(function(result) {
         res.json(result)
       })
-      .catch(function(e) {
-        res.status(500).send(e)
+      .catch(function(err) {
+        res.status(500).send(err)
       })
   })
 
