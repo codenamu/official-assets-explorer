@@ -1,6 +1,6 @@
 var express = require('express')
-var mandrill = require('mandrill-api/mandrill');
-var mandrill_client = new mandrill.Mandrill('ITvMCZ5cJMO7EXBDltxAAA');
+var config = require('../../../config/config')
+var sendgrid = require('sendgrid')(config.sendgrid.apikey)
 
 module.exports = function() {
   var router = express.Router()
@@ -11,30 +11,17 @@ module.exports = function() {
     var html = '<p>' + queries.content + '</p>'
     var subject = '고위공직자 재산 공개 - ' + queries.type
 
-    var message = {
-      'html': html,
-      'text': '텍스트 영역',
-      'subject': subject,
-      'from_email': fromEmail,
-      'from_name': fromEmail,
-      'to': [{
-              'email': 'data@newstapa.org',
-              'name': '뉴스타파',
-              'type': 'to'
-          }],
-      'headers': {
-          'Reply-To': 'data@newstapa.org'
-      }
-    };
+    var email = new sendgrid.Email({
+      to:       'data@newstapa.org',
+      from:     fromEmail,
+      subject:  subject,
+      html:     html
+    })
 
-    var async = false;
-    mandrill_client.messages.send({"message": message, "async": async}, function(result) {
-        res.json(result)
-        
-    }, function(e) {
-        console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-        res.json(e)
-    });
+    return sendgrid.send(email, function(err, json) {
+      if (err) { return res.error(err); }
+      return res.json(json)
+    })
   })
 
   return router

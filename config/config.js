@@ -30,6 +30,9 @@ var config = {
       port: process.env.REDIS_PORT || 6379,
       host: process.env.REDIS_HOST || '127.0.0.1',
       expired: 3600 * 3 // cache expired after 3 hours
+    },
+    sendgrid: {
+      apikey: process.env.SENDGRID || ''
     }
   },
 
@@ -60,6 +63,9 @@ var config = {
       port: process.env.REDIS_PORT || 6379,
       host: process.env.REDIS_HOST || '127.0.0.1',
       expired: 3600 * 3 // cache expired after 3 hours
+    },
+    sendgrid: {
+      apikey: process.env.SENDGRID || ''
     }
   },
 
@@ -90,6 +96,9 @@ var config = {
       port: process.env.REDIS_PORT || 6379,
       host: process.env.REDIS_HOST || '127.0.0.1',
       expired: 3600 * 3 // cache expired after 3 hours
+    },
+    sendgrid: {
+      apikey: process.env.SENDGRID || ''
     }
   }
 };
