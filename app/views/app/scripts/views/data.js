@@ -10,7 +10,8 @@ Officials.Views = Officials.Views || {};
 
     events: {
       'click #skip-survey'    : 'showDataList',
-      'submit form#form-data' : 'submitSurvey'
+      'submit form#form-data' : 'submitSurvey',
+      'click #data-list li'   : 'downloadFile'
     },
 
     initialize: function () {
@@ -71,11 +72,11 @@ Officials.Views = Officials.Views || {};
       $('#data-list').append(
         '<div class="row">' +
           '<ul>' +
-            '<li>- <a href="#">2011년도 데이터</a></li>' +
-            '<li>- <a href="#">2012년도 데이터</a></li>' +
-            '<li>- <a href="#">2013년도 데이터</a></li>' +
-            '<li>- <a href="#">2014년도 데이터</a></li>' +
-            '<li>- <a href="#">2015년도 데이터</a></li>' +
+            '<li>- <a>2011년도 데이터</a></li>' +
+            '<li>- <a>2012년도 데이터</a></li>' +
+            '<li>- <a>2013년도 데이터</a></li>' +
+            '<li>- <a>2014년도 데이터</a></li>' +
+            '<li>- <a>2015년도 데이터</a></li>' +
           '</ul>' +
         '</div>'
       )
@@ -147,5 +148,13 @@ Officials.Views = Officials.Views || {};
       } else {
         return true
       }
+    },
+
+    downloadFile: function(e) {
+      $.post('/api/log', {
+        success: function(result) {
+          return true;
+        }
+      })
     }
   })

@@ -12,14 +12,14 @@ module.exports = function() {
     var subject = '고위공직자 재산 공개 - ' + queries.type
 
     var email = new sendgrid.Email({
-      to:       'data@newstapa.org',
+      to:       'hoonch3@gmail.com',
       from:     fromEmail,
       subject:  subject,
       html:     html
     })
 
     return sendgrid.send(email, function(err, json) {
-      if (err) { return res.error(err); }
+      if (err) { return res.json(err); }
       return res.json(json)
     })
   })
