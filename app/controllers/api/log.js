@@ -10,14 +10,13 @@ module.exports = function() {
 
     db.Log.create({
       browserInfo: userAgent,
-      ip: ip
+      ip: ip,
+      data: req.body.dataId
     }).then(function(result) {
       res.json({message: 'success'})
     }).error(function(err) {
       res.status(500).send(err)
     })
-
-    res.json({})
   })
 
   return router

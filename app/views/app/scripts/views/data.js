@@ -72,11 +72,11 @@ Officials.Views = Officials.Views || {};
       $('#data-list').append(
         '<div class="row">' +
           '<ul>' +
-            '<li>- <a>2011년도 데이터</a></li>' +
-            '<li>- <a>2012년도 데이터</a></li>' +
-            '<li>- <a>2013년도 데이터</a></li>' +
-            '<li>- <a>2014년도 데이터</a></li>' +
-            '<li>- <a>2015년도 데이터</a></li>' +
+            '<li>- <a id="data-2011">2011년도 데이터</a></li>' +
+            '<li>- <a id="data-2012">2012년도 데이터</a></li>' +
+            '<li>- <a id="data-2013">2013년도 데이터</a></li>' +
+            '<li>- <a id="data-2014">2014년도 데이터</a></li>' +
+            '<li>- <a id="data-2015">2015년도 데이터</a></li>' +
           '</ul>' +
         '</div>'
       )
@@ -151,10 +151,13 @@ Officials.Views = Officials.Views || {};
     },
 
     downloadFile: function(e) {
+      var dataId = $(e.target).attr('id')
+
       $.post('/api/log', {
-        success: function(result) {
-          return true;
-        }
+        dataId: dataId
+      })
+      .done(function(result) {
+        return true;
       })
     }
   })

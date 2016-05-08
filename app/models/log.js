@@ -1,7 +1,8 @@
 module.exports = function (sequelize, DataTypes) {
   var Log = sequelize.define('Log', {
     ip: DataTypes.STRING,
-    browserInfo: DataTypes.TEXT
+    browserInfo: DataTypes.TEXT,
+    data: DataTypes.STRING
   }, {
     timestamps: true,
     classMethods: {
