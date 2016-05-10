@@ -12,7 +12,7 @@ module.exports = function() {
     var subject = '고위공직자 재산 공개 - ' + queries.type
 
     var email = new sendgrid.Email({
-      to:       'hoonch3@gmail.com',
+      to:       'data@codenamu.org',
       from:     fromEmail,
       subject:  subject,
       html:     html
