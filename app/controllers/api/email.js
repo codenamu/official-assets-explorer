@@ -1,10 +1,44 @@
 var express = require('express')
 var config = require('../../../config/config')
-var util = require('util');
-var SMTPConnection = require('smtp-connection');
+var util = require('util')
+var SMTPConnection = require('smtp-connection')
 
 module.exports = function() {
   var router = express.Router()
+
+  var message_template = "Subject: %s\n" +
+    "Reply-To: %s\n" +
+    "\n\n" +
+    "연락처: %s\n" +
+    "--------------------------------------------------------------------------------\n"
+    "내용:\n" +
+    "%s\n"
+  ;
+
+  var send_message = function(connection, queries, callback) {
+    connection.send(
+        {
+            from: queries.fromEmail,
+            to: 'report@newstapa.org'
+        },
+        util.format(
+            message_template,
+            '고위공직자 재산 공개: ' + queries.type,
+            queries.fromEmail,
+            queries.fromContact ? queries.fromContact : queries.fromEmail,
+            queries.content
+        ),
+        function(err) {
+            connection.close();
+            connection.quit();
+
+            callback(err);
+        }
+    );
+  }
+
+  return router.post('/', function(req, res, next) {
+    var queries = req.body
 
     var connection = new SMTPConnection({
         port: config.smtp.port,
@@ -24,41 +58,19 @@ module.exports = function() {
                 throw err;
                 return;
             }
+
+            send_message(
+                connection,
+                queries,
+                function(err) {
+                    if (err) {
+                        return res.json(err);
+                    }
+                    return res.json({message: "success"});
+                }
+            );
         });
     });
-
-  var message_template = "Subject: %s\n" + 
-    "Reply-To: %s\n" + 
-    "\n\n" + 
-    "연락처: %s\n" + 
-    "--------------------------------------------------------------------------------\n" + 
-    "내용:\n" + 
-    "%s\n"
-  ;
-
-  router.post('/', function(req, res, next) {
-    var queries = req.body;
-
-    connection.send(
-        {
-            from: queries.fromEmail,
-            to: 'report@newstapa.org'
-        },
-        util.format(
-            message_template,
-            '고위공직자 재산 공개: ' + queries.type,
-            queries.fromEmail,
-            queries.fromContact ? queries.fromContact : queries.fromEmail,
-            queries.content
-        ),
-        function(err) {
-            if (err) {
-                return res.json(err);
-            }
-            return res.json({message: "success"});
-        }
-    );
-
   })
 
   return router
