@@ -72,11 +72,11 @@ Officials.Views = Officials.Views || {};
       $('#data-list').append(
         '<div class="row">' +
           '<ul>' +
-            '<li>- <a id="data-2011">2011년도 데이터</a></li>' +
-            '<li>- <a id="data-2012">2012년도 데이터</a></li>' +
-            '<li>- <a id="data-2013">2013년도 데이터</a></li>' +
-            '<li>- <a id="data-2014">2014년도 데이터</a></li>' +
-            '<li>- <a id="data-2015">2015년도 데이터</a></li>' +
+            '<li>- <a id="data-2011" href="http://jaesan.newstapa.org/data/newstapa-jaesan-2011.zip">2011년도 데이터</a></li>' +
+            '<li>- <a id="data-2012" href="http://jaesan.newstapa.org/data/newstapa-jaesan-2012.zip">2012년도 데이터</a></li>' +
+            '<li>- <a id="data-2013" href="http://jaesan.newstapa.org/data/newstapa-jaesan-2013.zip">2013년도 데이터</a></li>' +
+            '<li>- <a id="data-2014" href="http://jaesan.newstapa.org/data/newstapa-jaesan-2014.zip">2014년도 데이터</a></li>' +
+            '<li>- <a id="data-2015" href="http://jaesan.newstapa.org/data/newstapa-jaesan-2015.zip">2015년도 데이터</a></li>' +
           '</ul>' +
         '</div>'
       )
