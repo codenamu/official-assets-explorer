@@ -77,6 +77,7 @@ Officials.Views = Officials.Views || {};
             '<li>- <a id="data-2013" href="http://jaesan.newstapa.org/data/newstapa-jaesan-2013.zip">2013년도 데이터</a></li>' +
             '<li>- <a id="data-2014" href="http://jaesan.newstapa.org/data/newstapa-jaesan-2014.zip">2014년도 데이터</a></li>' +
             '<li>- <a id="data-2015" href="http://jaesan.newstapa.org/data/newstapa-jaesan-2015.zip">2015년도 데이터</a></li>' +
+            '<li>- <a id="data-2016" href="http://jaesan.newstapa.org/data/newstapa-jaesan-2016.zip">2016년도 데이터</a></li>' +
           '</ul>' +
         '</div>'
       )
