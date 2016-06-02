@@ -8,6 +8,7 @@ module.exports = function (app) {
   app.get('*', function(req, res) {
     res.render('index', {
       ga: config.ga,
+      ga_2: config.ga_2,
       host: config.host
     });
   });

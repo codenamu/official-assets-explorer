@@ -22,6 +22,8 @@ Officials.Routers.Main = Backbone.Router.extend({
 
   _pageView: function() {
     var path = decodeURI(Backbone.history.getFragment());
+    ga('anotherTracker.send', 'pageview');
+    ga('require', 'displayfeatures');
     ga('send', 'pageview', {page: "/" + path});
   },
 

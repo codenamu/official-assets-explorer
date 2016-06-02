@@ -13,6 +13,7 @@ var config = {
     },
     host: 'http://jaesan.newstapa.org',
     ga: 'UA-61309870-1',
+    ga_2: 'UA-45524133-1',
     root: rootPath,
     force: false,
     app: {
