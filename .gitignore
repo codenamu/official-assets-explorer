@@ -36,3 +36,4 @@ node_modules
 
 # caches
 .sass-cache
+.*.sw?

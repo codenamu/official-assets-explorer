@@ -20,7 +20,13 @@ module.exports = function(app, config) {
   app.set('view engine', 'ejs');
 
   // app.use(favicon(config.root + '/public/img/favicon.ico'));
-  // app.use(logger('dev'));
+  if (env == 'production') {
+      app.use(logger('combined', {
+          skip : function(req, res) { return res.statusCode < 400 }
+      }));
+  } else {
+      app.use(logger('dev'));
+  }
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
     extended: true
